@@ -1,46 +1,28 @@
 import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
+  // {
+  //   path: '',
+  //   title: 'Informacion',// Name del apartado
+  //   moduleName: '',
+  //   icon: '',
+  //   class: '',
+  //   groupTitle: true,// Es el que decide si es apartado
+  //   submenu: []
+  // },
   {
-    path: '',
-    title: 'MENUITEMS.MAIN.TEXT',
-    moduleName: '',
-    icon: '',
-    class: '',
-    groupTitle: true,
-    submenu: []
-  },
-  {
-    path: '',
-    title: 'MENUITEMS.HOME.TEXT',
+    path: '/',
+    title: 'Inicio',
     moduleName: 'dashboard',
     icon: 'monitor',
     class: 'menu-toggle',
     groupTitle: false,
     submenu: [
       {
-        path: 'dashboard/main',
-        title: 'MENUITEMS.HOME.LIST.DASHBOARD1',
+        path: '/dashboard',
+        title: 'Estadisticas',
         moduleName: 'dashboard',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: 'dashboard/dashboard2',
-        title: 'MENUITEMS.HOME.LIST.DASHBOARD2',
-        moduleName: 'dashboard',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: 'dashboard/dashboard3',
-        title: 'MENUITEMS.HOME.LIST.DASHBOARD3',
-        moduleName: 'dashboard',
-        icon: '',
+        icon: 'monitor',
         class: 'ml-menu',
         groupTitle: false,
         submenu: []
@@ -49,15 +31,60 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
-    title: 'Authentication',
-    moduleName: 'authentication',
+    title: 'Gestion',
+    moduleName: 'gestion',
     icon: 'user-check',
     class: 'menu-toggle',
     groupTitle: false,
     submenu: [
       {
-        path: '/authentication/signin',
-        title: 'Sign In',
+        path: '/gestion/usuarios',
+        title: 'Usuarios',
+        moduleName: 'users',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        submenu: []
+      },
+      {
+        path: '/gestion/dispositivos',
+        title: 'Dispositivos',
+        moduleName: 'devices',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        submenu: []
+      },
+      {
+        path: '/gestion/categorias',
+        title: 'Categorias',
+        moduleName: 'categories',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        submenu: []
+      },
+      {
+        path: '/gestion/vistas',
+        title: 'Vistas',
+        moduleName: 'views',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        submenu: []
+      },
+      {
+        path: '/gestion/roles',
+        title: 'Roles',
+        moduleName: 'roles',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        submenu: []
+      },
+      {
+        path: '/gestion/vistaroles',
+        title: 'Vistas roles',
         moduleName: 'authentication',
         icon: '',
         class: 'ml-menu',
@@ -65,45 +92,9 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/authentication/signup',
-        title: 'Sign Up',
-        moduleName: 'authentication',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/authentication/forgot-password',
-        title: 'Forgot Password',
-        moduleName: 'authentication',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/authentication/locked',
-        title: 'Locked',
-        moduleName: 'authentication',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/authentication/page404',
-        title: '404 - Not Found',
-        moduleName: 'authentication',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/authentication/page500',
-        title: '500 - Server Error',
-        moduleName: 'authentication',
+        path: '/gestion/comunidad',
+        title: 'Comunidad',
+        moduleName: 'comunity',
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
@@ -113,15 +104,15 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
-    title: 'Extra Pages',
-    moduleName: 'extra-pages',
+    title: 'Usuario',
+    moduleName: 'user',
     icon: 'anchor',
     class: 'menu-toggle',
     groupTitle: false,
     submenu: [
       {
-        path: '/extra-pages/blank',
-        title: 'Blank Page',
+        path: '/user/profile',
+        title: 'Perfil',
         moduleName: 'extra-pages',
         icon: '',
         class: 'ml-menu',
@@ -130,60 +121,4 @@ export const ROUTES: RouteInfo[] = [
       }
     ]
   },
-  {
-    path: '',
-    title: 'Multi level',
-    moduleName: 'multilevel',
-    icon: 'chevrons-down',
-    class: 'menu-toggle',
-    groupTitle: false,
-    submenu: [
-      {
-        path: '/multilevel/first1',
-        title: 'First',
-        moduleName: 'multilevel',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/',
-        title: 'Second',
-        moduleName: 'secondlevel',
-        icon: '',
-        class: 'ml-sub-menu',
-        groupTitle: false,
-        submenu: [
-          {
-            path: '/multilevel/secondlevel/second1',
-            title: 'Second 1',
-            moduleName: 'secondlevel',
-            icon: '',
-            class: 'ml-sub-sub-menu',
-            groupTitle: false,
-            submenu: []
-          },
-          {
-            path: '/multilevel/secondlevel/second2',
-            title: 'Second 2',
-            moduleName: 'secondlevel',
-            icon: '',
-            class: 'ml-sub-sub-menu',
-            groupTitle: false,
-            submenu: []
-          }
-        ]
-      },
-      {
-        path: '/multilevel/first3',
-        title: 'Third',
-        moduleName: 'multilevel',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      }
-    ]
-  }
 ];

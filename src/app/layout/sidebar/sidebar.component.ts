@@ -1,14 +1,6 @@
 import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  Inject,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  HostListener,
-  OnDestroy
-} from '@angular/core';
+import { Component, Inject, ElementRef, OnInit, Renderer2, HostListener, OnDestroy} from '@angular/core';
 import { ROUTES } from './sidebar-items';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';

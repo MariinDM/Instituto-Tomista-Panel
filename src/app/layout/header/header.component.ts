@@ -1,13 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  Inject,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  HostListener,
-  AfterViewInit
-} from '@angular/core';
+import { Component, Inject, ElementRef, OnInit, Renderer2, HostListener, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfigService } from 'src/app/config/config.service';
 import { AuthService } from 'src/app/core/service/auth.service';
@@ -15,6 +7,7 @@ import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
 import { WINDOW } from 'src/app/core/service/window.service';
 import { LanguageService } from 'src/app/core/service/language.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import * as texts from 'src/assets/data/language.json';
 const document: any = window.document;
 
 @Component({
@@ -22,10 +15,8 @@ const document: any = window.document;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass']
 })
-export class HeaderComponent
-  extends UnsubscribeOnDestroyAdapter
-  implements OnInit, AfterViewInit
-{
+export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnInit, AfterViewInit{
+  texts:any = texts;
   public config: any = {};
   isNavbarCollapsed = true;
   isNavbarShow = true;
