@@ -3,7 +3,9 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { MatTableExporterModule } from 'mat-table-exporter';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { MaterialModule } from "./material.module";
 import { FeatherIconsModule } from "./components/feather-icons/feather-icons.module";
@@ -16,6 +18,8 @@ import { FeatherIconsModule } from "./components/feather-icons/feather-icons.mod
     RouterModule,
     NgbModule,
     NgxSpinnerModule,
+    MatTableExporterModule,
+    NgxMatFileInputModule,
   ],
   exports: [
     CommonModule,
@@ -26,6 +30,8 @@ import { FeatherIconsModule } from "./components/feather-icons/feather-icons.mod
     NgxSpinnerModule,
     MaterialModule,
     FeatherIconsModule,
+    MatTableExporterModule,
+    NgxMatFileInputModule,
   ],
 })
 export class SharedModule {}

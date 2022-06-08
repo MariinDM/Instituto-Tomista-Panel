@@ -8,7 +8,7 @@ import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroy
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.sass']
+  styleUrls: ['../../app.component.scss']
 })
 export class SidebarComponent
   extends UnsubscribeOnDestroyAdapter
@@ -80,7 +80,7 @@ export class SidebarComponent
     }
   }
   ngOnInit() {
-    if (this.authService.currentUserValue) {
+    if (localStorage.getItem('token')) {
       this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
     }
 

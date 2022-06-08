@@ -1,65 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/service/auth.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import { AuthService } from 'src/app/services/auth.service';
+import { Auth } from 'src/app/interfaces/user';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss']
+  styleUrls: ['../../app.component.scss']
 })
-export class SigninComponent
-  extends UnsubscribeOnDestroyAdapter
-  implements OnInit
-{
-  loginForm: FormGroup;
-  submitted = false;
-  error = '';
-  hide = true;
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthService
-  ) {
+export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
+
+  loginForm: FormGroup
+  submitted = false
+  error = ''
+  hide = true
+  auth!: Auth
+
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     super();
+    this.createForm()
   }
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: [
-        'admin@lorax.com',
-        [Validators.required, Validators.email, Validators.minLength(5)]
-      ],
-      password: ['admin', Validators.required]
-    });
   }
+
   get f() {
     return this.loginForm.controls;
   }
   onSubmit() {
     this.submitted = true;
-    this.error = '';
     if (this.loginForm.invalid) {
-      this.error = 'Username and Password not valid !';
-      return;
+      this.error = 'Username or Password not valid !'
+      return
     } else {
-      this.subs.sink = this.authService
-        .login(this.f.email.value, this.f.password.value)
-        .subscribe(
-          (res) => {
-            if (res) {
-              const token = this.authService.currentUserValue.token;
-              if (token) {
-                this.router.navigate(['/dashboard/main']);
-              }
-            } else {
-              this.error = 'Invalid Login';
-            }
-          },
-          (error) => {
-            this.error = error;
-            this.submitted = false;
-          }
-        );
+      this.setData()
+      this.subs.sink = this.authService.login(this.auth).subscribe({
+        next: (v) => {
+          this.router.navigate(['/dashboard'])
+        },
+        error: (e) => {
+          this.error = 'Invalid Credentials';
+          this.submitted = false;
+        },
+        complete: () => console.info('complete')
+      })
+    }
+  }
+  createForm(): void {
+    this.loginForm = this.fb.group({
+      email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
+      password: new FormControl('', [Validators.required])
+    });
+  }
+
+  setData(): void {
+    this.auth = {
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value,
     }
   }
 }

@@ -2,18 +2,18 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, ElementRef, OnInit, Renderer2, HostListener, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfigService } from 'src/app/config/config.service';
-import { AuthService } from 'src/app/core/service/auth.service';
 import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
 import { WINDOW } from 'src/app/core/service/window.service';
 import { LanguageService } from 'src/app/core/service/language.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import * as texts from 'src/assets/data/language.json';
+import { AuthService } from 'src/app/services/auth.service';
 const document: any = window.document;
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.sass']
+  styleUrls: ['../../app.component.scss']
 })
 export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnInit, AfterViewInit{
   texts:any = texts;
@@ -214,11 +214,12 @@ export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnIn
       this.renderer.addClass(this.document.body, 'submenu-closed');
     }
   }
+  
   logout() {
-    this.subs.sink = this.authService.logout().subscribe((res) => {
-      if (!res.success) {
+    this.authService.logout().subscribe((res) => {
+      // if (!res.success) {
         this.router.navigate(['/authentication/signin']);
-      }
-    });
+      // }
+    })
   }
 }

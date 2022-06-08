@@ -1,7 +1,9 @@
 <div>
   <aside id="leftsidebar" class="sidebar" (mouseenter)="mouseHover($event)" (mouseleave)="mouseOut($event)">
     <div class="menu">
-      <ul id="sidebarnav" class="list" [ngStyle]="{'position' : 'relative', 'max-height' : listMaxHeight+'px', 'max-width' : listMaxWidth+'px'}" [perfectScrollbar]>
+      <ul id="sidebarnav" class="list"
+        [ngStyle]="{'position' : 'relative', 'max-height' : listMaxHeight+'px', 'max-width' : listMaxWidth+'px'}"
+        [perfectScrollbar]>
         <li class="sidebar-user-panel">
           <div class="user-panel">
             <div class=" image">
@@ -17,7 +19,8 @@
           *ngFor="let sidebarItem of sidebarItems" [routerLinkActive]="sidebarItem.submenu.length != 0 ? '' : 'active'">
           <div class="header" *ngIf="sidebarItem.groupTitle === true">{{sidebarItem.title}}</div>
           <a [routerLink]="sidebarItem.class === '' ? [sidebarItem.path] : null" *ngIf="!sidebarItem.groupTitle;"
-            [ngClass]="[sidebarItem.class]" (click)="callLevel1Toggle($event, sidebarItem.moduleName)" class="menu-top">
+            [ngClass]="[sidebarItem.class]" (click)="callLevel1Toggle($event, sidebarItem.moduleName)"
+            class="menu-top">
             <i-feather [name]="sidebarItem.icon" class="sidebarIcon"></i-feather>
             <span class="hide-menu">{{sidebarItem.title}}
             </span>

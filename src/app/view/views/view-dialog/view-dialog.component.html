@@ -1,0 +1,84 @@
+<div class="addContainer">
+    <div class="modalHeader">
+        <div class="editRowModal">
+            <div class="modalHeader clearfix">
+                <!-- <img src="" alt="Avatar"> -->
+                <mat-icon style="color: rgb(213, 213, 213);">people</mat-icon>
+                <div class="modal-about">
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Vista</div>
+                </div>
+            </div>
+        </div>
+        <button mat-icon-button [mat-dialog-close]="true" aria-label="Close dialog"
+            class="mat-focus-indicator mat-icon-button mat-button-base">
+            <span class="mat-button-wrapper">
+                <mat-icon>close </mat-icon>
+            </span>
+        </button>
+    </div>
+    <div class="mat-dialog-content">
+        <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-icon matSuffix>view_quilt</mat-icon>
+                        <mat-label>Enter Name</mat-label>
+                        <input matInput placeholder="Ex. Usuarios" required formControlName="name">
+                        <mat-error
+                            *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
+                            It's required field</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-icon matSuffix>123</mat-icon>
+                        <mat-label>Enter Order</mat-label>
+                        <input matInput placeholder="Ex. 1" required formControlName="order_index">
+                        <mat-error
+                            *ngIf="form.controls['order_index'].hasError('required') && (form.controls['order_index'].dirty || form.controls['order_index'].touched)">
+                            It's required field</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-icon matSuffix>description</mat-icon>
+                        <mat-label>Enter Description</mat-label>
+                        <input matInput placeholder="Ex. Categoria para Usuarios" formControlName="description">
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-icon matSuffix>insert_photo</mat-icon>
+                        <mat-label>Enter Image</mat-label>
+                        <input matInput placeholder="Ex. image.com" formControlName="image">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-label>Enter Category</mat-label>
+                        <mat-select formControlName="category_id">
+                            <mat-option *ngFor="let item of dataCategories" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="form.controls['category_id'].hasError('required') && (form.controls['category_id'].dirty || form.controls['category_id'].touched)">
+                            It's required field</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="example-button-row" mat-dialog-actions align="end">
+                        <button type="submit" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary">Save</button>
+                        <button mat-dialog-close class="mat-focus-indicator mat-raised-button mat-button-base mat-warn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
