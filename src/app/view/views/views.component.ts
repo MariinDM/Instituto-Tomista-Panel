@@ -13,50 +13,53 @@ import { ViewDialogComponent } from './view-dialog/view-dialog.component'
   templateUrl: './views.component.html',
   styleUrls: ['../../app.component.scss']
 })
-export class ViewsComponent implements AfterViewInit {
+export class ViewsComponent implements OnInit {
 
   dataView!: any[]
-  class!: string
+  loader = false
+  code = localStorage.getItem('code')
 
-  displayedColumns: string[] = ['point', 'name', 'order_index', 'description', 'image', 'category_id', 'active', 'actions']
+  displayedColumns: string[] = ['point', 'name', 'order_index', 'description', 'image', 'category', 'active', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
-  constructor(private viewService: ViewService, private _snack: MatSnackBar, public dialog: MatDialog) {
+  constructor(
+    private viewService: ViewService,
+    private _snack: MatSnackBar,
+    public dialog: MatDialog) { }
+
+  ngOnInit(): void {
     this.getall()
   }
 
-  ngAfterViewInit(): void {
-    // this.dataSource.paginator = this.paginator
-    // this.dataSource.sort = this.sort
-  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = filterValue.trim().toLowerCase()
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage()
-    }
   }
 
   getall(): void {
-    this.viewService.getall().subscribe((data: any) => {
-      this.dataView = data
-      // console.log(this.dataView)
-      this.dataSource = new MatTableDataSource(this.dataView)
-
-      this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort
-
+    this.loader = false
+    this.viewService.getall(this.code).subscribe((data: any) => {
+      this.dataView = data.views
+      this.setData()
+      this.loader = true
+      this.openSnack(data.message)
     })
   }
 
+  setData(): void {
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.dataView;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   delete(id: number): void {
-    this.viewService.delete(id).subscribe({
+    this.viewService.delete(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.message) },
+      error: (e) => { this.openSnack(e.error.error.message) },
       complete: () => { this.getall() }
     })
   }

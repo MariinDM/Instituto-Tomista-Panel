@@ -27,10 +27,8 @@ export class InterceptorService {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          // localStorage.clear()
-          // this.router.navigate(['/auth/login']);
-          // console.log('Si entro')
-
+          localStorage.clear()
+          this.router.navigate(['/authentication/signin']);
         }
         return throwError(err);
       })

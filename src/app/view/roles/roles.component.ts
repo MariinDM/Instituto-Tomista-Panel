@@ -13,9 +13,11 @@ import { RoleDialogComponent } from './role-dialog/role-dialog.component';
   templateUrl: './roles.component.html',
   styleUrls: ['../../app.component.scss']
 })
-export class RolesComponent implements AfterViewInit {
+export class RolesComponent implements OnInit {
 
   dataRol!: any[]
+  loader = false
+  code = localStorage.getItem('code')
 
   displayedColumns: string[] = ['point', 'name', 'description', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -24,36 +26,43 @@ export class RolesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private rolService: RolesService, private _snack: MatSnackBar, public dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
     this.getall()
   }
 
-  ngAfterViewInit(): void {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   getall(): void {
-    this.rolService.getall().subscribe((data: any) => {
-      this.dataRol = data
-      this.dataSource = new MatTableDataSource(this.dataRol);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
+    this.loader = false
+    this.rolService.getall(this.code).subscribe({
+      next: (v) => {
+        this.dataRol = v.roles
+        this.setData()
+        this.loader = true
+        this.openSnack(v.message)
+      },
+      error: (e)=>{
+        this.openSnack(e.error.message)
+      }
     })
   }
 
+  setData(): void {
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.dataRol;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   delete(id: number): void {
-    this.rolService.delete(id).subscribe({
+    this.rolService.delete(this.code,id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.message) },
+      error: (e) => { this.openSnack(e.error.error.message) },
       complete: () => { this.getall() }
     })
   }

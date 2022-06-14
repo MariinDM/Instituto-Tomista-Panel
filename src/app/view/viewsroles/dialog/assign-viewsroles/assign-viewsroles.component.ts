@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { MatDialog } from '@angular/material/dialog'
+import { Component, Inject, OnInit } from '@angular/core'
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { Viewsroles } from 'src/app/interfaces/viewsroles'
-import { RolesService } from 'src/app/services/roles.service'
 import { ViewService } from 'src/app/services/view.service'
 import { ViewsrolesService } from 'src/app/services/viewsroles.service'
 
@@ -13,22 +10,23 @@ import { ViewsrolesService } from 'src/app/services/viewsroles.service'
   styleUrls: ['../../../../app.component.scss']
 })
 export class AssignViewsrolesComponent implements OnInit {
-  
-  premium!:boolean
+
+  premium!: boolean
   dataRoles: any[] = []
   viewsRole: any[] = []
   newViews: number[] = []
   dataViews: any[] = []
+  code = localStorage.getItem('code')
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,
     private _snack: MatSnackBar,
     private vrService: ViewsrolesService,
-    private rolService: RolesService,
     private viewService: ViewService) { }
 
   ngOnInit() {
-    this.getallRoles()
+    this.viewsRole = this.data.element.roles_views;
     this.getallViews()
   }
 
@@ -37,18 +35,21 @@ export class AssignViewsrolesComponent implements OnInit {
     this.viewsRole.forEach(view => {
       this.newViews.push(view.id);
     })
-    console.log({ role_id: 1, views: this.newViews, premium: this.premium, active: true})
-
-  }
-
-  getallRoles() {
-    this.rolService.getall().subscribe((data: any) => {
-      this.dataRoles = data
+    console.log({ role_id: this.data.element.id, views: this.newViews, premium: this.premium, active: true })
+    this.vrService.update(this.code, { role_id: this.data.element.id, views: this.newViews, premium: this.premium, active: true }).subscribe({
+      next: (v) => {
+        console.log('nice')
+        this.dialog.closeAll()
+      },
+      error: (e) => {
+        console.log(':(')
+      }
     })
   }
+
   getallViews() {
-    this.viewService.getall().subscribe((data: any) => {
-      this.dataViews = data
+    this.viewService.getall(this.code).subscribe((data: any) => {
+      this.dataViews = data.views
     })
   }
 

@@ -13,44 +13,58 @@ import { AssignViewsrolesComponent } from './dialog/assign-viewsroles/assign-vie
   templateUrl: './viewsroles.component.html',
   styleUrls: ['../../app.component.scss']
 })
-export class ViewsrolesComponent implements AfterViewInit {
+export class ViewsrolesComponent implements OnInit {
 
-  dataRol!: any[]
-  class!: string
+  dataVR!: any[]
+  loader = false
+  code = localStorage.getItem('code')
 
-  displayedColumns: string[] = ['point', 'name', 'description', 'premium', 'active', 'actions']
+  displayedColumns: string[] = ['point', 'name', 'premium', 'active', 'actions'] //'description',
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
-  constructor(private viewsrolesService: ViewsrolesService, private _snack: MatSnackBar, public dialog: MatDialog) {
+  constructor(
+    private viewsrolesService: ViewsrolesService,
+    private _snack: MatSnackBar,
+    public dialog: MatDialog) { }
+
+  ngOnInit(): void {
     this.getall()
   }
 
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator
-    // this.dataSource.sort = this.sort
-  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = filterValue.trim().toLowerCase()
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage()
-    }
   }
 
-  getall() {
-    this.viewsrolesService.getall().subscribe((data: any) => {
-      this.dataRol = data
-
-      this.dataSource = new MatTableDataSource(this.dataRol)
-
-      this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort
-
+  getall(): void {
+    this.loader = false
+    this.viewsrolesService.getall(this.code).subscribe((data: any) => {
+      this.dataVR = data.roles.roles_views
+      this.setData()
+      this.loader = true
+      this.openSnack(data.message)
     })
+  }
+
+  delete(id: number): void {
+    this.viewsrolesService.delete(this.code, id).subscribe({
+      next: (v) => {
+        this.openSnack(v.message)
+      },
+      error: (e) => {
+        this.openSnack(e.error.error.message)
+      }
+    })
+  }
+
+  setData(): void {
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.dataVR;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   openSnack(message: string) {

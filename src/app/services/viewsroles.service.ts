@@ -9,15 +9,17 @@ import { Viewsroles } from '../interfaces/viewsroles';
 })
 export class ViewsrolesService {
 
-  locale = 'es'
-
   constructor(private http: HttpClient) { }
 
-  getall(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${this.locale}/roles_views/get`);
+  getall(code: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/api/v1/${code}/roles_views/get`);
   }
 
-  update(id: number, vr: Viewsroles): Observable<any> {
-    return this.http.put(`${environment.apiUrl}v1/${this.locale}/vr/roles_views/${id}`, vr)
+  update(code: string, vr: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/api/v1/${code}/roles_views/update`, vr)
+  }
+
+  delete(code: string, id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/api/v1/${code}/roles_views/delete/${id}`)
   }
 }

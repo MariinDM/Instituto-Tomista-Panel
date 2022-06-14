@@ -9,23 +9,21 @@ import { View } from '../interfaces/view';
 })
 export class ViewService {
 
-  locale = 'es'
-
   constructor(private http:HttpClient) { }
 
-  getall(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${this.locale}/views/get`);
+  getall(code:string,): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/api/v1/${code}/views/get`);
   }
-  getone(id:number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${this.locale}/views/get/${id}`);
+  getone(code:string,id:number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/api/v1/${code}/views/get/${id}`);
   }
-  insert(view:View):Observable<any>{
-    return this.http.post(`${environment.apiUrl}v1/${this.locale}/views/create`, view)
+  insert(code:string,view:View):Observable<any>{
+    return this.http.post(`${environment.apiUrl}/api/v1/${code}/views/create`, view)
   }
-  update(id:number, view:View):Observable<any>{
-    return this.http.put(`${environment.apiUrl}v1/${this.locale}/views/update/${id}`, view)
+  update(code:string,id:number, view:View):Observable<any>{
+    return this.http.put(`${environment.apiUrl}/api/v1/${code}/views/update/${id}`, view)
   }
-  delete(id:number):Observable<any>{
-    return this.http.delete(`${environment.apiUrl}v1/${this.locale}/views/delete/${id}`)
+  delete(code:string,id:number):Observable<any>{
+    return this.http.delete(`${environment.apiUrl}/api/v1/${code}/views/delete/${id}`)
   }
 }

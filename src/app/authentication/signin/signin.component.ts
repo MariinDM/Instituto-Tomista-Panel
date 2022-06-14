@@ -17,6 +17,7 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
   error = ''
   hide = true
   auth!: Auth
+  user!: any
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     super();
@@ -42,8 +43,7 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
         error: (e) => {
           this.error = 'Invalid Credentials';
           this.submitted = false;
-        },
-        complete: () => console.info('complete')
+        }
       })
     }
   }

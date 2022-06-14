@@ -13,9 +13,11 @@ import { CategoryDialogComponent } from './category-dialog/category-dialog.compo
   templateUrl: './categories.component.html',
   styleUrls: ['../../app.component.scss']
 })
-export class CategoriesComponent implements AfterViewInit {
+export class CategoriesComponent implements OnInit {
 
   dataCategory!: any[]
+  loader = true
+  code = localStorage.getItem('code')
 
   displayedColumns: string[] = ['point', 'name', 'order_index', 'description', 'image', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -24,12 +26,10 @@ export class CategoriesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private categoryService: CategoryService, private _snack: MatSnackBar, public dialog: MatDialog) {
-    this.getall()
   }
 
-  ngAfterViewInit(): void {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
+  ngOnInit(): void {
+    this.getall()
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -41,24 +41,34 @@ export class CategoriesComponent implements AfterViewInit {
   }
 
   getall(): void {
-    this.categoryService.getall().subscribe((data: any) => {
-      this.dataCategory = data
-      // console.log(this.dataCategory)
-      this.dataSource = new MatTableDataSource(this.dataCategory);
-
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
+    this.loader = false
+    this.categoryService.getall(this.code).subscribe({
+      next: (v) => {
+        this.dataCategory = v.categories
+        this.setData()
+        this.loader = true
+        this.openSnack(v.message)
+      },
+      error: (e) => {
+        this.openSnack(e.error.message)
+      }
     })
   }
 
+  setData(): void {
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.dataCategory;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   delete(id: number): void {
-    this.categoryService.delete(id).subscribe({
+    this.categoryService.delete(this.code, id).subscribe({
       next: (v) => {
         this.openSnack(v.message)
       },
       error: (e) => {
-        this.openSnack(e.message)
+        this.openSnack(e.error.error.message)
       },
       complete: () => {
         this.getall()

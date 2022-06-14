@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Category } from '../interfaces/category';
@@ -9,23 +10,21 @@ import { Category } from '../interfaces/category';
 })
 export class CategoryService {
 
-  locale = 'es'
+  constructor(private http: HttpClient) { }
 
-  constructor(private http:HttpClient) { }
-
-  getall(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${this.locale}/categories/get`);
+  getall(code: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/api/v1/${code}/categories/get`);
   }
-  getone(id:number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${this.locale}/categories/get/${id}`);
+  getone(code: string, id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/api/v1/${code}/categories/get/${id}`);
   }
-  insert(category:Category):Observable<any>{
-    return this.http.post(`${environment.apiUrl}v1/${this.locale}/categories/create`, category)
+  insert(code: string, category: Category): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/api/v1/${code}/categories/create`, category)
   }
-  update(id:number, category:Category):Observable<any>{
-    return this.http.put(`${environment.apiUrl}v1/${this.locale}/categories/update/${id}`, category)
+  update(code: string, id: number, category: Category): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/api/v1/${code}/categories/update/${id}`, category)
   }
-  delete(id:number):Observable<any>{
-    return this.http.delete(`${environment.apiUrl}v1/${this.locale}/categories/delete/${id}`)
+  delete(code: string, id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/api/v1/${code}/categories/delete/${id}`)
   }
 }

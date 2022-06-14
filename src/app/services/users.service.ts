@@ -14,18 +14,18 @@ export class UsersService {
   constructor(private http:HttpClient) { }
 
   getall(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${this.locale}/users/get`);
+    return this.http.get(`${environment.apiUrl}/api/v1/${this.locale}/users/get`);
   }
   getone(id:number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${this.locale}/users/get/${id}`);
+    return this.http.get(`${environment.apiUrl}/api/v1/${this.locale}/users/get/${id}`);
   }
   insert(user:User):Observable<any>{
-    return this.http.post(`${environment.apiUrl}v1/${this.locale}/users/post`, user)
+    return this.http.post(`${environment.apiUrl}/api/auth/${this.locale}/register`, user)
   }
   update(id:number, user:User):Observable<any>{
-    return this.http.put(`${environment.apiUrl}v1/${this.locale}/users/update/${id}`, user)
+    return this.http.put(`${environment.apiUrl}/api/v1/${this.locale}/users/update/${id}`, user)
   }
   delete(id:number):Observable<any>{
-    return this.http.delete(`${environment.apiUrl}v1/${this.locale}/users/delete/${id}`)
+    return this.http.delete(`${environment.apiUrl}/api/v1/${this.locale}/users/delete/${id}`)
   }
 }

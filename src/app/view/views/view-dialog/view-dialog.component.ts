@@ -15,6 +15,7 @@ export class ViewDialogComponent implements OnInit {
   form!: FormGroup
   view!: any
   dataCategories!: any[]
+  code = localStorage.getItem('code')
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,7 +33,7 @@ export class ViewDialogComponent implements OnInit {
   }
 
   getallcategories(): void {
-    this.categoryService.getall().subscribe((data: any) => {
+    this.categoryService.getall(this.code).subscribe((data: any) => {
       this.dataCategories = data
     })
   }
@@ -41,15 +42,15 @@ export class ViewDialogComponent implements OnInit {
     if (this.form.invalid) { return }
     this.setData();
     if (!this.data.edit) {
-      this.viewService.insert(this.view).subscribe({
+      this.viewService.insert(this.code, this.view).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e) },
+        error: (e) => { this.openSnack(e.error.error.message) },
         complete: () => { this.dialog.closeAll() }
       })
     } else {
-      this.viewService.update(this.data.element.id, this.view).subscribe({
+      this.viewService.update(this.code, this.data.element.id, this.view).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e) },
+        error: (e) => { this.openSnack(e.error.error.message) },
         complete: () => { this.dialog.closeAll() }
       })
     }

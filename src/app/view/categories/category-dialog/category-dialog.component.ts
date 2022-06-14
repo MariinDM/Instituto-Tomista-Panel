@@ -14,6 +14,7 @@ export class CategoryDialogComponent implements OnInit {
   form!: FormGroup
   obj!: any
   validateIMG = false
+  code = localStorage.getItem('code')
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,18 +33,15 @@ export class CategoryDialogComponent implements OnInit {
     if (this.form.invalid) { return }
     this.setData()
     if (!this.data.edit) {
-      this.categoryService.insert(this.obj).subscribe({
+      this.categoryService.insert(this.code, this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e.message) },
+        error: (e) => { this.openSnack(e.error.error.message) },
         complete: () => { this.dialog.closeAll() }
       })
     } else {
-      this.categoryService.update(this.data.element.id, this.obj).subscribe({
+      this.categoryService.update(this.code, this.data.element.id, this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => {
-          // this.openSnack(e.message),
-          console.log(e)
-        },
+        error: (e) => { this.openSnack(e.error.error.message) },
         complete: () => { this.dialog.closeAll() }
       })
     }

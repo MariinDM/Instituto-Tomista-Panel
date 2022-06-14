@@ -68,7 +68,7 @@ export function createTranslateLoader(http: HttpClient): any {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     WINDOW_PROVIDERS,
     fakeBackendProvider,
   ],

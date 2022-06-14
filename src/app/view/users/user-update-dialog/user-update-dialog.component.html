@@ -69,10 +69,6 @@
                             *ngIf="form.controls['age'].hasError('required') && (form.controls['age'].dirty || form.controls['age'].touched)">
                             It's required field
                         </mat-error>
-                        <mat-error
-                            *ngIf="form.controls['age'].hasError('maxlength') && (form.controls['age'].dirty || form.controls['age'].touched)">
-                            Max length is 2 characters
-                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -115,18 +111,6 @@
                             *ngIf="form.controls['phone'].hasError('required') && (form.controls['phone'].dirty || form.controls['phone'].touched)">
                             It's required field
                         </mat-error>
-                        <mat-error
-                            *ngIf="form.controls['phone'].hasError('pattern') && (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            Only Numbers
-                        </mat-error>
-                        <mat-error
-                            *ngIf="form.controls['phone'].hasError('maxlength') && (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            Max length is 10 characters
-                        </mat-error>
-                        <mat-error
-                            *ngIf="form.controls['phone'].hasError('mixlength') && (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            Min length is 10 characters
-                        </mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -135,7 +119,7 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>outlined_flag</mat-icon>
                         <mat-label>Enter Country</mat-label>
-                        <input matInput placeholder="Ex. 1" formControlName="country_id">
+                        <input matInput placeholder="Ex. Coahuila" formControlName="country_id">
                         <mat-error
                             *ngIf="form.controls['country_id'].hasError('required') && (form.controls['country_id'].dirty || form.controls['country_id'].touched)">
                             It's required field</mat-error>
@@ -145,7 +129,7 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>location_city</mat-icon>
                         <mat-label>Enter City</mat-label>
-                        <input matInput placeholder="Ex. 2" formControlName="city_id">
+                        <input matInput placeholder="Ex. Torreón" formControlName="city_id">
                         <mat-error
                             *ngIf="form.controls['city_id'].hasError('required') && (form.controls['city_id'].dirty || form.controls['city_id'].touched)">
                             It's required field</mat-error>
@@ -155,7 +139,7 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>group_work</mat-icon>
+                        <mat-icon matSuffix>outlined_flag</mat-icon>
                         <mat-label>Enter Group</mat-label>
                         <input matInput placeholder="Ex. A" formControlName="group">
                         <mat-error
@@ -165,7 +149,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>grade</mat-icon>
+                        <mat-icon matSuffix>location_city</mat-icon>
                         <mat-label>Enter Grade</mat-label>
                         <input matInput placeholder="Ex. 5" type="number" formControlName="grade">
                         <mat-error
@@ -197,16 +181,10 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <div class="example-button-row" mat-dialog-actions align="end">
-                        <button type="submit" mat-button color="primary">
-                            <span class="m-o">
-                                <mat-icon>save</mat-icon>
-                            </span>
-                        </button>
-                        <button mat-dialog-close mat-button color="warn">
-                            <span class="m-o">
-                                <mat-icon>close</mat-icon>
-                            </span>
-                        </button>
+                        <button type="submit"
+                            class="mat-focus-indicator mat-raised-button mat-button-base mat-primary">Save</button>
+                        <button mat-dialog-close
+                            class="mat-focus-indicator mat-raised-button mat-button-base mat-warn">Cancel</button>
                     </div>
                 </div>
             </div>

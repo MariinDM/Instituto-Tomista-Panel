@@ -13,6 +13,7 @@ export class RoleDialogComponent implements OnInit {
 
   form!: FormGroup
   obj!: any
+  code = localStorage.getItem('code')
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,13 +32,13 @@ export class RoleDialogComponent implements OnInit {
     if (this.form.invalid) { return }
     this.setData()
     if (!this.data.edit) {
-      this.rolService.insert(this.obj).subscribe({
+      this.rolService.insert(this.code, this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e) },
+        error: (e) => { this.openSnack(e.error.error.message) },
         complete: () => { this.dialog.closeAll() }
       })
     } else {
-      this.rolService.update(this.data.element.id, this.obj).subscribe({
+      this.rolService.update(this.code, this.data.element.id, this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }

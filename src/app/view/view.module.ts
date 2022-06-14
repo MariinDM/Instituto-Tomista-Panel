@@ -18,6 +18,8 @@ import { CategoryDialogComponent } from './categories/category-dialog/category-d
 import { RoleDialogComponent } from './roles/role-dialog/role-dialog.component';
 import { ViewDialogComponent } from './views/view-dialog/view-dialog.component';
 import { UserDialogComponent } from './users/user-dialog/user-dialog.component';
+import { ChangePasswordComponent } from './profile/change-password/change-password.component';
+import { UserUpdateDialogComponent } from './users/user-update-dialog/user-update-dialog.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { UserDialogComponent } from './users/user-dialog/user-dialog.component';
     RoleDialogComponent,
     ViewDialogComponent,
     UserDialogComponent,
+    ChangePasswordComponent,
+    UserUpdateDialogComponent,
   ],
   imports: [
     CommonModule,
