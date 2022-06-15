@@ -77,7 +77,6 @@ export class ViewsComponent implements OnInit {
     })
   }
   openDialogUpdate(element: View, edit: boolean) {
-    console.log(element)
     this.dialog.open(ViewDialogComponent, {
       data: { element, edit },
       panelClass: ['dialog-responsive']

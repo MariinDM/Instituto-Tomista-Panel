@@ -12,18 +12,18 @@ export class ViewService {
   constructor(private http:HttpClient) { }
 
   getall(code:string,): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/${code}/views/get`);
+    return this.http.get(`${environment.apiUrl}v1/${code}/views/get`);
   }
   getone(code:string,id:number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/${code}/views/get/${id}`);
+    return this.http.get(`${environment.apiUrl}v1/${code}/views/get/${id}`);
   }
   insert(code:string,view:View):Observable<any>{
-    return this.http.post(`${environment.apiUrl}/api/v1/${code}/views/create`, view)
+    return this.http.post(`${environment.apiUrl}v1/${code}/views/create`, view)
   }
   update(code:string,id:number, view:View):Observable<any>{
-    return this.http.put(`${environment.apiUrl}/api/v1/${code}/views/update/${id}`, view)
+    return this.http.put(`${environment.apiUrl}v1/${code}/views/update/${id}`, view)
   }
   delete(code:string,id:number):Observable<any>{
-    return this.http.delete(`${environment.apiUrl}/api/v1/${code}/views/delete/${id}`)
+    return this.http.delete(`${environment.apiUrl}v1/${code}/views/delete/${id}`)
   }
 }

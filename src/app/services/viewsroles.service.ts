@@ -12,14 +12,14 @@ export class ViewsrolesService {
   constructor(private http: HttpClient) { }
 
   getall(code: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/${code}/roles_views/get`);
+    return this.http.get(`${environment.apiUrl}v1/${code}/roles_views/get`);
   }
 
   update(code: string, vr: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/api/v1/${code}/roles_views/update`, vr)
+    return this.http.put(`${environment.apiUrl}v1/${code}/roles_views/update`, vr)
   }
 
   delete(code: string, id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/api/v1/${code}/roles_views/delete/${id}`)
+    return this.http.delete(`${environment.apiUrl}v1/${code}/roles_views/delete/${id}`)
   }
 }

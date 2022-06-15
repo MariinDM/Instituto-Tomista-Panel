@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
   loader = true
   code = localStorage.getItem('code')
 
-  displayedColumns: string[] = ['point', 'name', 'email', 'institution_picture', 'profile_picture', 'rol', 'active', 'actions'];
+  displayedColumns: string[] = ['point', 'name', 'lastname', 'email', 'institution_picture', 'profile_picture', 'rol', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,12 +43,13 @@ export class UsersComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    this.userService.getall().subscribe({
+    this.userService.getall(this.code).subscribe({
       next: (v) => {
-        this.dataUser = v.users
+        this.dataUser = v.data
         this.setData()
         this.loader = true
         this.openSnack(v.message)
+        console.log(this.dataUser)
       },
       error: (e) => { this.openSnack(e.error.message) }
     })
@@ -62,7 +63,7 @@ export class UsersComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.userService.delete(id).subscribe({
+    this.userService.delete(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
       error: (e) => { this.openSnack(e.error.error.message) },
       complete: () => { this.getall() }

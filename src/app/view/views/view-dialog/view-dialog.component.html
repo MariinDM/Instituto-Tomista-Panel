@@ -49,9 +49,11 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>insert_photo</mat-icon>
                         <mat-label>Enter Image</mat-label>
-                        <input matInput placeholder="Ex. image.com" formControlName="image">
+                        <ngx-mat-file-input formControlName="image" multiple="false" accept=".png, .jpg, .jpeg"
+                            (change)="onImageChangeFromFile($event)">
+                            <mat-icon matSuffix>insert_photo</mat-icon>
+                        </ngx-mat-file-input>
                     </mat-form-field>
                 </div>
             </div>

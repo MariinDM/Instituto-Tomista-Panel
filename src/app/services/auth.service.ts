@@ -45,17 +45,17 @@ export class AuthService {
   logout() {
     const token: any = localStorage.getItem('token')
     this.clearToken()
-    return this.http.post(`${environment.apiUrl}/api/auth/en/logout`, token)
+    return this.http.post(`${environment.apiUrl}auth/en/logout`, token)
   }
 
   getInfo(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/auth/en/me`);
+    return this.http.get(`${environment.apiUrl}auth/en/me`);
   }
 
   changePassword(code: string, obj: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/api/v1/${code}/password/update`, obj);
+    return this.http.put(`${environment.apiUrl}v1/${code}/password/update`, obj);
   }
   passwordDefault(code: string, obj: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/api/v1/${code}/password/default`, obj);
+    return this.http.put(`${environment.apiUrl}v1/${code}/password/default`, obj);
   }
 }

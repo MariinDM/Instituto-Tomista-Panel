@@ -11,7 +11,7 @@ import { ViewsrolesService } from 'src/app/services/viewsroles.service'
 })
 export class AssignViewsrolesComponent implements OnInit {
 
-  premium!: boolean
+  premium = false
   dataRoles: any[] = []
   viewsRole: any[] = []
   newViews: number[] = []
@@ -26,8 +26,9 @@ export class AssignViewsrolesComponent implements OnInit {
     private viewService: ViewService) { }
 
   ngOnInit() {
-    this.viewsRole = this.data.element.roles_views;
+    this.viewsRole = this.data.element.views;
     this.getallViews()
+    if (this.data.element.role_view[0]) { this.premium = this.data.element.role_view[0].premium }
   }
 
   sendData() {
@@ -38,11 +39,13 @@ export class AssignViewsrolesComponent implements OnInit {
     console.log({ role_id: this.data.element.id, views: this.newViews, premium: this.premium, active: true })
     this.vrService.update(this.code, { role_id: this.data.element.id, views: this.newViews, premium: this.premium, active: true }).subscribe({
       next: (v) => {
-        console.log('nice')
-        this.dialog.closeAll()
+        this.openSnack(v.message)
       },
       error: (e) => {
-        console.log(':(')
+        this.openSnack(e.error.error.message)
+      },
+      complete: () => {
+        this.dialog.closeAll()
       }
     })
   }

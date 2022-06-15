@@ -9,23 +9,30 @@ import { User } from '../core/models/user';
 })
 export class UsersService {
 
-  locale = 'es'
-
   constructor(private http:HttpClient) { }
 
-  getall(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/${this.locale}/users/get`);
+  getall(code:string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/users/get`);
   }
-  getone(id:number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/${this.locale}/users/get/${id}`);
+  getone(code:string,id:number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/users/get/${id}`);
   }
-  insert(user:User):Observable<any>{
-    return this.http.post(`${environment.apiUrl}/api/auth/${this.locale}/register`, user)
+  insert(code:string,user:any):Observable<any>{
+    return this.http.post(`${environment.apiUrl}auth/${code}/register`, user)
   }
-  update(id:number, user:User):Observable<any>{
-    return this.http.put(`${environment.apiUrl}/api/v1/${this.locale}/users/update/${id}`, user)
+  update(code:string,id:number, user:User):Observable<any>{
+    return this.http.put(`${environment.apiUrl}v1/${code}/users/update/${id}`, user)
   }
-  delete(id:number):Observable<any>{
-    return this.http.delete(`${environment.apiUrl}/api/v1/${this.locale}/users/delete/${id}`)
+  delete(code:string,id:number):Observable<any>{
+    return this.http.delete(`${environment.apiUrl}v1/${code}/users/delete/${id}`)
+  }
+  getcities(code:string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/cities/get`);
+  }
+  getcountries(code:string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/countries/get`);
+  }
+  getlanguages(code:string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/languages/get`);
   }
 }

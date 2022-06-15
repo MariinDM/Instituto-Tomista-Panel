@@ -19,7 +19,7 @@ export class ViewsrolesComponent implements OnInit {
   loader = false
   code = localStorage.getItem('code')
 
-  displayedColumns: string[] = ['point', 'name', 'premium', 'active', 'actions'] //'description',
+  displayedColumns: string[] = ['point', 'name', 'premium','active', 'actions'] //'description',
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -42,10 +42,11 @@ export class ViewsrolesComponent implements OnInit {
   getall(): void {
     this.loader = false
     this.viewsrolesService.getall(this.code).subscribe((data: any) => {
-      this.dataVR = data.roles.roles_views
+      this.dataVR = data.roles
       this.setData()
       this.loader = true
       this.openSnack(data.message)
+      console.log(this.dataVR)
     })
   }
 
@@ -56,6 +57,9 @@ export class ViewsrolesComponent implements OnInit {
       },
       error: (e) => {
         this.openSnack(e.error.error.message)
+      },
+      complete:()=>{
+        this.getall()
       }
     })
   }

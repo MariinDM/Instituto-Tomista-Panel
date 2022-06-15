@@ -15,6 +15,7 @@ export class ViewDialogComponent implements OnInit {
   form!: FormGroup
   view!: any
   dataCategories!: any[]
+  validateIMG = false
   code = localStorage.getItem('code')
 
   constructor(
@@ -34,7 +35,7 @@ export class ViewDialogComponent implements OnInit {
 
   getallcategories(): void {
     this.categoryService.getall(this.code).subscribe((data: any) => {
-      this.dataCategories = data
+      this.dataCategories = data.categories
     })
   }
 
@@ -79,5 +80,16 @@ export class ViewDialogComponent implements OnInit {
       duration: 1000,
     })
   }
-
+  onImageChangeFromFile($event: any) {
+    if ($event.target.files && $event.target.files[0]) {
+      let file = $event.target.files[0];
+      // console.log(file);
+      if (file.type == "image/jpeg" || file.type == "image/png" || file.type == "image/jpg") {
+        this.validateIMG = false
+      }
+      else {
+        this.validateIMG = true
+      }
+    }
+  }
 }
