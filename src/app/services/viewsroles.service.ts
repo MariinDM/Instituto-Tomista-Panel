@@ -14,6 +14,9 @@ export class ViewsrolesService {
   getall(code: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/roles_views/get`);
   }
+  getone(code: string, id: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/roles_views/get/${id}`);
+  }
 
   update(code: string, vr: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}v1/${code}/roles_views/update`, vr)

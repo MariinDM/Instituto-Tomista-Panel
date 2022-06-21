@@ -3,17 +3,14 @@
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="body" *ngIf="!loader">
-                    <!-- <div class="header">
-                        <h2><strong>Information</strong></h2>
-                    </div> -->
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="box-part text-center">
                                 <div class="text fs-3 m-b-5">Personal Picture</div>
                                 <div class="row">
                                     <div class="image text-center mb-3 mt-3">
-                                        <img src="assets/images/usrbig.jpg" alt="User Image" width="150" height="150"
-                                            class="img-circle user-img-circle">
+                                        <img src="{{userInfo.profile_picture ? profile : 'assets/images/image-gallery/user.jpg'}}"
+                                            alt="" width=" 150" height="150" class="img-circle user-img-circle">
                                     </div>
                                 </div>
                                 <div class="text p-b-10">
@@ -66,7 +63,8 @@
                                 <div class="text fs-3 m-b-5">Institution Picture</div>
                                 <div class="row">
                                     <div class="image text-center mb-3 mt-3">
-                                        <img src="assets/images/usrbig.jpg" alt="User Image" width="150" height="150"
+                                        <img src="{{userInfo.institution_picture ? institution : 'assets/images/image-gallery/InstitutionPicture.jpg'}}"
+                                            alt="User Image" width="150" height="150"
                                             class="img-circle user-img-circle">
                                     </div>
                                 </div>
@@ -123,16 +121,16 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-5">
                             <button mat-button class="baby-green m-2 btn-lg" (click)="openDialog()">Change
                                 Password</button>
-                            <!-- <button mat-button class="baby-pink m-2 btn-lg">Update Info</button> -->
+                            <button (click)="openProfile(userInfo,true)"*ngIf="rol!=3" mat-button class="baby-pink m-2 btn-lg">Update
+                                Profile
+                                Picture</button>
+                            <button (click)="openInstitution(userInfo,false)" *ngIf="rol==3" mat-button
+                                class="baby-yellow m-2 btn-lg">Update Institution Picture</button>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="m-0 vh-100 row justify-content-center aling-items-center" *ngIf="true">
-                    <div class="col-auto text-center">
-                        
-                    </div>
-                </div> -->
-                <mat-spinner *ngIf="loader" color="accent" style="top: 150%; margin-right: auto; margin-left: auto;" diameter="150"></mat-spinner>
+                <mat-spinner *ngIf="loader" color="accent" style="top: 150%; margin-right: auto; margin-left: auto;"
+                    diameter="150"></mat-spinner>
             </div>
         </div>
     </div>

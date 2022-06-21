@@ -90,6 +90,7 @@ export class CategoriesComponent implements OnInit {
       this.getall()
     })
   }
+  
   openDialogUpdate(element: Category, edit: boolean) {
     this.dialog.open(CategoryDialogComponent, {
       data: { element, edit },

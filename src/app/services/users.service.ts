@@ -9,30 +9,33 @@ import { User } from '../core/models/user';
 })
 export class UsersService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getall(code:string): Observable<any> {
+  getall(code: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/users/get`);
   }
-  getone(code:string,id:number): Observable<any> {
+  getone(code: string, id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/users/get/${id}`);
   }
-  insert(code:string,user:any):Observable<any>{
+  insert(code: string, user: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}auth/${code}/register`, user)
   }
-  update(code:string,id:number, user:User):Observable<any>{
+  update(code: string, id: number, user: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}v1/${code}/users/update/${id}`, user)
   }
-  delete(code:string,id:number):Observable<any>{
+  delete(code: string, id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}v1/${code}/users/delete/${id}`)
   }
-  getcities(code:string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}v1/${code}/cities/get`);
+  getcities(code: string, id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/cities/get/${id}`);
   }
-  getcountries(code:string): Observable<any> {
+  getcountries(code: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/countries/get`);
   }
-  getlanguages(code:string): Observable<any> {
+  getlanguages(code: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/languages/get`);
+  }
+  uploadImg(code: string, id: number, image: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Users/${id}`, image)
   }
 }

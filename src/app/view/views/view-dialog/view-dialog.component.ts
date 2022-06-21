@@ -16,6 +16,7 @@ export class ViewDialogComponent implements OnInit {
   view!: any
   dataCategories!: any[]
   validateIMG = false
+  image: any = null
   code = localStorage.getItem('code')
 
   constructor(
@@ -41,19 +42,63 @@ export class ViewDialogComponent implements OnInit {
 
   sendData() {
     if (this.form.invalid) { return }
-    this.setData();
+
+    var fd = new FormData()
+
+    fd.set('id', this.data.element ? this.data.element.id : null)
+    fd.set('name', this.form.controls['name'].value)
+    fd.set('order_index', this.form.controls['order_index'].value)
+    fd.set('description', this.form.controls['description'].value)
+    fd.set('category_id', this.form.controls['category_id'].value)
+    fd.set('image', this.image)
+    fd.set('active', this.data.element ? this.data.element.active : true)
+
+    var id = 0
+    var message = ''
+
     if (!this.data.edit) {
-      this.viewService.insert(this.code, this.view).subscribe({
-        next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e.error.error.message) },
-        complete: () => { this.dialog.closeAll() }
-      })
+      if (this.image) {
+        this.viewService.insert(this.code, fd).subscribe({
+          next: (v) => { message = v.message, id = v.view_id },
+          error: (e) => { message = e.error.error.message },
+          complete: () => {
+            this.viewService.uploadImg(this.code, id, fd).subscribe({
+              next: (v) => { this.openSnack(message) },
+              error: (e) => { this.openSnack(e.error.error.message) },
+              complete: () => { this.dialog.closeAll() }
+            })
+          }
+        })
+      }
+      else {
+        this.viewService.insert(this.code, fd).subscribe({
+          next: (v) => { this.openSnack(v.message) },
+          error: (e) => { this.openSnack(e.error.error.message) },
+          complete: () => { this.dialog.closeAll() }
+        })
+      }
     } else {
-      this.viewService.update(this.code, this.data.element.id, this.view).subscribe({
-        next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e.error.error.message) },
-        complete: () => { this.dialog.closeAll() }
-      })
+      if (this.image) {
+        fd.set('image', this.image)
+        this.viewService.update(this.code, this.data.element.id, fd).subscribe({
+          next: (v) => { message = v.message, id = v.view_id },
+          error: (e) => { message = e.error.error.message },
+          complete: () => {
+            this.viewService.uploadImg(this.code, this.data.element.id, fd).subscribe({
+              next: (v) => { this.openSnack(message) },
+              error: (e) => { this.openSnack(e.error.error.message) },
+              complete: () => { this.dialog.closeAll() }
+            })
+          }
+        })
+      }
+      else {
+        this.viewService.update(this.code, this.data.element.id, fd).subscribe({
+          next: (v) => { this.openSnack(v.message) },
+          error: (e) => { this.openSnack(e.error.error.message) },
+          complete: () => { this.dialog.closeAll() }
+        })
+      }
     }
   }
 
@@ -62,17 +107,23 @@ export class ViewDialogComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       order_index: new FormControl('', [Validators.required]),
       description: new FormControl('',),
-      image: new FormControl('',),
       category_id: new FormControl('', [Validators.required]),
     });
   }
 
-  setData(): void {
-    this.view = {
-      ...this.form.value,
-      id: this.data.element ? this.data.element.id : null,
-      active: this.data.element ? this.data.element.active : true
-    }
+  setData() {
+
+    var fd = new FormData()
+
+    fd.set('id', this.data.element ? this.data.element.id : null)
+    fd.set('name', this.form.controls['name'].value)
+    fd.set('order_index', this.form.controls['order_index'].value)
+    fd.set('description', this.form.controls['description'].value)
+    fd.set('category_id', this.form.controls['category_id'].value)
+    fd.set('image', this.image)
+    fd.set('active', this.data.element ? this.data.element.active : true)
+
+    return fd
   }
 
   openSnack(message: string) {
@@ -84,11 +135,14 @@ export class ViewDialogComponent implements OnInit {
     if ($event.target.files && $event.target.files[0]) {
       let file = $event.target.files[0];
       // console.log(file);
-      if (file.type == "image/jpeg" || file.type == "image/png" || file.type == "image/jpg") {
+      if (file.type == "image/jpeg" || file.type == "image/jpg" || file.type == "image/png") {
         this.validateIMG = false
+        this.image = file
+        console.log('yes')
       }
       else {
         this.validateIMG = true
+        console.log('no')
       }
     }
   }

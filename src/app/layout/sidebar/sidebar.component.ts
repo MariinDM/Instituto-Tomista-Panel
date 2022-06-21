@@ -1,9 +1,10 @@
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, ElementRef, OnInit, Renderer2, HostListener, OnDestroy} from '@angular/core';
+import { Component, Inject, ElementRef, OnInit, AfterViewInit, Renderer2, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ROUTES } from './sidebar-items';
-import { AuthService } from 'src/app/core/service/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import { AuthService } from 'src/app/services/auth.service';
+import { ViewsrolesService } from 'src/app/services/viewsroles.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,9 +13,8 @@ import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroy
 })
 export class SidebarComponent
   extends UnsubscribeOnDestroyAdapter
-  implements OnInit, OnDestroy
-{
-  public sidebarItems: any[];
+  implements OnInit, OnDestroy {
+  public sidebarItems: any[] = []
   level1Menu = '';
   level2Menu = '';
   level3Menu = '';
@@ -24,12 +24,25 @@ export class SidebarComponent
   listMaxWidth: string;
   headerHeight = 60;
   routerObj = null;
+
+  user!: any
+  code = localStorage.getItem('code')
+  rol = localStorage.getItem('rol')
+  dataVR: any = []
+  sidebar: any[] = []
+  menu: any = []
+  cat: any[] = []
+  pass: boolean = false
+  submenu: any[] = []
+  routes = ROUTES.filter((sidebarItem)=> sidebarItem)
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public elementRef: ElementRef,
-    private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private vrService: ViewsrolesService,
+    private cd: ChangeDetectorRef,
   ) {
     super();
     this.routerObj = this.router.events.subscribe((event) => {
@@ -40,6 +53,54 @@ export class SidebarComponent
         this.renderer.removeClass(this.document.body, 'overlay-open');
       }
     });
+  }
+  getall(): void {
+    this.vrService.getone(this.code, this.rol).subscribe((data: any) => {
+      this.dataVR = data.role.views
+      if (localStorage.getItem('token')) {
+        this.sidebar = ROUTES.filter((sidebarItem) => sidebarItem);
+        //CATEGORIES
+        for (let i = 0; i < this.sidebar.length; i++) {
+          for (let j = 0; j < this.dataVR.length; j++) {
+            if (this.sidebar[i].moduleName == this.dataVR[j].categories.name) {
+              //Primer Categoria
+              if (this.menu.length == 0) {
+                this.menu.push(this.sidebar[i])
+              }
+              //Otras Categorias
+              else {
+                for (let o = 0; o < this.menu.length; o++) {
+                  if (this.menu[o].moduleName != this.dataVR[j].categories.name) {
+                    this.pass = true
+                  } else { this.pass = false }
+                }
+                if (this.pass) {
+                  this.menu.push(this.sidebar[i])
+                }
+              }
+            }
+          }
+        }
+
+        //MENU
+        for (let j = 0; j < this.menu.length; j++) {
+          //SUBMENU
+          for (let o = 0; o < this.menu[j].submenu.length; o++) {
+            //DATAVR
+            for (let i = 0; i < this.dataVR.length; i++) {
+              if (this.dataVR[i].name == this.menu[j].submenu[o].moduleName) {
+                this.submenu.push(this.menu[j].submenu[o])
+              }
+            }
+          }
+          this.menu[j].submenu = this.submenu
+          this.submenu = []
+        }
+        this.sidebarItems = this.menu
+      }
+      this.initLeftSidebar();
+      this.bodyTag = this.document.body;
+    })
   }
   @HostListener('window:resize', ['$event'])
   windowResizecall(event) {
@@ -80,12 +141,11 @@ export class SidebarComponent
     }
   }
   ngOnInit() {
-    if (localStorage.getItem('token')) {
-      this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
-    }
+    this.getall()
+  }
+  ngAfterViewInit(): void {
 
-    this.initLeftSidebar();
-    this.bodyTag = this.document.body;
+    this.cd.detectChanges()
   }
   ngOnDestroy() {
     this.routerObj.unsubscribe();

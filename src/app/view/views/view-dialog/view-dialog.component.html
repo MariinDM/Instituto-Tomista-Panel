@@ -49,17 +49,6 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Image</mat-label>
-                        <ngx-mat-file-input formControlName="image" multiple="false" accept=".png, .jpg, .jpeg"
-                            (change)="onImageChangeFromFile($event)">
-                            <mat-icon matSuffix>insert_photo</mat-icon>
-                        </ngx-mat-file-input>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>Enter Category</mat-label>
                         <mat-select formControlName="category_id">
                             <mat-option *ngFor="let item of dataCategories" [value]="item.id">
@@ -70,6 +59,18 @@
                             *ngIf="form.controls['category_id'].hasError('required') && (form.controls['category_id'].dirty || form.controls['category_id'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <!-- <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-label>Enter Image</mat-label>
+                        <ngx-mat-file-input formControlName="image" multiple="false" accept=".png, .jpg, .jpeg"
+                            (change)="onImageChangeFromFile($event)">
+                            <mat-icon matSuffix>insert_photo</mat-icon>
+                        </ngx-mat-file-input>
+                    </mat-form-field> -->
+                    <input type="file" #fileInput (change)="onImageChangeFromFile($event)" accept=".jpeg, .jpg, .png">
                 </div>
             </div>
             <div class="row">

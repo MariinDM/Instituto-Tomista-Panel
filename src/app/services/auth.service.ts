@@ -42,9 +42,8 @@ export class AuthService {
     return throwError(errorMessage)
   }
 
-  logout() {
+  logout(): Observable<any> {
     const token: any = localStorage.getItem('token')
-    this.clearToken()
     return this.http.post(`${environment.apiUrl}auth/en/logout`, token)
   }
 

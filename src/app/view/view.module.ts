@@ -20,6 +20,7 @@ import { ViewDialogComponent } from './views/view-dialog/view-dialog.component';
 import { UserDialogComponent } from './users/user-dialog/user-dialog.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { UserUpdateDialogComponent } from './users/user-update-dialog/user-update-dialog.component';
+import { ChangePictureComponent } from './profile/change-picture/change-picture.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { UserUpdateDialogComponent } from './users/user-update-dialog/user-updat
     UserDialogComponent,
     ChangePasswordComponent,
     UserUpdateDialogComponent,
+    ChangePictureComponent,
   ],
   imports: [
     CommonModule,

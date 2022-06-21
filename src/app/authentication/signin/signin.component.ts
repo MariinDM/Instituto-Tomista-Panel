@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { AuthService } from 'src/app/services/auth.service';
 import { Auth } from 'src/app/interfaces/user';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-signin',
@@ -19,10 +20,14 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
   auth!: Auth
   user!: any
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
-    super();
-    this.createForm()
-  }
+  code!: string
+  rol!: string
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private spinner: NgxSpinnerService) { super(); this.createForm() }
   ngOnInit() {
   }
 
@@ -35,14 +40,27 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
       this.error = 'Username or Password not valid !'
       return
     } else {
+      this.spinner.show()
       this.setData()
       this.subs.sink = this.authService.login(this.auth).subscribe({
         next: (v) => {
-          this.router.navigate(['/dashboard'])
         },
         error: (e) => {
           this.error = 'Invalid Credentials';
           this.submitted = false;
+        },
+        complete: () => {
+          this.authService.getInfo().subscribe({
+            next: (v) => { this.code = v.profile[0].languages.code, this.rol = v.rol[0].id },
+            error: (e) => { console.log(e) },
+            complete: () => {
+              localStorage.setItem('code', this.code)
+              localStorage.setItem('rol', this.rol)
+              this.submitted = true
+              this.router.navigate(['/dashboard'])
+              this.spinner.hide()
+            }
+          })
         }
       })
     }

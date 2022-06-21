@@ -46,7 +46,6 @@ export class ViewsrolesComponent implements OnInit {
       this.setData()
       this.loader = true
       this.openSnack(data.message)
-      console.log(this.dataVR)
     })
   }
 

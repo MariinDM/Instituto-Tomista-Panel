@@ -3,11 +3,12 @@ import { Component, Inject, ElementRef, OnInit, Renderer2, HostListener, AfterVi
 import { Router } from '@angular/router';
 import { ConfigService } from 'src/app/config/config.service';
 import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
-import { WINDOW } from 'src/app/core/service/window.service';
+import { WINDOW, WINDOW_PROVIDERS } from 'src/app/core/service/window.service';
 import { LanguageService } from 'src/app/core/service/language.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import * as texts from 'src/assets/data/language.json';
 import { AuthService } from 'src/app/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 const document: any = window.document;
 
 @Component({
@@ -15,8 +16,8 @@ const document: any = window.document;
   templateUrl: './header.component.html',
   styleUrls: ['../../app.component.scss']
 })
-export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnInit, AfterViewInit{
-  texts:any = texts;
+export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnInit, AfterViewInit {
+  texts: any = texts;
   public config: any = {};
   isNavbarCollapsed = true;
   isNavbarShow = true;
@@ -34,7 +35,8 @@ export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnIn
     private configService: ConfigService,
     private authService: AuthService,
     private router: Router,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private spinner: NgxSpinnerService
   ) {
     super();
   }
@@ -214,12 +216,13 @@ export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnIn
       this.renderer.addClass(this.document.body, 'submenu-closed');
     }
   }
-  
+
   logout() {
-    this.authService.logout().subscribe((res) => {
-      // if (!res.success) {
-        this.router.navigate(['/authentication/signin']);
-      // }
+    this.spinner.show()
+    this.authService.logout().subscribe((res: any) => {
+      localStorage.clear()
+      this.router.navigate(['/authentication/signin']);
+      this.spinner.hide()
     })
   }
 }

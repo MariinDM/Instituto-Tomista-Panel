@@ -16,7 +16,9 @@ import { UserUpdateDialogComponent } from './user-update-dialog/user-update-dial
 })
 export class UsersComponent implements OnInit {
 
-  dataUser!: any[]
+  dataUser: any[] = []
+  dataTable: any[] = []
+  user!: any
   loader = true
   code = localStorage.getItem('code')
 
@@ -24,7 +26,7 @@ export class UsersComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private userService: UsersService,
@@ -36,28 +38,44 @@ export class UsersComponent implements OnInit {
     this.getall()
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(cadena: string) {
+    cadena.trim()
+    cadena.toLowerCase()
+    this.dataSource.filter = cadena;
+    this.dataSource.paginator = this.paginator;
   }
 
   getall(): void {
     this.loader = false
-    this.userService.getall(this.code).subscribe({
-      next: (v) => {
-        this.dataUser = v.data
-        this.setData()
-        this.loader = true
-        this.openSnack(v.message)
-        console.log(this.dataUser)
-      },
-      error: (e) => { this.openSnack(e.error.message) }
+    this.dataTable = []
+    this.userService.getall(this.code).subscribe((data: any) => {
+      this.dataUser = data.data
+      for (let i = 0; i < this.dataUser.length; i++) {
+        this.user = {
+          id: this.dataUser[i].users.id,
+          name: this.dataUser[i].users.profile[0].name,
+          last_name: this.dataUser[i].users.profile[0].last_name,
+          email: this.dataUser[i].users.email,
+          rol: this.dataUser[i].roles.name,
+          institution_picture: this.dataUser[i].users.institution_picture,
+          profile_picture: this.dataUser[i].users.profile_picture,
+          active: this.dataUser[i].users.active,
+        }
+        // if (localStorage.getItem('rol') < this.dataUser[i].role_id) {
+          this.dataTable.push(this.user)
+        // }
+      }
+      this.setData()
+      this.loader = true
+      this.openSnack(data.message)
+    }, (error: any) => {
+      console.log(error)
     })
   }
 
   setData(): void {
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.dataUser;
+    this.dataSource.data = this.dataTable;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -92,11 +110,17 @@ export class UsersComponent implements OnInit {
   }
 
   openDialogUpdate(element: any) {
+    for (let i = 0; i < this.dataUser.length; i++) {
+      if (this.dataUser[i].users.id == element.id) {
+        element = this.dataUser[i]
+      }
+    }
     this.dialog.open(UserUpdateDialogComponent, {
       data: { element },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()
     })
+    console.log(element)
   }
 }

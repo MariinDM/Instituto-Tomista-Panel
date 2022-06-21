@@ -38,24 +38,6 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: [
       {
-        path: '/gestion/usuarios',
-        title: 'Usuarios',
-        moduleName: 'users',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/gestion/dispositivos',
-        title: 'Dispositivos',
-        moduleName: 'devices',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
         path: '/gestion/categorias',
         title: 'Categorias',
         moduleName: 'categories',
@@ -85,7 +67,7 @@ export const ROUTES: RouteInfo[] = [
       {
         path: '/gestion/vistaroles',
         title: 'Vistas roles',
-        moduleName: 'authentication',
+        moduleName: 'viewsroles',
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
@@ -94,7 +76,7 @@ export const ROUTES: RouteInfo[] = [
       {
         path: '/gestion/comunidad',
         title: 'Comunidad',
-        moduleName: 'comunity',
+        moduleName: 'community',
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
@@ -111,9 +93,18 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: [
       {
-        path: '/user/profile',
-        title: 'Perfil',
-        moduleName: 'extra-pages',
+        path: '/user/usuarios',
+        title: 'Usuarios',
+        moduleName: 'users',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        submenu: []
+      },
+      {
+        path: '/user/dispositivos',
+        title: 'Dispositivos',
+        moduleName: 'devices',
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
