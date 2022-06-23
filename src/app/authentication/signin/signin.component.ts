@@ -48,6 +48,7 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
         error: (e) => {
           this.error = 'Invalid Credentials';
           this.submitted = false;
+          this.spinner.hide()
         },
         complete: () => {
           this.authService.getInfo().subscribe({

@@ -28,7 +28,7 @@ export class ChangePictureComponent implements OnInit {
     if (this.data.edit) {
       //Profile
       fb.set('profile_picture', this.image)
-      this.userService.uploadImg(this.code, this.data.user.id, fb).subscribe({
+      this.userService.upProfile(this.code, this.data.user.id, fb).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e.error.error.message) },
         complete: () => { this.dialog.closeAll() }
@@ -36,7 +36,7 @@ export class ChangePictureComponent implements OnInit {
     } else {
       //Institution
       fb.set('institution_picture', this.image)
-      this.userService.uploadImg(this.code, this.data.user.id, fb).subscribe({
+      this.userService.upInstitution(this.code, this.data.user.id, fb).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e.error.error.message) },
         complete: () => { this.dialog.closeAll() }

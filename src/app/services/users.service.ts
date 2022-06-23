@@ -35,7 +35,10 @@ export class UsersService {
   getlanguages(code: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/languages/get`);
   }
-  uploadImg(code: string, id: number, image: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Users/${id}`, image)
+  upProfile(code: string, id: number, image: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Profile/${id}`, image)
+  }
+  upInstitution(code: string, id: number, image: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Institution/${id}`, image)
   }
 }

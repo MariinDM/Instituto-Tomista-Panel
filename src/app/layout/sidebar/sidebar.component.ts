@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, ElementRef, OnInit, AfterViewInit, Renderer2, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ROUTES } from './sidebar-items';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { AuthService } from 'src/app/services/auth.service';
 import { ViewsrolesService } from 'src/app/services/viewsroles.service';
 
 @Component({
@@ -34,7 +33,6 @@ export class SidebarComponent
   cat: any[] = []
   pass: boolean = false
   submenu: any[] = []
-  routes = ROUTES.filter((sidebarItem)=> sidebarItem)
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -58,6 +56,7 @@ export class SidebarComponent
     this.vrService.getone(this.code, this.rol).subscribe((data: any) => {
       this.dataVR = data.role.views
       if (localStorage.getItem('token')) {
+        // this.sidebar = this.routes 
         this.sidebar = ROUTES.filter((sidebarItem) => sidebarItem);
         //CATEGORIES
         for (let i = 0; i < this.sidebar.length; i++) {

@@ -1,6 +1,6 @@
 import { RouteInfo } from './sidebar.metadata';
 
-export const ROUTES: RouteInfo[] = [
+export let ROUTES: RouteInfo[] = [
   // {
   //   path: '',
   //   title: 'Informacion',// Name del apartado
