@@ -39,6 +39,7 @@
     "@swimlane/ngx-datatable": "^20.0.0",
     "@types/d3-shape": "^3.0.2",
     "acorn": "^8.6.0",
+    "angular-cropperjs": "^1.0.2",
     "angular-feather": "^6.1.0",
     "angular-gauge": "^4.0.0",
     "apexcharts": "^3.30.0",

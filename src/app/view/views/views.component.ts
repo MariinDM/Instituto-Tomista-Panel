@@ -19,7 +19,7 @@ export class ViewsComponent implements OnInit {
   loader = false
   code = localStorage.getItem('code')
 
-  displayedColumns: string[] = ['point', 'name', 'order_index', 'description', 'image', 'category', 'active', 'actions']
+  displayedColumns: string[] = ['point', 'name', 'order_index', 'url', 'description', 'image', 'category', 'active', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator

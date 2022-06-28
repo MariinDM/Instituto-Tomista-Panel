@@ -50,6 +50,7 @@ export class ViewDialogComponent implements OnInit {
     fd.set('order_index', this.form.controls['order_index'].value)
     fd.set('description', this.form.controls['description'].value)
     fd.set('category_id', this.form.controls['category_id'].value)
+    fd.set('url', this.form.controls['url'].value)
     fd.set('image', this.image)
     fd.set('active', this.data.element ? this.data.element.active : true)
 
@@ -108,22 +109,8 @@ export class ViewDialogComponent implements OnInit {
       order_index: new FormControl('', [Validators.required]),
       description: new FormControl('',),
       category_id: new FormControl('', [Validators.required]),
+      url: new FormControl('', [Validators.required]),
     });
-  }
-
-  setData() {
-
-    var fd = new FormData()
-
-    fd.set('id', this.data.element ? this.data.element.id : null)
-    fd.set('name', this.form.controls['name'].value)
-    fd.set('order_index', this.form.controls['order_index'].value)
-    fd.set('description', this.form.controls['description'].value)
-    fd.set('category_id', this.form.controls['category_id'].value)
-    fd.set('image', this.image)
-    fd.set('active', this.data.element ? this.data.element.active : true)
-
-    return fd
   }
 
   openSnack(message: string) {

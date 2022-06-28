@@ -14,14 +14,16 @@ import { ViewsrolesComponent } from './viewsroles/viewsroles.component';
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'user/usuarios', component: UsersComponent },
+  
   { path: 'user/dispositivos', component: DevicesComponent },
+  { path: 'user/profile', component: ProfileComponent },
+
+  { path: 'gestion/usuarios', component: UsersComponent },
   { path: 'gestion/categorias', component: CategoriesComponent, canActivate:[AdminRolGuard]},
   { path: 'gestion/vistas', component: ViewsComponent, canActivate:[AdminRolGuard]},
   { path: 'gestion/roles', component: RolesComponent, canActivate:[AdminRolGuard]},
   { path: 'gestion/vistaroles', component: ViewsrolesComponent, canActivate:[AdminRolGuard]},
   { path: 'gestion/comunidad', component: CommunityComponent },
-  { path: 'user/profile', component: ProfileComponent },
 ];
 
 @NgModule({

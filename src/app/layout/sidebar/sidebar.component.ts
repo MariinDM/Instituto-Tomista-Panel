@@ -2,6 +2,7 @@ import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, ElementRef, OnInit, AfterViewInit, Renderer2, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ROUTES } from './sidebar-items';
+import { RouteInfo } from './sidebar.metadata';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { ViewsrolesService } from 'src/app/services/viewsroles.service';
 
@@ -33,6 +34,11 @@ export class SidebarComponent
   cat: any[] = []
   pass: boolean = false
   submenu: any[] = []
+  icons: any[] = [
+    'monitor',
+    'monitor',
+    'monitor',
+  ]
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -56,50 +62,59 @@ export class SidebarComponent
     this.vrService.getone(this.code, this.rol).subscribe((data: any) => {
       this.dataVR = data.role.views
       if (localStorage.getItem('token')) {
-        // this.sidebar = this.routes 
-        this.sidebar = ROUTES.filter((sidebarItem) => sidebarItem);
         //CATEGORIES
-        for (let i = 0; i < this.sidebar.length; i++) {
-          for (let j = 0; j < this.dataVR.length; j++) {
-            if (this.sidebar[i].moduleName == this.dataVR[j].categories.name) {
-              //Primer Categoria
-              if (this.menu.length == 0) {
-                this.menu.push(this.sidebar[i])
-              }
-              //Otras Categorias
-              else {
-                for (let o = 0; o < this.menu.length; o++) {
-                  if (this.menu[o].moduleName != this.dataVR[j].categories.name) {
-                    this.pass = true
-                  } else { this.pass = false }
-                }
-                if (this.pass) {
-                  this.menu.push(this.sidebar[i])
-                }
-              }
+        for (let j = 0; j < this.dataVR.length; j++) {
+          let route: RouteInfo = null
+          route = {
+            path: '',
+            title: this.dataVR[j].categories.name,
+            moduleName: this.dataVR[j].categories.name,
+            icon: 'monitor',
+            class: 'menu-toggle',
+            groupTitle: false,
+            submenu: []
+          }
+          let name = this.dataVR[j].categories.name
+          if (this.menu.length == 0) {
+            this.menu.push(route)
+          }
+          else {
+            let index = this.menu.findIndex(item => item.moduleName == name)
+            if (index == -1) {
+              this.menu.push(route)
             }
           }
         }
 
-        //MENU
+        //VIEWS
         for (let j = 0; j < this.menu.length; j++) {
-          //SUBMENU
-          for (let o = 0; o < this.menu[j].submenu.length; o++) {
-            //DATAVR
-            for (let i = 0; i < this.dataVR.length; i++) {
-              if (this.dataVR[i].name == this.menu[j].submenu[o].moduleName) {
-                this.submenu.push(this.menu[j].submenu[o])
-              }
+          for (let i = 0; i < this.dataVR.length; i++) {
+            let submenu: RouteInfo = null
+            submenu = {
+              path: this.dataVR[i].url,
+              title: this.dataVR[i].name,
+              moduleName: this.dataVR[i].name,
+              icon: '',
+              class: 'ml-menu',
+              groupTitle: false,
+              submenu: []
+            }
+            if (this.menu[j].moduleName == this.dataVR[i].categories.name) {
+              this.menu[j].submenu.push(submenu)
             }
           }
-          this.menu[j].submenu = this.submenu
-          this.submenu = []
+        }
+        for (let h = 0; h < this.menu.length; h++) {
+          this.menu[h].moduleName = this.tolowercase(this.menu[h].moduleName)
         }
         this.sidebarItems = this.menu
       }
       this.initLeftSidebar();
       this.bodyTag = this.document.body;
     })
+  }
+  tolowercase(value: string): string {
+    return value.toLowerCase();
   }
   @HostListener('window:resize', ['$event'])
   windowResizecall(event) {
