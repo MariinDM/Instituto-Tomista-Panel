@@ -1,0 +1,202 @@
+<div class="addContainer">
+  <div class="modalHeader">
+      <div class="editRowModal">
+          <div class="modalHeader clearfix">
+              <img src="assets/images/user.jpg" class="rounded-circle" width="32" height="32" alt="">
+              <div class="modal-about">
+                  <div class="font-weight-bold p-t-5 font-17"> Device Data</div>
+              </div>
+          </div>
+      </div>
+      <button mat-icon-button [mat-dialog-close]="true" aria-label="Close dialog"
+          class="mat-focus-indicator mat-icon-button mat-button-base">
+          <span class="mat-button-wrapper">
+              <mat-icon>close </mat-icon>
+          </span>
+      </button>
+  </div>
+  <div class="mat-dialog-content">
+      <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Password</mat-label>
+                  <input matInput placeholder="Password" required formControlName="password">
+                  <mat-error *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].dirty || form.controls['password'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Restarts</mat-label>
+                  <input matInput placeholder="Restarts" required formControlName="restarts">
+                  <mat-error *ngIf="form.controls['restarts'].hasError('required') && (form.controls['restarts'].dirty || form.controls['restarts'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Serial</mat-label>
+                  <input matInput placeholder="Serial" required formControlName="serial">
+                  <mat-error *ngIf="form.controls['serial'].hasError('required') && (form.controls['serial'].dirty || form.controls['serial'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Token</mat-label>
+                  <input matInput placeholder="Token" required formControlName="token">
+                  <mat-error *ngIf="form.controls['token'].hasError('required') && (form.controls['token'].dirty || form.controls['token'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Comments</mat-label>
+                  <input matInput placeholder="Comments" required formControlName="comments">
+                  <mat-error *ngIf="form.controls['comments'].hasError('required') && (form.controls['comments'].dirty || form.controls['comments'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>IP</mat-label>
+                  <input matInput placeholder="IP" required formControlName="ip">
+                  <mat-error *ngIf="form.controls['ip'].hasError('required') && (form.controls['ip'].dirty || form.controls['ip'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                <mat-icon matSuffix>description</mat-icon>
+                <mat-label>LAN</mat-label>
+                <input matInput placeholder="LAN" required formControlName="lan">
+                <mat-error *ngIf="form.controls['lan'].hasError('required') && (form.controls['lan'].dirty || form.controls['lan'].touched)">
+                  It's required field
+                </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Created At</mat-label>
+                  <input matInput placeholder="Created At" required formControlName="created_at">
+                  <mat-error *ngIf="form.controls['created_at'].hasError('required') && (form.controls['created_at'].dirty || form.controls['created_at'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                <mat-icon matSuffix>description</mat-icon>
+                <mat-label>Updated At</mat-label>
+                <input matInput placeholder="Updated At" required formControlName="updated_at">
+                <mat-error *ngIf="form.controls['updated_at'].hasError('required') && (form.controls['updated_at'].dirty || form.controls['updated_at'].touched)">
+                  It's required field
+                </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Firmware Version</mat-label>
+                  <input matInput placeholder="Firmware Version" required formControlName="firmware_version_id">
+                  <mat-error *ngIf="form.controls['firmware_version_id'].hasError('required') && (form.controls['firmware_version_id'].dirty || form.controls['firmware_version_id'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Controller Version</mat-label>
+                  <input matInput placeholder="Controller Version" required formControlName="controller_version_id">
+                  <mat-error *ngIf="form.controls['controller_version_id'].hasError('required') && (form.controls['controller_version_id'].dirty || form.controls['controller_version_id'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Hardware Version</mat-label>
+                  <input matInput placeholder="Hardware Version" required formControlName="hardware_version_id">
+                  <mat-error *ngIf="form.controls['hardware_version_id'].hasError('required') && (form.controls['hardware_version_id'].dirty || form.controls['hardware_version_id'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Model</mat-label>
+                  <input matInput placeholder="Model" required formControlName="model_id">
+                  <mat-error *ngIf="form.controls['model_id'].hasError('required') && (form.controls['model_id'].dirty || form.controls['model_id'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Device Version</mat-label>
+                  <input matInput placeholder="Device Version" required formControlName="device_version_id">
+                  <mat-error *ngIf="form.controls['device_version_id'].hasError('required') && (form.controls['device_version_id'].dirty || form.controls['device_version_id'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <div class="example-button-row" mat-dialog-actions align="end">
+                    <button type="submit" mat-button color="primary">
+                        <span class="m-o">
+                            <mat-icon>save</mat-icon>
+                        </span>
+                    </button>
+                    <button mat-dialog-close mat-button color="warn">
+                        <span class="m-o">
+                            <mat-icon>close</mat-icon>
+                        </span>
+                    </button>
+                </div>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>

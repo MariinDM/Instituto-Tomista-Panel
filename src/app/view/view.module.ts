@@ -5,7 +5,7 @@ import { ViewRoutingModule } from './view-routing.module';
 import { CategoriesComponent } from './categories/categories.component';
 import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DevicesComponent } from './devices/devices.component';
+import { DevicesComponent } from './devices_views/devices/devices.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RolesComponent } from './roles/roles.component';
 import { UsersComponent } from './users/users.component';
@@ -21,6 +21,23 @@ import { UserDialogComponent } from './users/user-dialog/user-dialog.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { UserUpdateDialogComponent } from './users/user-update-dialog/user-update-dialog.component';
 import { ChangePictureComponent } from './profile/change-picture/change-picture.component';
+import { NecessitiesComponent } from './devices_views/necessities/necessities.component';
+import { ControllerVersionsComponent } from './devices_views/controller-versions/controller-versions.component';
+import { ModelsComponent } from './devices_views/models/models.component';
+import { FirmwareVersionsComponent } from './devices_views/firmware-versions/firmware-versions.component';
+import { HardwareVersionsComponent } from './devices_views/hardware-versions/hardware-versions.component';
+import { DeviceTypesComponent } from './devices_views/device-types/device-types.component';
+import { DeviceVersionsComponent } from './devices_views/device-versions/device-versions.component';
+import { ControllerVersionDialogComponent } from './devices_views/dialogs/controller-version-dialog/controller-version-dialog.component';
+import { HardwareVersionDialogComponent } from './devices_views/dialogs/hardware-version-dialog/hardware-version-dialog.component';
+import { DeviceVersionDialogComponent } from './devices_views/dialogs/device-version-dialog/device-version-dialog.component';
+import { DeviceTypeDialogComponent } from './devices_views/dialogs/device-type-dialog/device-type-dialog.component';
+import { NecessitieDialogComponent } from './devices_views/dialogs/necessitie-dialog/necessitie-dialog.component';
+import { ModelDialogComponent } from './devices_views/dialogs/model-dialog/model-dialog.component';
+import { DevicesDialogComponent } from './devices_views/dialogs/devices-dialog/devices-dialog.component';
+import { ModelNecessitiesDialogComponent } from './devices_views/dialogs/model-necessities-dialog/model-necessities-dialog.component';
+import { DeviceCalibrationDialogComponent } from './devices_views/dialogs/device-calibration-dialog/device-calibration-dialog.component';
+import { FirmawareVersionDialogComponent } from './devices_views/dialogs/firmaware-version-dialog/firmaware-version-dialog.component';
 
 
 @NgModule({
@@ -42,13 +59,30 @@ import { ChangePictureComponent } from './profile/change-picture/change-picture.
     ChangePasswordComponent,
     UserUpdateDialogComponent,
     ChangePictureComponent,
+    NecessitiesComponent,
+    ControllerVersionsComponent,
+    ModelsComponent,
+    FirmwareVersionsComponent,
+    HardwareVersionsComponent,
+    DeviceTypesComponent,
+    DeviceVersionsComponent,
+    ControllerVersionDialogComponent,
+    HardwareVersionDialogComponent,
+    DeviceVersionDialogComponent,
+    DeviceTypeDialogComponent,
+    NecessitieDialogComponent,
+    ModelDialogComponent,
+    DevicesDialogComponent,
+    ModelNecessitiesDialogComponent,
+    DeviceCalibrationDialogComponent,
+    FirmawareVersionDialogComponent,
   ],
   imports: [
     CommonModule,
     ViewRoutingModule,
     MaterialModule,
     SharedModule
-    
+
   ]
 })
 export class ViewModule { }
