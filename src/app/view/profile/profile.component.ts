@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangePictureComponent } from './change-picture/change-picture.component';
+
 
 @Component({
   selector: 'app-profile',
@@ -33,8 +35,8 @@ export class ProfileComponent implements OnInit {
     this.loader = true
     this.authService.getInfo().subscribe((data: any) => {
       this.userInfo = data
-      this.institution = 'https://hub-qa.solidusystems.mx/api/v1/en/resources/' + data.institution_picture
-      this.profile = 'https://hub-qa.solidusystems.mx/api/v1/en/resources/' + data.profile_picture
+      this.institution = environment.apiUrl + 'v1/en/resources/' + data.institution_picture
+      this.profile = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
       this.loader = false
     })
   }

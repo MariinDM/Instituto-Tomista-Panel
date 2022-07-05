@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/user.jpg" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Categoria</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Vista</div>
                 </div>
             </div>
         </div>
@@ -17,26 +17,26 @@
     </div>
     <div class="mat-dialog-content">
         <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
-            <div class="row">
+            <div class="row" *ngIf="data.edit">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>tab</mat-icon>
-                        <mat-label>Enter Name</mat-label>
-                        <input matInput placeholder="Ex. Usuarios" required formControlName="name">
-                        <mat-error
-                            *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
-                            It's required field</mat-error>
+                        <mat-label>Enter Language</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let item of dataLanguages" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>123</mat-icon>
-                        <mat-label>Enter Order</mat-label>
-                        <input matInput placeholder="Ex. 1" required formControlName="order_index" type="number">
+                        <mat-icon matSuffix>view_quilt</mat-icon>
+                        <mat-label>Enter Title</mat-label>
+                        <input matInput placeholder="Ex. Tutorial 1" required formControlName="title">
                         <mat-error
-                            *ngIf="form.controls['order_index'].hasError('required') && (form.controls['order_index'].dirty || form.controls['order_index'].touched)">
+                            *ngIf="form.controls['title'].hasError('required') && (form.controls['title'].dirty || form.controls['title'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
@@ -51,42 +51,38 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <h5>Chooose Option</h5>
-                    <div class="row">
-                        <mat-radio-group (change)="radioChange($event)">
-                            <div class="row">
-                                <div class="col-6">
-                                    <mat-radio-button value="1">Image</mat-radio-button>
-                                </div>
-                                <div class="col-6">
-                                    <mat-radio-button value="2">Icon</mat-radio-button>
-                                </div>
-                            </div>
-                        </mat-radio-group>
-                    </div>
-                </div>
-            </div>
-            <div class="row" *ngIf="select=='1'">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <div class="mat-form-field example-full-width">
-                        <button type="button" mat-raised-button (click)="getFile()">Select Image</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row" *ngIf="select=='2'">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>description</mat-icon>
-                        <mat-label>Enter Icon</mat-label>
-                        <input matInput placeholder="Ex. folder" formControlName="image">
+                        <mat-label>Choose a Start date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="start_date">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-label>Choose a End date</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="end_date">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <!-- <input type="file" #fileInput (change)="onImageChangeFromFile($event)" accept=".jpeg, .jpg, .png"> -->
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <ngx-mat-file-input formControlName="image" [multiple]="false" [accept]="'.jpeg, .jpg, .png'">
+                        </ngx-mat-file-input>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <div class="example-button-row" mat-dialog-actions align="end">
-                        <button type="submit" mat-raised-button class="baby-green">
+                        <button type="submit" mat-raised-button color="primary" class="baby-green">
                             <span class="mat-button-wrapper log-white">
                                 <mat-icon>save</mat-icon>
                             </span>

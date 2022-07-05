@@ -21,6 +21,7 @@ import { UserDialogComponent } from './users/user-dialog/user-dialog.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { UserUpdateDialogComponent } from './users/user-update-dialog/user-update-dialog.component';
 import { ChangePictureComponent } from './profile/change-picture/change-picture.component';
+<<<<<<< HEAD
 import { NecessitiesComponent } from './devices_views/necessities/necessities.component';
 import { ControllerVersionsComponent } from './devices_views/controller-versions/controller-versions.component';
 import { ModelsComponent } from './devices_views/models/models.component';
@@ -38,6 +39,17 @@ import { DevicesDialogComponent } from './devices_views/dialogs/devices-dialog/d
 import { ModelNecessitiesDialogComponent } from './devices_views/dialogs/model-necessities-dialog/model-necessities-dialog.component';
 import { DeviceCalibrationDialogComponent } from './devices_views/dialogs/device-calibration-dialog/device-calibration-dialog.component';
 import { FirmawareVersionDialogComponent } from './devices_views/dialogs/firmaware-version-dialog/firmaware-version-dialog.component';
+=======
+import { TutorialsComponent } from './tutorials/tutorials.component';
+import { TutorialDialogComponent } from './tutorials/tutorial-dialog/tutorial-dialog.component';
+import { TipsComponent } from './tips/tips.component';
+import { TipDialogComponent } from './tips/tip-dialog/tip-dialog.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { FaqDialogComponent } from './faqs/faq-dialog/faq-dialog.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { CalculatorDialogComponent } from './calculator/calculator-dialog/calculator-dialog.component';
+import { GetFilesComponent } from './get-files/get-files.component';
+>>>>>>> 9db0b87993692b1e16ebc2d39d15ce3bc3d80126
 
 
 @NgModule({
@@ -59,6 +71,7 @@ import { FirmawareVersionDialogComponent } from './devices_views/dialogs/firmawa
     ChangePasswordComponent,
     UserUpdateDialogComponent,
     ChangePictureComponent,
+<<<<<<< HEAD
     NecessitiesComponent,
     ControllerVersionsComponent,
     ModelsComponent,
@@ -76,13 +89,27 @@ import { FirmawareVersionDialogComponent } from './devices_views/dialogs/firmawa
     ModelNecessitiesDialogComponent,
     DeviceCalibrationDialogComponent,
     FirmawareVersionDialogComponent,
+=======
+    TutorialsComponent,
+    TutorialDialogComponent,
+    TipsComponent,
+    TipDialogComponent,
+    FaqsComponent,
+    FaqDialogComponent,
+    CalculatorComponent,
+    CalculatorDialogComponent,
+    GetFilesComponent,
+>>>>>>> 9db0b87993692b1e16ebc2d39d15ce3bc3d80126
   ],
   imports: [
     CommonModule,
     ViewRoutingModule,
     MaterialModule,
     SharedModule
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9db0b87993692b1e16ebc2d39d15ce3bc3d80126
   ]
 })
 export class ViewModule { }

@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { UserUpdateDialogComponent } from './user-update-dialog/user-update-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -21,6 +22,8 @@ export class UsersComponent implements OnInit {
   user!: any
   loader = true
   code = localStorage.getItem('code')
+  filter: string = ''
+  apiURL = environment.apiUrl
 
   displayedColumns: string[] = ['point', 'name', 'lastname', 'email', 'institution_picture', 'profile_picture', 'rol', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -71,6 +74,7 @@ export class UsersComponent implements OnInit {
     }, (error: any) => {
       console.log(error)
     })
+    this.filter = ''
   }
 
   setData(): void {
