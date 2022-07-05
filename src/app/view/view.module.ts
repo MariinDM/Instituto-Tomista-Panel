@@ -21,6 +21,15 @@ import { UserDialogComponent } from './users/user-dialog/user-dialog.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { UserUpdateDialogComponent } from './users/user-update-dialog/user-update-dialog.component';
 import { ChangePictureComponent } from './profile/change-picture/change-picture.component';
+import { TutorialsComponent } from './tutorials/tutorials.component';
+import { TutorialDialogComponent } from './tutorials/tutorial-dialog/tutorial-dialog.component';
+import { TipsComponent } from './tips/tips.component';
+import { TipDialogComponent } from './tips/tip-dialog/tip-dialog.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { FaqDialogComponent } from './faqs/faq-dialog/faq-dialog.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { CalculatorDialogComponent } from './calculator/calculator-dialog/calculator-dialog.component';
+import { GetFilesComponent } from './get-files/get-files.component';
 
 
 @NgModule({
@@ -42,13 +51,21 @@ import { ChangePictureComponent } from './profile/change-picture/change-picture.
     ChangePasswordComponent,
     UserUpdateDialogComponent,
     ChangePictureComponent,
+    TutorialsComponent,
+    TutorialDialogComponent,
+    TipsComponent,
+    TipDialogComponent,
+    FaqsComponent,
+    FaqDialogComponent,
+    CalculatorComponent,
+    CalculatorDialogComponent,
+    GetFilesComponent,
   ],
   imports: [
     CommonModule,
     ViewRoutingModule,
     MaterialModule,
     SharedModule
-    
   ]
 })
 export class ViewModule { }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Category } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-categories',
@@ -18,6 +19,8 @@ export class CategoriesComponent implements OnInit {
   dataCategory!: any[]
   loader = true
   code = localStorage.getItem('code')
+  filter: string = ''
+  apiURL = environment.apiUrl
 
   displayedColumns: string[] = ['point', 'name', 'order_index', 'description', 'image', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -25,7 +28,10 @@ export class CategoriesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private categoryService: CategoryService, private _snack: MatSnackBar, public dialog: MatDialog) {
+  constructor(
+    private categoryService: CategoryService,
+    private _snack: MatSnackBar,
+    public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -53,6 +59,7 @@ export class CategoriesComponent implements OnInit {
         this.openSnack(e.error.message)
       }
     })
+    this.filter= ''
   }
 
   setData(): void {
@@ -90,7 +97,7 @@ export class CategoriesComponent implements OnInit {
       this.getall()
     })
   }
-  
+
   openDialogUpdate(element: Category, edit: boolean) {
     this.dialog.open(CategoryDialogComponent, {
       data: { element, edit },

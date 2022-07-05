@@ -18,6 +18,7 @@ export class RolesComponent implements OnInit {
   dataRol!: any[]
   loader = false
   code = localStorage.getItem('code')
+  filter: string = ''
 
   displayedColumns: string[] = ['point', 'name', 'description', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -50,6 +51,7 @@ export class RolesComponent implements OnInit {
         this.openSnack(e.error.message)
       }
     })
+    this.filter= ''
   }
 
   setData(): void {

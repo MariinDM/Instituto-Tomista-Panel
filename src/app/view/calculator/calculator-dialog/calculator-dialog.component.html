@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/user.jpg" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Rol</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Calculator Field</div>
                 </div>
             </div>
         </div>
@@ -17,14 +17,26 @@
     </div>
     <div class="mat-dialog-content">
         <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
+            <div class="row" *ngIf="data.edit">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-label>Enter Language</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let item of dataLanguages" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>person_outline</mat-icon>
-                        <mat-label>Enter Name</mat-label>
-                        <input matInput placeholder="Ex. Ejemplo" required formControlName="name">
+                        <mat-icon matSuffix>view_quilt</mat-icon>
+                        <mat-label>Enter Title</mat-label>
+                        <input matInput placeholder="Ex. Tutorial 1" required formControlName="title">
                         <mat-error
-                            *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
+                            *ngIf="form.controls['title'].hasError('required') && (form.controls['title'].dirty || form.controls['title'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
@@ -33,18 +45,15 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>description</mat-icon>
-                        <mat-label>Enter Nescription</mat-label>
-                        <input matInput placeholder="Ex. Rol para Soporte" required formControlName="description">
-                        <mat-error
-                            *ngIf="form.controls['description'].hasError('required') && (form.controls['description'].dirty || form.controls['description'].touched)">
-                            It's required field</mat-error>
+                        <mat-label>Enter Description</mat-label>
+                        <input matInput placeholder="Ex. Categoria para Usuarios" formControlName="description">
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <div class="example-button-row" mat-dialog-actions align="end">
-                        <button type="submit" mat-raised-button class="baby-green">
+                        <button type="submit" mat-raised-button color="primary" class="baby-green">
                             <span class="mat-button-wrapper log-white">
                                 <mat-icon>save</mat-icon>
                             </span>

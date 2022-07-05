@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
+import { Router } from '@angular/router'
 import { Viewsroles } from 'src/app/interfaces/viewsroles'
 import { ViewsrolesService } from 'src/app/services/viewsroles.service'
 import { AssignViewsrolesComponent } from './dialog/assign-viewsroles/assign-viewsroles.component'
@@ -18,14 +19,16 @@ export class ViewsrolesComponent implements OnInit {
   dataVR!: any[]
   loader = false
   code = localStorage.getItem('code')
+  filter: string = ''
 
-  displayedColumns: string[] = ['point', 'name', 'premium','active', 'actions'] //'description',
+  displayedColumns: string[] = ['point', 'name', 'premium', 'active', 'actions'] //'description',
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
   constructor(
+    private router:Router,
     private viewsrolesService: ViewsrolesService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) { }
@@ -47,6 +50,7 @@ export class ViewsrolesComponent implements OnInit {
       this.loader = true
       this.openSnack(data.message)
     })
+    this.filter = ''
   }
 
   delete(id: number): void {
@@ -57,7 +61,7 @@ export class ViewsrolesComponent implements OnInit {
       error: (e) => {
         this.openSnack(e.error.error.message)
       },
-      complete:()=>{
+      complete: () => {
         this.getall()
       }
     })
@@ -82,7 +86,13 @@ export class ViewsrolesComponent implements OnInit {
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()
+      this.refreshMenu()
     })
   }
 
+  refreshMenu(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload'
+    this.router.navigate(['gestion/vistaroles'])
+  }
 }

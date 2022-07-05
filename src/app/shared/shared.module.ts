@@ -6,6 +6,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { AngularCropperjsModule } from "angular-cropperjs";
 
 import { MaterialModule } from "./material.module";
 import { FeatherIconsModule } from "./components/feather-icons/feather-icons.module";
@@ -20,6 +21,7 @@ import { FeatherIconsModule } from "./components/feather-icons/feather-icons.mod
     NgxSpinnerModule,
     MatTableExporterModule,
     NgxMatFileInputModule,
+    AngularCropperjsModule
   ],
   exports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { FeatherIconsModule } from "./components/feather-icons/feather-icons.mod
     FeatherIconsModule,
     MatTableExporterModule,
     NgxMatFileInputModule,
+    AngularCropperjsModule
   ],
 })
 export class SharedModule {}

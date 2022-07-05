@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from 'src/app/services/category.service';
+import { GetFilesComponent } from '../../get-files/get-files.component';
 
 @Component({
   selector: 'app-category-dialog',
@@ -13,9 +15,10 @@ export class CategoryDialogComponent implements OnInit {
 
   form!: FormGroup
   obj!: any
-  validateIMG = false
   code = localStorage.getItem('code')
   image: any = null
+  imageActual: any = null
+  select!: any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -45,6 +48,7 @@ export class CategoryDialogComponent implements OnInit {
     var message = ''
 
     if (!this.data.edit) {
+      console.log(this.image)
       if (this.image) {
         fd.set('image', this.image)
         this.categoryService.insert(this.code, fd).subscribe({
@@ -94,22 +98,8 @@ export class CategoryDialogComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       order_index: new FormControl('', [Validators.required]),
       description: new FormControl('', []),
+      image: new FormControl('', []),
     });
-  }
-
-  setData() {
-
-    var data = new FormData()
-
-    data.set('id', this.data.element ? this.data.element.id : null)
-    data.set('name', this.form.controls['name'].value)
-    data.set('order_index', this.form.controls['order_index'].value)
-    data.set('description', this.form.controls['description'].value)
-    data.set('image', this.image)
-    data.set('active', this.data.element ? this.data.element.active : true)
-
-    return data
-
   }
 
   openSnack(message: string) {
@@ -118,17 +108,14 @@ export class CategoryDialogComponent implements OnInit {
     })
   }
 
-  onImageChangeFromFile($event: any) {
-    if ($event.target.files && $event.target.files[0]) {
-      let file = $event.target.files[0];
-      // console.log(file);
-      if (file.type == "image/jpeg" || file.type == "image/png" || file.type == "image/jpg") {
-        this.validateIMG = false
-        this.image = file
-      }
-      else {
-        this.validateIMG = true
-      }
-    }
+  getFile() {
+    this.dialog.open(GetFilesComponent, {
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe((result) => {
+      this.image = result.image
+    })
+  }
+  radioChange($event: MatRadioChange) {
+    this.select = $event.value
   }
 }

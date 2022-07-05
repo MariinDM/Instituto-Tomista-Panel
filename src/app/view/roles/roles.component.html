@@ -23,7 +23,7 @@
                         </li>
                         <li class="dropdown m-l-20">
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" (keyup)="applyFilter($event)"
+                          <input placeholder="Search" type="text" [(ngModel)]="filter" (keyup)="applyFilter($event)"
                             class="browser-default search-field" aria-label="Search box">
                         </li>
                         <li>

@@ -29,10 +29,7 @@ export class SidebarComponent
   code = localStorage.getItem('code')
   rol = localStorage.getItem('rol')
   dataVR: any = []
-  sidebar: any[] = []
   menu: any = []
-  cat: any[] = []
-  pass: boolean = false
   submenu: any[] = []
   icons: any[] = [
     'monitor',
@@ -85,7 +82,6 @@ export class SidebarComponent
             }
           }
         }
-
         //VIEWS
         for (let j = 0; j < this.menu.length; j++) {
           for (let i = 0; i < this.dataVR.length; i++) {

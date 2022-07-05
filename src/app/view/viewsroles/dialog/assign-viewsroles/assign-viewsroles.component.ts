@@ -36,7 +36,6 @@ export class AssignViewsrolesComponent implements OnInit {
     this.viewsRole.forEach(view => {
       this.newViews.push(view.id);
     })
-    console.log({ role_id: this.data.element.id, views: this.newViews, premium: this.premium, active: true })
     this.vrService.update(this.code, { role_id: this.data.element.id, views: this.newViews, premium: this.premium, active: true }).subscribe({
       next: (v) => {
         this.openSnack(v.message)

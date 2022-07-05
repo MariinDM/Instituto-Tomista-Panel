@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from 'src/app/services/category.service';
 import { ViewService } from 'src/app/services/view.service';
+import { GetFilesComponent } from '../../get-files/get-files.component';
 
 @Component({
   selector: 'app-view-dialog',
@@ -15,9 +17,9 @@ export class ViewDialogComponent implements OnInit {
   form!: FormGroup
   view!: any
   dataCategories!: any[]
-  validateIMG = false
   image: any = null
   code = localStorage.getItem('code')
+  select!: any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -118,19 +120,14 @@ export class ViewDialogComponent implements OnInit {
       duration: 1000,
     })
   }
-  onImageChangeFromFile($event: any) {
-    if ($event.target.files && $event.target.files[0]) {
-      let file = $event.target.files[0];
-      // console.log(file);
-      if (file.type == "image/jpeg" || file.type == "image/jpg" || file.type == "image/png") {
-        this.validateIMG = false
-        this.image = file
-        console.log('yes')
-      }
-      else {
-        this.validateIMG = true
-        console.log('no')
-      }
-    }
+  getFile() {
+    this.dialog.open(GetFilesComponent, {
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe((result) => {
+      this.image = result.image
+    })
+  }
+  radioChange($event: MatRadioChange) {
+    this.select = $event.value
   }
 }

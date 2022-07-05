@@ -23,7 +23,7 @@
                         </li>
                         <li class="dropdown m-l-20">
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" (keyup)="applyFilter($event.target.value)"
+                          <input placeholder="Search" type="text" [(ngModel)]="filter" (keyup)="applyFilter($event.target.value)"
                             class="browser-default search-field" aria-label="Search box">
                         </li>
                         <li>
@@ -90,7 +90,7 @@
                       <td mat-cell *matCellDef="let row">
                         <!-- {{row.institution_picture}}  -->
                         <img *ngIf="row.institution_picture"
-                          src="https://hub-qa.solidusystems.mx/api/v1/en/resources/{{row.institution_picture}}" alt=""
+                          src="{{apiURL}}v1/en/resources/{{row.institution_picture}}" alt=""
                           class="rounded-circle ms-5" width="32" height="32">
                       </td>
                     </ng-container>
@@ -101,7 +101,7 @@
                       <td mat-cell *matCellDef="let row">
                         <!-- {{row.profile_picture}} -->
                         <img *ngIf="row.profile_picture"
-                          src="https://hub-qa.solidusystems.mx/api/v1/en/resources/{{row.profile_picture}}" alt=""
+                          src="{{apiURL}}v1/en/resources/{{row.profile_picture}}" alt=""
                           class="rounded-circle ms-4" width="32" height="32">
                       </td>
                     </ng-container>
@@ -114,7 +114,7 @@
 
                     <!-- Active Column -->
                     <ng-container matColumnDef="active">
-                      <th mat-header-cell *matHeaderCellDef> Status </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                       <td mat-cell *matCellDef="let row">
                         <span [ngClass]="row.active === true ? 'col-green' : 'col-red'">
                           <mat-icon>{{row.active === true ? 'done' : 'clear'}} </mat-icon>

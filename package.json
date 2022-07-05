@@ -47,6 +47,7 @@
     "browser-sync": "^2.27.7",
     "chart.js": "^2.9.4",
     "core-js": "^3.19.1",
+    "cropperjs": "^1.5.12",
     "echarts": "^4.9.0",
     "mat-progress-buttons": "^9.3.1",
     "mat-table-exporter": "^10.2.4",

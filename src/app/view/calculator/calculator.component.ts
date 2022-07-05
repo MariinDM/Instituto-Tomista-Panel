@@ -4,37 +4,33 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
-import { ViewService } from 'src/app/services/view.service'
-import { View } from 'src/app/interfaces/view'
-import { ViewDialogComponent } from './view-dialog/view-dialog.component'
-import { environment } from 'src/environments/environment'
+import { CalculatorService } from 'src/app/services/calculator.service';
+import { CalculatorDialogComponent } from './calculator-dialog/calculator-dialog.component';
 
 @Component({
-  selector: 'app-views',
-  templateUrl: './views.component.html',
+  selector: 'app-calculator',
+  templateUrl: './calculator.component.html',
   styleUrls: ['../../app.component.scss']
 })
-export class ViewsComponent implements OnInit {
+export class CalculatorComponent implements OnInit {
 
-  dataView!: any[]
+  dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
-  filter:string = ''
-  apiURL = environment.apiUrl
 
-  displayedColumns: string[] = ['point', 'name', 'order_index', 'url', 'description', 'image', 'category', 'active', 'actions']
+  displayedColumns: string[] = ['point', 'title', 'description', 'active', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
   constructor(
-    private viewService: ViewService,
+    private calculatorService: CalculatorService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getall()
+    // this.getall()
   }
 
   applyFilter(event: Event) {
@@ -44,24 +40,23 @@ export class ViewsComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    this.viewService.getall(this.code).subscribe((data: any) => {
-      this.dataView = data.views
+    this.calculatorService.getall(this.code).subscribe((data: any) => {
+      this.dataTutorials = data.views
       this.setData()
       this.loader = true
       this.openSnack(data.message)
     })
-    this.filter = ''
   }
 
   setData(): void {
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.dataView;
+    this.dataSource.data = this.dataTutorials;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   delete(id: number): void {
-    this.viewService.delete(this.code, id).subscribe({
+    this.calculatorService.delete(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
       error: (e) => { this.openSnack(e.error.error.message) },
       complete: () => { this.getall() }
@@ -73,20 +68,19 @@ export class ViewsComponent implements OnInit {
   }
 
   openDialog(edit: boolean) {
-    this.dialog.open(ViewDialogComponent, {
+    this.dialog.open(CalculatorDialogComponent, {
       data: { edit },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()
     })
   }
-  openDialogUpdate(element: View, edit: boolean) {
-    this.dialog.open(ViewDialogComponent, {
+  openDialogUpdate(element: any, edit: boolean) {
+    this.dialog.open(CalculatorDialogComponent, {
       data: { element, edit },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()
     })
   }
-
 }
