@@ -34,7 +34,7 @@ export class RoleDialogComponent implements OnInit {
     if (!this.data.edit) {
       this.rolService.insert(this.code, this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e.error.error.message) },
+        error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
       })
     } else {

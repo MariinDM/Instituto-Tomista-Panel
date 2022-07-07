@@ -48,7 +48,7 @@ export class RolesComponent implements OnInit {
         this.openSnack(v.message)
       },
       error: (e)=>{
-        this.openSnack(e.error.message)
+        this.openSnack(e)
       }
     })
     this.filter= ''
@@ -64,7 +64,7 @@ export class RolesComponent implements OnInit {
   delete(id: number): void {
     this.rolService.delete(this.code,id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
     })
   }

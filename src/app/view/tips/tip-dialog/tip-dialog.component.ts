@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from 'src/app/services/users.service';
 import { TipService } from 'src/app/services/tip.service';
+import { GetFilesComponent } from '../../get-files/get-files.component';
 
 @Component({
   selector: 'app-tip-dialog',
@@ -58,37 +59,35 @@ export class TipDialogComponent implements OnInit {
 
     if (!this.data.edit) {
       if (this.image) {
-        console.log(this.form.value)
-        // this.tipService.insert(this.code, fd).subscribe({
-        //   next: (v) => { message = v.message, id = v.view_id },
-        //   error: (e) => { message = e.error.error.message },
-        //   complete: () => {
-        //     this.tipService.uploadImg(this.code, id, fd).subscribe({
-        //       next: (v) => { this.openSnack(message) },
-        //       error: (e) => { this.openSnack(e.error.error.message) },
-        //       complete: () => { this.dialog.closeAll() }
-        //     })
-        //   }
-        // })
+        this.tipService.insert(this.code, fd).subscribe({
+          next: (v) => { message = v.message, id = v.view_id },
+          error: (e) => { this.openSnack(e) },
+          complete: () => {
+            this.tipService.uploadImg(this.code, id, fd).subscribe({
+              next: (v) => { this.openSnack(message) },
+              error: (e) => { this.openSnack(e) },
+              complete: () => { this.dialog.closeAll() }
+            })
+          }
+        })
       }
       else {
-        console.log(this.form.value)
-        // this.tipService.insert(this.code, fd).subscribe({
-        //   next: (v) => { this.openSnack(v.message) },
-        //   error: (e) => { this.openSnack(e.error.error.message) },
-        //   complete: () => { this.dialog.closeAll() }
-        // })
+        this.tipService.insert(this.code, fd).subscribe({
+          next: (v) => { this.openSnack(v.message) },
+          error: (e) => { this.openSnack(e) },
+          complete: () => { this.dialog.closeAll() }
+        })
       }
     } else {
       if (this.image) {
         fd.set('image', this.image)
         this.tipService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
-          error: (e) => { message = e.error.error.message },
+          error: (e) => { this.openSnack(e) },
           complete: () => {
             this.tipService.uploadImg(this.code, this.data.element.id, fd).subscribe({
               next: (v) => { this.openSnack(message) },
-              error: (e) => { this.openSnack(e.error.error.message) },
+              error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
             })
           }
@@ -97,7 +96,7 @@ export class TipDialogComponent implements OnInit {
       else {
         this.tipService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
-          error: (e) => { this.openSnack(e.error.error.message) },
+          error: (e) => { this.openSnack(e) },
           complete: () => { this.dialog.closeAll() }
         })
       }
@@ -119,20 +118,13 @@ export class TipDialogComponent implements OnInit {
       duration: 1000,
     })
   }
-  onImageChangeFromFile($event: any) {
-    if ($event.target.files && $event.target.files[0]) {
-      let file = $event.target.files[0];
-      // console.log(file);
-      if (file.type == "image/jpeg" || file.type == "image/jpg" || file.type == "image/png") {
-        this.validateIMG = false
-        this.image = file
-        console.log('yes')
-      }
-      else {
-        this.validateIMG = true
-        console.log('no')
-      }
-    }
+  getFile() {
+    this.dialog.open(GetFilesComponent, {
+      data: { edit: true },
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe((result) => {
+      this.image = result.image
+    })
   }
 
 }

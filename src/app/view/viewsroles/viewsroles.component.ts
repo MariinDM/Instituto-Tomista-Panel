@@ -28,7 +28,7 @@ export class ViewsrolesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort
 
   constructor(
-    private router:Router,
+    private router: Router,
     private viewsrolesService: ViewsrolesService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) { }
@@ -49,6 +49,8 @@ export class ViewsrolesComponent implements OnInit {
       this.setData()
       this.loader = true
       this.openSnack(data.message)
+    }, (error: any) => {
+      this.openSnack(error)
     })
     this.filter = ''
   }
@@ -59,7 +61,7 @@ export class ViewsrolesComponent implements OnInit {
         this.openSnack(v.message)
       },
       error: (e) => {
-        this.openSnack(e.error.error.message)
+        this.openSnack(e)
       },
       complete: () => {
         this.getall()
@@ -90,7 +92,7 @@ export class ViewsrolesComponent implements OnInit {
     })
   }
 
-  refreshMenu(){
+  refreshMenu() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload'
     this.router.navigate(['gestion/vistaroles'])

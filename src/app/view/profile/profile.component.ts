@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -38,6 +39,8 @@ export class ProfileComponent implements OnInit {
       this.institution = environment.apiUrl + 'v1/en/resources/' + data.institution_picture
       this.profile = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
       this.loader = false
+    }, (error: any) => {
+      this.openSnack(error)
     })
   }
 

@@ -30,7 +30,7 @@ export class ChangePasswordComponent implements OnInit {
     this.setData();
     this.authService.changePassword(this.code, this.obj).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.dialog.closeAll() }
     })
   }

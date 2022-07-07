@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -39,6 +40,8 @@ export class ViewDialogComponent implements OnInit {
   getallcategories(): void {
     this.categoryService.getall(this.code).subscribe((data: any) => {
       this.dataCategories = data.categories
+    }, (error: any) => {
+      this.openSnack(error)
     })
   }
 
@@ -63,11 +66,11 @@ export class ViewDialogComponent implements OnInit {
       if (this.image) {
         this.viewService.insert(this.code, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
-          error: (e) => { message = e.error.error.message },
+          error: (e) => { this.openSnack(e) },
           complete: () => {
             this.viewService.uploadImg(this.code, id, fd).subscribe({
               next: (v) => { this.openSnack(message) },
-              error: (e) => { this.openSnack(e.error.error.message) },
+              error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
             })
           }
@@ -76,7 +79,7 @@ export class ViewDialogComponent implements OnInit {
       else {
         this.viewService.insert(this.code, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
-          error: (e) => { this.openSnack(e.error.error.message) },
+          error: (e) => { this.openSnack(e) },
           complete: () => { this.dialog.closeAll() }
         })
       }
@@ -85,11 +88,11 @@ export class ViewDialogComponent implements OnInit {
         fd.set('image', this.image)
         this.viewService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
-          error: (e) => { message = e.error.error.message },
+          error: (e) => { this.openSnack(e) },
           complete: () => {
             this.viewService.uploadImg(this.code, this.data.element.id, fd).subscribe({
               next: (v) => { this.openSnack(message) },
-              error: (e) => { this.openSnack(e.error.error.message) },
+              error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
             })
           }
@@ -98,7 +101,7 @@ export class ViewDialogComponent implements OnInit {
       else {
         this.viewService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
-          error: (e) => { this.openSnack(e.error.error.message) },
+          error: (e) => { this.openSnack(e) },
           complete: () => { this.dialog.closeAll() }
         })
       }
@@ -122,6 +125,7 @@ export class ViewDialogComponent implements OnInit {
   }
   getFile() {
     this.dialog.open(GetFilesComponent, {
+      data: { edit: false },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe((result) => {
       this.image = result.image

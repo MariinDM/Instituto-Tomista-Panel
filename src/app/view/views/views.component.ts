@@ -49,6 +49,8 @@ export class ViewsComponent implements OnInit {
       this.setData()
       this.loader = true
       this.openSnack(data.message)
+    },(error:any)=>{
+      this.openSnack(error)
     })
     this.filter = ''
   }
@@ -63,7 +65,7 @@ export class ViewsComponent implements OnInit {
   delete(id: number): void {
     this.viewService.delete(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
     })
   }

@@ -30,7 +30,7 @@ export class FaqsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.getall()
+    this.getall()
   }
 
   applyFilter(event: Event) {
@@ -41,10 +41,12 @@ export class FaqsComponent implements OnInit {
   getall(): void {
     this.loader = false
     this.faqService.getall(this.code).subscribe((data: any) => {
-      this.dataTutorials = data.views
+      this.dataTutorials = data.faqs
       this.setData()
       this.loader = true
       this.openSnack(data.message)
+    }, (error: any) => {
+      this.openSnack(error)
     })
   }
 
@@ -58,7 +60,7 @@ export class FaqsComponent implements OnInit {
   delete(id: number): void {
     this.faqService.delete(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
     })
   }

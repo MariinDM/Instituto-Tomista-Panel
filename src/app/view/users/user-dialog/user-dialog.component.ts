@@ -44,7 +44,7 @@ export class UserDialogComponent implements OnInit {
         this.dataRoles = v.roles
       },
       error: (e) => {
-        console.log(e)
+        this.openSnack(e)
       }
     })
   }
@@ -55,7 +55,7 @@ export class UserDialogComponent implements OnInit {
         this.dataCountries = v.countries
       },
       error: (e) => {
-        console.log(e)
+        this.openSnack(e)
       }
     })
   }
@@ -66,7 +66,7 @@ export class UserDialogComponent implements OnInit {
         this.dataCities = v.cities
       },
       error: (e) => {
-        console.log(e)
+        this.openSnack(e)
       }
     })
   }
@@ -77,7 +77,7 @@ export class UserDialogComponent implements OnInit {
         this.dataLanguages = v.languages
       },
       error: (e) => {
-        console.log(e)
+        this.openSnack(e)
       }
     })
   }
@@ -87,7 +87,7 @@ export class UserDialogComponent implements OnInit {
     var data = this.setData()
     this.userService.insert(this.code, data).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.dialog.closeAll() }
     })
   }
@@ -111,10 +111,6 @@ export class UserDialogComponent implements OnInit {
   }
 
   setData() {
-    // this.obj = {
-    //   ...this.form.value,
-    //   password: '1n3rC1@'
-    // }
 
     var formData = new FormData()
 

@@ -36,8 +36,7 @@ export class AuthService {
   private handlerError(err: any): Observable<never> {
     let errorMessage = `Ocurrio un Error`;
     if (err) {
-      errorMessage = err.message
-      console.log(errorMessage)
+      errorMessage = err
     }
     return throwError(errorMessage)
   }

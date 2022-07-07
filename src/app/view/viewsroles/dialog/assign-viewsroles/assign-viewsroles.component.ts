@@ -41,7 +41,7 @@ export class AssignViewsrolesComponent implements OnInit {
         this.openSnack(v.message)
       },
       error: (e) => {
-        this.openSnack(e.error.error.message)
+        this.openSnack(e)
       },
       complete: () => {
         this.dialog.closeAll()
@@ -52,6 +52,8 @@ export class AssignViewsrolesComponent implements OnInit {
   getallViews() {
     this.viewService.getall(this.code).subscribe((data: any) => {
       this.dataViews = data.views
+    }, (error: any) => {
+      this.openSnack(error)
     })
   }
 

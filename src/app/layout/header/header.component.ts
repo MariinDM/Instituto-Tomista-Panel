@@ -9,6 +9,7 @@ import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroy
 import * as texts from 'src/assets/data/language.json';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { timer } from 'rxjs';
 const document: any = window.document;
 
 @Component({
@@ -219,8 +220,11 @@ export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnIn
 
   logout() {
     this.spinner.show()
+    localStorage.clear()
     this.authService.logout().subscribe((res: any) => {
-      localStorage.clear()
+      console.log(res)
+    })
+    timer(1000).subscribe(()=>{
       this.router.navigate(['/authentication/signin']);
       this.spinner.hide()
     })

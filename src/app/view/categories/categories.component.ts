@@ -56,7 +56,7 @@ export class CategoriesComponent implements OnInit {
         this.openSnack(v.message)
       },
       error: (e) => {
-        this.openSnack(e.error.message)
+        this.openSnack(e)
       }
     })
     this.filter= ''
@@ -75,7 +75,7 @@ export class CategoriesComponent implements OnInit {
         this.openSnack(v.message)
       },
       error: (e) => {
-        this.openSnack(e.error.error.message)
+        this.openSnack(e)
       },
       complete: () => {
         this.getall()

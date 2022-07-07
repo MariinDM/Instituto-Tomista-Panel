@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
       this.loader = true
       this.openSnack(data.message)
     }, (error: any) => {
-      console.log(error)
+      this.openSnack(error)
     })
     this.filter = ''
   }
@@ -87,7 +87,7 @@ export class UsersComponent implements OnInit {
   delete(id: number): void {
     this.userService.delete(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
     })
   }
@@ -95,7 +95,7 @@ export class UsersComponent implements OnInit {
   passwordDefault(obj: any): void {
     this.aurhService.passwordDefault(this.code, obj).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) }
+      error: (e) => { this.openSnack(e) }
     })
   }
 

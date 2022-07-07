@@ -48,16 +48,15 @@ export class CategoryDialogComponent implements OnInit {
     var message = ''
 
     if (!this.data.edit) {
-      console.log(this.image)
       if (this.image) {
         fd.set('image', this.image)
         this.categoryService.insert(this.code, fd).subscribe({
           next: (v) => { message = v.message, id = v.category_id },
-          error: (e) => { message = e.error.error.message },
+          error: (e) => { this.openSnack(e) },
           complete: () => {
             this.categoryService.uploadImg(this.code, id, fd).subscribe({
               next: (v) => { this.openSnack(message) },
-              error: (e) => { this.openSnack(e.error.error.message) },
+              error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
             })
           }
@@ -65,7 +64,7 @@ export class CategoryDialogComponent implements OnInit {
       } else {
         this.categoryService.insert(this.code, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
-          error: (e) => { this.openSnack(e.error.error.message) },
+          error: (e) => { this.openSnack(e) },
           complete: () => { this.dialog.closeAll() }
         })
       }
@@ -74,11 +73,11 @@ export class CategoryDialogComponent implements OnInit {
         fd.set('image', this.image)
         this.categoryService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { message = v.message },
-          error: (e) => { message = e.error.error.message },
+          error: (e) => { this.openSnack(e) },
           complete: () => {
             this.categoryService.uploadImg(this.code, this.data.element.id, fd).subscribe({
               next: (v) => { this.openSnack(message) },
-              error: (e) => { this.openSnack(e.error.error.message), console.log(e.error.error) },
+              error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
             })
           }
@@ -86,7 +85,7 @@ export class CategoryDialogComponent implements OnInit {
       } else {
         this.categoryService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
-          error: (e) => { this.openSnack(e.error.error.message) },
+          error: (e) => { this.openSnack(e) },
           complete: () => { this.dialog.closeAll() }
         })
       }
@@ -110,6 +109,7 @@ export class CategoryDialogComponent implements OnInit {
 
   getFile() {
     this.dialog.open(GetFilesComponent, {
+      data: { edit: false },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe((result) => {
       this.image = result.image

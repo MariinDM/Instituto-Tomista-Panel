@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CropperComponent } from 'angular-cropperjs';
 
@@ -24,12 +24,19 @@ export class GetFilesComponent implements OnInit {
   load:boolean = false
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data:any,
     private fb: FormBuilder,
     private _snack: MatSnackBar,
     private dialogRef: MatDialogRef<GetFilesComponent>) { this.createForm() }
 
   ngOnInit(): void {
     this.onImageChangeFromFile()
+    if(this.data.edit){
+      this.config = {
+        zoomable: false,
+        aspectRatio: 16 / 9
+      }
+    }
   }
 
   onImageChangeFromFile() {

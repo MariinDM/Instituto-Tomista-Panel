@@ -30,7 +30,7 @@ export class CalculatorComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.getall()
+    this.getall()
   }
 
   applyFilter(event: Event) {
@@ -41,10 +41,12 @@ export class CalculatorComponent implements OnInit {
   getall(): void {
     this.loader = false
     this.calculatorService.getall(this.code).subscribe((data: any) => {
-      this.dataTutorials = data.views
+      this.dataTutorials = data.calculator_fields
       this.setData()
       this.loader = true
       this.openSnack(data.message)
+    },(error:any)=>{
+      this.openSnack(error)
     })
   }
 

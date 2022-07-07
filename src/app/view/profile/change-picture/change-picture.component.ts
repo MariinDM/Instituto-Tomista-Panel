@@ -44,7 +44,7 @@ export class ChangePictureComponent implements OnInit {
       fb.set('profile_picture', this.newImg)
       this.userService.upProfile(this.code, this.data.user.id, fb).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e.error.error.message) },
+        error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
       })
     } else {
@@ -52,7 +52,7 @@ export class ChangePictureComponent implements OnInit {
       fb.set('institution_picture', this.newImg)
       this.userService.upInstitution(this.code, this.data.user.id, fb).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e.error.error.message) },
+        error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
       })
     }

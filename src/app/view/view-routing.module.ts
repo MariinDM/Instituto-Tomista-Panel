@@ -26,15 +26,19 @@ const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
 
-  { path: 'user/dispositivos', component: DevicesComponent },
+  { path: 'user/devices', component: DevicesComponent },
   { path: 'user/profile', component: ProfileComponent },
 
-  { path: 'gestion/usuarios', component: UsersComponent },
-  { path: 'gestion/categorias', component: CategoriesComponent, canActivate:[AdminRolGuard]},
-  { path: 'gestion/vistas', component: ViewsComponent, canActivate:[AdminRolGuard]},
-  { path: 'gestion/roles', component: RolesComponent, canActivate:[AdminRolGuard]},
-  { path: 'gestion/vistaroles', component: ViewsrolesComponent, canActivate:[AdminRolGuard]},
-  { path: 'gestion/comunidad', component: CommunityComponent },
+  { path: 'admin/users', component: UsersComponent },
+  { path: 'admin/categories', component: CategoriesComponent, canActivate:[AdminRolGuard]},
+  { path: 'admin/views', component: ViewsComponent, canActivate:[AdminRolGuard]},
+  { path: 'admin/roles', component: RolesComponent, canActivate:[AdminRolGuard]},
+  { path: 'admin/viewsroles', component: ViewsrolesComponent, canActivate:[AdminRolGuard]},
+  { path: 'admin/community', component: CommunityComponent },
+  { path: 'admin/tutorials', component: TutorialsComponent },
+  { path: 'admin/tips', component: TipsComponent },
+  { path: 'admin/faqs', component: FaqsComponent },
+  { path: 'admin/calculator', component: CalculatorComponent },
 
   { path: 'devices/controller_version', component:ControllerVersionsComponent , canActivate:[AdminRolGuard]},
   { path: 'devices/device_type', component:DeviceTypesComponent , canActivate:[AdminRolGuard]},
@@ -44,10 +48,6 @@ const routes: Routes = [
   { path: 'devices/hardware_version', component:HardwareVersionsComponent , canActivate:[AdminRolGuard]},
   { path: 'devices/models', component:ModelsComponent , canActivate:[AdminRolGuard]},
   { path: 'devices/necessities', component:NecessitiesComponent , canActivate:[AdminRolGuard]},
-  { path: 'gestion/tutoriales', component: TutorialsComponent },
-  { path: 'gestion/tips', component: TipsComponent },
-  { path: 'gestion/faqs', component: FaqsComponent },
-  { path: 'gestion/calculator', component: CalculatorComponent },
 ];
 
 @NgModule({

@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { TutorialService } from 'src/app/services/tutorial.service'
+import { environment } from 'src/environments/environment'
 import { TutorialDialogComponent } from './tutorial-dialog/tutorial-dialog.component'
 
 @Component({
@@ -17,8 +18,9 @@ export class TutorialsComponent implements OnInit {
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
+  apiURL = environment.apiUrl
 
-  displayedColumns: string[] = ['point', 'title', 'url', 'description', 'image', 'start_date', 'end_date',  'active', 'actions']
+  displayedColumns: string[] = ['point', 'title', 'url', 'description', 'image', 'start_date', 'end_date', 'active', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -41,10 +43,12 @@ export class TutorialsComponent implements OnInit {
   getall(): void {
     this.loader = false
     this.tutorialService.getall(this.code).subscribe((data: any) => {
-      this.dataTutorials = data.views
+      this.dataTutorials = data.tutorials
       this.setData()
       this.loader = true
       this.openSnack(data.message)
+    }, (error: any) => {
+      this.openSnack(error)
     })
   }
 
@@ -58,7 +62,7 @@ export class TutorialsComponent implements OnInit {
   delete(id: number): void {
     this.tutorialService.delete(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
     })
   }
