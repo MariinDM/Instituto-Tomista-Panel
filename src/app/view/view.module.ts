@@ -47,7 +47,13 @@ import { FaqDialogComponent } from './faqs/faq-dialog/faq-dialog.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorDialogComponent } from './calculator/calculator-dialog/calculator-dialog.component';
 import { GetFilesComponent } from './get-files/get-files.component';
+<<<<<<< HEAD
 import { ModelNecessitiesComponent } from './devices_views/dialogs/model-necessities/model-necessities.component';
+=======
+import { QuestionsComponent } from './quizes_views/questions/questions.component';
+import { UserAnswersComponent } from './quizes_views/user-answers/user-answers.component';
+import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
+>>>>>>> eefe09b4aff58320432422dfd5386007130a7566
 
 
 @NgModule({
@@ -95,7 +101,13 @@ import { ModelNecessitiesComponent } from './devices_views/dialogs/model-necessi
     CalculatorComponent,
     CalculatorDialogComponent,
     GetFilesComponent,
+<<<<<<< HEAD
     ModelNecessitiesComponent,
+=======
+    QuestionsComponent,
+    UserAnswersComponent,
+    UserCalculatorsComponent,
+>>>>>>> eefe09b4aff58320432422dfd5386007130a7566
   ],
   imports: [
     CommonModule,

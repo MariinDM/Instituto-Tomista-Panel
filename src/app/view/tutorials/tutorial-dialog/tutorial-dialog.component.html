@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/user.jpg" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Turorial</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Tutorial</div>
                 </div>
             </div>
         </div>
@@ -21,8 +21,8 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>Enter Language</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let item of dataLanguages" [value]="item.id">
+                        <mat-select formControlName="language">
+                            <mat-option *ngFor="let item of dataLanguages" [value]="item.code">
                                 {{item.name}}
                             </mat-option>
                         </mat-select>
@@ -44,7 +44,7 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>123</mat-icon>
                         <mat-label>Enter URL</mat-label>
-                        <input matInput placeholder="Ex. 1" required formControlName="url">
+                        <input matInput placeholder="Ex. 1" formControlName="url">
                         <mat-error
                             *ngIf="form.controls['url'].hasError('required') || (form.controls['url'].dirty || form.controls['url'].touched)">
                             It's required field</mat-error>
@@ -57,26 +57,23 @@
                         <mat-icon matSuffix>description</mat-icon>
                         <mat-label>Enter Description</mat-label>
                         <input matInput placeholder="Ex. Categoria para Usuarios" formControlName="description">
+                        <mat-error
+                            *ngIf="form.controls['description'].hasError('required') || (form.controls['description'].dirty || form.controls['description'].touched)">
+                            It's required field</mat-error>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Choose a Start date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="start_date">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-label>Choose a Start and End Date Range</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate formControlName="start_date" placeholder="Start Date">
+                            <input matEndDate formControlName="end_date" placeholder="End Date">
+                        </mat-date-range-input>
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Choose a End date</mat-label>
-                        <input matInput [matDatepicker]="picker2" formControlName="end_date">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
                 </div>
             </div>
@@ -85,6 +82,11 @@
                     <div class="mat-form-field example-full-width">
                         <button type="button" mat-raised-button (click)="getFile()">Select Image</button>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-checkbox color="primary" formControlName="active"> Active </mat-checkbox>
                 </div>
             </div>
             <div class="row">

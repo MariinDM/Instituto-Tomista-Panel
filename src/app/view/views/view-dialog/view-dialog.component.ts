@@ -56,7 +56,6 @@ export class ViewDialogComponent implements OnInit {
     fd.set('description', this.form.controls['description'].value)
     fd.set('category_id', this.form.controls['category_id'].value)
     fd.set('url', this.form.controls['url'].value)
-    fd.set('image', this.image)
     fd.set('active', this.data.element ? this.data.element.active : true)
 
     var id = 0
@@ -64,6 +63,7 @@ export class ViewDialogComponent implements OnInit {
 
     if (!this.data.edit) {
       if (this.image) {
+        fd.set('image', this.image)
         this.viewService.insert(this.code, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
           error: (e) => { this.openSnack(e) },
@@ -99,6 +99,7 @@ export class ViewDialogComponent implements OnInit {
         })
       }
       else {
+        console.log(this.form.value)
         this.viewService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },

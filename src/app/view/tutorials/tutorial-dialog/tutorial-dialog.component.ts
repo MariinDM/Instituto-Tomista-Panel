@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from 'src/app/services/users.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { GetFilesComponent } from '../../get-files/get-files.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-tutorial-dialog',
@@ -19,6 +20,7 @@ export class TutorialDialogComponent implements OnInit {
   validateIMG = false
   image: any = null
   code = localStorage.getItem('code')
+  language!: any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,6 +33,9 @@ export class TutorialDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.edit) {
       this.form.patchValue(this.data.element);
+      this.form.controls['language'].setValue(this.code)
+      this.language = this.code
+      this.selectLanguage()
     }
     this.getLanguages()
   }
@@ -46,25 +51,29 @@ export class TutorialDialogComponent implements OnInit {
   sendData() {
     if (this.form.invalid) { return }
 
+    var datePipe = new DatePipe('en-US');
+
+    let start = datePipe.transform(this.form.controls['start_date'].value, 'yyyy-MM-dd')
+    let end = datePipe.transform(this.form.controls['end_date'].value, 'yyyy-MM-dd')
+
     var fd = new FormData()
 
     fd.set('id', this.data.element ? this.data.element.id : null)
     fd.set('title', this.form.controls['title'].value)
     fd.set('url', this.form.controls['url'].value)
     fd.set('description', this.form.controls['description'].value)
-    fd.set('image', this.image)
-    fd.set('start_date', this.form.controls['start_date'].value)
-    fd.set('end_date', this.form.controls['end_date'].value)
-    fd.set('active', this.data.element ? this.data.element.active : true)
+    // fd.set('start_date', start)
+    // fd.set('end_date', end)
+    fd.set('active', this.form.controls['active'].value)
 
     var id = 0
     var message = ''
 
     if (!this.data.edit) {
       if (this.image) {
-        console.log(this.form.value)
+        fd.set('image', this.image)
         this.tutorialService.insert(this.code, fd).subscribe({
-          next: (v) => { message = v.message, id = v.view_id },
+          next: (v) => { message = v.message, id = v.tutorial_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
             this.tutorialService.uploadImg(this.code, id, fd).subscribe({
@@ -76,7 +85,6 @@ export class TutorialDialogComponent implements OnInit {
         })
       }
       else {
-        console.log(this.form.value)
         this.tutorialService.insert(this.code, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
@@ -86,7 +94,7 @@ export class TutorialDialogComponent implements OnInit {
     } else {
       if (this.image) {
         fd.set('image', this.image)
-        this.tutorialService.update(this.code, this.data.element.id, fd).subscribe({
+        this.tutorialService.update(this.language, this.data.element.id, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
@@ -99,7 +107,7 @@ export class TutorialDialogComponent implements OnInit {
         })
       }
       else {
-        this.tutorialService.update(this.code, this.data.element.id, fd).subscribe({
+        this.tutorialService.update(this.language, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
           complete: () => { this.dialog.closeAll() }
@@ -108,15 +116,40 @@ export class TutorialDialogComponent implements OnInit {
     }
   }
 
+  selectLanguage() {
+    this.form.controls['language'].valueChanges.subscribe(() => {
+      this.language = this.form.controls['language'].value
+      this.tutorialService.getone(this.language, this.data.element.id).subscribe({
+        next: (v) => { this.form.patchValue(v.tutorial) },
+        error: (e) => { this.openSnack(e) },
+        complete: () => { }
+      })
+    })
+  }
+
   createForm(): void {
-    this.form = this.fb.group({
-      title: new FormControl('', [Validators.required]),
-      url: new FormControl('', [Validators.required]),
-      description: new FormControl('',),
-      image: new FormControl('',),
-      start_date: new FormControl('',),
-      end_date: new FormControl('',),
-    });
+    if (!this.data.edit) {
+      this.form = this.fb.group({
+        title: new FormControl('', [Validators.required]),
+        url: new FormControl('', [Validators.required]),
+        description: new FormControl('',[Validators.required]),
+        image: new FormControl('',),
+        start_date: new FormControl('',),
+        end_date: new FormControl('',),
+        active: new FormControl(false)
+      });
+    } else {
+      this.form = this.fb.group({
+        title: new FormControl('', [Validators.required]),
+        url: new FormControl('', [Validators.required]),
+        description: new FormControl('',[Validators.required]),
+        image: new FormControl('',),
+        start_date: new FormControl('',),
+        end_date: new FormControl('',),
+        language:new FormControl(''),
+        active: new FormControl(false)
+      });
+    }
   }
 
   openSnack(message: string) {

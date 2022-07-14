@@ -16,6 +16,7 @@ export class CalculatorDialogComponent implements OnInit {
   view!: any
   dataLanguages!: any[]
   code = localStorage.getItem('code')
+  language!:any
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,6 +29,9 @@ export class CalculatorDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.edit) {
       this.form.patchValue(this.data.element);
+      this.form.controls['language'].setValue(this.code)
+      this.language = this.code
+      this.selectLanguage()
     }
     this.getLanguages()
   }
@@ -46,32 +50,52 @@ export class CalculatorDialogComponent implements OnInit {
     fd.set('id', this.data.element ? this.data.element.id : null)
     fd.set('title', this.form.controls['title'].value)
     fd.set('description', this.form.controls['description'].value)
-    fd.set('active', this.data.element ? this.data.element.active : true)
+    fd.set('active', this.form.controls['active'].value)
 
     var id = 0
     var message = ''
 
     if (!this.data.edit) {
-      console.log(this.form.value)
-      // this.calculatorService.insert(this.code, fd).subscribe({
-      //   next: (v) => { this.openSnack(v.message) },
-      //   error: (e) => { this.openSnack(e.error.error.message) },
-      //   complete: () => { this.dialog.closeAll() }
-      // })
-    } else {
-      this.calculatorService.update(this.code, this.data.element.id, fd).subscribe({
+      this.calculatorService.insert(this.code, fd).subscribe({
         next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e.error.error.message) },
+        error: (e) => { this.openSnack(e) },
+        complete: () => { this.dialog.closeAll() }
+      })
+    } else {
+      this.calculatorService.update(this.language, this.data.element.id, fd).subscribe({
+        next: (v) => { this.openSnack(v.message) },
+        error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
       })
     }
   }
 
+  selectLanguage() {
+    this.form.controls['language'].valueChanges.subscribe(() => {
+      this.language = this.form.controls['language'].value
+      this.calculatorService.getone(this.language, this.data.element.id).subscribe({
+        next: (v) => { this.form.patchValue(v.calculator_field) },
+        error: (e) => { this.openSnack(e) },
+        complete: () => { }
+      })
+    })
+  }
+
   createForm(): void {
-    this.form = this.fb.group({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('',),
-    });
+    if(!this.data.edit){
+      this.form = this.fb.group({
+        title: new FormControl('', [Validators.required]),
+        description: new FormControl('',[Validators.required]),
+        active: new FormControl(false)
+      });
+    } else {
+      this.form = this.fb.group({
+        title: new FormControl('', [Validators.required]),
+        description: new FormControl('',[Validators.required]),
+        active: new FormControl(false),
+        language: new FormControl('',),
+      });
+    }
   }
 
   openSnack(message: string) {
