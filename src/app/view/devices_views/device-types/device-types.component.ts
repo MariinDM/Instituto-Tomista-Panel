@@ -41,7 +41,7 @@ export class DeviceTypesComponent implements OnInit {
       next:(v) => {
         this.loader = true;
         console.log(v)
-        this.dataDeviceTypes = v.deviceTypes
+        this.dataDeviceTypes = v.device_types
         this.setData()
         this.openSnack(v.message)
       },

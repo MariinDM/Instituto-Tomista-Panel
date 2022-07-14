@@ -41,7 +41,7 @@ export class NecessitiesComponent implements OnInit {
       next:(v) => {
         this.loader = true;
         console.log(v)
-        this.dataNecessities = v.deviceTypes
+        this.dataNecessities = v.necessities
         this.setData()
         this.openSnack(v.message)
       },

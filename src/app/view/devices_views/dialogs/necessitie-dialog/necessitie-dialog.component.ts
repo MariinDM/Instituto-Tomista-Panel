@@ -54,7 +54,7 @@ export class NecessitieDialogComponent implements OnInit {
     }
 
     if(this.edit){
-      this.deviceServices.updateDeviceVersions(this.element.id, data).subscribe({
+      this.deviceServices.updateNecessities(this.element.id, data).subscribe({
         next:(v) => {
           console.log(v)
         },
@@ -68,7 +68,7 @@ export class NecessitieDialogComponent implements OnInit {
       })
     }
     else{
-      this.deviceServices.sendDeviceVersions(data).subscribe({
+      this.deviceServices.sendNecessities(data).subscribe({
         next:(v) => {
           console.log(v)
         },

@@ -47,6 +47,7 @@ import { FaqDialogComponent } from './faqs/faq-dialog/faq-dialog.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorDialogComponent } from './calculator/calculator-dialog/calculator-dialog.component';
 import { GetFilesComponent } from './get-files/get-files.component';
+import { ModelNecessitiesComponent } from './devices_views/dialogs/model-necessities/model-necessities.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { GetFilesComponent } from './get-files/get-files.component';
     CalculatorComponent,
     CalculatorDialogComponent,
     GetFilesComponent,
+    ModelNecessitiesComponent,
   ],
   imports: [
     CommonModule,

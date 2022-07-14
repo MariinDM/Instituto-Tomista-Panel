@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DeviceType, DeviceVersion, HardwareVersion, Model } from 'src/app/interfaces/devices-intefaces';
+import { DeviceType, DeviceVersion, HardwareVersion } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { DevicesService } from 'src/app/services/devices.service';
 })
 export class ModelDialogComponent implements OnInit {
   form!: FormGroup;
-  element:Model;
+  element:any;
   dataDeviceVersion!:DeviceVersion[];
   dataDeviceType!:DeviceType[];
   dataHardwareVersion!:HardwareVersion[];
@@ -42,6 +42,7 @@ export class ModelDialogComponent implements OnInit {
       device_type_id: new FormControl('', [Validators.required]),
       hardware_version_id: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
+      active: new FormControl('',),
     });
   }
 
@@ -51,13 +52,14 @@ export class ModelDialogComponent implements OnInit {
     this.form.controls['device_type_id'].setValue(this.element.device_type_id)
     this.form.controls['hardware_version_id'].setValue(this.element.hardware_version_id)
     this.form.controls['name'].setValue(this.element.name)
+    this.form.controls['active'].setValue(this.element.active)
   }
 
   getData(): void {
     this.deviceServices.getDeviceVersions().subscribe({
       next:(v) => {
         console.log(v)
-        this.dataDeviceVersion = v.deviceVersions
+        this.dataDeviceVersion = v.device_versions
       },
       error:(e) => {
         console.log(e)
@@ -66,7 +68,7 @@ export class ModelDialogComponent implements OnInit {
     this.deviceServices.getDeviceTypes().subscribe({
       next:(v) => {
         console.log(v)
-        this.dataDeviceType = v.deviceTypes
+        this.dataDeviceType = v.device_types
       },
       error:(e) => {
         console.log(e)
@@ -89,6 +91,8 @@ export class ModelDialogComponent implements OnInit {
       device_type_id:this.form.controls['device_type_id'].value,
       hardware_version_id:this.form.controls['hardware_version_id'].value,
       name:this.form.controls['name'].value,
+      active:this.form.controls['active'].value,
+      necessities:this.element.necessities
     }
 
     if(this.edit){
@@ -112,7 +116,7 @@ export class ModelDialogComponent implements OnInit {
         },
         error:(e) => {
           console.log(e)
-          this.openSnack(e.error.message)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
