@@ -26,6 +26,6 @@ export class TipService {
     return this.http.delete(`${environment.apiUrl}v1/${code}/tips/delete/${id}`)
   }
   uploadImg(code: string, id: number, image: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Tutorials/${id}`, image)
+    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Tips/${id}`, image)
   }
 }
