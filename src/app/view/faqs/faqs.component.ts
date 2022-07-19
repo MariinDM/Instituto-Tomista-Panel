@@ -17,6 +17,7 @@ export class FaqsComponent implements OnInit {
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
+  filter: string = ''
 
   displayedColumns: string[] = ['point', 'title', 'text', 'url', 'actions']
   dataSource: MatTableDataSource<any>
@@ -48,6 +49,7 @@ export class FaqsComponent implements OnInit {
     }, (error: any) => {
       this.openSnack(error)
     })
+    this.filter = ''
   }
 
   setData(): void {
@@ -85,5 +87,4 @@ export class FaqsComponent implements OnInit {
       this.getall()
     })
   }
-
 }

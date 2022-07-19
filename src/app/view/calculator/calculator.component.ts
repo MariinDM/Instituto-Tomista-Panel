@@ -17,6 +17,7 @@ export class CalculatorComponent implements OnInit {
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
+  filter: string = ''
 
   displayedColumns: string[] = ['point', 'title', 'description', 'active', 'actions']
   dataSource: MatTableDataSource<any>
@@ -45,9 +46,10 @@ export class CalculatorComponent implements OnInit {
       this.setData()
       this.loader = true
       this.openSnack(data.message)
-    },(error:any)=>{
+    }, (error: any) => {
       this.openSnack(error)
     })
+    this.filter = ''
   }
 
   setData(): void {

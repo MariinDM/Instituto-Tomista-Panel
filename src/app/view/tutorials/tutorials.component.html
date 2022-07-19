@@ -23,7 +23,7 @@
                         </li>
                         <li class="dropdown m-l-20">
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" (keyup)="applyFilter($event)"
+                          <input placeholder="Search" [(ngModel)]="filter" type="text" (keyup)="applyFilter($event)"
                             class="browser-default search-field" aria-label="Search box">
                         </li>
                         <li>
@@ -93,19 +93,19 @@
 
                     <!-- Start Date Column -->
                     <ng-container matColumnDef="start_date">
-                      <th mat-header-cell *matHeaderCellDef> Start </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
                       <td mat-cell *matCellDef="let row"> {{row.start_date}} </td>
                     </ng-container>
 
                     <!-- End Date Column -->
                     <ng-container matColumnDef="end_date">
-                      <th mat-header-cell *matHeaderCellDef> End </th>
-                      <td mat-cell *matCellDef="let row"> {{row.start_date}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> End </th>
+                      <td mat-cell *matCellDef="let row"> {{row.end_date}} </td>
                     </ng-container>
 
                     <!-- Active Column -->
                     <ng-container matColumnDef="active">
-                      <th mat-header-cell *matHeaderCellDef> Status </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                       <td mat-cell *matCellDef="let row">
                         <span [ngClass]="row.active === true ? 'col-green' : 'col-red'">
                           <mat-icon>{{row.active === true ? 'done' : 'clear'}} </mat-icon>

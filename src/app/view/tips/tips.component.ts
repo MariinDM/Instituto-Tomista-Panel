@@ -18,7 +18,8 @@ export class TipsComponent implements OnInit {
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
-  apiURL= environment.apiUrl
+  filter: string = ''
+  apiURL = environment.apiUrl
 
   displayedColumns: string[] = ['point', 'title', 'description', 'image', 'start_date', 'end_date', 'active', 'actions']
   dataSource: MatTableDataSource<any>
@@ -50,6 +51,7 @@ export class TipsComponent implements OnInit {
     }, (error: any) => {
       this.openSnack(error)
     })
+    this.filter= ''
   }
 
   setData(): void {

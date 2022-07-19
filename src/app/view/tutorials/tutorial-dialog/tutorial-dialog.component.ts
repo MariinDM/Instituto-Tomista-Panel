@@ -62,8 +62,8 @@ export class TutorialDialogComponent implements OnInit {
     fd.set('title', this.form.controls['title'].value)
     fd.set('url', this.form.controls['url'].value)
     fd.set('description', this.form.controls['description'].value)
-    // fd.set('start_date', start)
-    // fd.set('end_date', end)
+    fd.set('start_date', start)
+    fd.set('end_date', end)
     fd.set('active', this.form.controls['active'].value)
 
     var id = 0

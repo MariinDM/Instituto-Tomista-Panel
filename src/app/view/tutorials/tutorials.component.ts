@@ -18,6 +18,7 @@ export class TutorialsComponent implements OnInit {
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
+  filter: string = ''
   apiURL = environment.apiUrl
 
   displayedColumns: string[] = ['point', 'title', 'url', 'description', 'image', 'start_date', 'end_date', 'active', 'actions']
@@ -50,6 +51,7 @@ export class TutorialsComponent implements OnInit {
     }, (error: any) => {
       this.openSnack(error)
     })
+    this.filter= ''
   }
 
   setData(): void {
