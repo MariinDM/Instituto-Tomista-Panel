@@ -41,7 +41,7 @@ export class DeviceVersionsComponent implements OnInit {
       next:(v) => {
         this.loader = true;
         console.log(v)
-        this.dataDeviceVersion = v.deviceVersions
+        this.dataDeviceVersion = v.device_versions
         this.setData()
         this.openSnack(v.message)
       },

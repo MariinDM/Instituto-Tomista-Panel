@@ -86,17 +86,17 @@ export class DevicesService {
 
   getNecessities(): Observable<any>{
     let code = localStorage.getItem('code')
-    return this.http.get<any>(`${ environment.apiUrl }v1/${code}/device_versions/get`,{})
+    return this.http.get<any>(`${ environment.apiUrl }v1/${code}/necessities/get`,{})
   }
 
   sendNecessities(data:any): Observable<any>{
     let code = localStorage.getItem('code')
-    return this.http.post<any>(`${ environment.apiUrl }v1/${code}/device_versions/create`, data, {})
+    return this.http.post<any>(`${ environment.apiUrl }v1/${code}/necessities/create`, data, {})
   }
 
   updateNecessities(id:number, data:any): Observable<any>{
     let code = localStorage.getItem('code')
-    return this.http.put<any>(`${ environment.apiUrl }v1/${code}/device_versions/update/${id}`, data, {})
+    return this.http.put<any>(`${ environment.apiUrl }v1/${code}/necessities/update/${id}`, data, {})
   }
 
   getModels(): Observable<any>{

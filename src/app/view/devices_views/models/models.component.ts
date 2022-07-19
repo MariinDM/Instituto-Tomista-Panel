@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Model } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 import { ModelDialogComponent } from '../dialogs/model-dialog/model-dialog.component';
+import { ModelNecessitiesComponent } from '../dialogs/model-necessities/model-necessities.component';
 
 @Component({
   selector: 'app-models',
@@ -81,6 +82,16 @@ export class ModelsComponent implements OnInit {
     let object = this.dataModels[this.dataModels.findIndex(obj => obj.id == element.id)]
     this.dialog.open(ModelDialogComponent, {
       data: { element:object, edit },
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe(() => {
+      this.getData()
+    })
+  }
+
+  openNecessitiesDialog(element: any){
+    let object = this.dataModels[this.dataModels.findIndex(obj => obj.id == element.id)]
+    this.dialog.open(ModelNecessitiesComponent, {
+      data: { element:object },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getData()

@@ -56,18 +56,25 @@
               </mat-form-field>
           </div>
       </div>
-          <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                    <mat-icon matSuffix>description</mat-icon>
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Name" required formControlName="name">
-                    <mat-error *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
-                      It's required field
-                    </mat-error>
-                </mat-form-field>
-            </div>
+      <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Name" required formControlName="name">
+                  <mat-error *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
+                    It's required field
+                  </mat-error>
+              </mat-form-field>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <p class="ms-1">
+                <mat-checkbox color="primary" formControlName="active"> Active</mat-checkbox>
+            </p>
         </div>
+      </div>
           <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <div class="example-button-row" mat-dialog-actions align="end">

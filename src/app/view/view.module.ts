@@ -47,11 +47,12 @@ import { FaqDialogComponent } from './faqs/faq-dialog/faq-dialog.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorDialogComponent } from './calculator/calculator-dialog/calculator-dialog.component';
 import { GetFilesComponent } from './get-files/get-files.component';
+import { ModelNecessitiesComponent } from './devices_views/dialogs/model-necessities/model-necessities.component';
 import { QuestionsComponent } from './quizes_views/questions/questions.component';
-import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
+import { QuestionsDialogComponent } from './quizes_views/questions/questions-dialog/questions-dialog.component';
 import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.component';
 import { EvaluationDialogComponent } from './quizes_views/evaluations/evaluation-dialog/evaluation-dialog.component';
-import { QuestionsDialogComponent } from './quizes_views/questions/questions-dialog/questions-dialog.component';
+import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
 import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/user-calculator-dialog/user-calculator-dialog.component';
 
 @NgModule({
@@ -99,11 +100,12 @@ import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/u
     CalculatorComponent,
     CalculatorDialogComponent,
     GetFilesComponent,
+    ModelNecessitiesComponent,
     QuestionsComponent,
-    UserCalculatorsComponent,
+    QuestionsDialogComponent,
     EvaluationsComponent,
     EvaluationDialogComponent,
-    QuestionsDialogComponent,
+    UserCalculatorsComponent,
     UserCalculatorDialogComponent,
   ],
   imports: [
