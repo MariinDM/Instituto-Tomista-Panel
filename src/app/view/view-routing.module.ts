@@ -15,9 +15,9 @@ import { ModelsComponent } from './devices_views/models/models.component';
 import { NecessitiesComponent } from './devices_views/necessities/necessities.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { ProfileComponent } from './profile/profile.component';
-// import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.component';
-// import { QuestionsComponent } from './quizes_views/questions/questions.component';
-// import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
+import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.component';
+import { QuestionsComponent } from './quizes_views/questions/questions.component';
+import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
 import { RolesComponent } from './roles/roles.component';
 import { TipsComponent } from './tips/tips.component';
 import { TutorialsComponent } from './tutorials/tutorials.component';
@@ -42,9 +42,9 @@ const routes: Routes = [
   { path: 'admin/tips', component: TipsComponent },
   { path: 'admin/faqs', component: FaqsComponent },
   { path: 'admin/calculator', component: CalculatorComponent },
-  // { path: 'admin/questions', component: QuestionsComponent },
-  // { path: 'admin/user_calculator', component: UserCalculatorsComponent },
-  // { path: 'admin/evaluations', component: EvaluationsComponent },
+  { path: 'admin/questions', component: QuestionsComponent },
+  { path: 'admin/user_calculator', component: UserCalculatorsComponent },
+  { path: 'admin/evaluations', component: EvaluationsComponent },
 
   { path: 'devices/controller_version', component:ControllerVersionsComponent , canActivate:[AdminRolGuard]},
   { path: 'devices/device_type', component:DeviceTypesComponent , canActivate:[AdminRolGuard]},
