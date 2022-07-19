@@ -48,9 +48,11 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorDialogComponent } from './calculator/calculator-dialog/calculator-dialog.component';
 import { GetFilesComponent } from './get-files/get-files.component';
 import { QuestionsComponent } from './quizes_views/questions/questions.component';
-import { UserAnswersComponent } from './quizes_views/user-answers/user-answers.component';
 import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
-
+import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.component';
+import { EvaluationDialogComponent } from './quizes_views/evaluations/evaluation-dialog/evaluation-dialog.component';
+import { QuestionsDialogComponent } from './quizes_views/questions/questions-dialog/questions-dialog.component';
+import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/user-calculator-dialog/user-calculator-dialog.component';
 
 @NgModule({
   declarations: [
@@ -98,8 +100,11 @@ import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-c
     CalculatorDialogComponent,
     GetFilesComponent,
     QuestionsComponent,
-    UserAnswersComponent,
     UserCalculatorsComponent,
+    EvaluationsComponent,
+    EvaluationDialogComponent,
+    QuestionsDialogComponent,
+    UserCalculatorDialogComponent,
   ],
   imports: [
     CommonModule,
