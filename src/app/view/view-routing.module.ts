@@ -42,9 +42,9 @@ const routes: Routes = [
   { path: 'admin/tips', component: TipsComponent },
   { path: 'admin/faqs', component: FaqsComponent },
   { path: 'admin/calculator', component: CalculatorComponent },
-  { path: 'admin/questions', component: QuestionsComponent },
-  { path: 'admin/user_calculator', component: UserCalculatorsComponent },
-  { path: 'admin/evaluations', component: EvaluationsComponent },
+  // { path: 'admin/questions', component: QuestionsComponent },
+  // { path: 'admin/user_calculator', component: UserCalculatorsComponent },
+  // { path: 'admin/evaluations', component: EvaluationsComponent },
 
   { path: 'devices/controller_version', component:ControllerVersionsComponent , canActivate:[AdminRolGuard]},
   { path: 'devices/device_type', component:DeviceTypesComponent , canActivate:[AdminRolGuard]},
