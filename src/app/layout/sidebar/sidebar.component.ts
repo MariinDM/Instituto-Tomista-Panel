@@ -2,7 +2,10 @@ import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, ElementRef, OnInit, AfterViewInit, Renderer2, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ROUTES } from './sidebar-items';
+import { environment } from 'src/environments/environment';
 import { RouteInfo } from './sidebar.metadata';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { ViewsrolesService } from 'src/app/services/viewsroles.service';
 
@@ -25,17 +28,14 @@ export class SidebarComponent
   headerHeight = 60;
   routerObj = null;
 
-  user!: any
+  user: any
+  picture: string = ''
+  image:string = null
   code = localStorage.getItem('code')
   rol = localStorage.getItem('rol')
   dataVR: any = []
   menu: any = []
   submenu: any[] = []
-  icons: any[] = [
-    'monitor',
-    'monitor',
-    'monitor',
-  ]
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -44,6 +44,8 @@ export class SidebarComponent
     private router: Router,
     private vrService: ViewsrolesService,
     private cd: ChangeDetectorRef,
+    private authService: AuthService,
+    private _snack: MatSnackBar
   ) {
     super();
     this.routerObj = this.router.events.subscribe((event) => {
@@ -70,6 +72,10 @@ export class SidebarComponent
             class: 'menu-toggle',
             groupTitle: false,
             submenu: []
+          }
+          let image = this.dataVR[j].categories.image
+          if (image.indexOf('.') == -1) {
+            route.icon = image
           }
           let name = this.dataVR[j].categories.name
           if (this.menu.length == 0) {
@@ -107,6 +113,21 @@ export class SidebarComponent
       }
       this.initLeftSidebar();
       this.bodyTag = this.document.body;
+    })
+  }
+  getInfo(): void {
+    this.authService.getInfo().subscribe((data: any) => {
+      this.user = data
+      this.picture = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
+      // this.institution = environment.apiUrl + 'v1/en/resources/' + data.institution_picture
+      // this.profile = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
+    }, (error: any) => {
+      this.openSnack(error)
+    })
+  }
+  openSnack(message: string) {
+    this._snack.open(message, '', {
+      duration: 1000,
     })
   }
   tolowercase(value: string): string {
@@ -151,6 +172,7 @@ export class SidebarComponent
     }
   }
   ngOnInit() {
+    this.getInfo()
     this.getall()
   }
   ngAfterViewInit(): void {

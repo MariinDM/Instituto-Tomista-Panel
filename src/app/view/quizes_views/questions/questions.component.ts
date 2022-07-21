@@ -19,7 +19,7 @@ export class QuestionsComponent implements OnInit {
   code = localStorage.getItem('code')
   filter: string = ''
 
-  displayedColumns: string[] = ['point', 'question', 'answers', 'actions']
+  displayedColumns: string[] = ['point', 'question', 'active', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -31,7 +31,7 @@ export class QuestionsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.getall()
+    this.getall()
   }
 
   applyFilter(event: Event) {
@@ -41,8 +41,8 @@ export class QuestionsComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    this.quizesService.getallEvaluations(this.code).subscribe((data: any) => {
-      this.dataTutorials = data.faqs
+    this.quizesService.getallQuestions(this.code).subscribe((data: any) => {
+      this.dataTutorials = data.questions
       this.setData()
       this.loader = true
       this.openSnack(data.message)
@@ -60,7 +60,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.quizesService.deleteEvaluation(this.code, id).subscribe({
+    this.quizesService.deleteQuestions(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
       error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
@@ -74,6 +74,14 @@ export class QuestionsComponent implements OnInit {
   openDialog(edit: boolean) {
     this.dialog.open(QuestionsDialogComponent, {
       data: { edit },
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe(() => {
+      this.getall()
+    })
+  }
+  openDialogUpdate(element: any, edit: boolean) {
+    this.dialog.open(QuestionsDialogComponent, {
+      data: { element, edit },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()

@@ -100,8 +100,16 @@
                       <th mat-header-cell *matHeaderCellDef> Image </th>
                       <td mat-cell *matCellDef="let row">
                         <!-- {{row.image}} -->
-                        <img *ngIf="row.image" src="{{apiURL}}v1/en/resources/{{row.image}}" alt=""
-                          class="rounded-circle ms-2" width="32" height="32">
+                        <div *ngIf="row.image">
+                          <div *ngIf="row.image.indexOf('.') != -1">
+                            <!-- <mat-icon>{{row.image}}</mat-icon> -->
+                            <img src="{{apiURL}}v1/en/resources/{{row.image}}" alt="" class="rounded-circle ms-2"
+                              width="32" height="32">
+                          </div>
+                          <div *ngIf="row.image.indexOf('.') == -1">
+                            <mat-icon>{{row.image}}</mat-icon>
+                          </div>
+                        </div>
                       </td>
                     </ng-container>
 

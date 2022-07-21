@@ -77,6 +77,7 @@ export class ViewDialogComponent implements OnInit {
         })
       }
       else {
+        fd.set('image', this.form.controls['image'].value)
         this.viewService.insert(this.code, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
@@ -99,7 +100,7 @@ export class ViewDialogComponent implements OnInit {
         })
       }
       else {
-        console.log(this.form.value)
+        fd.set('image', this.form.controls['image'].value)
         this.viewService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
@@ -113,9 +114,10 @@ export class ViewDialogComponent implements OnInit {
     this.form = this.fb.group({
       name: new FormControl('', [Validators.required]),
       order_index: new FormControl('', [Validators.required]),
-      description: new FormControl('',),
+      description: new FormControl('', []),
       category_id: new FormControl('', [Validators.required]),
       url: new FormControl('', [Validators.required]),
+      image: new FormControl('', []),
     });
   }
 
