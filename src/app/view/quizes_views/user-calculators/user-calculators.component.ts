@@ -1,37 +1,37 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { MatPaginator } from '@angular/material/paginator'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatSort } from '@angular/material/sort'
-import { MatTableDataSource } from '@angular/material/table'
-import { FaqService } from 'src/app/services/faq.service'
-import { FaqDialogComponent } from './faq-dialog/faq-dialog.component'
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { QuizesService } from 'src/app/services/quizes.service';
+import { UserCalculatorDialogComponent } from './user-calculator-dialog/user-calculator-dialog.component';
 
 @Component({
-  selector: 'app-faqs',
-  templateUrl: './faqs.component.html',
-  styleUrls: ['../../app.component.scss']
+  selector: 'app-user-calculators',
+  templateUrl: './user-calculators.component.html',
+  styleUrls: ['../../../app.component.scss']
 })
-export class FaqsComponent implements OnInit {
+export class UserCalculatorsComponent implements OnInit {
 
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
 
-  displayedColumns: string[] = ['point', 'title', 'text', 'url', 'actions']
+  displayedColumns: string[] = ['point', 'user', 'calculator', 'value', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
   constructor(
-    private faqService: FaqService,
+    private quizesService: QuizesService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getall()
+    // this.getall()
   }
 
   applyFilter(event: Event) {
@@ -41,7 +41,7 @@ export class FaqsComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    this.faqService.getall(this.code).subscribe((data: any) => {
+    this.quizesService.getallEvaluations(this.code).subscribe((data: any) => {
       this.dataTutorials = data.faqs
       this.setData()
       this.loader = true
@@ -60,7 +60,7 @@ export class FaqsComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.faqService.delete(this.code, id).subscribe({
+    this.quizesService.deleteEvaluation(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
       error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
@@ -71,20 +71,12 @@ export class FaqsComponent implements OnInit {
     this._snack.open(message, '', { duration: 1000, })
   }
 
-  openDialog(edit: boolean) {
-    this.dialog.open(FaqDialogComponent, {
-      data: { edit },
+  openDialog() {
+    this.dialog.open(UserCalculatorDialogComponent, {
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()
     })
   }
-  openDialogUpdate(element: any, edit: boolean) {
-    this.dialog.open(FaqDialogComponent, {
-      data: { element, edit },
-      panelClass: ['dialog-responsive']
-    }).afterClosed().subscribe(() => {
-      this.getall()
-    })
-  }
+
 }

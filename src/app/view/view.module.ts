@@ -57,7 +57,12 @@ import { ClientDialogComponent } from './sales_views/dialogs/client-dialog/clien
 import { RegionDialogComponent } from './sales_views/dialogs/region-dialog/region-dialog.component';
 import { SalesDialogComponent } from './sales_views/dialogs/sales-dialog/sales-dialog.component';
 import { DealerDialogComponent } from './sales_views/dialogs/dealer-dialog/dealer-dialog.component';
-
+import { QuestionsComponent } from './quizes_views/questions/questions.component';
+import { QuestionsDialogComponent } from './quizes_views/questions/questions-dialog/questions-dialog.component';
+import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.component';
+import { EvaluationDialogComponent } from './quizes_views/evaluations/evaluation-dialog/evaluation-dialog.component';
+import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
+import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/user-calculator-dialog/user-calculator-dialog.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +118,13 @@ import { DealerDialogComponent } from './sales_views/dialogs/dealer-dialog/deale
     ClientDialogComponent,
     RegionDialogComponent,
     SalesDialogComponent,
-    DealerDialogComponent
+    DealerDialogComponent,
+    QuestionsComponent,
+    QuestionsDialogComponent,
+    EvaluationsComponent,
+    EvaluationDialogComponent,
+    UserCalculatorsComponent,
+    UserCalculatorDialogComponent,
   ],
   imports: [
     CommonModule,

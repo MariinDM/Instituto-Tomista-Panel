@@ -34,7 +34,7 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>view_quilt</mat-icon>
                         <mat-label>Enter Title</mat-label>
-                        <input matInput placeholder="Ex. Tutorial 1" required formControlName="title">
+                        <input matInput placeholder="Ex. Necesidades" required formControlName="title">
                         <mat-error
                             *ngIf="form.controls['title'].hasError('required') || (form.controls['title'].dirty || form.controls['title'].touched)">
                             It's required field</mat-error>
@@ -46,7 +46,7 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>description</mat-icon>
                         <mat-label>Enter Description</mat-label>
-                        <input matInput placeholder="Ex. Categoria para Usuarios" formControlName="description">
+                        <input matInput placeholder="Ex. Articulos de Primera Necesidad" formControlName="description">
                         <mat-error
                             *ngIf="form.controls['description'].hasError('required') || (form.controls['description'].dirty || form.controls['description'].touched)">
                             It's required field</mat-error>

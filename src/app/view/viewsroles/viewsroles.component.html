@@ -87,7 +87,7 @@
 
                     <!-- Active Column -->
                     <ng-container matColumnDef="active">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                      <th mat-header-cell *matHeaderCellDef> Status </th>
                       <td mat-cell *matCellDef="let row">
                         <span
                           [ngClass]="row.role_view[0] ? row.role_view[0].active ? 'col-green' : 'col-red' : 'col-red'">

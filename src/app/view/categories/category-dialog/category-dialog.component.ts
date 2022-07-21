@@ -62,6 +62,7 @@ export class CategoryDialogComponent implements OnInit {
           }
         })
       } else {
+        fd.set('image', this.form.controls['image'].value)
         this.categoryService.insert(this.code, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
@@ -83,6 +84,7 @@ export class CategoryDialogComponent implements OnInit {
           }
         })
       } else {
+        fd.set('image', this.form.controls['image'].value)
         this.categoryService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },

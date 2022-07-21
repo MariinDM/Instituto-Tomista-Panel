@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit {
   id!: number
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     public dialog: MatDialog,
     private _snack: MatSnackBar) { }
@@ -55,6 +57,7 @@ export class ProfileComponent implements OnInit {
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getInfo()
+      this.refreshMenu()
     })
   }
   openInstitution(user: any, edit: boolean) {
@@ -69,5 +72,10 @@ export class ProfileComponent implements OnInit {
     this._snack.open(message, '', {
       duration: 1000,
     })
+  }
+  refreshMenu() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload'
+    this.router.navigate(['user/profile'])
   }
 }

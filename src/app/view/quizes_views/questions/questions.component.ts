@@ -1,32 +1,32 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { MatPaginator } from '@angular/material/paginator'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatSort } from '@angular/material/sort'
-import { MatTableDataSource } from '@angular/material/table'
-import { CalculatorService } from 'src/app/services/calculator.service';
-import { CalculatorDialogComponent } from './calculator-dialog/calculator-dialog.component';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { QuizesService } from 'src/app/services/quizes.service';
+import { QuestionsDialogComponent } from './questions-dialog/questions-dialog.component';
 
 @Component({
-  selector: 'app-calculator',
-  templateUrl: './calculator.component.html',
-  styleUrls: ['../../app.component.scss']
+  selector: 'app-questions',
+  templateUrl: './questions.component.html',
+  styleUrls: ['../../../app.component.scss']
 })
-export class CalculatorComponent implements OnInit {
+export class QuestionsComponent implements OnInit {
 
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
 
-  displayedColumns: string[] = ['point', 'title', 'description', 'active', 'actions']
+  displayedColumns: string[] = ['point', 'question', 'active', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
   constructor(
-    private calculatorService: CalculatorService,
+    private quizesService: QuizesService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) { }
 
@@ -41,8 +41,8 @@ export class CalculatorComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    this.calculatorService.getall(this.code).subscribe((data: any) => {
-      this.dataTutorials = data.calculator_fields
+    this.quizesService.getallQuestions(this.code).subscribe((data: any) => {
+      this.dataTutorials = data.questions
       this.setData()
       this.loader = true
       this.openSnack(data.message)
@@ -60,9 +60,9 @@ export class CalculatorComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.calculatorService.delete(this.code, id).subscribe({
+    this.quizesService.deleteQuestions(this.code, id).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e.error.error.message) },
+      error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
     })
   }
@@ -72,7 +72,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   openDialog(edit: boolean) {
-    this.dialog.open(CalculatorDialogComponent, {
+    this.dialog.open(QuestionsDialogComponent, {
       data: { edit },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
@@ -80,11 +80,12 @@ export class CalculatorComponent implements OnInit {
     })
   }
   openDialogUpdate(element: any, edit: boolean) {
-    this.dialog.open(CalculatorDialogComponent, {
+    this.dialog.open(QuestionsDialogComponent, {
       data: { element, edit },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()
     })
   }
+
 }

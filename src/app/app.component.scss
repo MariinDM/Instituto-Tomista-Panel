@@ -14,6 +14,18 @@ $subtitles: #585858;
 $principal-text: #000000;
 $secondary-text: #585858;
 
+
+.center-icon{
+    position: relative;
+    top: -6px;
+    left: 7px;
+}
+
+.aling-icon{
+    margin-top: .5rem;
+    text-align: left;
+}
+
 .navbar,
 .color-baby,
 .navbar-header {
