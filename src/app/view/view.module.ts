@@ -47,13 +47,16 @@ import { FaqDialogComponent } from './faqs/faq-dialog/faq-dialog.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorDialogComponent } from './calculator/calculator-dialog/calculator-dialog.component';
 import { GetFilesComponent } from './get-files/get-files.component';
-<<<<<<< HEAD
 import { ModelNecessitiesComponent } from './devices_views/dialogs/model-necessities/model-necessities.component';
-=======
-import { QuestionsComponent } from './quizes_views/questions/questions.component';
-import { UserAnswersComponent } from './quizes_views/user-answers/user-answers.component';
-import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
->>>>>>> eefe09b4aff58320432422dfd5386007130a7566
+import { DeviceCalibrationComponent } from './devices_views/device-calibration/device-calibration.component';
+import { SalesComponent } from './sales_views/sales/sales.component';
+import { DealersComponent } from './sales_views/dealers/dealers.component';
+import { ClientsComponent } from './sales_views/clients/clients.component';
+import { RegionsComponent } from './sales_views/regions/regions.component';
+import { ClientDialogComponent } from './sales_views/dialogs/client-dialog/client-dialog.component';
+import { RegionDialogComponent } from './sales_views/dialogs/region-dialog/region-dialog.component';
+import { SalesDialogComponent } from './sales_views/dialogs/sales-dialog/sales-dialog.component';
+import { DealerDialogComponent } from './sales_views/dialogs/dealer-dialog/dealer-dialog.component';
 
 
 @NgModule({
@@ -101,13 +104,16 @@ import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-c
     CalculatorComponent,
     CalculatorDialogComponent,
     GetFilesComponent,
-<<<<<<< HEAD
     ModelNecessitiesComponent,
-=======
-    QuestionsComponent,
-    UserAnswersComponent,
-    UserCalculatorsComponent,
->>>>>>> eefe09b4aff58320432422dfd5386007130a7566
+    DeviceCalibrationComponent,
+    SalesComponent,
+    DealersComponent,
+    ClientsComponent,
+    RegionsComponent,
+    ClientDialogComponent,
+    RegionDialogComponent,
+    SalesDialogComponent,
+    DealerDialogComponent
   ],
   imports: [
     CommonModule,

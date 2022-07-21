@@ -1,0 +1,130 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card" [hidden]="!loader">
+          <div class="body">
+            <div class="tableBody">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row line-colors">
+                  <div class="col-3 baby-pink height"></div>
+                  <div class="col-3 baby-purpura height"></div>
+                  <div class="col-3 baby-green height"></div>
+                  <div class="col-3 baby-yellow height"></div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h2>Dealers</h2>
+                        </li>
+                        <li class="dropdown m-l-20">
+                          <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                          <input placeholder="Search" type="text" (keyup)="applyFilter($event)"
+                            class="browser-default search-field" aria-label="Search box">
+                        </li>
+                        <li>
+                          <div class="export-button m-l-10" matTooltip="ADD">
+                            <button mat-mini-fab class="baby-pink" (click)="openDialog(false)">
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="export-button m-l-10" matTooltip="REFRESH">
+                            <button mat-mini-fab class="baby-purpura" (click)="getData()">
+                              <mat-icon class="col-white">refresh</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource" matSort class="table table-hover" matTableExporter
+                    #exporter="matTableExporter">
+
+                    <!-- Point Column -->
+                    <ng-container matColumnDef="point">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                      <td mat-cell *matCellDef="let row">
+                        <div class="rounded-circle baby-yellow point"></div>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="legal_id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Legal ID. </th>
+                      <td mat-cell *matCellDef="let row"> {{row.legal_id}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="active">
+                      <th mat-header-cell *matHeaderCellDef> Status </th>
+                      <td mat-cell *matCellDef="let row">
+                        <span [ngClass]="row.active === true ? 'col-green' : 'col-red'">
+                          <mat-icon>{{row.active === true ? 'done' : 'clear'}} </mat-icon>
+                        </span>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="created_at">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado </th>
+                      <td mat-cell *matCellDef="let row"> {{row.created_at}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="updated_at">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ult actuali. </th>
+                      <td mat-cell *matCellDef="let row"> {{row.updated_at}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> Actions </th>
+                      <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="openDialogUpdate(row,true)">
+                            <mat-icon>mode_edit</mat-icon>
+                            <span>Edit</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No data matching the filter</td>
+                    </tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users">
+                  </mat-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-spinner [hidden]="loader" color="accent" style="top: 150%; margin-right: auto; margin-left: auto;" diameter="150"></mat-spinner>
+      </div>
+    </div>
+  </div>
+</section>
+

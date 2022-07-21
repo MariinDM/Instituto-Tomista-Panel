@@ -6,6 +6,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ControllerVersionsComponent } from './devices_views/controller-versions/controller-versions.component';
+import { DeviceCalibrationComponent } from './devices_views/device-calibration/device-calibration.component';
 import { DeviceTypesComponent } from './devices_views/device-types/device-types.component';
 import { DeviceVersionsComponent } from './devices_views/device-versions/device-versions.component';
 import { DevicesComponent } from './devices_views/devices/devices.component';
@@ -16,6 +17,10 @@ import { NecessitiesComponent } from './devices_views/necessities/necessities.co
 import { FaqsComponent } from './faqs/faqs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RolesComponent } from './roles/roles.component';
+import { ClientsComponent } from './sales_views/clients/clients.component';
+import { DealersComponent } from './sales_views/dealers/dealers.component';
+import { RegionsComponent } from './sales_views/regions/regions.component';
+import { SalesComponent } from './sales_views/sales/sales.component';
 import { TipsComponent } from './tips/tips.component';
 import { TutorialsComponent } from './tutorials/tutorials.component';
 import { UsersComponent } from './users/users.component';
@@ -48,6 +53,13 @@ const routes: Routes = [
   { path: 'devices/hardware_version', component:HardwareVersionsComponent , canActivate:[AdminRolGuard]},
   { path: 'devices/models', component:ModelsComponent , canActivate:[AdminRolGuard]},
   { path: 'devices/necessities', component:NecessitiesComponent , canActivate:[AdminRolGuard]},
+  { path: 'devices/calibrations', component:DeviceCalibrationComponent , canActivate:[AdminRolGuard]},
+
+  { path: 'sales/clients', component:ClientsComponent , canActivate:[]},
+  { path: 'sales/dealers', component:DealersComponent , canActivate:[]},
+  { path: 'sales/regions', component:RegionsComponent , canActivate:[]},
+  { path: 'sales/sales', component:SalesComponent , canActivate:[]},
+
 ];
 
 @NgModule({

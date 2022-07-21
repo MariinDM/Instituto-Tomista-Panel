@@ -25,6 +25,7 @@ export class ModelNecessitiesComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data)
     this.element = this.data.element
+    this.fillArray()
   }
 
   getNecessities(){
@@ -39,6 +40,12 @@ export class ModelNecessitiesComponent implements OnInit {
     });
   }
 
+  fillArray(){
+    for (const necessitie of this.element.necessities) {
+      this.assignedNecessities.push(necessitie.id)
+    }
+  }
+
   check(idItem:number) :boolean{
     const item = this.element.necessities.find(({ id }) => id === idItem);
     if (item) { return true; }
@@ -48,9 +55,9 @@ export class ModelNecessitiesComponent implements OnInit {
   onChange(event: any) {
     console.log(event)
     if (event.checked) {
-      this.assignedNecessities.push(event.source.value);
+      this.assignedNecessities.push(event.source.value.id);
     } else {
-      const removeIndex = this.assignedNecessities.map((view) => view.id).indexOf(event.source.value.id);
+      const removeIndex = this.assignedNecessities.map((view) => view).indexOf(event.source.value.id);
       this.assignedNecessities.splice(removeIndex, 1);
     }
   }

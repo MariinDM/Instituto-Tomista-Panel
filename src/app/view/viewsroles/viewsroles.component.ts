@@ -95,6 +95,6 @@ export class ViewsrolesComponent implements OnInit {
   refreshMenu() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload'
-    this.router.navigate(['admin/vistaroles'])
+    this.router.navigate(['admin/viewsroles'])
   }
 }
