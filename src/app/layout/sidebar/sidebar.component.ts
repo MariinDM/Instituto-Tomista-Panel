@@ -28,9 +28,13 @@ export class SidebarComponent
   headerHeight = 60;
   routerObj = null;
 
-  user: any
+  user: any = {
+    name:'',
+    rol:'',
+    image:''
+  }
   picture: string = ''
-  image:string = null
+  image: string = null
   code = localStorage.getItem('code')
   rol = localStorage.getItem('rol')
   dataVR: any = []
@@ -74,8 +78,10 @@ export class SidebarComponent
             submenu: []
           }
           let image = this.dataVR[j].categories.image
-          if (image.indexOf('.') == -1) {
-            route.icon = image
+          if (image != null) {
+            if (image.indexOf('.') == -1) {
+              route.icon = image
+            }
           }
           let name = this.dataVR[j].categories.name
           if (this.menu.length == 0) {
@@ -117,8 +123,10 @@ export class SidebarComponent
   }
   getInfo(): void {
     this.authService.getInfo().subscribe((data: any) => {
-      this.user = data
-      this.picture = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
+      this.user.name = data.profile[0].name + ' ' + data.profile[0].last_name
+      this.user.rol = data.rol[0].name
+      this.picture = data.profile_picture
+      this.user.image = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
       // this.institution = environment.apiUrl + 'v1/en/resources/' + data.institution_picture
       // this.profile = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
     }, (error: any) => {

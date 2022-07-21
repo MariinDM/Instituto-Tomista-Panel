@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card" [hidden]="false">
+        <div class="card" [hidden]="!loader">
           <div class="body">
             <div class="tableBody">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -141,7 +141,7 @@
             </div>
           </div>
         </div>
-        <mat-spinner [hidden]="true" color="accent" style="top: 150%; margin-right: auto; margin-left: auto;"
+        <mat-spinner [hidden]="loader" color="accent" style="top: 150%; margin-right: auto; margin-left: auto;"
           diameter="150"></mat-spinner>
       </div>
     </div>
