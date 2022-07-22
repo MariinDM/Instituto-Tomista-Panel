@@ -34,7 +34,7 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>123</mat-icon>
                         <mat-label>Enter Order</mat-label>
-                        <input matInput placeholder="Ex. 1" required formControlName="order_index" type="number">
+                        <input matInput placeholder="Ex. 1" required formControlName="order_index" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['order_index'].hasError('required') && (form.controls['order_index'].dirty || form.controls['order_index'].touched)">
                             It's required field</mat-error>

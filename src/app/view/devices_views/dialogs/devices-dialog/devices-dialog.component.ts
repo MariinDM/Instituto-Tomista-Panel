@@ -66,6 +66,7 @@ export class DevicesDialogComponent implements OnInit {
     this.form.controls['hardware_version_id'].setValue(this.element.model.hardware_version.version)
     this.form.controls['model_id'].setValue(this.element.model.name)
     this.form.controls['device_version_id'].setValue(this.element.model.device_version.name)
+    this.form.disable()
   }
 
   getData(): void {

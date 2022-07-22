@@ -17,6 +17,7 @@ export class ModelDialogComponent implements OnInit {
   dataDeviceType!:DeviceType[];
   dataHardwareVersion!:HardwareVersion[];
   edit:boolean;
+  assignedNecessities:any = []
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: any,
   private dialog: MatDialog,
@@ -33,6 +34,13 @@ export class ModelDialogComponent implements OnInit {
     if(this.data.edit){
       this.element = this.data.element
       this.setData();
+      this.fillArray()
+    }
+  }
+
+  fillArray(){
+    for (const necessitie of this.element.necessities) {
+      this.assignedNecessities.push(necessitie.id)
     }
   }
 
@@ -92,7 +100,7 @@ export class ModelDialogComponent implements OnInit {
       hardware_version_id:this.form.controls['hardware_version_id'].value,
       name:this.form.controls['name'].value,
       active:this.form.controls['active'].value,
-      necessities:this.element.necessities
+      necessities:this.assignedNecessities
     }
 
     if(this.edit){
@@ -102,7 +110,7 @@ export class ModelDialogComponent implements OnInit {
         },
         error:(e) => {
           console.log(e)
-          this.openSnack(e.error.message)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()

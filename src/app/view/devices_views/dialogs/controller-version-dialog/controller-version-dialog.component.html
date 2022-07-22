@@ -47,7 +47,7 @@
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>pin</mat-icon>
                   <mat-label>Numeric value</mat-label>
-                  <input matInput placeholder="Numeric value" required formControlName="numeric_value">
+                  <input matInput placeholder="Numeric value" required formControlName="numeric_value" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                   <mat-error *ngIf="form.controls['numeric_value'].hasError('required') && (form.controls['numeric_value'].dirty || form.controls['numeric_value'].touched)">
                     It's required field
                   </mat-error>
@@ -69,16 +69,16 @@
           <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <div class="example-button-row" mat-dialog-actions align="end">
-                      <button type="submit" mat-button color="primary">
-                          <span class="m-o">
-                              <mat-icon>save</mat-icon>
-                          </span>
-                      </button>
-                      <button mat-dialog-close mat-button color="warn">
-                          <span class="m-o">
-                              <mat-icon>close</mat-icon>
-                          </span>
-                      </button>
+                    <button type="submit" mat-raised-button class="baby-green">
+                        <span class="mat-button-wrapper log-white">
+                            <mat-icon>save</mat-icon>
+                        </span>
+                    </button>
+                    <button mat-dialog-close mat-raised-button color="warn">
+                        <span class="mat-button-wrapper log-white">
+                            <mat-icon>close</mat-icon>
+                        </span>
+                    </button>
                   </div>
               </div>
           </div>

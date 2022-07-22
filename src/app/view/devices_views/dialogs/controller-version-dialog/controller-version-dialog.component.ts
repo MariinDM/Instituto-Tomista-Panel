@@ -77,7 +77,7 @@ export class ControllerVersionDialogComponent implements OnInit {
         },
         error:(e) => {
           console.log(e)
-          this.openSnack(e.error.message)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
@@ -91,7 +91,7 @@ export class ControllerVersionDialogComponent implements OnInit {
         },
         error:(e) => {
           console.log(e)
-          this.openSnack(e.error.message)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
