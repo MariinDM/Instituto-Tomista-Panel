@@ -55,15 +55,15 @@
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width" (click)="picker.open()">
                         <mat-label>Choose a Start and End Date Range</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate formControlName="start_date" placeholder="Start Date">
-                            <input matEndDate formControlName="end_date" placeholder="End Date">
+                            <input matStartDate formControlName="start_date" placeholder="Start Date" disabled>
+                            <input matEndDate formControlName="end_date" placeholder="End Date" disabled>
                         </mat-date-range-input>
                         <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
+                        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
                     </mat-form-field>
                 </div>
             </div>
