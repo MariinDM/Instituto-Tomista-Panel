@@ -6,11 +6,19 @@ import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { FaqService } from 'src/app/services/faq.service'
 import { FaqDialogComponent } from './faq-dialog/faq-dialog.component'
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-faqs',
   templateUrl: './faqs.component.html',
-  styleUrls: ['../../app.component.scss']
+  styleUrls: ['../../app.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class FaqsComponent implements OnInit {
 
@@ -20,6 +28,7 @@ export class FaqsComponent implements OnInit {
   filter: string = ''
 
   displayedColumns: string[] = ['point', 'title', 'text', 'url', 'actions']
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator

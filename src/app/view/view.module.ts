@@ -64,6 +64,10 @@ import { EvaluationDialogComponent } from './quizes_views/evaluations/evaluation
 import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
 import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/user-calculator-dialog/user-calculator-dialog.component';
 
+//PIPE
+import { LimitToPipe } from 'src/app/shared/pipes/limit-to.pipe'
+import { NewLinePipe } from '../shared/pipes/new-line.pipe';
+
 @NgModule({
   declarations: [
     CategoriesComponent,
@@ -125,6 +129,10 @@ import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/u
     EvaluationDialogComponent,
     UserCalculatorsComponent,
     UserCalculatorDialogComponent,
+
+    //PIPE
+    LimitToPipe,
+    NewLinePipe
   ],
   imports: [
     CommonModule,
