@@ -21,6 +21,11 @@ export class TipDialogComponent implements OnInit {
   image: any = null
   code = localStorage.getItem('code')
   language!: any
+  obj!:any
+  clear: any = {
+    title: '',
+    description: ''
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -117,7 +122,25 @@ export class TipDialogComponent implements OnInit {
     this.form.controls['language'].valueChanges.subscribe(() => {
       this.language = this.form.controls['language'].value
       this.tipService.getone(this.language, this.data.element.id).subscribe({
-        next: (v) => { this.form.patchValue(v.tip) },
+        next: (v) => {
+          this.obj = v.tip
+          if (this.language == 'en') {
+            this.form.patchValue(this.obj)
+          } else {
+            if (this.obj.title == this.data.element.title) {
+              console.log('si')
+
+              if (this.obj.description == this.data.element.description) {
+                this.form.patchValue(this.clear)
+              } else {
+                console.log('no')
+              }
+
+            } else {
+              console.log('no')
+            }
+          }
+        },
         error: (e) => { this.openSnack(e) },
         complete: () => { }
       })
@@ -154,7 +177,7 @@ export class TipDialogComponent implements OnInit {
   }
   getFile() {
     this.dialog.open(GetFilesComponent, {
-      data: { edit: true },
+      data: { edit: 3 },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe((result) => {
       this.image = result.image

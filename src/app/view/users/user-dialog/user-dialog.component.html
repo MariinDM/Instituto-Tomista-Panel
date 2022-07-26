@@ -24,11 +24,11 @@
                         <mat-label>Enter Email</mat-label>
                         <input matInput placeholder="Ex. example@gmail.com" required formControlName="email">
                         <mat-error
-                            *ngIf="form.controls['email'].hasError('required') && (form.controls['email'].dirty || form.controls['email'].touched)">
+                            *ngIf="form.controls['email'].hasError('required') || (form.controls['email'].dirty || form.controls['email'].touched)">
                             It's required field
                         </mat-error>
                         <mat-error
-                            *ngIf="form.controls['email'].hasError('pattern') && (form.controls['email'].dirty || form.controls['email'].touched)">
+                            *ngIf="form.controls['email'].hasError('pattern') || (form.controls['email'].dirty || form.controls['email'].touched)">
                             Email must be a valid email address
                         </mat-error>
                     </mat-form-field>
@@ -41,7 +41,7 @@
                         <mat-label>Enter Name</mat-label>
                         <input matInput placeholder="Ex. Juan" required formControlName="name">
                         <mat-error
-                            *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
+                            *ngIf="form.controls['name'].hasError('required') || (form.controls['name'].dirty || form.controls['name'].touched)">
                             It's required field
                         </mat-error>
                     </mat-form-field>
@@ -52,7 +52,7 @@
                         <mat-label>Enter Last Name</mat-label>
                         <input matInput placeholder="Ex. Torres" required formControlName="last_name">
                         <mat-error
-                            *ngIf="form.controls['last_name'].hasError('required') && (form.controls['last_name'].dirty || form.controls['last_name'].touched)">
+                            *ngIf="form.controls['last_name'].hasError('required') || (form.controls['last_name'].dirty || form.controls['last_name'].touched)">
                             It's required field
                         </mat-error>
                     </mat-form-field>
@@ -62,9 +62,9 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>Enter Age</mat-label>
-                        <input matInput #age placeholder="Ex. 19" type="number" required formControlName="age">
+                        <input matInput #age placeholder="Ex. 19" maxlength="2" type="text" required formControlName="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
-                            *ngIf="form.controls['age'].hasError('required') && (form.controls['age'].dirty || form.controls['age'].touched)">
+                            *ngIf="form.controls['age'].hasError('required') || (form.controls['age'].dirty || form.controls['age'].touched)">
                             It's required field
                         </mat-error>
                     </mat-form-field>
@@ -78,7 +78,7 @@
                             </mat-option>
                         </mat-select>
                         <mat-error
-                            *ngIf="form.controls['role_id'].hasError('required') && (form.controls['role_id'].dirty || form.controls['role_id'].touched)">
+                            *ngIf="form.controls['role_id'].hasError('required') || (form.controls['role_id'].dirty || form.controls['role_id'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
@@ -93,7 +93,7 @@
                             </mat-option>
                         </mat-select>
                         <mat-error
-                            *ngIf="form.controls['language_id'].hasError('required') && (form.controls['language_id'].dirty || form.controls['language_id'].touched)">
+                            *ngIf="form.controls['language_id'].hasError('required') || (form.controls['language_id'].dirty || form.controls['language_id'].touched)">
                             It's required field
                         </mat-error>
                     </mat-form-field>
@@ -103,18 +103,18 @@
                         <mat-icon matSuffix>phone</mat-icon>
                         <mat-label>Enter Cellphone</mat-label>
                         <input matInput #phone placeholder="Ex. 8745213654" maxlength='10' required
-                            formControlName="phone">
+                            formControlName="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-hint align="end">{{phone.value.length}} / 10</mat-hint>
                         <mat-error
-                            *ngIf="form.controls['phone'].hasError('required') && (form.controls['phone'].dirty || form.controls['phone'].touched)">
+                            *ngIf="form.controls['phone'].hasError('required') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
                             It's required field
                         </mat-error>
                         <mat-error
-                            *ngIf="form.controls['phone'].hasError('minlength') && (form.controls['phone'].dirty || form.controls['phone'].touched)">
+                            *ngIf="form.controls['phone'].hasError('minlength') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
                             Min length is 10 characters
                         </mat-error>
                         <mat-error
-                            *ngIf="form.controls['phone'].hasError('pattern') && (form.controls['phone'].dirty || form.controls['phone'].touched)">
+                            *ngIf="form.controls['phone'].hasError('pattern') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
                             Only Numbers
                         </mat-error>
                     </mat-form-field>
@@ -130,7 +130,7 @@
                             </mat-option>
                         </mat-select>
                         <mat-error
-                            *ngIf="form.controls['country_id'].hasError('required') && (form.controls['country_id'].dirty || form.controls['country_id'].touched)">
+                            *ngIf="form.controls['country_id'].hasError('required') || (form.controls['country_id'].dirty || form.controls['country_id'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
@@ -143,19 +143,19 @@
                             </mat-option>
                         </mat-select>
                         <mat-error
-                            *ngIf="form.controls['city_id'].hasError('required') && (form.controls['city_id'].dirty || form.controls['city_id'].touched)">
+                            *ngIf="form.controls['city_id'].hasError('required') || (form.controls['city_id'].dirty || form.controls['city_id'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="select == '5'">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>group_work</mat-icon>
                         <mat-label>Enter Group</mat-label>
                         <input matInput placeholder="Ex. A" formControlName="group">
                         <mat-error
-                            *ngIf="form.controls['group'].hasError('required') && (form.controls['group'].dirty || form.controls['group'].touched)">
+                            *ngIf="form.controls['group'].hasError('required') || (form.controls['group'].dirty || form.controls['group'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
@@ -163,14 +163,14 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>grade</mat-icon>
                         <mat-label>Enter Grade</mat-label>
-                        <input matInput placeholder="Ex. 5" type="number" formControlName="grade">
+                        <input matInput placeholder="Ex. 5" type="number" formControlName="grade" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
-                            *ngIf="form.controls['grade'].hasError('required') && (form.controls['grade'].dirty || form.controls['grade'].touched)">
+                            *ngIf="form.controls['grade'].hasError('required') || (form.controls['grade'].dirty || form.controls['grade'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="select == '3' || select == '5' || select == '4'">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>school</mat-icon>
@@ -178,7 +178,7 @@
                         <input matInput placeholder="Ex. Universidad Tecnologica de Torreon"
                             formControlName="institution">
                         <mat-error
-                            *ngIf="form.controls['institution'].hasError('required') && (form.controls['institution'].dirty || form.controls['institution'].touched)">
+                            *ngIf="form.controls['institution'].hasError('required') || (form.controls['institution'].dirty || form.controls['institution'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>

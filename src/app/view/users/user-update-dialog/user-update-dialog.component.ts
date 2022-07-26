@@ -14,12 +14,14 @@ export class UserUpdateDialogComponent implements OnInit {
 
   form!: FormGroup
   obj!: any
-  dataRoles!: any[]
+  dataRoles: any[] = []
   dataCities: any[] = []
   dataCountries!: any[]
   dataLanguages!: any[]
   image: any = null
   code = localStorage.getItem('code')
+  select!:any
+  //3/5
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,6 +34,7 @@ export class UserUpdateDialogComponent implements OnInit {
   ngOnInit(): void {
     this.getData()
     this.setForm()
+    this.selectRol()
   }
 
   getData() {
@@ -43,7 +46,11 @@ export class UserUpdateDialogComponent implements OnInit {
   getRoles() {
     this.roleService.getall(this.code).subscribe({
       next: (v) => {
-        this.dataRoles = v.roles
+        for (let i = 0; i < v.roles.length; i++){
+          if(v.roles[i].name != 'GUEST'){
+            this.dataRoles.push(v.roles[i])
+          }
+        }
       },
       error: (e) => {
         this.openSnack(e)
@@ -88,6 +95,12 @@ export class UserUpdateDialogComponent implements OnInit {
       next: (v) => { this.openSnack(v.message) },
       error: (e) => { this.openSnack(e) },
       complete: () => { this.dialog.closeAll() }
+    })
+  }
+  selectRol(){
+    this.form.controls['role_id'].valueChanges.subscribe((v) => {
+      this.select = v
+      console.log(this.select)
     })
   }
 

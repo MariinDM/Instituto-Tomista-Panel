@@ -31,10 +31,15 @@ export class GetFilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.onImageChangeFromFile()
-    if(this.data.edit){
+    if(this.data.edit == 2){
       this.config = {
         zoomable: false,
         aspectRatio: 16 / 9
+      }
+    } else if ( this.data.edit == 3){
+      this.config = {
+        zoomable: false,
+        aspectRatio: 3 / 4
       }
     }
   }

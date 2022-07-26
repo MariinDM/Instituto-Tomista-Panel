@@ -64,9 +64,9 @@ export class UsersComponent implements OnInit {
           profile_picture: this.dataUser[i].users.profile_picture,
           active: this.dataUser[i].users.active,
         }
-        // if (localStorage.getItem('rol') < this.dataUser[i].role_id) {
+        if (localStorage.getItem('rol') < this.dataUser[i].role_id) {
           this.dataTable.push(this.user)
-        // }
+        }
       }
       this.setData()
       this.loader = true

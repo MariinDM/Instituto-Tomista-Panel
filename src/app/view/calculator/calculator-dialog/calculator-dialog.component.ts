@@ -16,7 +16,12 @@ export class CalculatorDialogComponent implements OnInit {
   view!: any
   dataLanguages!: any[]
   code = localStorage.getItem('code')
-  language!:any
+  language!: any
+  obj!: any
+  clear: any = {
+    title: '',
+    description: ''
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -74,7 +79,25 @@ export class CalculatorDialogComponent implements OnInit {
     this.form.controls['language'].valueChanges.subscribe(() => {
       this.language = this.form.controls['language'].value
       this.calculatorService.getone(this.language, this.data.element.id).subscribe({
-        next: (v) => { this.form.patchValue(v.calculator_field) },
+        next: (v) => {
+          this.obj = v.calculator_field
+          if (this.language == 'en') {
+            this.form.patchValue(this.obj)
+          } else {
+            if (this.obj.title == this.data.element.title) {
+              console.log('si')
+
+              if (this.obj.description == this.data.element.description) {
+                this.form.patchValue(this.clear)
+              } else {
+                console.log('no')
+              }
+
+            } else {
+              console.log('no')
+            }
+          }
+        },
         error: (e) => { this.openSnack(e) },
         complete: () => { }
       })
@@ -82,16 +105,16 @@ export class CalculatorDialogComponent implements OnInit {
   }
 
   createForm(): void {
-    if(!this.data.edit){
+    if (!this.data.edit) {
       this.form = this.fb.group({
         title: new FormControl('', [Validators.required]),
-        description: new FormControl('',[Validators.required]),
+        description: new FormControl('', [Validators.required]),
         active: new FormControl(false)
       });
     } else {
       this.form = this.fb.group({
         title: new FormControl('', [Validators.required]),
-        description: new FormControl('',[Validators.required]),
+        description: new FormControl('', [Validators.required]),
         active: new FormControl(false),
         language: new FormControl('',),
       });

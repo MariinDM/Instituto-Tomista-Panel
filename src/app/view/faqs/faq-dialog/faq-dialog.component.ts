@@ -17,6 +17,11 @@ export class FaqDialogComponent implements OnInit {
   dataLanguages!: any[]
   code = localStorage.getItem('code')
   language!: any
+  obj!: any
+  clear: any = {
+    title: '',
+    description: ''
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -74,7 +79,25 @@ export class FaqDialogComponent implements OnInit {
     this.form.controls['language'].valueChanges.subscribe(() => {
       this.language = this.form.controls['language'].value
       this.faqService.getone(this.language, this.data.element.id).subscribe({
-        next: (v) => { this.form.patchValue(v.faq) },
+        next: (v) => { 
+          this.obj = v.faqs
+          if (this.language == 'en') {
+            this.form.patchValue(v.calculator_field)
+          } else {
+            if (this.obj.title == this.data.element.title) {
+              console.log('si')
+
+              if (this.obj.description == this.data.element.description) {
+                this.form.patchValue(this.clear)
+              } else {
+                console.log('no')
+              }
+
+            } else {
+              console.log('no')
+            }
+          }
+         },
         error: (e) => { this.openSnack(e) },
         complete: () => { }
       })

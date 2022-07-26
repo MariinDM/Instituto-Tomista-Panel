@@ -14,12 +14,13 @@ export class UserDialogComponent implements OnInit {
 
   form!: FormGroup
   obj!: any
-  dataRoles!: any[]
+  dataRoles: any[] = []
   dataCities: any[] = []
   dataCountries!: any[]
   dataLanguages!: any[]
   image: any = null
   code = localStorage.getItem('code')
+  select!:any
 
   constructor(
     private dialog: MatDialog,
@@ -30,6 +31,7 @@ export class UserDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData()
+    this.selectRol()
   }
 
   getData() {
@@ -41,7 +43,11 @@ export class UserDialogComponent implements OnInit {
   getRoles() {
     this.roleService.getall(this.code).subscribe({
       next: (v) => {
-        this.dataRoles = v.roles
+        for (let i = 0; i < v.roles.length; i++){
+          if(v.roles[i].name != 'GUEST'){
+            this.dataRoles.push(v.roles[i])
+          }
+        }
       },
       error: (e) => {
         this.openSnack(e)
@@ -92,6 +98,13 @@ export class UserDialogComponent implements OnInit {
     })
   }
 
+  selectRol(){
+    this.form.controls['role_id'].valueChanges.subscribe((v) => {
+      this.select = v
+      console.log(this.select)
+    })
+  }
+
   createForm() {
     this.form = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
@@ -103,9 +116,9 @@ export class UserDialogComponent implements OnInit {
       last_name: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern(/^[1-9]\d{6,10}$/)]),
       age: new FormControl('', [Validators.required]),
-      grade: new FormControl('', [Validators.required]),
-      group: new FormControl('', [Validators.required]),
-      institution: new FormControl('', [Validators.required]),
+      grade: new FormControl('', []),
+      group: new FormControl('', []),
+      institution: new FormControl('', []),
       premium: new FormControl(false),
     });
   }

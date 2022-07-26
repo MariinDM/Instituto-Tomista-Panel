@@ -21,6 +21,11 @@ export class TutorialDialogComponent implements OnInit {
   image: any = null
   code = localStorage.getItem('code')
   language!: any
+  obj!: any
+  clear: any = {
+    title: '',
+    description: ''
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -120,7 +125,25 @@ export class TutorialDialogComponent implements OnInit {
     this.form.controls['language'].valueChanges.subscribe(() => {
       this.language = this.form.controls['language'].value
       this.tutorialService.getone(this.language, this.data.element.id).subscribe({
-        next: (v) => { this.form.patchValue(v.tutorial) },
+        next: (v) => {
+          this.obj = v.tutorial
+          if (this.language == 'en') {
+            this.form.patchValue(this.obj)
+          } else {
+            if (this.obj.title == this.data.element.title) {
+              console.log('si')
+
+              if (this.obj.description == this.data.element.description) {
+                this.form.patchValue(this.clear)
+              } else {
+                console.log('no')
+              }
+
+            } else {
+              console.log('no')
+            }
+          }
+        },
         error: (e) => { this.openSnack(e) },
         complete: () => { }
       })
@@ -132,7 +155,7 @@ export class TutorialDialogComponent implements OnInit {
       this.form = this.fb.group({
         title: new FormControl('', [Validators.required]),
         url: new FormControl('', [Validators.required]),
-        description: new FormControl('',[Validators.required]),
+        description: new FormControl('', [Validators.required]),
         image: new FormControl('',),
         start_date: new FormControl('',),
         end_date: new FormControl('',),
@@ -142,11 +165,11 @@ export class TutorialDialogComponent implements OnInit {
       this.form = this.fb.group({
         title: new FormControl('', [Validators.required]),
         url: new FormControl('', [Validators.required]),
-        description: new FormControl('',[Validators.required]),
+        description: new FormControl('', [Validators.required]),
         image: new FormControl('',),
         start_date: new FormControl('',),
         end_date: new FormControl('',),
-        language:new FormControl(''),
+        language: new FormControl(''),
         active: new FormControl(false)
       });
     }
@@ -159,7 +182,7 @@ export class TutorialDialogComponent implements OnInit {
   }
   getFile() {
     this.dialog.open(GetFilesComponent, {
-      data: { edit: true },
+      data: { edit: 2 },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe((result) => {
       this.image = result.image
