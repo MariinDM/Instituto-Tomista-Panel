@@ -63,6 +63,7 @@ import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.com
 import { EvaluationDialogComponent } from './quizes_views/evaluations/evaluation-dialog/evaluation-dialog.component';
 import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
 import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/user-calculator-dialog/user-calculator-dialog.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -130,7 +131,8 @@ import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/u
     CommonModule,
     ViewRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    QRCodeModule,
   ]
 })
 export class ViewModule { }

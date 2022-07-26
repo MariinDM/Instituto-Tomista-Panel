@@ -26,13 +26,13 @@
                           <input placeholder="Search" type="text" (keyup)="applyFilter($event)"
                             class="browser-default search-field" aria-label="Search box">
                         </li>
-                        <!-- <li>
+                        <li>
                           <div class="export-button m-l-10" matTooltip="ADD">
                             <button mat-mini-fab class="baby-pink" (click)="openDialog(false)">
                               <mat-icon class="col-white">add</mat-icon>
                             </button>
                           </div>
-                        </li> -->
+                        </li>
                         <li>
                           <div class="export-button m-l-10" matTooltip="REFRESH">
                             <button mat-mini-fab class="baby-purpura" (click)="getData()">
@@ -137,10 +137,10 @@
                             <mat-icon>mode_edit</mat-icon>
                             <span>Details</span>
                           </button>
-                          <button mat-menu-item (click)="delete(row.id)">
+                          <!-- <button mat-menu-item (click)="delete(row.id)">
                             <mat-icon>sync_alt</mat-icon>
                             <span>Change Status</span>
-                          </button>
+                          </button> -->
                         </mat-menu>
                       </td>
                     </ng-container>

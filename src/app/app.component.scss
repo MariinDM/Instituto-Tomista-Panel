@@ -88,3 +88,14 @@ $secondary-text: #585858;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
+
+.qrcodeImage {
+  display: flex;
+  flex: 1;
+}
+
+.center {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}

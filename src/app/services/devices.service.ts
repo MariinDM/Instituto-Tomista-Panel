@@ -119,6 +119,11 @@ export class DevicesService {
     return this.http.get<any>(`${ environment.apiUrl }v1/${code}/devices/get`,{})
   }
 
+  syncDevice(data:any): Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.post<any>(`${ environment.apiUrl }v1/${code}/devices`, data, {})
+  }
+
   sendDevices(data:any): Observable<any>{
     let code = localStorage.getItem('code')
     return this.http.post<any>(`${ environment.apiUrl }v1/${code}/devices/create`, data, {})

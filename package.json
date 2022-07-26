@@ -42,6 +42,7 @@
     "angular-cropperjs": "^1.0.2",
     "angular-feather": "^6.1.0",
     "angular-gauge": "^4.0.0",
+    "angularx-qrcode": "^13.0.15",
     "apexcharts": "^3.30.0",
     "bootstrap": "^5.0.1",
     "browser-sync": "^2.27.7",
