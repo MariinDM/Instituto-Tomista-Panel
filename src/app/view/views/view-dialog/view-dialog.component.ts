@@ -128,7 +128,7 @@ export class ViewDialogComponent implements OnInit {
   }
   getFile() {
     this.dialog.open(GetFilesComponent, {
-      data: { edit: false },
+      data: { edit: 1 },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe((result) => {
       this.image = result.image

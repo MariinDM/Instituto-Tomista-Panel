@@ -17,9 +17,9 @@ export class EvaluationsComponent implements OnInit {
   dataTutorials!: any[]
   loader = false
   code = localStorage.getItem('code')
-  filter:string = ''
+  filter: string = ''
 
-  displayedColumns: string[] = ['point', 'title', 'text', 'total', 'actions']
+  displayedColumns: string[] = ['point', 'name', 'instructor', 'quiz', 'simulator', 'total'] //, 'actions'
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -31,7 +31,7 @@ export class EvaluationsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.getall()
+    this.getall()
   }
 
   applyFilter(event: Event) {
@@ -42,7 +42,7 @@ export class EvaluationsComponent implements OnInit {
   getall(): void {
     this.loader = false
     this.quizesService.getallEvaluations(this.code).subscribe((data: any) => {
-      this.dataTutorials = data.faqs
+      this.dataTutorials = data.evaluations
       this.setData()
       this.loader = true
       this.openSnack(data.message)

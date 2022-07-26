@@ -65,6 +65,10 @@ import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-c
 import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/user-calculator-dialog/user-calculator-dialog.component';
 import { QRCodeModule } from 'angularx-qrcode';
 
+//PIPE
+import { LimitToPipe } from 'src/app/shared/pipes/limit-to.pipe'
+import { NewLinePipe } from '../shared/pipes/new-line.pipe';
+
 @NgModule({
   declarations: [
     CategoriesComponent,
@@ -126,6 +130,10 @@ import { QRCodeModule } from 'angularx-qrcode';
     EvaluationDialogComponent,
     UserCalculatorsComponent,
     UserCalculatorDialogComponent,
+
+    //PIPE
+    LimitToPipe,
+    NewLinePipe
   ],
   imports: [
     CommonModule,

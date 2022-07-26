@@ -20,13 +20,10 @@
           <div class="header" *ngIf="sidebarItem.groupTitle === true">{{sidebarItem.title}}</div>
           <a [routerLink]="sidebarItem.class === '' ? [sidebarItem.path] : null" *ngIf="!sidebarItem.groupTitle;"
             [ngClass]="[sidebarItem.class]" (click)="callLevel1Toggle($event, sidebarItem.moduleName)" class="menu-top">
-            <div class="demo-icon-container">
-              <div class="aling-icon">
-                <mat-icon class="material-icons">{{sidebarItem.icon}}</mat-icon>
-                <span class="hide-menu center-icon">{{sidebarItem.title}}
-                </span>
-              </div>
-            </div>
+            <!-- <i-feather [name]="sidebarItem.icon" class="sidebarIcon"></i-feather> -->
+            <mat-icon matPrefix>{{sidebarItem.icon}}</mat-icon>
+            <span class="hide-menu">{{sidebarItem.title | translate}}
+            </span>
           </a>
           <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
             <li [ngClass]="level2Menu === sidebarSubItem.moduleName? 'activeSub':''"
