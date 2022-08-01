@@ -32,7 +32,8 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>123</mat-icon>
                         <mat-label>Enter Order</mat-label>
-                        <input matInput placeholder="Ex. 1" required formControlName="order_index" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input matInput placeholder="Ex. 1" required formControlName="order_index" type="number"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['order_index'].hasError('required') && (form.controls['order_index'].dirty || form.controls['order_index'].touched)">
                             It's required field</mat-error>
@@ -67,9 +68,9 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>description</mat-icon>
+                        <mat-icon matSuffix></mat-icon>
                         <mat-label>Enter Description</mat-label>
-                        <input matInput placeholder="Ex. Categoria para Usuarios" formControlName="description">
+                        <textarea matInput placeholder="Ex. Categoria para Usuarios" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
             </div>
@@ -90,10 +91,20 @@
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="select=='1'">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="row" *ngIf="select==1">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                     <div class="mat-form-field example-full-width">
                         <button type="button" mat-raised-button (click)="getFile()">Select Image</button>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 mb-2" *ngIf="image">
+                    <div class="mat-form-field example-full-width">
+                        <div class="demo-icon-container" style="padding: 0.4rem;">
+                            <div class="demo-google-material-icon">
+                                <i class="material-icons">image</i>
+                                <span class="icon-name">Captured Image</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

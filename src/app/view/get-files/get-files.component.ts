@@ -39,7 +39,7 @@ export class GetFilesComponent implements OnInit {
     } else if ( this.data.edit == 3){
       this.config = {
         zoomable: false,
-        aspectRatio: 3 / 4
+        aspectRatio: 1 / 1
       }
     }
   }
@@ -54,14 +54,12 @@ export class GetFilesComponent implements OnInit {
     })
   }
   getImgCropper() {
-    this.load = true
     this.angularCropper.cropper.getCroppedCanvas().toBlob(blob => {
       let type = blob.type
       this.newImg = new File([blob], 'Image', { type });
       this.dialogRef.close({
         image: this.newImg
       })
-      this.load = false
     })
   }
   convertBase64ToFile(fileBase64: string, name: string): Promise<File> {

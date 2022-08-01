@@ -54,9 +54,9 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>description</mat-icon>
+                        <mat-icon matSuffix></mat-icon>
                         <mat-label>Enter Description</mat-label>
-                        <input matInput placeholder="Ex. No poner de cabeza" formControlName="description">
+                        <textarea matInput placeholder="Ex. No poner de cabeza" formControlName="description"></textarea>
                         <mat-error
                             *ngIf="form.controls['description'].hasError('required') || (form.controls['description'].dirty || form.controls['description'].touched)">
                             It's required field</mat-error>
@@ -65,7 +65,8 @@
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width" (click)="picker.open()">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width"
+                        (click)="picker.open()">
                         <mat-label>Choose a Start and End Date Range</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
                             <input matStartDate formControlName="start_date" placeholder="Start Date" disabled>
@@ -78,9 +79,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                     <div class="mat-form-field example-full-width">
                         <button type="button" mat-raised-button (click)="getFile()">Select Image</button>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 mb-2" *ngIf="image">
+                    <div class="mat-form-field example-full-width">
+                        <div class="demo-icon-container" style="padding: 0.4rem;">
+                            <div class="demo-google-material-icon">
+                                <i class="material-icons">image</i>
+                                <span class="icon-name">Captured Image</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

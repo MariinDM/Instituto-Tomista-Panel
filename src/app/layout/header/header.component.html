@@ -26,8 +26,12 @@
           </button>
         </li>
         <li class="nav-item user_profile" ngbDropdown>
-          <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
-            <img src="assets/images/user.jpg" class="rounded-circle" width="32" height="32" alt="User">
+          <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0 icon-profile">
+            <!-- <img src="assets/images/user.jpg" class="rounded-circle" width="32" height="32" alt="User"> -->
+            <button mat-icon-button type="button" class="nav-notification-icons feather-maximize">
+              <!-- <app-feather-icons [icon]="'maximize'" [class]="'header-icon'"></app-feather-icons> -->
+              <mat-icon class="feather-maximize">person</mat-icon>
+            </button>
           </a>
           <div ngbDropdownMenu class="notification-dropdown">
             <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
@@ -36,7 +40,7 @@
                   <ul class="user_dw_menu">
                     <li>
                       <a href="#" routerLink="user/profile" onClick="return false;">
-                        <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons>Account
+                        <app-feather-icons [icon]="'users'" [class]="'user-menu-icons'"></app-feather-icons>Account
                       </a>
                     </li>
                     <!-- <li>

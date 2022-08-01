@@ -14,12 +14,14 @@ import { EvaluationDialogComponent } from './evaluation-dialog/evaluation-dialog
 })
 export class EvaluationsComponent implements OnInit {
 
-  dataTutorials!: any[]
+  data: any[] = []
+  dataEvaluations: any[] = []
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
+  obj!: any
 
-  displayedColumns: string[] = ['point', 'name', 'instructor', 'quiz', 'simulator', 'total'] //, 'actions'
+  displayedColumns: string[] = ['point', 'name', 'last_name', 'instructor', 'quiz', 'simulator', 'total', 'date', 'actions']
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator
@@ -41,8 +43,23 @@ export class EvaluationsComponent implements OnInit {
 
   getall(): void {
     this.loader = false
+    this.data = []
     this.quizesService.getallEvaluations(this.code).subscribe((data: any) => {
-      this.dataTutorials = data.evaluations
+      this.dataEvaluations = data.evaluations
+      for (let i = 0; i < data.evaluations.length; i++) {
+        this.obj = {
+          id: data.evaluations[i].id,
+          name: data.evaluations[i].student.profile[0].name,
+          last_name: data.evaluations[i].student.profile[0].last_name,
+          // email: data.evaluations[i].student.email,
+          instructor: data.evaluations[i].instructor,
+          simulator: data.evaluations[i].simulator,
+          quiz: data.evaluations[i].quiz,
+          total: data.evaluations[i].total,
+          date: data.evaluations[i].date,
+        }
+        this.data.push(this.obj)
+      }
       this.setData()
       this.loader = true
       this.openSnack(data.message)
@@ -54,7 +71,7 @@ export class EvaluationsComponent implements OnInit {
 
   setData(): void {
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.dataTutorials;
+    this.dataSource.data = this.data;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -71,8 +88,14 @@ export class EvaluationsComponent implements OnInit {
     this._snack.open(message, '', { duration: 1000, })
   }
 
-  openDialog() {
+  openDialogUpdate(element: any, edit: boolean) {
+    for (let i = 0; i < this.dataEvaluations.length; i++) {
+      if (this.dataEvaluations[i].id == element.id) {
+        element = this.dataEvaluations[i]
+      }
+    }
     this.dialog.open(EvaluationDialogComponent, {
+      data: { element, edit },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()

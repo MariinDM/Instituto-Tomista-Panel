@@ -14,6 +14,15 @@ $subtitles: #585858;
 $principal-text: #000000;
 $secondary-text: #585858;
 
+.letters {
+    margin: 7px 0px 3px 6px !important;
+}
+
+.aling-icons-menu {
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
 .example-element-diagram {
     min-width: 80px;
     border: 2px solid black;
@@ -133,16 +142,25 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .qrcodeImage {
-  display: flex;
-  flex: 1;
+    display: flex;
+    flex: 1;
 }
 
 .center {
-  display: flex;
-  flex: 1;
-  justify-content: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
 }
 
 table {
     width: 100%;
+}
+
+th {
+    background-color: #f5f5f5 !important;
+    color: #666 !important;
+}
+
+.icon-profile{
+    margin-top: 8px;
 }

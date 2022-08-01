@@ -44,9 +44,9 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>description</mat-icon>
+                        <mat-icon matSuffix></mat-icon>
                         <mat-label>Enter Description</mat-label>
-                        <input matInput placeholder="Ex. Articulos de Primera Necesidad" formControlName="description">
+                        <textarea matInput placeholder="Ex. Articulos de Primera Necesidad" formControlName="description"></textarea>
                         <mat-error
                             *ngIf="form.controls['description'].hasError('required') || (form.controls['description'].dirty || form.controls['description'].touched)">
                             It's required field</mat-error>
