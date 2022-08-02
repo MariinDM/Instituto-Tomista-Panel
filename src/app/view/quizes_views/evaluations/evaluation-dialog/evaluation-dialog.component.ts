@@ -32,10 +32,32 @@ export class EvaluationDialogComponent implements OnInit {
     this.obj = {
       ...this.form.value
     }
+    let message = ''
     this.quizesService.updateEvaluations(this.code, this.data.element.id, this.obj).subscribe({
-      next: (v) => { this.openSnack(v.message) },
+      next: (v) => { message = v.message },
       error: (e) => { this.openSnack(e) },
-      complete: () => { this.dialog.closeAll() }
+      complete: () => {
+        let data = {
+          evaluation_id: '',
+          user_id: '',
+          comments: ''
+        }
+        data.evaluation_id = this.data.element.id
+        data.user_id = this.form.controls['student_id'].value
+        data.comments = this.form.controls['comments'].value
+
+        let leng = this.data.element.evaluation_comments.length - 1
+        this.form.controls['comments'].setValue(this.data.element.evaluation_comments[leng].comments)
+
+        if (data.comments != this.data.element.evaluation_comments[leng].comments) {
+          this.quizesService.insertEvaluationsComments(this.code, data).subscribe({
+            next: (v) => { this.openSnack(message) },
+            error: (e) => { this.openSnack(e) },
+            complete: () => {}
+          })
+        }
+        this.dialog.closeAll()
+      }
     })
   }
 
@@ -63,7 +85,8 @@ export class EvaluationDialogComponent implements OnInit {
     this.form.controls['quiz_affects_total'].setValue(this.data.element.quiz_affects_total)
     this.form.controls['simulator'].setValue(this.data.element.simulator)
     this.form.controls['simulator_affects_total'].setValue(this.data.element.simulator_affects_total)
-    this.form.controls['comments'].setValue(this.data.element.comments)
+    let leng = this.data.element.evaluation_comments.length - 1
+    this.form.controls['comments'].setValue(this.data.element.evaluation_comments[leng].comments)
 
   }
 

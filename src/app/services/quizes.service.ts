@@ -26,6 +26,22 @@ export class QuizesService {
   deleteEvaluation(code: string, id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}v1/${code}/evaluations/delete/${id}`)
   }
+  //EVALUATIONS COMMENTS
+  getallEvaluationsComments(code: string,): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/evaluation_comments/get`);
+  }
+  getoneEvaluationsComments(code: string, id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/evaluation_comments/get/${id}`);
+  }
+  insertEvaluationsComments(code: string, data: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}v1/${code}/evaluation_comments/create`, data)
+  }
+  updateEvaluationsComments(code: string, id: number, data: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}v1/${code}/evaluation_comments/update/${id}`, data)
+  }
+  deleteEvaluationComments(code: string, id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}v1/${code}/evaluation_comments/delete/${id}`)
+  }
   //QUESTIONS
   getallQuestions(code: string,): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/questions/get`);
