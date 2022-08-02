@@ -133,4 +133,9 @@ export class DevicesService {
     let code = localStorage.getItem('code')
     return this.http.put<any>(`${ environment.apiUrl }v1/${code}/devices/update/${id}`, data, {})
   }
+
+  getDeviceCode(data:any): Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.post<any>(`${ environment.apiUrl }v1/${code}/device_codes/generateCode`, data, {})
+  }
 }

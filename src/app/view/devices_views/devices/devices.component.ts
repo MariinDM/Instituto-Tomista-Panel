@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DevicesService } from 'src/app/services/devices.service';
+import { DeviceCodeDialogComponent } from '../dialogs/device-code-dialog/device-code-dialog.component';
 import { DevicesDialogComponent } from '../dialogs/devices-dialog/devices-dialog.component';
 
 @Component({
@@ -82,6 +83,16 @@ export class DevicesComponent implements OnInit {
     let object = this.dataDevices[this.dataDevices.findIndex(obj => obj.id == element.id)]
     this.dialog.open(DevicesDialogComponent, {
       data: { element:object, edit },
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe(() => {
+      this.getData()
+    })
+  }
+
+  openDialogCode(element: any) {
+    let object = this.dataDevices[this.dataDevices.findIndex(obj => obj.id == element.id)]
+    this.dialog.open(DeviceCodeDialogComponent, {
+      data: { element:object },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getData()
