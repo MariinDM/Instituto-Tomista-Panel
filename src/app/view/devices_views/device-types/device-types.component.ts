@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DeviceType } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 import { DeviceTypeDialogComponent } from '../dialogs/device-type-dialog/device-type-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-device-types',
@@ -16,6 +17,7 @@ import { DeviceTypeDialogComponent } from '../dialogs/device-type-dialog/device-
 export class DeviceTypesComponent implements OnInit {
   dataDeviceTypes!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'code', 'description', 'name', 'actions'];
   dataSource: MatTableDataSource<any>;

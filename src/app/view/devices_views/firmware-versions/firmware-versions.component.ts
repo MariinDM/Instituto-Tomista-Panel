@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FirmwareVersion } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 import { FirmawareVersionDialogComponent } from '../dialogs/firmaware-version-dialog/firmaware-version-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-firmware-versions',
@@ -17,6 +18,7 @@ export class FirmwareVersionsComponent implements OnInit {
   dataTable:any = []
   dataFirmwares!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'previous_version_id', 'version', 'model_id', 'description', 'created_at', 'updated_at', 'actions'];
   dataSource: MatTableDataSource<any>;

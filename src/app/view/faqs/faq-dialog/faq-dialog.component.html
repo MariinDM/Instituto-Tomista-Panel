@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} FAQs</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? translate.faqs.dialog_edit : translate.faqs.dialog_add}}</div>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="row" *ngIf="data.edit">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Language</mat-label>
+                        <mat-label>{{translate.shared.language}}</mat-label>
                         <mat-select formControlName="language">
                             <mat-option *ngFor="let item of dataLanguages" [value]="item.code">
                                 {{item.name}}
@@ -33,7 +33,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>view_quilt</mat-icon>
-                        <mat-label>Enter Title</mat-label>
+                        <mat-label>{{translate.faqs.name}}</mat-label>
                         <input matInput placeholder="Ex. ¿Como cuidar a tu bebé?" required formControlName="title">
                         <mat-error
                             *ngIf="form.controls['title'].hasError('required') || (form.controls['title'].dirty || form.controls['title'].touched)">
@@ -44,9 +44,9 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>description</mat-icon>
-                        <mat-label>Enter Description</mat-label>
-                        <input matInput placeholder="Ex. Guardar cosas peligrosas" formControlName="text">
+                        <mat-icon matSuffix></mat-icon>
+                        <mat-label>{{translate.faqs.description}}</mat-label>
+                        <textarea matInput placeholder="Ex. Guardar cosas peligrosas" formControlName="text"></textarea>
                         <mat-error
                             *ngIf="form.controls['text'].hasError('required') || (form.controls['text'].dirty || form.controls['text'].touched)">
                             It's required field</mat-error>
@@ -57,7 +57,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>share</mat-icon>
-                        <mat-label>Enter URL</mat-label>
+                        <mat-label>{{translate.faqs.url}}</mat-label>
                         <input matInput placeholder="Ex. Categoria para Usuarios" formControlName="url">
                         <!-- <mat-error
                             *ngIf="form.controls['url'].hasError('required') && (form.controls['url'].dirty || form.controls['url'].touched)">

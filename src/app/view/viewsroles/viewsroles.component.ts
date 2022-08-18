@@ -8,6 +8,7 @@ import { Router } from '@angular/router'
 import { Viewsroles } from 'src/app/interfaces/viewsroles'
 import { ViewsrolesService } from 'src/app/services/viewsroles.service'
 import { AssignViewsrolesComponent } from './dialog/assign-viewsroles/assign-viewsroles.component'
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-viewsroles',
@@ -20,6 +21,7 @@ export class ViewsrolesComponent implements OnInit {
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'name', 'premium', 'active', 'actions'] //'description',
   dataSource: MatTableDataSource<any>

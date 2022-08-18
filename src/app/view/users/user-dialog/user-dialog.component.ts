@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RolesService } from 'src/app/services/roles.service';
 import { UsersService } from 'src/app/services/users.service';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-user-dialog',
@@ -21,6 +22,7 @@ export class UserDialogComponent implements OnInit {
   image: any = null
   code = localStorage.getItem('code')
   select!:any
+  translate: any = LANGUAGE
 
   constructor(
     private dialog: MatDialog,

@@ -3,6 +3,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { ViewService } from 'src/app/services/view.service'
 import { ViewsrolesService } from 'src/app/services/viewsroles.service'
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-assign-viewsroles',
@@ -17,6 +18,7 @@ export class AssignViewsrolesComponent implements OnInit {
   newViews: number[] = []
   dataViews: any[] = []
   code = localStorage.getItem('code')
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

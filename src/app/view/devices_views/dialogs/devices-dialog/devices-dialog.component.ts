@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ControllerVersion, FirmwareVersion, Model } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 import { QRCodeModule } from 'angularx-qrcode';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-devices-dialog',
@@ -18,6 +19,7 @@ export class DevicesDialogComponent implements OnInit {
   dataControllerVersions!:ControllerVersion[];
   dataFirmwareVersions!:FirmwareVersion[];
   dataModels!:any[];
+  translate: any = LANGUAGE
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private dialog: MatDialog,

@@ -4,7 +4,7 @@
           <div class="modalHeader clearfix">
               <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
               <div class="modal-about">
-                  <div class="font-weight-bold p-t-5 font-17"> Agregar Control Version</div>
+                  <div class="font-weight-bold p-t-5 font-17"> {{translate.models.dialog_add}}</div>
               </div>
           </div>
       </div>
@@ -21,7 +21,7 @@
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                       <mat-icon matSuffix>undo</mat-icon>
-                      <mat-label>Device Version</mat-label>
+                      <mat-label>{{translate.models.device_version}}</mat-label>
                       <mat-select formControlName="device_version_id">
                         <mat-option *ngFor="let item of dataDeviceVersion" [value]="item.id">
                             {{item.name}}
@@ -34,7 +34,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                     <mat-icon matSuffix>undo</mat-icon>
-                    <mat-label>Device Type</mat-label>
+                    <mat-label>{{translate.models.d_type}}</mat-label>
                     <mat-select formControlName="device_type_id">
                       <mat-option *ngFor="let item of dataDeviceType" [value]="item.id">
                           {{item.name}}
@@ -47,7 +47,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>undo</mat-icon>
-                  <mat-label>Hardware Version</mat-label>
+                  <mat-label>{{translate.models.hardware_version}}</mat-label>
                   <mat-select formControlName="hardware_version_id">
                     <mat-option *ngFor="let item of dataHardwareVersion" [value]="item.id">
                         {{item.version}}
@@ -60,7 +60,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>Name</mat-label>
+                  <mat-label>{{translate.models.name}}</mat-label>
                   <input matInput placeholder="Name" required formControlName="name">
                   <mat-error *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
                     It's required field
@@ -71,7 +71,7 @@
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <p class="ms-1">
-                <mat-checkbox color="primary" formControlName="active"> Active</mat-checkbox>
+                <mat-checkbox color="primary" formControlName="active"> {{translate.shared.active}}</mat-checkbox>
             </p>
         </div>
       </div>

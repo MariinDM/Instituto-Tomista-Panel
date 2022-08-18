@@ -8,6 +8,7 @@ import { Category } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { environment } from 'src/environments/environment';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-categories',
@@ -21,6 +22,7 @@ export class CategoriesComponent implements OnInit {
   code = localStorage.getItem('code')
   filter: string = ''
   apiURL = environment.apiUrl
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'name', 'order_index', 'description', 'image', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;

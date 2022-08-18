@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { QuizesService } from 'src/app/services/quizes.service';
 import { UsersService } from 'src/app/services/users.service';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-questions-dialog',
@@ -19,6 +20,7 @@ export class QuestionsDialogComponent implements OnInit {
   language!: any
   obj: any;
   question_id: any
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -79,7 +81,45 @@ export class QuestionsDialogComponent implements OnInit {
     this.form.controls['language'].valueChanges.subscribe(() => {
       this.language = this.form.controls['language'].value
       this.quizesService.getoneQuestions(this.language, this.data.element.id).subscribe({
-        next: (v) => { this.data.element = v.question, this.setForm() },
+        next: (v) => {
+          // this.data.element = v.question, this.setForm()
+          this.obj = v.question
+          if (this.language == 'en') {
+            // this.form.patchValue(this.obj)
+            this.setForm()
+          } else {
+            if (this.obj.title == this.data.element.title) {
+
+              if (this.obj.answers[0].text == this.data.element.answers[0].text) {
+
+                if (this.obj.answers[1].text == this.data.element.answers[1].text) {
+
+                  if (this.obj.answers[2].text == this.data.element.answers[2].text) {
+
+                    if (this.obj.answers[3].text == this.data.element.answers[3].text) {
+                      this.clear()
+                    } else {
+                      this.data.element = this.obj
+                      this.setForm()
+                    }
+                  } else {
+                    this.data.element = this.obj
+                    this.setForm()
+                  }
+                } else {
+                  this.data.element = this.obj
+                  this.setForm()
+                }
+              } else {
+                this.data.element = this.obj
+                this.setForm()
+              }
+            } else {
+              this.data.element = this.obj
+              this.setForm()
+            }
+          }
+        },
         error: (e) => { this.openSnack(e) },
         complete: () => { }
       })
@@ -168,5 +208,14 @@ export class QuestionsDialogComponent implements OnInit {
         this.obj.correct = "answer4"
         break
     }
+  }
+
+  clear() {
+    this.form.controls['title'].setValue('')
+    this.answers.controls['answer1'].setValue('')
+    this.answers.controls['answer2'].setValue('')
+    this.answers.controls['answer3'].setValue('')
+    this.answers.controls['answer4'].setValue('')
+    // this.form.controls['correct'].setValue('')
   }
 }

@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { UserUpdateDialogComponent } from './user-update-dialog/user-update-dialog.component';
 import { environment } from 'src/environments/environment';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +25,7 @@ export class UsersComponent implements OnInit {
   code = localStorage.getItem('code')
   filter: string = ''
   apiURL = environment.apiUrl
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'name', 'lastname', 'email', 'institution_picture', 'profile_picture', 'rol', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;

@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Tutorial</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? translate.tutorials.dialog_edit : translate.tutorials.dialog_add}}</div>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="row" *ngIf="data.edit">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Language</mat-label>
+                        <mat-label>{{translate.shared.language}}</mat-label>
                         <mat-select formControlName="language">
                             <mat-option *ngFor="let item of dataLanguages" [value]="item.code">
                                 {{item.name}}
@@ -33,7 +33,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>view_quilt</mat-icon>
-                        <mat-label>Enter Title</mat-label>
+                        <mat-label>{{translate.tutorials.name}}</mat-label>
                         <input matInput placeholder="Ex. Tutorial 1" required formControlName="title">
                         <mat-error
                             *ngIf="form.controls['title'].hasError('required') || (form.controls['title'].dirty || form.controls['title'].touched)">
@@ -43,7 +43,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>123</mat-icon>
-                        <mat-label>Enter URL</mat-label>
+                        <mat-label>{{translate.tutorials.url}}</mat-label>
                         <input matInput placeholder="Ex. https://www.google.com.mx/" formControlName="url">
                         <mat-error
                             *ngIf="form.controls['url'].hasError('required') || (form.controls['url'].dirty || form.controls['url'].touched)">
@@ -55,7 +55,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix></mat-icon>
-                        <mat-label>Enter Description</mat-label>
+                        <mat-label>{{translate.tutorials.description}}</mat-label>
                         <textarea matInput placeholder="Ex. No poner de cabeza" formControlName="description"></textarea>
                         <mat-error
                             *ngIf="form.controls['description'].hasError('required') || (form.controls['description'].dirty || form.controls['description'].touched)">
@@ -67,7 +67,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width"
                         (click)="picker.open()">
-                        <mat-label>Choose a Start and End Date Range</mat-label>
+                        <mat-label>{{translate.tutorials.choose_se}}</mat-label>
                         <mat-date-range-input [rangePicker]="picker">
                             <input matStartDate formControlName="start_date" placeholder="Start Date" disabled>
                             <input matEndDate formControlName="end_date" placeholder="End Date" disabled>
@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                     <div class="mat-form-field example-full-width">
-                        <button type="button" mat-raised-button (click)="getFile()">Select Image</button>
+                        <button type="button" mat-raised-button (click)="getFile()">{{translate.tutorials.select_image}}</button>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 mb-2" *ngIf="image">
@@ -89,7 +89,7 @@
                         <div class="demo-icon-container" style="padding: 0.4rem;">
                             <div class="demo-google-material-icon">
                                 <i class="material-icons">image</i>
-                                <span class="icon-name">Captured Image</span>
+                                <span class="icon-name">{{translate.tutorials.captured_image}}</span>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-checkbox color="primary" formControlName="active"> Active </mat-checkbox>
+                    <mat-checkbox color="primary" formControlName="active"> {{translate.shared.active}} </mat-checkbox>
                 </div>
             </div>
             <div class="row">

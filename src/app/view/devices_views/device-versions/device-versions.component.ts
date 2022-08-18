@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DeviceVersion } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 import { DeviceVersionDialogComponent } from '../dialogs/device-version-dialog/device-version-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-device-versions',
@@ -16,6 +17,7 @@ import { DeviceVersionDialogComponent } from '../dialogs/device-version-dialog/d
 export class DeviceVersionsComponent implements OnInit {
   dataDeviceVersion!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'code', 'description', 'name', 'actions'];
   dataSource: MatTableDataSource<any>;

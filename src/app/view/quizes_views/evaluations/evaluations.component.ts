@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { QuizesService } from 'src/app/services/quizes.service';
 import { EvaluationDialogComponent } from './evaluation-dialog/evaluation-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-evaluations',
@@ -20,6 +21,7 @@ export class EvaluationsComponent implements OnInit {
   code = localStorage.getItem('code')
   filter: string = ''
   obj!: any
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'name', 'last_name', 'instructor', 'quiz', 'simulator', 'total', 'date', 'actions']
   dataSource: MatTableDataSource<any>

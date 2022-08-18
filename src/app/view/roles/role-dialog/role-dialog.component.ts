@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RolesService } from 'src/app/services/roles.service';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-role-dialog',
@@ -14,6 +15,7 @@ export class RoleDialogComponent implements OnInit {
   form!: FormGroup
   obj!: any
   code = localStorage.getItem('code')
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

@@ -8,6 +8,7 @@ import { ViewService } from 'src/app/services/view.service'
 import { View } from 'src/app/interfaces/view'
 import { ViewDialogComponent } from './view-dialog/view-dialog.component'
 import { environment } from 'src/environments/environment'
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-views',
@@ -21,6 +22,7 @@ export class ViewsComponent implements OnInit {
   code = localStorage.getItem('code')
   filter:string = ''
   apiURL = environment.apiUrl
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'name', 'order_index', 'url', 'description', 'image', 'category', 'active', 'actions']
   dataSource: MatTableDataSource<any>

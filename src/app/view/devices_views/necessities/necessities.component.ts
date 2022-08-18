@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Necessitie } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 import { NecessitieDialogComponent } from '../dialogs/necessitie-dialog/necessitie-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-necessities',
@@ -16,6 +17,7 @@ import { NecessitieDialogComponent } from '../dialogs/necessitie-dialog/necessit
 export class NecessitiesComponent implements OnInit {
   dataNecessities!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'code', 'description', 'name', 'actions'];
   dataSource: MatTableDataSource<any>;

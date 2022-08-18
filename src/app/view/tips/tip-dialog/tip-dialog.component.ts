@@ -6,6 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { TipService } from 'src/app/services/tip.service';
 import { GetFilesComponent } from '../../get-files/get-files.component';
 import { DatePipe } from '@angular/common';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-tip-dialog',
@@ -21,11 +22,12 @@ export class TipDialogComponent implements OnInit {
   image: any = null
   code = localStorage.getItem('code')
   language!: any
-  obj!:any
+  obj!: any
   clear: any = {
     title: '',
     description: ''
   }
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -128,16 +130,14 @@ export class TipDialogComponent implements OnInit {
             this.form.patchValue(this.obj)
           } else {
             if (this.obj.title == this.data.element.title) {
-              console.log('si')
 
               if (this.obj.description == this.data.element.description) {
                 this.form.patchValue(this.clear)
               } else {
-                console.log('no')
+                this.form.patchValue(this.obj)
               }
-
             } else {
-              console.log('no')
+              this.form.patchValue(this.obj)
             }
           }
         },

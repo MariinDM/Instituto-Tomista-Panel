@@ -7,11 +7,20 @@ import { MatTableDataSource } from '@angular/material/table'
 import { TutorialService } from 'src/app/services/tutorial.service'
 import { environment } from 'src/environments/environment'
 import { TutorialDialogComponent } from './tutorial-dialog/tutorial-dialog.component'
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-tutorials',
   templateUrl: './tutorials.component.html',
-  styleUrls: ['../../app.component.scss']
+  styleUrls: ['../../app.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class TutorialsComponent implements OnInit {
 
@@ -20,8 +29,10 @@ export class TutorialsComponent implements OnInit {
   code = localStorage.getItem('code')
   filter: string = ''
   apiURL = environment.apiUrl
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'title', 'url', 'description', 'image', 'start_date', 'end_date', 'active', 'actions']
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator

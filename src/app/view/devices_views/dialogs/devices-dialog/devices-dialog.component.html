@@ -4,7 +4,7 @@
           <div class="modalHeader clearfix">
               <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
               <div class="modal-about">
-                  <div class="font-weight-bold p-t-5 font-17"> Device Data</div>
+                  <div class="font-weight-bold p-t-5 font-17">{{translate.devices.title}}</div>
               </div>
           </div>
       </div>
@@ -21,7 +21,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>Password</mat-label>
+                  <mat-label>{{translate.devices.password}}</mat-label>
                   <input matInput placeholder="Password" required formControlName="password">
                   <mat-error *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].dirty || form.controls['password'].touched)">
                     It's required field
@@ -33,7 +33,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>Restarts</mat-label>
+                  <mat-label>{{translate.devices.restarts}}</mat-label>
                   <input matInput placeholder="Restarts" required formControlName="restarts">
                   <mat-error *ngIf="form.controls['restarts'].hasError('required') && (form.controls['restarts'].dirty || form.controls['restarts'].touched)">
                     It's required field
@@ -45,7 +45,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>Serial</mat-label>
+                  <mat-label>{{translate.devices.serial}}</mat-label>
                   <input matInput placeholder="Serial" required formControlName="serial">
                   <mat-error *ngIf="form.controls['serial'].hasError('required') && (form.controls['serial'].dirty || form.controls['serial'].touched)">
                     It's required field
@@ -57,7 +57,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>Comments</mat-label>
+                  <mat-label>{{translate.devices.comments}}</mat-label>
                   <input matInput placeholder="Comments" formControlName="comments">
               </mat-form-field>
           </div>
@@ -66,14 +66,14 @@
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>IP</mat-label>
+                  <mat-label>{{translate.devices.ip}}</mat-label>
                   <input matInput placeholder="IP" formControlName="ip">
               </mat-form-field>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
             <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                 <mat-icon matSuffix>description</mat-icon>
-                <mat-label>LAN</mat-label>
+                <mat-label>{{translate.devices.lan}}</mat-label>
                 <input matInput placeholder="LAN" formControlName="lan">
             </mat-form-field>
           </div>
@@ -98,7 +98,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>undo</mat-icon>
-                  <mat-label>Firmware Version</mat-label>
+                  <mat-label>{{translate.devices.f_version}}</mat-label>
                   <mat-select formControlName="firmware_version_id">
                     <mat-option *ngFor="let item of dataFirmwareVersions" [value]="item.id">
                         {{item.version}}
@@ -111,7 +111,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>undo</mat-icon>
-                  <mat-label>Controller Version</mat-label>
+                  <mat-label>{{translate.devices.c_version}}</mat-label>
                   <mat-select formControlName="controller_version_id">
                     <mat-option *ngFor="let item of dataControllerVersions" [value]="item.id">
                         {{item.description}}
@@ -124,7 +124,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>undo</mat-icon>
-                  <mat-label>Model</mat-label>
+                  <mat-label>{{translate.devices.model}}</mat-label>
                   <mat-select formControlName="model_id">
                     <mat-option *ngFor="let item of dataModels" [value]="item.id">
                         {{item.name}}
@@ -136,7 +136,7 @@
         <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
               <p class="ms-1">
-                  <mat-checkbox color="primary" formControlName="active"> Active</mat-checkbox>
+                  <mat-checkbox color="primary" formControlName="active"> {{translate.shared.active}}</mat-checkbox>
               </p>
           </div>
         </div>

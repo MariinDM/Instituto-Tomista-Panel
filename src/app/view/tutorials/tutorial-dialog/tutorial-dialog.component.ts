@@ -6,6 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { GetFilesComponent } from '../../get-files/get-files.component';
 import { DatePipe } from '@angular/common';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-tutorial-dialog',
@@ -26,6 +27,7 @@ export class TutorialDialogComponent implements OnInit {
     title: '',
     description: ''
   }
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -131,16 +133,15 @@ export class TutorialDialogComponent implements OnInit {
             this.form.patchValue(this.obj)
           } else {
             if (this.obj.title == this.data.element.title) {
-              console.log('si')
 
               if (this.obj.description == this.data.element.description) {
                 this.form.patchValue(this.clear)
               } else {
-                console.log('no')
+                this.form.patchValue(this.obj)
               }
 
             } else {
-              console.log('no')
+              this.form.patchValue(this.obj)
             }
           }
         },

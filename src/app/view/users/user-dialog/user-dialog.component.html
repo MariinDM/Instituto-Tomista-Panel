@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> Agregar Usuario</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{translate.users.dialog_add}}</div>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>email</mat-icon>
-                        <mat-label>Enter Email</mat-label>
+                        <mat-label>{{translate.users.email}}</mat-label>
                         <input matInput placeholder="Ex. example@gmail.com" required formControlName="email">
                         <mat-error
                             *ngIf="form.controls['email'].hasError('required') || (form.controls['email'].dirty || form.controls['email'].touched)">
@@ -38,7 +38,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>face</mat-icon>
-                        <mat-label>Enter Name</mat-label>
+                        <mat-label>{{translate.users.name}}</mat-label>
                         <input matInput placeholder="Ex. Juan" required formControlName="name">
                         <mat-error
                             *ngIf="form.controls['name'].hasError('required') || (form.controls['name'].dirty || form.controls['name'].touched)">
@@ -49,7 +49,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>face</mat-icon>
-                        <mat-label>Enter Last Name</mat-label>
+                        <mat-label>{{translate.users.last_name}}</mat-label>
                         <input matInput placeholder="Ex. Torres" required formControlName="last_name">
                         <mat-error
                             *ngIf="form.controls['last_name'].hasError('required') || (form.controls['last_name'].dirty || form.controls['last_name'].touched)">
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Age</mat-label>
+                        <mat-label>{{translate.users.age}}</mat-label>
                         <input matInput #age placeholder="Ex. 19" maxlength="2" type="text" required formControlName="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['age'].hasError('required') || (form.controls['age'].dirty || form.controls['age'].touched)">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Rol</mat-label>
+                        <mat-label>{{translate.users.rol}}</mat-label>
                         <mat-select formControlName="role_id">
                             <mat-option *ngFor="let item of dataRoles" [value]="item.id">
                                 {{item.name}}
@@ -86,7 +86,7 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Language</mat-label>
+                        <mat-label>{{translate.users.language}}</mat-label>
                         <mat-select formControlName="language_id">
                             <mat-option *ngFor="let item of dataLanguages" [value]="item.id">
                                 {{item.name}}
@@ -101,7 +101,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>phone</mat-icon>
-                        <mat-label>Enter Cellphone</mat-label>
+                        <mat-label>{{translate.users.cellphone}}</mat-label>
                         <input matInput #phone placeholder="Ex. 8745213654" maxlength='10' required
                             formControlName="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-hint align="end">{{phone.value.length}} / 10</mat-hint>
@@ -123,7 +123,7 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Country</mat-label>
+                        <mat-label>{{translate.users.country}}</mat-label>
                         <mat-select formControlName="country_id" (selectionChange)="getCities($event.value)">
                             <mat-option *ngFor="let item of dataCountries" [value]="item.id">
                                 {{item.name}}
@@ -136,7 +136,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter City</mat-label>
+                        <mat-label>{{translate.users.city}}</mat-label>
                         <mat-select formControlName="city_id">
                             <mat-option *ngFor="let item of dataCities" [value]="item.id">
                                 {{item.name}}
@@ -151,21 +151,21 @@
             <div class="row" *ngIf="select == '5'">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>group_work</mat-icon>
-                        <mat-label>Enter Group</mat-label>
-                        <input matInput placeholder="Ex. A" formControlName="group">
+                        <mat-icon matSuffix>grade</mat-icon>
+                        <mat-label>{{translate.users.grade}}</mat-label>
+                        <input matInput placeholder="Ex. 5" type="number" formControlName="grade" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
-                            *ngIf="form.controls['group'].hasError('required') || (form.controls['group'].dirty || form.controls['group'].touched)">
+                            *ngIf="form.controls['grade'].hasError('required') || (form.controls['grade'].dirty || form.controls['grade'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>grade</mat-icon>
-                        <mat-label>Enter Grade</mat-label>
-                        <input matInput placeholder="Ex. 5" type="number" formControlName="grade" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        <mat-icon matSuffix>group_work</mat-icon>
+                        <mat-label>{{translate.users.group}}</mat-label>
+                        <input matInput placeholder="Ex. A" formControlName="group">
                         <mat-error
-                            *ngIf="form.controls['grade'].hasError('required') || (form.controls['grade'].dirty || form.controls['grade'].touched)">
+                            *ngIf="form.controls['group'].hasError('required') || (form.controls['group'].dirty || form.controls['group'].touched)">
                             It's required field</mat-error>
                     </mat-form-field>
                 </div>
@@ -174,7 +174,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>school</mat-icon>
-                        <mat-label>Enter Institution</mat-label>
+                        <mat-label>{{translate.users.institution}}</mat-label>
                         <input matInput placeholder="Ex. Universidad Tecnologica de Torreon"
                             formControlName="institution">
                         <mat-error
@@ -186,7 +186,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <p class="ms-1">
-                        <mat-checkbox color="primary" formControlName="premium"> Premium </mat-checkbox>
+                        <mat-checkbox color="primary" formControlName="premium"> {{translate.shared.premium}} </mat-checkbox>
                     </p>
                 </div>
             </div>

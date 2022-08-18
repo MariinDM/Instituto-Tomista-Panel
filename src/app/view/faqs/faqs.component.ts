@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { FaqService } from 'src/app/services/faq.service'
 import { FaqDialogComponent } from './faq-dialog/faq-dialog.component'
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-faqs',
@@ -26,6 +27,7 @@ export class FaqsComponent implements OnInit {
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'title', 'text', 'url', 'actions']
   columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];

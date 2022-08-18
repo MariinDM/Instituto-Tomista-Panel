@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { QuizesService } from 'src/app/services/quizes.service';
+import { ListCommentsDialogComponent } from '../list-comments-dialog/list-comments-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-evaluation-dialog',
@@ -14,6 +16,8 @@ export class EvaluationDialogComponent implements OnInit {
   form!: FormGroup
   obj!: any
   code = localStorage.getItem('code')
+  leng:any;
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -46,16 +50,18 @@ export class EvaluationDialogComponent implements OnInit {
         data.user_id = this.form.controls['student_id'].value
         data.comments = this.form.controls['comments'].value
 
-        let leng = this.data.element.evaluation_comments.length - 1
-        this.form.controls['comments'].setValue(this.data.element.evaluation_comments[leng].comments)
+        // if (this.data.element.evaluation_comments > 0) {
+        //   this.leng = this.data.element.evaluation_comments.length - 1
+        //   this.form.controls['comments'].setValue(this.data.element.evaluation_comments[this.leng].comments)
+        // }
 
-        if (data.comments != this.data.element.evaluation_comments[leng].comments) {
+        // if (data.comments != this.data.element.evaluation_comments[this.leng].comments) {
           this.quizesService.insertEvaluationsComments(this.code, data).subscribe({
             next: (v) => { this.openSnack(message) },
             error: (e) => { this.openSnack(e) },
-            complete: () => {}
+            complete: () => { }
           })
-        }
+        // }
         this.dialog.closeAll()
       }
     })
@@ -80,18 +86,26 @@ export class EvaluationDialogComponent implements OnInit {
     this.form.controls['instructor_id'].setValue(this.data.element.instructor_id)
     this.form.controls['student_id'].setValue(this.data.element.student_id)
     this.form.controls['instructor'].setValue(this.data.element.instructor)
-    this.form.controls['instructor_affects_total'].setValue(this.data.element.instructor_affects_total)
+    this.form.controls['instructor_affects_total'].setValue(true)
     this.form.controls['quiz'].setValue(this.data.element.quiz)
-    this.form.controls['quiz_affects_total'].setValue(this.data.element.quiz_affects_total)
+    this.form.controls['quiz_affects_total'].setValue(true)
     this.form.controls['simulator'].setValue(this.data.element.simulator)
-    this.form.controls['simulator_affects_total'].setValue(this.data.element.simulator_affects_total)
-    let leng = this.data.element.evaluation_comments.length - 1
-    this.form.controls['comments'].setValue(this.data.element.evaluation_comments[leng].comments)
-
+    this.form.controls['simulator_affects_total'].setValue(true)
+    if (this.data.element.evaluation_comments.length > 0) {
+      let leng = this.data.element.evaluation_comments.length - 1
+      this.form.controls['comments'].setValue(this.data.element.evaluation_comments[leng].comments)
+    }
   }
 
   openSnack(message: string) {
     this._snack.open(message, '', { duration: 1000, })
+  }
+
+  openDialogListComments(comments:any){
+    this.dialog.open(ListCommentsDialogComponent, {
+      data: { comments },
+      panelClass: ['dialog-responsive']
+    })
   }
 
 }

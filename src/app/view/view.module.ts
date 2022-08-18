@@ -69,6 +69,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { LimitToPipe } from 'src/app/shared/pipes/limit-to.pipe'
 import { NewLinePipe } from '../shared/pipes/new-line.pipe';
 import { DeviceCodeDialogComponent } from './devices_views/dialogs/device-code-dialog/device-code-dialog.component';
+import { ListCommentsDialogComponent } from './quizes_views/evaluations/list-comments-dialog/list-comments-dialog.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { DeviceCodeDialogComponent } from './devices_views/dialogs/device-code-d
     //PIPE
     LimitToPipe,
     NewLinePipe,
+    ListCommentsDialogComponent,
   ],
   imports: [
     CommonModule,

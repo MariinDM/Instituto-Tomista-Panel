@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FaqService } from 'src/app/services/faq.service';
 import { UsersService } from 'src/app/services/users.service';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-faq-dialog',
@@ -20,8 +21,9 @@ export class FaqDialogComponent implements OnInit {
   obj!: any
   clear: any = {
     title: '',
-    description: ''
+    text: ''
   }
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -79,25 +81,23 @@ export class FaqDialogComponent implements OnInit {
     this.form.controls['language'].valueChanges.subscribe(() => {
       this.language = this.form.controls['language'].value
       this.faqService.getone(this.language, this.data.element.id).subscribe({
-        next: (v) => { 
-          this.obj = v.faqs
+        next: (v) => {
+          this.obj = v.faq
           if (this.language == 'en') {
-            this.form.patchValue(v.calculator_field)
+            this.form.patchValue(v.faq)
           } else {
             if (this.obj.title == this.data.element.title) {
-              console.log('si')
 
-              if (this.obj.description == this.data.element.description) {
+              if (this.obj.text == this.data.element.text) {
                 this.form.patchValue(this.clear)
               } else {
-                console.log('no')
+                this.form.patchValue(v.faq)
               }
-
             } else {
-              console.log('no')
+              this.form.patchValue(v.faq)
             }
           }
-         },
+        },
         error: (e) => { this.openSnack(e) },
         complete: () => { }
       })

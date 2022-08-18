@@ -4,7 +4,8 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Editar' : 'Agregar' }} Vista</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? translate.views.dialog_edit :
+                        translate.views.dialog_add }} </div>
                 </div>
             </div>
         </div>
@@ -21,7 +22,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>view_quilt</mat-icon>
-                        <mat-label>Enter Name</mat-label>
+                        <mat-label>{{translate.views.name}}</mat-label>
                         <input matInput placeholder="Ex. Usuarios" required formControlName="name">
                         <mat-error
                             *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
@@ -31,7 +32,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>123</mat-icon>
-                        <mat-label>Enter Order</mat-label>
+                        <mat-label>{{translate.views.order}}</mat-label>
                         <input matInput placeholder="Ex. 1" required formControlName="order_index" type="number"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
@@ -44,7 +45,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>description</mat-icon>
-                        <mat-label>Enter Route</mat-label>
+                        <mat-label>{{translate.views.url}}</mat-label>
                         <input matInput placeholder="Ex. gestion/ejemplo" formControlName="url">
                         <mat-error
                             *ngIf="form.controls['url'].hasError('required') && (form.controls['url'].dirty || form.controls['url'].touched)">
@@ -53,7 +54,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Category</mat-label>
+                        <mat-label>{{translate.views.category}}</mat-label>
                         <mat-select formControlName="category_id">
                             <mat-option *ngFor="let item of dataCategories" [value]="item.id">
                                 {{item.name}}
@@ -69,22 +70,22 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix></mat-icon>
-                        <mat-label>Enter Description</mat-label>
+                        <mat-label>{{translate.views.description}}</mat-label>
                         <textarea matInput placeholder="Ex. Categoria para Usuarios" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <h5>Chooose Option</h5>
+                    <h5>{{translate.shared.choose_option}}</h5>
                     <div class="row">
                         <mat-radio-group (change)="radioChange($event)">
                             <div class="row">
                                 <div class="col-6">
-                                    <mat-radio-button value="1">Image</mat-radio-button>
+                                    <mat-radio-button value="1">{{translate.shared.image}}</mat-radio-button>
                                 </div>
                                 <div class="col-6">
-                                    <mat-radio-button value="2">Icon</mat-radio-button>
+                                    <mat-radio-button value="2">{{translate.shared.icon}}</mat-radio-button>
                                 </div>
                             </div>
                         </mat-radio-group>
@@ -94,7 +95,7 @@
             <div class="row" *ngIf="select==1">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                     <div class="mat-form-field example-full-width">
-                        <button type="button" mat-raised-button (click)="getFile()">Select Image</button>
+                        <button type="button" mat-raised-button (click)="getFile()">{{translate.shared.select_image}}</button>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 mb-2" *ngIf="image">
@@ -102,7 +103,7 @@
                         <div class="demo-icon-container" style="padding: 0.4rem;">
                             <div class="demo-google-material-icon">
                                 <i class="material-icons">image</i>
-                                <span class="icon-name">Captured Image</span>
+                                <span class="icon-name">{{translate.shared.captured_image}}</span>
                             </div>
                         </div>
                     </div>
@@ -112,7 +113,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>description</mat-icon>
-                        <mat-label>Enter Icon</mat-label>
+                        <mat-label>{{translate.views.icon}}</mat-label>
                         <input matInput placeholder="Ex. folder" formControlName="image">
                     </mat-form-field>
                 </div>

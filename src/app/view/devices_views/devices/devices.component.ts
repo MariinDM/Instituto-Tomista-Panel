@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DevicesService } from 'src/app/services/devices.service';
 import { DeviceCodeDialogComponent } from '../dialogs/device-code-dialog/device-code-dialog.component';
 import { DevicesDialogComponent } from '../dialogs/devices-dialog/devices-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-devices',
@@ -17,6 +18,7 @@ export class DevicesComponent implements OnInit {
   dataTable: any[] = []
   dataDevices!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'controller_version', 'firmware_version', 'model', 'device_type', 'device_version', 'hardware_version', 'active', 'restarts', 'serial', 'actions'];
 

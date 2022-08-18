@@ -5,6 +5,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from 'src/app/services/category.service';
 import { GetFilesComponent } from '../../get-files/get-files.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-category-dialog',
@@ -19,6 +20,7 @@ export class CategoryDialogComponent implements OnInit {
   image: any = null
   imageActual: any = null
   select!: any
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

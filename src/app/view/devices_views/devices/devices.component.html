@@ -19,22 +19,22 @@
                     <div class="col-8">
                       <ul class="header-buttons-left ml-0">
                         <li class="dropdown">
-                          <h2>Devices Data</h2>
+                          <h2>{{translate.devices.title}}</h2>
                         </li>
                         <li class="dropdown m-l-20">
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" (keyup)="applyFilter($event)"
+                          <input placeholder="{{translate.shared.search}}" type="text" (keyup)="applyFilter($event)"
                             class="browser-default search-field" aria-label="Search box">
                         </li>
                         <li>
-                          <div class="export-button m-l-10" matTooltip="ADD">
+                          <div class="export-button m-l-10" matTooltip="{{translate.shared.add}}">
                             <button mat-mini-fab class="baby-pink" (click)="openDialog(false)">
                               <mat-icon class="col-white">add</mat-icon>
                             </button>
                           </div>
                         </li>
                         <li>
-                          <div class="export-button m-l-10" matTooltip="REFRESH">
+                          <div class="export-button m-l-10" matTooltip="{{translate.shared.refresh}}">
                             <button mat-mini-fab class="baby-purpura" (click)="getData()">
                               <mat-icon class="col-white">refresh</mat-icon>
                             </button>
@@ -69,43 +69,43 @@
 
                     <!-- Version Controller Column -->
                     <ng-container matColumnDef="controller_version">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> V. Controller </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.v_controller}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.controller_version}} </td>
                     </ng-container>
 
                     <!-- Firmware Version Column -->
                     <ng-container matColumnDef="firmware_version">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> V. Firmware </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.v_firmaware}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.firmware_version}} </td>
                     </ng-container>
 
                     <!-- Model Column -->
                     <ng-container matColumnDef="model">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.model}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.model}} </td>
                     </ng-container>
 
                     <!-- Device Type Column -->
                     <ng-container matColumnDef="device_type">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Device T. </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.d_type}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.device_type}} </td>
                     </ng-container>
 
                     <!-- Version Device Column -->
                     <ng-container matColumnDef="device_version">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> V. Device. </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.v_device}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.device_version}} </td>
                     </ng-container>
 
                     <!-- Version Hardware Column -->
                     <ng-container matColumnDef="hardware_version">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> V. Hardware </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.v_hardware}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.hardware_version}} </td>
                     </ng-container>
 
                     <!-- Status Column -->
                     <ng-container matColumnDef="active">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.shared.status}} </th>
                       <td mat-cell *matCellDef="let row">
                         <span [ngClass]="row.active === true ? 'col-green' : 'col-red'">
                           <mat-icon>{{row.active === true ? 'done' : 'clear'}} </mat-icon>
@@ -115,19 +115,19 @@
 
                     <!-- Restarts Column -->
                     <ng-container matColumnDef="restarts">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Restarts </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.restarts}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.restarts}} </td>
                     </ng-container>
 
                     <!-- Serial Column -->
                     <ng-container matColumnDef="serial">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.devices.serial}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.serial}} </td>
                     </ng-container>
 
                     <!-- Actions -->
                     <ng-container matColumnDef="actions">
-                      <th mat-header-cell *matHeaderCellDef> Actions </th>
+                      <th mat-header-cell *matHeaderCellDef> {{translate.shared.actions}} </th>
                       <td mat-cell *matCellDef="let row">
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
                           <mat-icon>more_vert</mat-icon>
@@ -135,11 +135,11 @@
                         <mat-menu #menu="matMenu">
                           <button mat-menu-item (click)="openDialogUpdate(row,true)">
                             <mat-icon>mode_edit</mat-icon>
-                            <span>Details</span>
+                            <span>{{translate.devices.details}}</span>
                           </button>
                           <button mat-menu-item (click)="openDialogCode(row)">
                             <mat-icon>send_to_mobile</mat-icon>
-                            <span>Generar Codigo</span>
+                            <span>{{translate.devices.gen_code}}</span>
                           </button>
                           <!-- <button mat-menu-item (click)="delete(row.id)">
                             <mat-icon>sync_alt</mat-icon>
@@ -151,7 +151,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     <tr class="mat-row" *matNoDataRow>
-                      <td class="mat-cell" colspan="4">No data matching the filter</td>
+                      <td class="mat-cell" colspan="4">{{translate.shared.nodata}}</td>
                     </tr>
                   </table>
                   <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users">

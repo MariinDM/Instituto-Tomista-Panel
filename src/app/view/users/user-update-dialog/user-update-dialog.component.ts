@@ -1,16 +1,17 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RolesService } from 'src/app/services/roles.service';
 import { UsersService } from 'src/app/services/users.service';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-user-update-dialog',
   templateUrl: './user-update-dialog.component.html',
   styleUrls: ['../../../app.component.scss']
 })
-export class UserUpdateDialogComponent implements OnInit {
+export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
 
   form!: FormGroup
   obj!: any
@@ -20,8 +21,8 @@ export class UserUpdateDialogComponent implements OnInit {
   dataLanguages!: any[]
   image: any = null
   code = localStorage.getItem('code')
-  select!:any
-  //3/5
+  select!: any
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,21 +34,24 @@ export class UserUpdateDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData()
-    this.setForm()
     this.selectRol()
+  }
+
+  ngAfterViewInit(): void {
+    this.getCountries()
+    this.setForm()
   }
 
   getData() {
     this.getRoles()
     this.getLanguages()
-    this.getCountries()
   }
 
   getRoles() {
     this.roleService.getall(this.code).subscribe({
       next: (v) => {
-        for (let i = 0; i < v.roles.length; i++){
-          if(v.roles[i].name != 'GUEST'){
+        for (let i = 0; i < v.roles.length; i++) {
+          if (v.roles[i].name != 'GUEST') {
             this.dataRoles.push(v.roles[i])
           }
         }
@@ -87,7 +91,6 @@ export class UserUpdateDialogComponent implements OnInit {
       }
     })
   }
-
   sendData() {
     if (this.form.invalid) { return }
     var data = this.setData()
@@ -97,13 +100,12 @@ export class UserUpdateDialogComponent implements OnInit {
       complete: () => { this.dialog.closeAll() }
     })
   }
-  selectRol(){
+  selectRol() {
     this.form.controls['role_id'].valueChanges.subscribe((v) => {
       this.select = v
       console.log(this.select)
     })
   }
-
   createForm() {
     this.form = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
@@ -144,7 +146,6 @@ export class UserUpdateDialogComponent implements OnInit {
 
     return formData
   }
-
   setForm() {
     this.form.controls['email'].setValue(this.data.element.users.email)
     this.form.controls['role_id'].setValue(this.data.element.roles.id)
@@ -160,7 +161,6 @@ export class UserUpdateDialogComponent implements OnInit {
     this.form.controls['institution'].setValue(this.data.element.users.profile[0].institution)
     this.form.controls['premium'].setValue(this.data.element.premium)
   }
-
   openSnack(message: string) {
     this._snack.open(message, '', { duration: 1000, })
   }

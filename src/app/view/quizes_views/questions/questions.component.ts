@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { QuizesService } from 'src/app/services/quizes.service';
 import { QuestionsDialogComponent } from './questions-dialog/questions-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-questions',
@@ -18,6 +19,7 @@ export class QuestionsComponent implements OnInit {
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'question', 'active', 'actions']
   dataSource: MatTableDataSource<any>

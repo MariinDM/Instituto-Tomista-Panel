@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CalculatorService } from 'src/app/services/calculator.service';
 import { UsersService } from 'src/app/services/users.service';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-calculator-dialog',
@@ -22,6 +23,7 @@ export class CalculatorDialogComponent implements OnInit {
     title: '',
     description: ''
   }
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -80,21 +82,21 @@ export class CalculatorDialogComponent implements OnInit {
       this.language = this.form.controls['language'].value
       this.calculatorService.getone(this.language, this.data.element.id).subscribe({
         next: (v) => {
+          console.log(this.language)
           this.obj = v.calculator_field
           if (this.language == 'en') {
             this.form.patchValue(this.obj)
           } else {
             if (this.obj.title == this.data.element.title) {
-              console.log('si')
 
               if (this.obj.description == this.data.element.description) {
                 this.form.patchValue(this.clear)
               } else {
-                console.log('no')
+                this.form.patchValue(v.calculator_field)
               }
 
             } else {
-              console.log('no')
+              this.form.patchValue(v.calculator_field)
             }
           }
         },

@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DevicesService } from 'src/app/services/devices.service';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-model-necessities',
@@ -13,6 +14,7 @@ export class ModelNecessitiesComponent implements OnInit {
   dataNecessities:any = []
   assignedNecessities:any = []
   element:any
+  translate: any = LANGUAGE
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private dialog: MatDialog,

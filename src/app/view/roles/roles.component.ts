@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Rol } from 'src/app/interfaces/rol';
 import { RolesService } from 'src/app/services/roles.service';
 import { RoleDialogComponent } from './role-dialog/role-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-roles',
@@ -19,6 +20,7 @@ export class RolesComponent implements OnInit {
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'name', 'description', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;

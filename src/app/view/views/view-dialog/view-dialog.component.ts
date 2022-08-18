@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from 'src/app/services/category.service';
 import { ViewService } from 'src/app/services/view.service';
 import { GetFilesComponent } from '../../get-files/get-files.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-view-dialog',
@@ -21,6 +22,7 @@ export class ViewDialogComponent implements OnInit {
   image: any = null
   code = localStorage.getItem('code')
   select!: any
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

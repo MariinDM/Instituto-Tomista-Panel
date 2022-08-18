@@ -6,11 +6,20 @@ import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { CalculatorService } from 'src/app/services/calculator.service';
 import { CalculatorDialogComponent } from './calculator-dialog/calculator-dialog.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
-  styleUrls: ['../../app.component.scss']
+  styleUrls: ['../../app.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class CalculatorComponent implements OnInit {
 
@@ -18,8 +27,10 @@ export class CalculatorComponent implements OnInit {
   loader = false
   code = localStorage.getItem('code')
   filter: string = ''
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'title', 'description', 'active', 'actions']
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   dataSource: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator: MatPaginator

@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{translate.viewsroles.assign_views}}</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{translate.evaluations.ch}}</div>
                 </div>
             </div>
         </div>
@@ -16,38 +16,36 @@
         </button>
     </div>
     <div class="mat-dialog-content">
-        <div class="register-form m-4">
+        <form class="register-form m-4">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <h4>{{translate.viewsroles.select_views}}</h4>
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" *ngFor="let item of dataViews">
-                            <p class="ms-1">
-                                <mat-checkbox color="primary" [checked]="check(item.id)" [id]="item.id" [value]="item"
-                                    (change)="onChange($event)">{{ item.name }}</mat-checkbox>
-                            </p>
+                    <!-- <mat-list role="list">
+                        <mat-list-item role="listitem" *ngFor="let item of comments"> - {{item.comments}}</mat-list-item>
+                        <div class="row" *ngFor="let item of comments">
+                            <mat-list-item>
+                                <mat-icon mat-list-icon>chat</mat-icon>
+                                <div aria-multiline> {{item.comments | newLine}} </div>
+                                <div mat-line> {{item.date | date}} </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <h4>{{translate.viewsroles.choose_premium}}</h4>
-                    <div class="row">
-                        <p class="ms-1">
-                            <mat-checkbox color="primary" [(ngModel)]="premium"> {{translate.shared.premium}} </mat-checkbox>
-                        </p>
-                    </div>
+                    </mat-list> -->
+                    <mat-card class="mat-card-shadow" *ngFor="let item of comments" style="margin: 1.5rem;">
+                        <mat-card-content>
+                            <p>{{item.comments | newLine}}</p>
+                            <p>{{item.date | date}}</p>
+                        </mat-card-content>
+                    </mat-card>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <div class="example-button-row" mat-dialog-actions align="end">
-                        <button (click)="sendData()" mat-raised-button class="baby-green">
+                        <!-- <button type="submit" mat-raised-button color="primary" class="baby-green">
                             <span class="mat-button-wrapper log-white">
                                 <mat-icon>save</mat-icon>
                             </span>
-                        </button>
+                        </button> -->
                         <button mat-dialog-close mat-raised-button color="warn">
                             <span class="mat-button-wrapper log-white">
                                 <mat-icon>close</mat-icon>
@@ -56,6 +54,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>

@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> Edit Evaluation</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{translate.evaluations.dialog_edit}}</div>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>email</mat-icon>
-                        <mat-label>Email</mat-label>
+                        <mat-label>{{translate.evaluations.email}}</mat-label>
                         <input matInput placeholder="Ex. example@gmail.com" required
                             [value]="data.element.student.email" disabled>
                     </mat-form-field>
@@ -31,7 +31,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>face</mat-icon>
-                        <mat-label>Name</mat-label>
+                        <mat-label>{{translate.evaluations.name}}</mat-label>
                         <input matInput placeholder="Ex. Juan" required [value]="data.element.student.profile[0].name"
                             disabled>
                     </mat-form-field>
@@ -39,7 +39,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>face</mat-icon>
-                        <mat-label>Last Name</mat-label>
+                        <mat-label>{{translate.evaluations.last_name}}</mat-label>
                         <input matInput placeholder="Ex. Torres" required
                             [value]="data.element.student.profile[0].last_name" disabled>
                     </mat-form-field>
@@ -48,16 +48,16 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>group_work</mat-icon>
-                        <mat-label>Group</mat-label>
-                        <input matInput placeholder="Ex. A" [value]="data.element.student.profile[0].group" disabled>
+                        <mat-icon matSuffix>grade</mat-icon>
+                        <mat-label>{{translate.evaluations.grade}}</mat-label>
+                        <input matInput placeholder="Ex. 5" type="number" [value]="data.element.student.profile[0].grade" disabled>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>grade</mat-icon>
-                        <mat-label>Grade</mat-label>
-                        <input matInput placeholder="Ex. 5" type="number" [value]="data.element.student.profile[0].grade" disabled>
+                        <mat-icon matSuffix>group_work</mat-icon>
+                        <mat-label>{{translate.evaluations.group}}</mat-label>
+                        <input matInput placeholder="Ex. A" [value]="data.element.student.profile[0].group" disabled>
                     </mat-form-field>
                 </div>
             </div>
@@ -65,14 +65,14 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix></mat-icon>
-                        <mat-label>Quiz</mat-label>
+                        <mat-label>{{translate.evaluations.quiz}}</mat-label>
                         <input matInput placeholder="Ex. A" [value]="data.element.quiz" disabled>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix></mat-icon>
-                        <mat-label>Instructor</mat-label>
+                        <mat-label>{{translate.evaluations.instructor}}</mat-label>
                         <input matInput placeholder="Ex. 5" type="number" formControlName="instructor" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['instructor'].hasError('required') || (form.controls['instructor'].dirty || form.controls['instructor'].touched)">
@@ -82,7 +82,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix></mat-icon>
-                        <mat-label>Simulator</mat-label>
+                        <mat-label>{{translate.evaluations.simulator}}</mat-label>
                         <input matInput placeholder="Ex. 5" type="number" [value]="data.element.simulator" disabled>
                     </mat-form-field>
                 </div>
@@ -91,7 +91,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix></mat-icon>
-                        <mat-label>Total</mat-label>
+                        <mat-label>{{translate.evaluations.total}}</mat-label>
                         <input matInput placeholder="Ex. example@gmail.com" required
                             [value]="data.element.total" disabled>
                     </mat-form-field>
@@ -100,9 +100,11 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix></mat-icon>
-                        <mat-label>Comments</mat-label>
-                        <textarea matInput placeholder="" formControlName="comments"></textarea>
+                        <button type="button" mat-icon-button matSuffix (click)="openDialogListComments(data.element.evaluation_comments)">
+                            <mat-icon matSuffix>visibility</mat-icon>
+                        </button>
+                        <mat-label>{{translate.evaluations.comments}}</mat-label>
+                        <input matInput placeholder="" formControlName="comments">
                     </mat-form-field>
                 </div>
             </div>

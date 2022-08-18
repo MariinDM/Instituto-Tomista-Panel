@@ -19,22 +19,22 @@
                     <div class="col-8">
                       <ul class="header-buttons-left ml-0">
                         <li class="dropdown">
-                          <h2>Views Data</h2>
+                          <h2>{{translate.views.title}}</h2>
                         </li>
                         <li class="dropdown m-l-20">
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" [(ngModel)]="filter" (keyup)="applyFilter($event)"
-                            class="browser-default search-field" aria-label="Search box">
+                          <input placeholder="{{translate.shared.search}}" type="text" [(ngModel)]="filter"
+                            (keyup)="applyFilter($event)" class="browser-default search-field" aria-label="Search box">
                         </li>
                         <li>
-                          <div class="export-button m-l-10" matTooltip="ADD">
+                          <div class="export-button m-l-10" matTooltip="{{translate.shared.add}}">
                             <button mat-mini-fab class="baby-pink" (click)="openDialog(false)">
                               <mat-icon class="col-white">add</mat-icon>
                             </button>
                           </div>
                         </li>
                         <li>
-                          <div class="export-button m-l-10" matTooltip="REFRESH">
+                          <div class="export-button m-l-10" matTooltip="{{translate.shared.refresh}}">
                             <button mat-mini-fab class="baby-purpura" (click)="getall()">
                               <mat-icon class="col-white">refresh</mat-icon>
                             </button>
@@ -69,25 +69,25 @@
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.views.name}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                     </ng-container>
 
                     <!-- Order Column -->
                     <ng-container matColumnDef="order_index">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Order </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.views.order}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.order_index}} </td>
                     </ng-container>
 
                     <!-- Order Column -->
                     <ng-container matColumnDef="url">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> URL </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.views.url}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.url}} </td>
-                    </ng-container>
+                    </ng-container>shared
 
                     <!-- Description Column -->
                     <ng-container matColumnDef="description">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.views.description}} </th>
                       <td mat-cell *matCellDef="let row">
                         <p *ngIf="row.description != 'null'">
                           {{row.description}}
@@ -97,7 +97,7 @@
 
                     <!-- Image Column -->
                     <ng-container matColumnDef="image">
-                      <th mat-header-cell *matHeaderCellDef> Image </th>
+                      <th mat-header-cell *matHeaderCellDef> {{translate.views.image}} </th>
                       <td mat-cell *matCellDef="let row">
                         <!-- {{row.image}} -->
                         <div *ngIf="row.image">
@@ -115,13 +115,13 @@
 
                     <!-- Category Column -->
                     <ng-container matColumnDef="category">
-                      <th mat-header-cell *matHeaderCellDef> Category </th>
+                      <th mat-header-cell *matHeaderCellDef> {{translate.views.category}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.categories.name}} </td>
                     </ng-container>
 
                     <!-- active Column -->
                     <ng-container matColumnDef="active">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.shared.status}} </th>
                       <td mat-cell *matCellDef="let row">
                         <span [ngClass]="row.active === true ? 'col-green' : 'col-red'">
                           <mat-icon>{{row.active === true ? 'done' : 'clear'}} </mat-icon>
@@ -131,7 +131,7 @@
 
                     <!-- actions -->
                     <ng-container matColumnDef="actions">
-                      <th mat-header-cell *matHeaderCellDef> Actions </th>
+                      <th mat-header-cell *matHeaderCellDef> {{translate.shared.actions}} </th>
                       <td mat-cell *matCellDef="let row">
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                           <mat-icon>more_vert</mat-icon>
@@ -139,11 +139,11 @@
                         <mat-menu #menu="matMenu">
                           <button mat-menu-item (click)="openDialogUpdate(row, true)">
                             <mat-icon>mode_edit</mat-icon>
-                            <span>Edit</span>
+                            <span>{{translate.shared.edit}}</span>
                           </button>
                           <button mat-menu-item (click)="delete(row.id)">
                             <mat-icon>sync_alt</mat-icon>
-                            <span>Change Status</span>
+                            <span>{{translate.shared.change_status}}</span>
                           </button>
                         </mat-menu>
                       </td>
@@ -154,7 +154,7 @@
 
                     <!-- Row shown when there is no matching data. -->
                     <tr class="mat-row" *matNoDataRow>
-                      <td class="mat-cell" colspan="4">No data matching the filter</td>
+                      <td class="mat-cell" colspan="4">{{translate.shared.nodata}}</td>
                     </tr>
                   </table>
 

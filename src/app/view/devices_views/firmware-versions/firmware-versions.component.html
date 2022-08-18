@@ -19,22 +19,22 @@
                     <div class="col-8">
                       <ul class="header-buttons-left ml-0">
                         <li class="dropdown">
-                          <h2>Firmware Version</h2>
+                          <h2>{{translate.firmware_version.title}}</h2>
                         </li>
                         <li class="dropdown m-l-20">
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" (keyup)="applyFilter($event)"
+                          <input placeholder="{{translate.shared.search}}" type="text" (keyup)="applyFilter($event)"
                             class="browser-default search-field" aria-label="Search box">
                         </li>
                         <li>
-                          <div class="export-button m-l-10" matTooltip="ADD">
+                          <div class="export-button m-l-10" matTooltip="{{translate.shared.add}}">
                             <button mat-mini-fab class="baby-pink" (click)="openDialog(false)">
                               <mat-icon class="col-white">add</mat-icon>
                             </button>
                           </div>
                         </li>
                         <li>
-                          <div class="export-button m-l-10" matTooltip="REFRESH">
+                          <div class="export-button m-l-10" matTooltip="{{translate.shared.refresh}}">
                             <button mat-mini-fab class="baby-purpura" (click)="getData()">
                               <mat-icon class="col-white">refresh</mat-icon>
                             </button>
@@ -69,49 +69,49 @@
 
                     <!-- ID Previous Version Column -->
                     <ng-container matColumnDef="previous_version_id">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID Version Ant. </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.firmware_version.previous_version_id}} </th>
                       <td mat-cell *matCellDef="let row">
                          <p class="table-cell-custom" *ngIf="row.previous_version_id != null"> {{row.previous_version.name}} </p>
-                         <p class="table-cell-custom" *ngIf="row.previous_version_id === null"> No existe </p>
+                         <p class="table-cell-custom" *ngIf="row.previous_version_id === null"> {{translate.shared.no_exist}} </p>
                       </td>
                     </ng-container>
 
                     <!-- Model Previous Version Column -->
                     <ng-container matColumnDef="model_id">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID Version Ant. </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.firmware_version.model}} </th>
                       <td mat-cell *matCellDef="let row">
                          <p class="table-cell-custom" *ngIf="row.model_id != null"> {{row.model.name}} </p>
-                         <p class="table-cell-custom" *ngIf="row.model_id === null"> No existe </p>
+                         <p class="table-cell-custom" *ngIf="row.model_id === null"> {{translate.shared.no_exist}} </p>
                       </td>
                     </ng-container>
 
                     <!-- Version Column -->
                     <ng-container matColumnDef="version">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Version </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.firmware_version.version}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.version}} </td>
                     </ng-container>
 
                     <!-- Description Column -->
                     <ng-container matColumnDef="description">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.firmware_version.description}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.description}} </td>
                     </ng-container>
 
                     <!-- Created At Column -->
                     <ng-container matColumnDef="created_at">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.firmware_version.created}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.created_at}} </td>
                     </ng-container>
 
                     <!-- Updatedp At Column -->
                     <ng-container matColumnDef="updated_at">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ult actuali. </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.firmware_version.update_at}} </th>
                       <td mat-cell *matCellDef="let row"> {{row.updated_at}} </td>
                     </ng-container>
 
                     <!-- Actions -->
                     <ng-container matColumnDef="actions">
-                      <th mat-header-cell *matHeaderCellDef> Actions </th>
+                      <th mat-header-cell *matHeaderCellDef> {{translate.shared.actions}} </th>
                       <td mat-cell *matCellDef="let row">
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
                           <mat-icon>more_vert</mat-icon>
@@ -119,7 +119,7 @@
                         <mat-menu #menu="matMenu">
                           <button mat-menu-item (click)="openDialogUpdate(row,true)">
                             <mat-icon>mode_edit</mat-icon>
-                            <span>Edit</span>
+                            <span>{{translate.shared.edit}}</span>
                           </button>
                         </mat-menu>
                       </td>
@@ -127,7 +127,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     <tr class="mat-row" *matNoDataRow>
-                      <td class="mat-cell" colspan="4">No data matching the filter</td>
+                      <td class="mat-cell" colspan="4">{{translate.shared.nodata}}</td>
                     </tr>
                   </table>
                   <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users">

@@ -8,6 +8,7 @@ import { Model } from 'src/app/interfaces/devices-intefaces';
 import { DevicesService } from 'src/app/services/devices.service';
 import { ModelDialogComponent } from '../dialogs/model-dialog/model-dialog.component';
 import { ModelNecessitiesComponent } from '../dialogs/model-necessities/model-necessities.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-models',
@@ -18,6 +19,7 @@ export class ModelsComponent implements OnInit {
   dataTable:any[] = []
   dataModels!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'name', 'device_type', 'device_version', 'hardware_version', 'created_at', 'updated_at', 'actions'];
   dataSource: MatTableDataSource<any>;
