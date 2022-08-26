@@ -37,7 +37,7 @@
                         <input matInput placeholder="Ex. A" required formControlName="title">
                         <mat-error
                             *ngIf="form.controls['title'].hasError('required') || (form.controls['title'].dirty || form.controls['title'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                             <input matInput placeholder="Ex. A" required formControlName="answer1">
                             <mat-error
                                 *ngIf="answers.controls['answer1'].hasError('required') || (answers.controls['answer1'].dirty || answers.controls['answer1'].touched)">
-                                It's required field</mat-error>
+                                {{translate.validations.required}}</mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             <input matInput placeholder="Ex. B" required formControlName="answer2">
                             <mat-error
                                 *ngIf="answers.controls['answer2'].hasError('required') || (answers.controls['answer2'].dirty || answers.controls['answer2'].touched)">
-                                It's required field</mat-error>
+                                {{translate.validations.required}}</mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                             <input matInput placeholder="Ex. C" required formControlName="answer3">
                             <mat-error
                                 *ngIf="answers.controls['answer3'].hasError('required') || (answers.controls['answer3'].dirty || answers.controls['answer3'].touched)">
-                                It's required field</mat-error>
+                                {{translate.validations.required}}</mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                             <input matInput placeholder="Ex. D" required formControlName="answer4">
                             <mat-error
                                 *ngIf="answers.controls['answer4'].hasError('required') || (answers.controls['answer4'].dirty || answers.controls['answer4'].touched)">
-                                It's required field</mat-error>
+                                {{translate.validations.required}}</mat-error>
                         </mat-form-field>
                     </div>
                 </div>

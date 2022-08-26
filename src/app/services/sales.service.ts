@@ -24,6 +24,11 @@ export class SalesService {
     return this.http.put<any>(`${ environment.apiUrl }v1/${code}/clients/update/${id}`, data, {})
   }
 
+  deleteClient(id:number): Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.delete<any>(`${ environment.apiUrl }v1/${code}/clients/delete/${id}`, {})
+  }
+
   getDealers(): Observable<any>{
     let code = localStorage.getItem('code')
     return this.http.get<any>(`${ environment.apiUrl }v1/${code}/dealers/get`,{})
@@ -38,10 +43,19 @@ export class SalesService {
     let code = localStorage.getItem('code')
     return this.http.put<any>(`${ environment.apiUrl }v1/${code}/dealers/update/${id}`, data, {})
   }
+  deleteDealer(id:number):Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.delete<any>(`${ environment.apiUrl }v1/${code}/dealers/delete/${id}`, {})
+  }
 
   getUsers(): Observable<any>{
     let code = localStorage.getItem('code')
     return this.http.get<any>(`${ environment.apiUrl }v1/${code}/users/get`,{})
+  }
+
+  getDevices(): Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.get<any>(`${ environment.apiUrl }v1/${code}/devices/get?devices=true`,{})
   }
 
   getRegions(): Observable<any>{
@@ -59,6 +73,11 @@ export class SalesService {
     return this.http.put<any>(`${ environment.apiUrl }v1/${code}/regions/update/${id}`, data, {})
   }
 
+  deleteRegion(id:number):Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.delete<any>(`${ environment.apiUrl }v1/${code}/regions/delete/${id}`, {})
+  }
+
   getSales(): Observable<any>{
     let code = localStorage.getItem('code')
     return this.http.get<any>(`${ environment.apiUrl }v1/${code}/sales/get`,{})
@@ -72,5 +91,15 @@ export class SalesService {
   updateSale(id:number, data:any): Observable<any>{
     let code = localStorage.getItem('code')
     return this.http.put<any>(`${ environment.apiUrl }v1/${code}/sales/update/${id}`, data, {})
+  }
+
+  deleteSale(id:number): Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.delete<any>(`${ environment.apiUrl }v1/${code}/sales/delete/${id}`, {})
+  }
+
+  oneSale(id:number): Observable<any>{
+    let code = localStorage.getItem('code')
+    return this.http.get<any>(`${ environment.apiUrl }v1/${code}/sales/get/${id}`, {})
   }
 }

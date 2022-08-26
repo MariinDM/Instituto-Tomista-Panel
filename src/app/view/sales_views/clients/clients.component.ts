@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SalesService } from 'src/app/services/sales.service';
 import { ClientDialogComponent } from '../dialogs/client-dialog/client-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-clients',
@@ -13,8 +14,10 @@ import { ClientDialogComponent } from '../dialogs/client-dialog/client-dialog.co
   styleUrls: ['../../../app.component.scss']
 })
 export class ClientsComponent implements OnInit {
+  
   dataClients!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'name', 'legal_id', 'active', 'created_at', 'updated_at', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -37,14 +40,14 @@ export class ClientsComponent implements OnInit {
   getData(): void {
     this.loader = false
     this.salesServices.getClients().subscribe({
-      next:(v) => {
+      next: (v) => {
         this.loader = true;
         console.log(v)
         this.dataClients = v.clients
         this.setData()
         this.openSnack(v.message)
       },
-      error:(e) => {
+      error: (e) => {
         console.log(e)
         this.openSnack(e.error.message)
       }
@@ -56,6 +59,18 @@ export class ClientsComponent implements OnInit {
     this.dataSource.data = this.dataClients;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  delete(id: number) {
+    this.salesServices.deleteClient(id).subscribe({
+      next: (v) => {
+        this.openSnack(v.message)
+        this.getData()
+      },
+      error: (e) => {
+        this.openSnack(e)
+      }
+    })
   }
 
   openSnack(message: string) {

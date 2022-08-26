@@ -37,7 +37,7 @@
                         <input matInput placeholder="Ex. Tutorial 1" required formControlName="title">
                         <mat-error
                             *ngIf="form.controls['title'].hasError('required') || (form.controls['title'].dirty || form.controls['title'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -47,7 +47,7 @@
                         <input matInput placeholder="Ex. https://www.google.com.mx/" formControlName="url">
                         <mat-error
                             *ngIf="form.controls['url'].hasError('required') || (form.controls['url'].dirty || form.controls['url'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         <textarea matInput placeholder="Ex. No poner de cabeza" formControlName="description"></textarea>
                         <mat-error
                             *ngIf="form.controls['description'].hasError('required') || (form.controls['description'].dirty || form.controls['description'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SalesService } from 'src/app/services/sales.service';
 import { RegionDialogComponent } from '../dialogs/region-dialog/region-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-regions',
@@ -13,10 +14,12 @@ import { RegionDialogComponent } from '../dialogs/region-dialog/region-dialog.co
   styleUrls: ['../../../app.component.scss']
 })
 export class RegionsComponent implements OnInit {
+
   dataRegions!: any[]
   loader = false
+  translate: any = LANGUAGE
 
-  displayedColumns: string[] = ['point', 'code', 'name', 'description', 'actions'];
+  displayedColumns: string[] = ['point', 'id','code', 'name', 'description', 'active','actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,7 +43,7 @@ export class RegionsComponent implements OnInit {
       next:(v) => {
         this.loader = true;
         console.log(v)
-        this.dataRegions = v.clients
+        this.dataRegions = v.regions
         this.setData()
         this.openSnack(v.message)
       },
@@ -56,6 +59,20 @@ export class RegionsComponent implements OnInit {
     this.dataSource.data = this.dataRegions;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  delete(id: number): void {
+    this.salesServices.deleteRegion(id).subscribe({
+      next: (v) => {
+        this.openSnack(v.message)
+      },
+      error: (e) => {
+        this.openSnack(e)
+      },
+      complete: () => {
+        this.getData()
+      }
+    })
   }
 
   openSnack(message: string) {

@@ -52,10 +52,15 @@
     },
     "profile": {
         "personal_img": "Personal Picture",
-        "institution_img": "Insitution Picture",
+        "institution_img": "Institution Picture",
         "change_password": "Change Password",
+        "change_picture": "Change Picture",
         "uploadPP": "Upload Profile Picture",
-        "uploadIP": "Upload Institution Picture"
+        "uploadIP": "Upload Institution Picture",
+        "password": "Password",
+        "new_pass": "New Password",
+        "confirm_pass": "Confirm Password",
+        "image": "Image"
     },
     "tutorials": {
         "title": "Tutorials Data",
@@ -210,7 +215,37 @@
         "name": "Name",
         "dialog_add": "Add Neccessities"
     },
-    "calibrations": {},
+    "sales_views": {
+        "clients": "Clients",
+        "sales": "Sales",
+        "dealers": "Dealers",
+        "regions": "Regions",
+        "id": "ID",
+        "name": "Name",
+        "legal_id": "Legal ID",
+        "created_at": "Created At",
+        "updated_at": "Updated At",
+        "comments": "Comments",
+        "code": "Code",
+        "description": "Description",
+        "add_client": "Add Client",
+        "edit_client": "Edit Client",
+        "add_dealer": "Add Dealer",
+        "edit_dealer": "Edit Dealer",
+        "add_region": "Add Region",
+        "edit_region": "Edit Region",
+        "add_sale": "Add Sale",
+        "edit_sale": "Edit Sale",
+        "user": "User",
+        "dealer": "Dealer",
+        "region": "Region",
+        "country": "Country",
+        "client": "Client",
+        "date":"Date",
+        "waranty_date":"Waranty Date",
+        "shipping_date":"Shipping Date",
+        "select_devices": "Select Devices"
+    },
     "shared": {
         "nodata": "No data matching the filter",
         "edit": "Edit",
@@ -231,5 +266,10 @@
         "language": "Language",
         "active": "Active",
         "no_exist": "Doesn't exist"
+    },
+    "validations": {
+        "required": "It's required",
+        "email": "Email must be a valid email address",
+        "phone": "Length is 10 characters"
     }
 }

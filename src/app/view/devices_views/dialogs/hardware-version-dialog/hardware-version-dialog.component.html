@@ -37,7 +37,7 @@
                     <mat-label>{{translate.hardware_version.description}}</mat-label>
                     <input matInput placeholder="Description" required formControlName="description">
                     <mat-error *ngIf="form.controls['description'].hasError('required') && (form.controls['description'].dirty || form.controls['description'].touched)">
-                      It's required field
+                      {{translate.validations.required}}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -49,7 +49,7 @@
                   <mat-label>{{translate.hardware_version.numeric_value}}</mat-label>
                   <input matInput placeholder="Numeric value" required formControlName="numeric_value" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                   <mat-error *ngIf="form.controls['numeric_value'].hasError('required') && (form.controls['numeric_value'].dirty || form.controls['numeric_value'].touched)">
-                    It's required field
+                    {{translate.validations.required}}
                   </mat-error>
               </mat-form-field>
           </div>
@@ -61,7 +61,7 @@
                 <mat-label>{{translate.hardware_version.version}}</mat-label>
                 <input matInput placeholder="Version" required formControlName="version">
                 <mat-error *ngIf="form.controls['version'].hasError('required') && (form.controls['version'].dirty || form.controls['version'].touched)">
-                  It's required field
+                  {{translate.validations.required}}
                 </mat-error>
             </mat-form-field>
         </div>

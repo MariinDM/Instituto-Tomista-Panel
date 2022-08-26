@@ -24,7 +24,7 @@
                   <mat-label>{{translate.devices.password}}</mat-label>
                   <input matInput placeholder="Password" required formControlName="password">
                   <mat-error *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].dirty || form.controls['password'].touched)">
-                    It's required field
+                    {{translate.validations.required}}
                   </mat-error>
               </mat-form-field>
           </div>
@@ -36,7 +36,7 @@
                   <mat-label>{{translate.devices.restarts}}</mat-label>
                   <input matInput placeholder="Restarts" required formControlName="restarts">
                   <mat-error *ngIf="form.controls['restarts'].hasError('required') && (form.controls['restarts'].dirty || form.controls['restarts'].touched)">
-                    It's required field
+                    {{translate.validations.required}}
                   </mat-error>
               </mat-form-field>
           </div>
@@ -48,7 +48,7 @@
                   <mat-label>{{translate.devices.serial}}</mat-label>
                   <input matInput placeholder="Serial" required formControlName="serial">
                   <mat-error *ngIf="form.controls['serial'].hasError('required') && (form.controls['serial'].dirty || form.controls['serial'].touched)">
-                    It's required field
+                    {{translate.validations.required}}
                   </mat-error>
               </mat-form-field>
           </div>

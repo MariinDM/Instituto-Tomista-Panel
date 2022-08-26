@@ -63,7 +63,7 @@
                   <mat-label>{{translate.models.name}}</mat-label>
                   <input matInput placeholder="Name" required formControlName="name">
                   <mat-error *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
-                    It's required field
+                    {{translate.validations.required}}
                   </mat-error>
               </mat-form-field>
           </div>

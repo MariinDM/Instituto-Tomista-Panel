@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmedValidator } from 'src/app/shared/functions';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-change-password',
@@ -15,6 +16,7 @@ export class ChangePasswordComponent implements OnInit {
   form!: FormGroup
   obj!: any
   code = localStorage.getItem('code')
+  translate: any = LANGUAGE
 
   constructor(
     private authService: AuthService,

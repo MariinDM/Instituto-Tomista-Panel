@@ -26,7 +26,7 @@
                         <input matInput placeholder="Ex. Usuarios" required formControlName="name">
                         <mat-error
                             *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['order_index'].hasError('required') && (form.controls['order_index'].dirty || form.controls['order_index'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>

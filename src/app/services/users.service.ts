@@ -18,7 +18,7 @@ export class UsersService {
     return this.http.get(`${environment.apiUrl}v1/${code}/users/get/${id}`);
   }
   insert(code: string, user: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}auth/${code}/register`, user)
+    return this.http.post(`${environment.apiUrl}v1/${code}/users/create`, user)
   }
   update(code: string, id: number, user: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}v1/${code}/users/update/${id}`, user)
@@ -34,6 +34,10 @@ export class UsersService {
   }
   getlanguages(code: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}v1/${code}/languages/get`);
+  }
+  getDealers(): Observable<any> {
+    let code = localStorage.getItem('code')
+    return this.http.get(`${environment.apiUrl}v1/${code}/users/get?dealers=true`);
   }
   upProfile(code: string, id: number, image: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Profile/${id}`, image)

@@ -24,7 +24,7 @@
                   <mat-label>{{translate.device_type.code}}</mat-label>
                   <input matInput placeholder="Code" required formControlName="code">
                   <mat-error *ngIf="form.controls['code'].hasError('required') && (form.controls['code'].dirty || form.controls['code'].touched)">
-                    It's required field
+                    {{translate.validations.required}}
                   </mat-error>
               </mat-form-field>
           </div>
@@ -36,7 +36,7 @@
                     <mat-label>{{translate.device_type.description}}</mat-label>
                     <input matInput placeholder="Description" required formControlName="description">
                     <mat-error *ngIf="form.controls['description'].hasError('required') && (form.controls['description'].dirty || form.controls['description'].touched)">
-                      It's required field
+                      {{translate.validations.required}}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -48,7 +48,7 @@
                   <mat-label>{{translate.device_type.name}}</mat-label>
                   <input matInput placeholder="Name" required formControlName="name">
                   <mat-error *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
-                    It's required field
+                    {{translate.validations.required}}
                   </mat-error>
               </mat-form-field>
           </div>

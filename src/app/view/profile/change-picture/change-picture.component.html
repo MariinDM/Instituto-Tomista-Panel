@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> Change Picture</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{translate.profile.change_picture}}</div>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>Enter Image</mat-label>
+                        <mat-label>{{translate.profile.image}}</mat-label>
                         <ngx-mat-file-input formControlName="image" [multiple]="false" [accept]="'.jpeg, .jpg, .png'">
                         </ngx-mat-file-input>
                     </mat-form-field>

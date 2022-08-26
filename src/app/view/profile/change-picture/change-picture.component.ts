@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from 'src/app/services/users.service';
 import { CropperComponent } from 'angular-cropperjs';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-change-picture',
@@ -23,6 +24,7 @@ export class ChangePictureComponent implements OnInit {
     aspectRatio: 1 / 1
   }
   newImg: any = null
+  translate: any = LANGUAGE
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

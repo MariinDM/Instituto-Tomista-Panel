@@ -25,11 +25,11 @@
                         <input matInput placeholder="Ex. example@gmail.com" required formControlName="email">
                         <mat-error
                             *ngIf="form.controls['email'].hasError('required') || (form.controls['email'].dirty || form.controls['email'].touched)">
-                            It's required field
+                            {{translate.validations.required}}
                         </mat-error>
                         <mat-error
                             *ngIf="form.controls['email'].hasError('pattern') || (form.controls['email'].dirty || form.controls['email'].touched)">
-                            Email must be a valid email address
+                            {{translate.validations.email}}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -42,7 +42,7 @@
                         <input matInput placeholder="Ex. Juan" required formControlName="name">
                         <mat-error
                             *ngIf="form.controls['name'].hasError('required') || (form.controls['name'].dirty || form.controls['name'].touched)">
-                            It's required field
+                            {{translate.validations.required}}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -53,7 +53,7 @@
                         <input matInput placeholder="Ex. Torres" required formControlName="last_name">
                         <mat-error
                             *ngIf="form.controls['last_name'].hasError('required') || (form.controls['last_name'].dirty || form.controls['last_name'].touched)">
-                            It's required field
+                            {{translate.validations.required}}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -65,7 +65,7 @@
                         <input matInput #age placeholder="Ex. 19" type="text" maxlength="2" required formControlName="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['age'].hasError('required') || (form.controls['age'].dirty || form.controls['age'].touched)">
-                            It's required field
+                            {{translate.validations.required}}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -79,7 +79,7 @@
                         </mat-select>
                         <mat-error
                             *ngIf="form.controls['role_id'].hasError('required') || (form.controls['role_id'].dirty || form.controls['role_id'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                         </mat-select>
                         <mat-error
                             *ngIf="form.controls['language_id'].hasError('required') || (form.controls['language_id'].dirty || form.controls['language_id'].touched)">
-                            It's required field
+                            {{translate.validations.required}}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -107,16 +107,16 @@
                         <mat-hint align="end">{{phone.value.length}} / 10</mat-hint>
                         <mat-error
                             *ngIf="form.controls['phone'].hasError('required') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            It's required field
+                            {{translate.validations.required}}
                         </mat-error>
                         <mat-error
                             *ngIf="form.controls['phone'].hasError('minlength') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            Min length is 10 characters
+                            {{translate.validations.phone}}
                         </mat-error>
-                        <mat-error
+                        <!-- <mat-error
                             *ngIf="form.controls['phone'].hasError('pattern') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
                             Only Numbers
-                        </mat-error>
+                        </mat-error> -->
                     </mat-form-field>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                         </mat-select>
                         <mat-error
                             *ngIf="form.controls['country_id'].hasError('required') || (form.controls['country_id'].dirty || form.controls['country_id'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -144,7 +144,7 @@
                         </mat-select>
                         <mat-error
                             *ngIf="form.controls['city_id'].hasError('required') || (form.controls['city_id'].dirty || form.controls['city_id'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                         <input matInput placeholder="Ex. 5" type="number" formControlName="grade" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['grade'].hasError('required') || (form.controls['grade'].dirty || form.controls['grade'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -166,7 +166,7 @@
                         <input matInput placeholder="Ex. A" formControlName="group">
                         <mat-error
                             *ngIf="form.controls['group'].hasError('required') || (form.controls['group'].dirty || form.controls['group'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                             formControlName="institution">
                         <mat-error
                             *ngIf="form.controls['institution'].hasError('required') || (form.controls['institution'].dirty || form.controls['institution'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>

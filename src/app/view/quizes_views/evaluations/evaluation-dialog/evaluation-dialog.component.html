@@ -76,7 +76,7 @@
                         <input matInput placeholder="Ex. 5" type="number" formControlName="instructor" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <mat-error
                             *ngIf="form.controls['instructor'].hasError('required') || (form.controls['instructor'].dirty || form.controls['instructor'].touched)">
-                            It's required field</mat-error>
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">

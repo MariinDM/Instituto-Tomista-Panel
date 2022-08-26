@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangePictureComponent } from './change-picture/change-picture.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
   code = localStorage.getItem('code')
   rol = localStorage.getItem('rol')
   id!: number
+  translate: any = LANGUAGE
 
   constructor(
     private router: Router,

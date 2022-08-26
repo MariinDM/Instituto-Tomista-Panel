@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SalesService } from 'src/app/services/sales.service';
 import { DealerDialogComponent } from '../dialogs/dealer-dialog/dealer-dialog.component';
+import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-dealers',
@@ -13,8 +14,10 @@ import { DealerDialogComponent } from '../dialogs/dealer-dialog/dealer-dialog.co
   styleUrls: ['../../../app.component.scss']
 })
 export class DealersComponent implements OnInit {
+  
   dataDealers!: any[]
   loader = false
+  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'name', 'legal_id', 'active', 'created_at', 'updated_at', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -40,7 +43,7 @@ export class DealersComponent implements OnInit {
       next:(v) => {
         this.loader = true;
         console.log(v)
-        this.dataDealers = v.clients
+        this.dataDealers = v.dealers
         this.setData()
         this.openSnack(v.message)
       },
@@ -56,6 +59,20 @@ export class DealersComponent implements OnInit {
     this.dataSource.data = this.dataDealers;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+  
+  delete(id: number): void {
+    this.salesServices.deleteDealer(id).subscribe({
+      next: (v) => {
+        this.openSnack(v.message)
+      },
+      error: (e) => {
+        this.openSnack(e)
+      },
+      complete: () => {
+        this.getData()
+      }
+    })
   }
 
   openSnack(message: string) {

@@ -144,7 +144,7 @@ export class UserDialogComponent implements OnInit {
     formData.set('age', this.form.controls['age'].value)
     formData.set('institution', this.form.controls['institution'].value)
     formData.set('premium', this.form.controls['premium'].value)
-    formData.set('image', this.image)
+    // formData.set('image', this.image)
 
     return formData
   }

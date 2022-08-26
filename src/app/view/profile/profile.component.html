@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="box-part text-center">
-                                <div class="text fs-3 m-b-5">Personal Picture</div>
+                                <div class="text fs-3 m-b-5">{{translate.profile.personal_img}}</div>
                                 <div class="row">
                                     <div class="image text-center mb-3 mt-3">
                                         <img src="{{userInfo.profile_picture ? profile : 'assets/images/image-gallery/user.jpg'}}"
@@ -19,7 +19,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>Name</mat-label>
+                                                        <mat-label>{{translate.users.name}}</mat-label>
                                                         <input matInput [value]="userInfo.profile[0].name" disabled>
                                                         <mat-icon matSuffix>face</mat-icon>
                                                     </mat-form-field>
@@ -28,7 +28,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>Last name</mat-label>
+                                                        <mat-label>{{translate.users.last_name}}</mat-label>
                                                         <input matInput [value]="userInfo.profile[0].last_name"
                                                             disabled>
                                                         <mat-icon matSuffix>face</mat-icon>
@@ -38,7 +38,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>Email</mat-label>
+                                                        <mat-label>{{translate.users.emaiil}}</mat-label>
                                                         <input matInput [value]="userInfo.email" disabled>
                                                         <mat-icon matSuffix>email</mat-icon>
                                                     </mat-form-field>
@@ -47,7 +47,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>Rol</mat-label>
+                                                        <mat-label>{{translate.users.rol}}</mat-label>
                                                         <input matInput [value]="userInfo.rol[0].name" disabled>
                                                         <mat-icon matSuffix>person_outline</mat-icon>
                                                     </mat-form-field>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="box-part text-center">
-                                <div class="text fs-3 m-b-5">Institution Picture</div>
+                                <div class="text fs-3 m-b-5">{{translate.profile.institution_img}}</div>
                                 <div class="row">
                                     <div class="image text-center mb-3 mt-3">
                                         <img src="{{userInfo.institution_picture ? institution : 'assets/images/image-gallery/InstitutionPicture.jpg'}}"
@@ -74,7 +74,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>Institution</mat-label>
+                                                        <mat-label>{{translate.users.institution}}</mat-label>
                                                         <input matInput [value]="userInfo.profile[0].institution"
                                                             disabled>
                                                         <mat-icon matSuffix>school</mat-icon>
@@ -84,7 +84,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>Country</mat-label>
+                                                        <mat-label>{{translate.users.country}}</mat-label>
                                                         <input matInput [value]="userInfo.profile[0].countries.name"
                                                             disabled>
                                                         <mat-icon matSuffix>outlined_flag</mat-icon>
@@ -94,7 +94,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>City</mat-label>
+                                                        <mat-label>{{translate.users.city}}</mat-label>
                                                         <input matInput [value]="userInfo.profile[0].cities.name"
                                                             disabled>
                                                         <mat-icon matSuffix>location_city</mat-icon>
@@ -104,7 +104,7 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                     <mat-form-field class="example-full-width" appearance="outline">
-                                                        <mat-label>Languages</mat-label>
+                                                        <mat-label>{{translate.users.language}}</mat-label>
                                                         <input matInput [value]="userInfo.profile[0].languages.name"
                                                             disabled>
                                                         <mat-icon matSuffix>language</mat-icon>
@@ -119,13 +119,10 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-5">
-                            <button mat-button class="baby-green m-2 btn-lg" (click)="openDialog()">Change
-                                Password</button>
-                            <button (click)="openProfile(userInfo,true)" mat-button class="baby-pink m-2 btn-lg">Update
-                                Profile
-                                Picture</button>
+                            <button mat-button class="baby-green m-2 btn-lg" (click)="openDialog()">{{translate.profile.change_password}}</button>
+                            <button (click)="openProfile(userInfo,true)" mat-button class="baby-pink m-2 btn-lg">{{translate.profile.uploadPP}}</button>
                             <button (click)="openInstitution(userInfo,false)" *ngIf="rol==3" mat-button
-                                class="baby-yellow m-2 btn-lg">Update Institution Picture</button>
+                                class="baby-yellow m-2 btn-lg">{{translate.profile.uploadIP}}</button>
                         </div>
                     </div>
                 </div>
