@@ -13,12 +13,12 @@ export class DealerRolGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
     const rol = localStorage.getItem('rol')
-    if (rol == '2' || rol =='1') { //rol=='2'(admin)
+    if (rol == '1' || rol == '3') {
       // this.router.navigate(['/dashboard']);
       return true
     }
     this.spinner.hide()
     return false
   }
-  
+
 }

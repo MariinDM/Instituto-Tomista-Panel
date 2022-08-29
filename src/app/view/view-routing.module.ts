@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminRolGuard } from '../guards/admin-rol.guard';
 import { DealerRolGuard } from '../guards/dealer-rol.guard';
+import { DeveloperGuard } from '../guards/developer.guard';
 import { InstructorRolGuard } from '../guards/instructor-rol.guard';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CategoriesComponent } from './categories/categories.component';
@@ -34,24 +35,26 @@ import { ViewsrolesComponent } from './viewsroles/viewsroles.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [] },
 
-  { path: 'user/devices', component: DevicesComponent },
-  { path: 'user/profile', component: ProfileComponent },
+  { path: 'user/devices', component: DevicesComponent, canActivate: [] },
+  { path: 'user/profile', component: ProfileComponent, canActivate: [] },
 
   { path: 'admin/users', component: UsersComponent, canActivate: [] },
-  { path: 'admin/categories', component: CategoriesComponent, canActivate: [AdminRolGuard] },
-  { path: 'admin/views', component: ViewsComponent, canActivate: [AdminRolGuard] },
-  { path: 'admin/roles', component: RolesComponent, canActivate: [AdminRolGuard] },
-  { path: 'admin/viewsroles', component: ViewsrolesComponent, canActivate: [AdminRolGuard] },
+  { path: 'admin/categories', component: CategoriesComponent, canActivate: [DeveloperGuard] },
+  { path: 'admin/views', component: ViewsComponent, canActivate: [DeveloperGuard] },
+  { path: 'admin/roles', component: RolesComponent, canActivate: [DeveloperGuard] },
+  { path: 'admin/viewsroles', component: ViewsrolesComponent, canActivate: [DeveloperGuard] },
+
   { path: 'admin/community', component: CommunityComponent, canActivate: [] },
   { path: 'admin/tutorials', component: TutorialsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/tips', component: TipsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/faqs', component: FaqsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/calculator', component: CalculatorComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/questions', component: QuestionsComponent, canActivate: [AdminRolGuard] },
-  // { path: 'admin/user_calculator', component: UserCalculatorsComponent },
+  
   { path: 'admin/evaluations', component: EvaluationsComponent, canActivate: [InstructorRolGuard] },
+  // { path: 'admin/user_calculator', component: UserCalculatorsComponent },
 
   { path: 'devices/controller_version', component: ControllerVersionsComponent, canActivate: [AdminRolGuard] },
   { path: 'devices/device_type', component: DeviceTypesComponent, canActivate: [AdminRolGuard] },
@@ -64,8 +67,8 @@ const routes: Routes = [
   { path: 'devices/calibrations', component: DeviceCalibrationComponent, canActivate: [AdminRolGuard] },
 
   { path: 'sales/clients', component: ClientsComponent, canActivate: [DealerRolGuard] },
-  { path: 'sales/dealers', component: DealersComponent, canActivate: [DealerRolGuard] },
-  { path: 'sales/regions', component: RegionsComponent, canActivate: [DealerRolGuard] },
+  { path: 'sales/dealers', component: DealersComponent, canActivate: [AdminRolGuard] },
+  { path: 'sales/regions', component: RegionsComponent, canActivate: [AdminRolGuard] },
   { path: 'sales/sales', component: SalesComponent, canActivate: [DealerRolGuard] },
 
 ];
