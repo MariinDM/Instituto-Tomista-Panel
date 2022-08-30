@@ -14,10 +14,10 @@ export class AdminRolGuard implements CanActivate {
 
     const rol = localStorage.getItem('rol')
     if (rol == '1' || rol == '2') {
-      // this.router.navigate(['/dashboard']);
       return true
     }
     this.spinner.hide()
+    this.router.navigate(['/dashboard']);
     return false
   }
 

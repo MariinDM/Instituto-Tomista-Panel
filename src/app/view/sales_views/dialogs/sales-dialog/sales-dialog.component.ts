@@ -17,6 +17,7 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
   element: any;
   dataUser!: Client[];
   dataDevices!: any[];
+  dataDealers!: any[];
   assignedDevices: any[] = [];
   edit: boolean;
   translate: any = LANGUAGE
@@ -40,12 +41,12 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.fillArray()
+    // this.fillArray()
   }
 
   createForm() {
     this.form = this.fb.group({
-      // dealer_id: new FormControl('', [Validators.required]),
+      dealer_id: new FormControl('', [Validators.required]),
       client_id: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
       waranty_date: new FormControl('', [Validators.required]),
@@ -58,7 +59,7 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
 
   setData() {
     // console.log(this.element)
-    // this.form.controls['dealer_id'].setValue(this.element.dealer_id)
+    this.form.controls['dealer_id'].setValue(this.element.dealer_id)
     this.form.controls['client_id'].setValue(this.element.saleDevice[0].saleDeviceClient[0].client_id)
     this.form.controls['date'].setValue(this.element.date)
     this.form.controls['waranty_date'].setValue(this.element.waranty_date)
@@ -78,10 +79,17 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
         console.log(e)
       }
     });
-    this.salesServices.getDevices().subscribe({
+    this.salesServices.getAuthDealers().subscribe({
       next: (v) => {
         // console.log(v)
-        // this.assignedDevices = []
+        this.dataDealers = v.dealers_user
+      },
+      error: (e) => {
+        console.log(e)
+      }
+    });
+    this.salesServices.getDevices().subscribe({
+      next: (v) => {
         this.dataDevices = v.device
         if (this.edit) {
           this.salesServices.oneSale(this.element.id).subscribe({
@@ -106,6 +114,7 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
   sendData() {
 
     let data = {
+      dealer_id: this.form.controls['dealer_id'].value,
       client_id: this.form.controls['client_id'].value,
       date: this.form.controls['date'].value,
       waranty_date: this.form.controls['waranty_date'].value,

@@ -41,7 +41,7 @@ export class ClientDialogComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      // dealer_id: new FormControl('', [Validators.required]),
+      dealer_id: new FormControl('', [Validators.required]),
       user_id: new FormControl('', [Validators.required]),
       legal_id: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
@@ -51,7 +51,7 @@ export class ClientDialogComponent implements OnInit {
 
   setData() {
     console.log(this.element)
-    // this.form.controls['dealer_id'].setValue(this.element.dealer_id)
+    this.form.controls['dealer_id'].setValue(this.element.dealer_id)
     this.form.controls['user_id'].setValue(this.element.user_id)
     this.form.controls['legal_id'].setValue(this.element.legal_id)
     this.form.controls['name'].setValue(this.element.name)
@@ -59,7 +59,7 @@ export class ClientDialogComponent implements OnInit {
   }
 
   getData(): void {
-    this.salesServices.getUsers().subscribe({
+    this.salesServices.getOWners().subscribe({
       next: (v) => {
         console.log(v)
         this.dataUser = v.data
@@ -68,20 +68,20 @@ export class ClientDialogComponent implements OnInit {
         console.log(e)
       }
     });
-    // this.salesServices.getDealers().subscribe({
-    //   next:(v) => {
-    //     console.log(v)
-    //     this.dataDealer = v.dealers
-    //   },
-    //   error:(e) => {
-    //     console.log(e)
-    //   }
-    // });
+    this.salesServices.getAuthDealers().subscribe({
+      next:(v) => {
+        console.log(v)
+        this.dataDealer = v.dealers_user
+      },
+      error:(e) => {
+        console.log(e)
+      }
+    });
   }
 
   sendData() {
     let data = {
-      // dealer_id:this.form.controls['dealer_id'].value,
+      dealer_id:this.form.controls['dealer_id'].value,
       user_id: this.form.controls['user_id'].value,
       legal_id: this.form.controls['legal_id'].value,
       name: this.form.controls['name'].value,

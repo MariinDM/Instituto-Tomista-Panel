@@ -14,10 +14,10 @@ export class DeveloperGuard implements CanActivate {
 
     const rol = localStorage.getItem('rol')
     if (rol == '1') {
-      // this.router.navigate(['/dashboard']);
       return true
     }
     this.spinner.hide()
+    this.router.navigate(['/dashboard']);
     return false
   }
 

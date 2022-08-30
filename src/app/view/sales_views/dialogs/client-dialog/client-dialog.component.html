@@ -21,6 +21,19 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>undo</mat-icon>
+                        <mat-label>{{ translate.sales_views.dealer}}</mat-label>
+                        <mat-select formControlName="dealer_id">
+                            <mat-option *ngFor="let item of dataDealer" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-icon matSuffix>undo</mat-icon>
                         <mat-label>{{ translate.sales_views.user}}</mat-label>
                         <mat-select formControlName="user_id">
                             <mat-option *ngFor="let item of dataUser" [value]="item.id">

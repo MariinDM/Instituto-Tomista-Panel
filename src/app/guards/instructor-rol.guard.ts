@@ -13,10 +13,10 @@ export class InstructorRolGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const rol = localStorage.getItem('rol')
     if (rol == '1' || rol == '5') {
-      // this.router.navigate(['/dashboard']);
       return true
     }
     this.spinner.hide()
+    this.router.navigate(['/dashboard']);
     return false
   }
 }

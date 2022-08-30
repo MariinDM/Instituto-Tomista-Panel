@@ -21,6 +21,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
   dataLanguages!: any[]
   image: any = null
   code = localStorage.getItem('code')
+  rol = localStorage.getItem('rol')
   select!: any
   translate: any = LANGUAGE
 
@@ -51,7 +52,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     this.roleService.getall(this.code).subscribe({
       next: (v) => {
         for (let i = 0; i < v.roles.length; i++) {
-          if (v.roles[i].name != 'GUEST') {
+          if (v.roles[i].name != 'GUEST' && v.roles[i].id > this.rol) {
             this.dataRoles.push(v.roles[i])
           }
         }

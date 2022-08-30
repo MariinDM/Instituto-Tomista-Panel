@@ -54,6 +54,7 @@ export class UsersComponent implements OnInit {
     this.loader = false
     this.dataTable = []
     this.userService.getall(this.code).subscribe((data: any) => {
+      console.log(data)
       this.dataUser = data.data
       for (let i = 0; i < this.dataUser.length; i++) {
         this.user = {

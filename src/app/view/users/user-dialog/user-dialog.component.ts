@@ -21,7 +21,8 @@ export class UserDialogComponent implements OnInit {
   dataLanguages!: any[]
   image: any = null
   code = localStorage.getItem('code')
-  select!:any
+  rol = localStorage.getItem('rol')
+  select!: any
   translate: any = LANGUAGE
 
   constructor(
@@ -45,8 +46,8 @@ export class UserDialogComponent implements OnInit {
   getRoles() {
     this.roleService.getall(this.code).subscribe({
       next: (v) => {
-        for (let i = 0; i < v.roles.length; i++){
-          if(v.roles[i].name != 'GUEST'){
+        for (let i = 0; i < v.roles.length; i++) {
+          if (v.roles[i].name != 'GUEST' && v.roles[i].id > this.rol) {
             this.dataRoles.push(v.roles[i])
           }
         }
@@ -56,7 +57,7 @@ export class UserDialogComponent implements OnInit {
       }
     })
   }
-  
+
   getCountries() {
     this.userService.getcountries(this.code).subscribe({
       next: (v) => {
@@ -68,7 +69,7 @@ export class UserDialogComponent implements OnInit {
     })
   }
 
-  getCities(event:any) {
+  getCities(event: any) {
     this.userService.getcities(this.code, event).subscribe({
       next: (v) => {
         this.dataCities = v.cities
@@ -100,7 +101,7 @@ export class UserDialogComponent implements OnInit {
     })
   }
 
-  selectRol(){
+  selectRol() {
     this.form.controls['role_id'].valueChanges.subscribe((v) => {
       this.select = v
       console.log(this.select)
