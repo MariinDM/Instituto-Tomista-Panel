@@ -41,7 +41,9 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.fillArray()
+    if (this.data.edit) {
+      this.fillArray()
+    }
   }
 
   createForm() {
@@ -94,8 +96,8 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
         if (this.edit) {
           this.salesServices.oneSale(this.element.id).subscribe({
             next: (v) => {
-              for (let i = 0; i < v.sale.devices.length; i++) {
-                this.dataDevices.push(v.sale.devices[i])
+              for (let i = 0; i < v.sale[0].sale_devices.length; i++) {
+                this.dataDevices.push(v.sale[0].sale_devices[i])
               }
               console.log(this.dataDevices)
             },
