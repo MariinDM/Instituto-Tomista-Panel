@@ -63,7 +63,7 @@
                     <!-- Name Column -->
                     <ng-container matColumnDef="title">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> {{translate.tips.name}} </th>
-                      <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+                      <td mat-cell *matCellDef="let row"> {{row.title | limitTo:40}} </td>
                     </ng-container>
 
                     <!-- Description Column -->

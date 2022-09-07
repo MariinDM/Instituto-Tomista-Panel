@@ -69,8 +69,8 @@ export class TutorialDialogComponent implements OnInit {
     fd.set('title', this.form.controls['title'].value)
     fd.set('url', this.form.controls['url'].value)
     fd.set('description', this.form.controls['description'].value)
-    fd.set('start_date', start)
-    fd.set('end_date', end)
+    fd.set('start_date', start ? start : null)
+    fd.set('end_date', end ? end : null)
     fd.set('active', this.form.controls['active'].value)
 
     var id = 0
@@ -158,8 +158,8 @@ export class TutorialDialogComponent implements OnInit {
         url: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
         image: new FormControl('',),
-        start_date: new FormControl('',),
-        end_date: new FormControl('',),
+        start_date: new FormControl(null,),
+        end_date: new FormControl(null,),
         active: new FormControl(false)
       });
     } else {
@@ -168,8 +168,8 @@ export class TutorialDialogComponent implements OnInit {
         url: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
         image: new FormControl('',),
-        start_date: new FormControl('',),
-        end_date: new FormControl('',),
+        start_date: new FormControl(null,),
+        end_date: new FormControl(null,),
         language: new FormControl(''),
         active: new FormControl(false)
       });

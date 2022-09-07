@@ -21,22 +21,22 @@ export class GetFilesComponent implements OnInit {
     aspectRatio: 1 / 1
   }
   newImg!: any
-  load:boolean = false
+  load: boolean = false
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data:any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private _snack: MatSnackBar,
     private dialogRef: MatDialogRef<GetFilesComponent>) { this.createForm() }
 
   ngOnInit(): void {
     this.onImageChangeFromFile()
-    if(this.data.edit == 2){
+    if (this.data.edit == 2) {
       this.config = {
         zoomable: false,
         aspectRatio: 16 / 9
       }
-    } else if ( this.data.edit == 3){
+    } else if (this.data.edit == 3) {
       this.config = {
         zoomable: false,
         aspectRatio: 1 / 1
@@ -54,13 +54,27 @@ export class GetFilesComponent implements OnInit {
     })
   }
   getImgCropper() {
+
     this.angularCropper.cropper.getCroppedCanvas().toBlob(blob => {
       let type = blob.type
-      this.newImg = new File([blob], 'Image', { type });
-      this.dialogRef.close({
-        image: this.newImg
-      })
+      let img = new File([blob], 'Image', { type });
+      this.newImg = img
     })
+
+    const pro1 = new Promise((resolve, rejects) => {
+      setTimeout(() => {
+        resolve(this.newImg)
+      }, 1500)
+    })
+
+    pro1
+      .then(() => {
+        console.log(this.newImg)
+        this.dialogRef.close({
+          image: this.newImg
+        })
+      })
+      .catch(() => this.openSnack('error'))
   }
   convertBase64ToFile(fileBase64: string, name: string): Promise<File> {
     const url = fileBase64;
