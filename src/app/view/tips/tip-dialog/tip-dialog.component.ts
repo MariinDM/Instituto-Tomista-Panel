@@ -60,8 +60,13 @@ export class TipDialogComponent implements OnInit {
 
     var datePipe = new DatePipe('en-US');
 
-    let start = datePipe.transform(this.form.controls['start_date'].value, 'yyyy-MM-dd')
-    let end = datePipe.transform(this.form.controls['end_date'].value, 'yyyy-MM-dd')
+    let start = ''
+    let end = ''
+
+    if (this.form.controls['start_date'].value) {
+      start = datePipe.transform(this.form.controls['start_date'].value, 'yyyy-MM-dd')
+      end = datePipe.transform(this.form.controls['end_date'].value, 'yyyy-MM-dd')
+    }
 
     fd.set('id', this.data.element ? this.data.element.id : null)
     fd.set('title', this.form.controls['title'].value)

@@ -60,8 +60,13 @@ export class TutorialDialogComponent implements OnInit {
 
     var datePipe = new DatePipe('en-US');
 
-    let start = datePipe.transform(this.form.controls['start_date'].value, 'yyyy-MM-dd')
-    let end = datePipe.transform(this.form.controls['end_date'].value, 'yyyy-MM-dd')
+    let start = ''
+    let end = ''
+
+    if (this.form.controls['start_date'].value) {
+      start = datePipe.transform(this.form.controls['start_date'].value, 'yyyy-MM-dd')
+      end = datePipe.transform(this.form.controls['end_date'].value, 'yyyy-MM-dd')
+    }
 
     var fd = new FormData()
 
@@ -69,8 +74,8 @@ export class TutorialDialogComponent implements OnInit {
     fd.set('title', this.form.controls['title'].value)
     fd.set('url', this.form.controls['url'].value)
     fd.set('description', this.form.controls['description'].value)
-    fd.set('start_date', start ? start : null)
-    fd.set('end_date', end ? end : null)
+    fd.set('start_date', start)
+    fd.set('end_date', end)
     fd.set('active', this.form.controls['active'].value)
 
     var id = 0
@@ -158,8 +163,8 @@ export class TutorialDialogComponent implements OnInit {
         url: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
         image: new FormControl('',),
-        start_date: new FormControl(null,),
-        end_date: new FormControl(null,),
+        start_date: new FormControl('',),
+        end_date: new FormControl('',),
         active: new FormControl(false)
       });
     } else {
