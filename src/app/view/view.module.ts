@@ -63,13 +63,26 @@ import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.com
 import { EvaluationDialogComponent } from './quizes_views/evaluations/evaluation-dialog/evaluation-dialog.component';
 import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
 import { UserCalculatorDialogComponent } from './quizes_views/user-calculators/user-calculator-dialog/user-calculator-dialog.component';
+import { TicketCategoriesComponent } from './tickets_views/ticket-categories/ticket-categories.component';
+import { TicketCategoriesDialogComponent } from './tickets_views/ticket-categories/ticket-categories-dialog/ticket-categories-dialog.component';
+import { DeviceCodeDialogComponent } from './devices_views/dialogs/device-code-dialog/device-code-dialog.component';
+import { ListCommentsDialogComponent } from './quizes_views/evaluations/list-comments-dialog/list-comments-dialog.component';
 import { QRCodeModule } from 'angularx-qrcode';
 
 //PIPE
 import { LimitToPipe } from 'src/app/shared/pipes/limit-to.pipe'
 import { NewLinePipe } from '../shared/pipes/new-line.pipe';
-import { DeviceCodeDialogComponent } from './devices_views/dialogs/device-code-dialog/device-code-dialog.component';
-import { ListCommentsDialogComponent } from './quizes_views/evaluations/list-comments-dialog/list-comments-dialog.component';
+import { TicketsComponent } from './tickets_views/tickets/tickets.component';
+import { TicketsDialogComponent } from './tickets_views/tickets/tickets-dialog/tickets-dialog.component';
+
+import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { TicketDialogFileComponent } from './tickets_views/tickets/ticket-dialog-file/ticket-dialog-file.component';
+import { GetFileComponent } from './shared/get-file/get-file.component';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+  wheelPropagation: false
+};
 
 @NgModule({
   declarations: [
@@ -137,6 +150,12 @@ import { ListCommentsDialogComponent } from './quizes_views/evaluations/list-com
     LimitToPipe,
     NewLinePipe,
     ListCommentsDialogComponent,
+    TicketCategoriesComponent,
+    TicketCategoriesDialogComponent,
+    TicketsComponent,
+    TicketsDialogComponent,
+    TicketDialogFileComponent,
+    GetFileComponent,
   ],
   imports: [
     CommonModule,
@@ -144,6 +163,13 @@ import { ListCommentsDialogComponent } from './quizes_views/evaluations/list-com
     MaterialModule,
     SharedModule,
     QRCodeModule,
+    PerfectScrollbarModule,
+  ],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ]
 })
 export class ViewModule { }

@@ -36,7 +36,10 @@ export class FaqDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.edit) {
       this.form.patchValue(this.data.element);
-      this.form.controls['language'].setValue(this.code)
+      this.form.controls['language'].setValue('en')
+      if (this.form.controls['url'].value === 'null') {
+        this.form.controls['url'].setValue('')
+      }
       this.language = this.code
       this.selectLanguage()
     }
@@ -97,6 +100,9 @@ export class FaqDialogComponent implements OnInit {
               this.form.patchValue(v.faq)
             }
           }
+          if (this.form.controls['url'].value === 'null') {
+            this.form.controls['url'].setValue('')
+          }
         },
         error: (e) => { this.openSnack(e) },
         complete: () => { }
@@ -115,8 +121,8 @@ export class FaqDialogComponent implements OnInit {
       this.form = this.fb.group({
         title: new FormControl('', [Validators.required]),
         text: new FormControl('', [Validators.required]),
-        url: new FormControl('',),
-        language: new FormControl('',),
+        url: new FormControl('', []),
+        language: new FormControl('', []),
       });
     }
   }

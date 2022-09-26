@@ -40,7 +40,7 @@ export class TutorialDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.edit) {
       this.form.patchValue(this.data.element);
-      this.form.controls['language'].setValue(this.code)
+      this.form.controls['language'].setValue('en')
       this.language = this.code
       this.selectLanguage()
     }
@@ -70,9 +70,10 @@ export class TutorialDialogComponent implements OnInit {
 
     var fd = new FormData()
 
-    fd.set('id', this.data.element ? this.data.element.id : null)
+    // fd.set('id', this.data.element ? this.data.element.id : null)
     fd.set('title', this.form.controls['title'].value)
     fd.set('url', this.form.controls['url'].value)
+    fd.set('image', this.form.controls['image'].value)
     fd.set('description', this.form.controls['description'].value)
     fd.set('start_date', start)
     fd.set('end_date', end)
@@ -82,6 +83,13 @@ export class TutorialDialogComponent implements OnInit {
     var message = ''
 
     if (!this.data.edit) {
+
+      //IMAGE VALIDATION
+      if (this.image === null) {
+        this.openSnack(this.translate.validations.image)
+        return
+      }
+
       if (this.image) {
         fd.set('image', this.image)
         this.tutorialService.insert(this.code, fd).subscribe({

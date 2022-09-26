@@ -241,10 +241,18 @@
         "region": "Region",
         "country": "Country",
         "client": "Client",
-        "date":"Date",
-        "waranty_date":"Waranty Date",
-        "shipping_date":"Shipping Date",
+        "date": "Date",
+        "waranty_date": "Waranty Date",
+        "shipping_date": "Shipping Date",
         "select_devices": "Select Devices"
+    },
+    "tickets_views": {
+        "ticket_category": "Tickets Categories",
+        "name": "Name",
+        "code": "Code",
+        "description": "Description",
+        "ticket_category_add":"Add Tickets Categories",
+        "ticket_category_edit":"Edit Tickets Categories"
     },
     "shared": {
         "nodata": "No data matching the filter",
@@ -270,6 +278,7 @@
     "validations": {
         "required": "It's required",
         "email": "Email must be a valid email address",
-        "phone": "Length is 10 characters"
+        "phone": "Length is 10 characters",
+        "image": "Image Required"
     }
 }

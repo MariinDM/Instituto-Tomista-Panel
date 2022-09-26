@@ -17,7 +17,7 @@ export class QuestionsDialogComponent implements OnInit {
   view!: any
   dataLanguages!: any[]
   code = localStorage.getItem('code')
-  language!: any
+  language: any = 'en '
   obj: any;
   question_id: any
   translate: any = LANGUAGE
@@ -33,7 +33,7 @@ export class QuestionsDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.edit) {
       this.setForm()
-      this.form.controls['language'].setValue(this.code)
+      this.form.controls['language'].setValue('en')
       this.language = this.code
       this.selectLanguage()
     }

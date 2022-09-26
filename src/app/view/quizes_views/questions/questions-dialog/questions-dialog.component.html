@@ -95,7 +95,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <h5>{{translate.questions.choose_co}}</h5>
                     <div class="row">
-                        <mat-radio-group formControlName="correct">
+                        <mat-radio-group formControlName="correct" [disabled]="language !== 'en'">
                             <div class="row">
                                 <div class="col-3">
                                     <mat-radio-button value="1">1</mat-radio-button>

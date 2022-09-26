@@ -22,25 +22,17 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                         <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                             <mat-label>Enter Image</mat-label>
-                            <ngx-mat-file-input formControlName="image" [multiple]="false"
-                                [accept]="'.jpeg, .jpg, .png'">
+                            <ngx-mat-file-input formControlName="image" [multiple]="multiple">
                             </ngx-mat-file-input>
                         </mat-form-field>
-                    </div>
-                </div>
-                <div class="row" *ngIf="image">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                        <div class="d-flex justify-content-center">
-                            <angular-cropper [cropperOptions]="config" [imageUrl]="image" #img ></angular-cropper>
-                        </div>
                     </div>
                 </div>
             </form>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <div class="example-button-row" mat-dialog-actions align="end">
-                        <button type="submit" mat-raised-button class="baby-green" (click)="getImgCropper()">
-                            <span class="mat-button-wrapper log-white">
+                        <button type="submit" mat-raised-button class="baby-green" (click)="saveFile()">
+                            <span class="mat-button-wrapper log-white" >
                                 <mat-icon>save</mat-icon>
                             </span>
                         </button>

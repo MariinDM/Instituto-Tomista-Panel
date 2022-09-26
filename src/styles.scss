@@ -13,8 +13,15 @@ body {
     width: 40%;
 }
 
+.dialog-tickets {
+    width: 70%;
+}
+
 @media only screen and (max-width: 760px) {
     .dialog-responsive {
+        width: 100%;
+    }
+    .dialog-tickets {
         width: 100%;
     }
 }

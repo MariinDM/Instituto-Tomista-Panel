@@ -14,16 +14,48 @@ $subtitles: #585858;
 $principal-text: #000000;
 $secondary-text: #585858;
 
-.mat-card-shadow{
+.container-comments{
+    width:auto;
+    height: 40vh;
+    padding: 1.5rem;
+}
+
+.container-message-left{
+    margin:1.5rem 0rem;
+    margin-right: 1.5em;
+    background-color: $babycare-pink;
+}
+
+.container-message-right{
+    margin:1.5rem 0rem;
+    margin-left: 1.5rem;
+    background-color: $babycare-purpura;
+}
+
+.mat-card.scrollable-content {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    >.mat-card-title-group {
+        display: block;
+    }
+
+    >.mat-card-content {
+        overflow-y: auto;
+    }
+}
+
+.mat-card-shadow {
     box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%) !important;
 }
 
-.img-auth{
+.img-auth {
     max-width: 70% !important;
     padding: 1rem;
 }
 
-.mr-5{
+.mr-5 {
     margin-right: 5.5rem;
 }
 
@@ -174,12 +206,12 @@ th {
     color: #666 !important;
 }
 
-.icon-profile{
+.icon-profile {
     margin-top: 8px;
 }
 
-.text-device-code{
-  text-align: center;
-  font-weight: 600;
-  font-size: 5rem;
+.text-device-code {
+    text-align: center;
+    font-weight: 600;
+    font-size: 5rem;
 }

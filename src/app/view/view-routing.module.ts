@@ -27,6 +27,8 @@ import { ClientsComponent } from './sales_views/clients/clients.component';
 import { DealersComponent } from './sales_views/dealers/dealers.component';
 import { RegionsComponent } from './sales_views/regions/regions.component';
 import { SalesComponent } from './sales_views/sales/sales.component';
+import { TicketCategoriesComponent } from './tickets_views/ticket-categories/ticket-categories.component';
+import { TicketsComponent } from './tickets_views/tickets/tickets.component';
 import { TipsComponent } from './tips/tips.component';
 import { TutorialsComponent } from './tutorials/tutorials.component';
 import { UsersComponent } from './users/users.component';
@@ -46,13 +48,13 @@ const routes: Routes = [
   { path: 'admin/roles', component: RolesComponent, canActivate: [DeveloperGuard] },
   { path: 'admin/viewsroles', component: ViewsrolesComponent, canActivate: [DeveloperGuard] },
 
-  { path: 'admin/community', component: CommunityComponent, canActivate: [] },
+  // { path: 'admin/community', component: CommunityComponent, canActivate: [] },
   { path: 'admin/tutorials', component: TutorialsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/tips', component: TipsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/faqs', component: FaqsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/calculator', component: CalculatorComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/questions', component: QuestionsComponent, canActivate: [AdminRolGuard] },
-  
+
   { path: 'admin/evaluations', component: EvaluationsComponent, canActivate: [InstructorRolGuard] },
   // { path: 'admin/user_calculator', component: UserCalculatorsComponent },
 
@@ -70,6 +72,9 @@ const routes: Routes = [
   { path: 'sales/dealers', component: DealersComponent, canActivate: [AdminRolGuard] },
   { path: 'sales/regions', component: RegionsComponent, canActivate: [AdminRolGuard] },
   { path: 'sales/sales', component: SalesComponent, canActivate: [DealerRolGuard] },
+
+  { path: 'tickets/tickets_categories', component: TicketCategoriesComponent, canActivate: [AdminRolGuard] },
+  { path: 'tickets/tickets', component: TicketsComponent, canActivate: [] },
 
 ];
 

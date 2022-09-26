@@ -40,9 +40,9 @@ export class UsersService {
     return this.http.get(`${environment.apiUrl}v1/${code}/users/get?dealers=true`);
   }
   upProfile(code: string, id: number, image: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Profile/${id}`, image)
+    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/User/Profile/${id}`, image)
   }
   upInstitution(code: string, id: number, image: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Institution/${id}`, image)
+    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/User/Institution/${id}`, image)
   }
 }

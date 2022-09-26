@@ -36,7 +36,7 @@ export class CalculatorDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.edit) {
       this.form.patchValue(this.data.element);
-      this.form.controls['language'].setValue(this.code)
+      this.form.controls['language'].setValue('en')
       this.language = this.code
       this.selectLanguage()
     }
