@@ -17,9 +17,10 @@ export class QuestionsDialogComponent implements OnInit {
   view!: any
   dataLanguages!: any[]
   code = localStorage.getItem('code')
-  language: any = 'en '
+  language: any = 'en'
   obj: any;
   question_id: any
+  dataEnglish:any;
   translate: any = LANGUAGE
 
   constructor(
@@ -32,17 +33,25 @@ export class QuestionsDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.edit) {
-      this.setForm()
+      this.getData()
       this.form.controls['language'].setValue('en')
-      this.language = this.code
+      // this.language = this.code
       this.selectLanguage()
     }
-    this.getLanguages()
   }
 
-  getLanguages(): void {
+  getData(): void {
     this.userService.getlanguages(this.code).subscribe((data: any) => {
       this.dataLanguages = data.languages
+    })
+    this.quizesService.getoneQuestions('en', this.data.element.id).subscribe({
+      next: (v) => {
+        this.dataEnglish = v.question
+        this.setForm(this.dataEnglish)
+      },
+      error: (e) => {
+        console.log(e)
+      }
     })
   }
 
@@ -51,11 +60,11 @@ export class QuestionsDialogComponent implements OnInit {
     this.setData()
     this.answerCorrect(this.obj.correct)
     if (!this.data.edit) {
-      this.quizesService.insertQuestions(this.code, this.obj).subscribe({
+      this.quizesService.insertQuestions(this.language, this.obj).subscribe({
         next: (v) => { this.obj.question_id = v.question_id },
         error: (e) => { this.openSnack(e) },
         complete: () => {
-          this.quizesService.insertAnswers(this.code, this.obj).subscribe({
+          this.quizesService.insertAnswers(this.language, this.obj).subscribe({
             next: (v) => { this.openSnack(v.message) },
             error: (e) => { this.openSnack(e) },
             complete: () => { this.dialog.closeAll() }
@@ -64,7 +73,7 @@ export class QuestionsDialogComponent implements OnInit {
       })
     } else {
       this.quizesService.updateQuestions(this.language, this.data.element.id, this.obj).subscribe({
-        next: (v) => { this.openSnack(this.obj.question_id = this.data.element.id) },
+        next: (v) => { this.obj.question_id = this.data.element.id },
         error: (e) => { this.openSnack(e) },
         complete: () => {
           this.quizesService.updateAnswers(this.language, this.obj).subscribe({
@@ -82,41 +91,38 @@ export class QuestionsDialogComponent implements OnInit {
       this.language = this.form.controls['language'].value
       this.quizesService.getoneQuestions(this.language, this.data.element.id).subscribe({
         next: (v) => {
-          // this.data.element = v.question, this.setForm()
+          // this.data.element = v.question, this.setForm(this.obj)
           this.obj = v.question
+          console.log(v)
           if (this.language == 'en') {
             // this.form.patchValue(this.obj)
-            this.setForm()
+            this.setForm(this.obj)
           } else {
-            if (this.obj.title == this.data.element.title) {
+            if (this.obj.title == this.dataEnglish.title) {
 
-              if (this.obj.answers[0].text == this.data.element.answers[0].text) {
+              if (this.obj.answers[0].text == this.dataEnglish.answers[0].text) {
 
-                if (this.obj.answers[1].text == this.data.element.answers[1].text) {
+                if (this.obj.answers[1].text == this.dataEnglish.answers[1].text) {
 
-                  if (this.obj.answers[2].text == this.data.element.answers[2].text) {
+                  if (this.obj.answers[2].text == this.dataEnglish.answers[2].text) {
 
-                    if (this.obj.answers[3].text == this.data.element.answers[3].text) {
+                    if (this.obj.answers[3].text == this.dataEnglish.answers[3].text) {
                       this.clear()
                     } else {
-                      this.data.element = this.obj
-                      this.setForm()
+                      this.setForm(this.obj)
                     }
                   } else {
-                    this.data.element = this.obj
-                    this.setForm()
+                    this.setForm(this.obj)
                   }
                 } else {
-                  this.data.element = this.obj
-                  this.setForm()
+
+                  this.setForm(this.obj)
                 }
               } else {
-                this.data.element = this.obj
-                this.setForm()
+                this.setForm(this.obj)
               }
             } else {
-              this.data.element = this.obj
-              this.setForm()
+              this.setForm(this.obj)
             }
           }
         },
@@ -175,19 +181,20 @@ export class QuestionsDialogComponent implements OnInit {
     };
   }
 
-  setForm() {
-    this.form.controls['title'].setValue(this.data.element.title)
-    this.answers.controls['answer1'].setValue(this.data.element.answers[0].text)
-    this.answers.controls['answer2'].setValue(this.data.element.answers[1].text)
-    this.answers.controls['answer3'].setValue(this.data.element.answers[2].text)
-    this.answers.controls['answer4'].setValue(this.data.element.answers[3].text)
-    this.setCorrectOption()
+  setForm(data: any) {
+    console.log(data)
+    this.form.controls['title'].setValue(data.title)
+    this.answers.controls['answer1'].setValue(data.answers[0].text)
+    this.answers.controls['answer2'].setValue(data.answers[1].text)
+    this.answers.controls['answer3'].setValue(data.answers[2].text)
+    this.answers.controls['answer4'].setValue(data.answers[3].text)
+    this.setCorrectOption(data)
   }
 
-  setCorrectOption() {
-    let num = this.data.element.answers.length
+  setCorrectOption(data: any) {
+    let num = data.answers.length
     for (let i = 0; i < num; i++) {
-      if (this.data.element.answers[i].correct == true) {
+      if (data.answers[i].correct == true) {
         this.form.controls['correct'].setValue(String(i + 1))
       }
     }

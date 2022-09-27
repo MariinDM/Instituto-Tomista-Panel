@@ -19,6 +19,7 @@ export class CalculatorDialogComponent implements OnInit {
   code = localStorage.getItem('code')
   language!: any
   obj!: any
+  dataEnglish: any;
   clear: any = {
     title: '',
     description: ''
@@ -35,17 +36,25 @@ export class CalculatorDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.edit) {
-      this.form.patchValue(this.data.element);
+      this.getData()
       this.form.controls['language'].setValue('en')
-      this.language = this.code
+      // this.language = this.code
       this.selectLanguage()
     }
-    this.getLanguages()
   }
 
-  getLanguages(): void {
+  getData(): void {
     this.userService.getlanguages(this.code).subscribe((data: any) => {
       this.dataLanguages = data.languages
+    })
+    this.calculatorService.getone('en', this.data.element.id).subscribe({
+      next: (v) => {
+        this.dataEnglish = v.calculator_field
+        this.form.patchValue(this.dataEnglish)
+      },
+      error: (e) => {
+
+      }
     })
   }
 
@@ -63,7 +72,7 @@ export class CalculatorDialogComponent implements OnInit {
     var message = ''
 
     if (!this.data.edit) {
-      this.calculatorService.insert(this.code, fd).subscribe({
+      this.calculatorService.insert(this.language, fd).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
@@ -87,9 +96,9 @@ export class CalculatorDialogComponent implements OnInit {
           if (this.language == 'en') {
             this.form.patchValue(this.obj)
           } else {
-            if (this.obj.title == this.data.element.title) {
+            if (this.obj.title == this.dataEnglish.title) {
 
-              if (this.obj.description == this.data.element.description) {
+              if (this.obj.description == this.dataEnglish.description) {
                 this.form.patchValue(this.clear)
               } else {
                 this.form.patchValue(v.calculator_field)

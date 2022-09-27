@@ -19,6 +19,7 @@ export class FaqDialogComponent implements OnInit {
   code = localStorage.getItem('code')
   language!: any
   obj!: any
+  dataEnglish: any;
   clear: any = {
     title: '',
     text: ''
@@ -35,20 +36,28 @@ export class FaqDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.edit) {
-      this.form.patchValue(this.data.element);
+      this.getData()
       this.form.controls['language'].setValue('en')
-      if (this.form.controls['url'].value === 'null') {
-        this.form.controls['url'].setValue('')
-      }
-      this.language = this.code
+      // this.language = this.code
       this.selectLanguage()
     }
-    this.getLanguages()
   }
 
-  getLanguages(): void {
+  getData(): void {
     this.userService.getlanguages(this.code).subscribe((data: any) => {
       this.dataLanguages = data.languages
+    })
+    this.faqService.getone('en', this.data.element.id).subscribe({
+      next: (v) => {
+        this.dataEnglish = v.faq
+        this.form.patchValue(this.dataEnglish)
+        if (this.form.controls['url'].value === 'null') {
+          this.form.controls['url'].setValue('')
+        }
+      },
+      error: (e) => {
+        console.log(e)
+      }
     })
   }
 
@@ -66,7 +75,7 @@ export class FaqDialogComponent implements OnInit {
     var message = ''
 
     if (!this.data.edit) {
-      this.faqService.insert(this.code, fd).subscribe({
+      this.faqService.insert(this.language, fd).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
@@ -89,9 +98,9 @@ export class FaqDialogComponent implements OnInit {
           if (this.language == 'en') {
             this.form.patchValue(v.faq)
           } else {
-            if (this.obj.title == this.data.element.title) {
+            if (this.obj.title == this.dataEnglish.title) {
 
-              if (this.obj.text == this.data.element.text) {
+              if (this.obj.text == this.dataEnglish.text) {
                 this.form.patchValue(this.clear)
               } else {
                 this.form.patchValue(v.faq)

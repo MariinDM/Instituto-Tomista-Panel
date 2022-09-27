@@ -23,6 +23,7 @@ export class TipDialogComponent implements OnInit {
   code = localStorage.getItem('code')
   language!: any
   obj!: any
+  dataEnglish:any;
   clear: any = {
     title: '',
     description: ''
@@ -39,17 +40,25 @@ export class TipDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.edit) {
-      this.form.patchValue(this.data.element);
+      this.getData()
       this.form.controls['language'].setValue('en')
-      this.language = this.code
+      // this.language = this.code
       this.selectLanguage()
     }
-    this.getLanguages()
   }
 
-  getLanguages(): void {
+  getData(): void {
     this.userService.getlanguages(this.code).subscribe((data: any) => {
       this.dataLanguages = data.languages
+    })
+    this.tipService.getone('en', this.data.element.id).subscribe({
+      next: (v) => {
+        this.dataEnglish = v.tip
+        this.form.patchValue(this.dataEnglish)
+      },
+      error: (e) => {
+        console.log(e)
+      }
     })
   }
 
@@ -89,11 +98,11 @@ export class TipDialogComponent implements OnInit {
 
       if (this.image) {
         fd.set('image', this.image)
-        this.tipService.insert(this.code, fd).subscribe({
+        this.tipService.insert(this.language, fd).subscribe({
           next: (v) => { message = v.message, id = v.tip_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.tipService.uploadImg(this.code, id, fd).subscribe({
+            this.tipService.uploadImg(this.language, id, fd).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
@@ -102,7 +111,7 @@ export class TipDialogComponent implements OnInit {
         })
       }
       else {
-        this.tipService.insert(this.code, fd).subscribe({
+        this.tipService.insert(this.language, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
           complete: () => { this.dialog.closeAll() }
@@ -115,7 +124,7 @@ export class TipDialogComponent implements OnInit {
           next: (v) => { message = v.message, id = v.view_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.tipService.uploadImg(this.code, this.data.element.id, fd).subscribe({
+            this.tipService.uploadImg(this.language, this.data.element.id, fd).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
@@ -142,9 +151,9 @@ export class TipDialogComponent implements OnInit {
           if (this.language == 'en') {
             this.form.patchValue(this.obj)
           } else {
-            if (this.obj.title == this.data.element.title) {
+            if (this.obj.title == this.dataEnglish.title) {
 
-              if (this.obj.description == this.data.element.description) {
+              if (this.obj.description == this.dataEnglish.description) {
                 this.form.patchValue(this.clear)
               } else {
                 this.form.patchValue(this.obj)
