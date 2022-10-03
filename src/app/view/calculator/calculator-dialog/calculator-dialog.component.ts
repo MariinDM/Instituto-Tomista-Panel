@@ -17,7 +17,7 @@ export class CalculatorDialogComponent implements OnInit {
   view!: any
   dataLanguages!: any[]
   code = localStorage.getItem('code')
-  language!: any
+  language: any = 'en'
   obj!: any
   dataEnglish: any;
   clear: any = {

@@ -21,7 +21,7 @@ export class TutorialDialogComponent implements OnInit {
   validateIMG = false
   image: any = null
   code = localStorage.getItem('code')
-  language!: any
+  language: any = 'en'
   obj!: any
   dataEnglish: any;
   clear: any = {
