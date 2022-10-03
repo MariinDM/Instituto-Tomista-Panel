@@ -11,7 +11,7 @@ import * as LANGUAGE from 'src/assets/i18n/translate.json';
   templateUrl: './user-update-dialog.component.html',
   styleUrls: ['../../../app.component.scss']
 })
-export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
+export class UserUpdateDialogComponent implements OnInit {
 
   form!: FormGroup
   obj!: any
@@ -35,17 +35,16 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getData()
+    let count_id = this.data.element.users.profile[0].countries.id
+    this.getCities(count_id)
     this.selectRol()
-  }
-
-  ngAfterViewInit(): void {
-    this.getCountries()
-    this.setForm()
   }
 
   getData() {
     this.getRoles()
     this.getLanguages()
+    this.getCountries()
+    this.setForm()
   }
 
   getRoles() {
