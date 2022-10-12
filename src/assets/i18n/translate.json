@@ -252,7 +252,14 @@
         "code": "Code",
         "description": "Description",
         "ticket_category_add":"Add Tickets Categories",
-        "ticket_category_edit":"Edit Tickets Categories"
+        "ticket_category_edit":"Edit Tickets Categories",
+        "view_file": "View File",
+        "ticket_add": "Add Ticket",
+        "ticket_edit": "Edit Ticket",
+        "info_ticket": "Information Ticket",
+        "category": "Category",
+        "device": "Device",
+        "title": "Title"
     },
     "shared": {
         "nodata": "No data matching the filter",

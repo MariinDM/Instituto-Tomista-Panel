@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(user: Auth): Observable<any> {
-    return this.http.post(`${environment.apiUrl}auth/en/login`, user)
+    return this.http.post(`${environment.apiUrl}auth/en/login?device_type=web`, user)
       .pipe(
         map((res: any) => {
           this.saveToken(res.auth.token)

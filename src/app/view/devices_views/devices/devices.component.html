@@ -26,7 +26,7 @@
                           <input placeholder="{{translate.shared.search}}" type="text" (keyup)="applyFilter($event)"
                             class="browser-default search-field" aria-label="Search box">
                         </li>
-                        <li>
+                        <li *ngIf="rol === '1' || rol === '2'">
                           <div class="export-button m-l-10" matTooltip="{{translate.shared.add}}">
                             <button mat-mini-fab class="baby-pink" (click)="openDialog(false)">
                               <mat-icon class="col-white">add</mat-icon>
@@ -133,7 +133,7 @@
                           <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                          <button mat-menu-item (click)="openDialogUpdate(row,true)">
+                        <button mat-menu-item (click)="openDialogUpdate(row,true)" *ngIf="rol === '1' || rol === '2' || rol === '3'">
                             <mat-icon>mode_edit</mat-icon>
                             <span>{{translate.devices.details}}</span>
                           </button>

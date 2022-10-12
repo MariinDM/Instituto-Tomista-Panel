@@ -17,7 +17,7 @@
     </div>
     <div class="mat-dialog-content">
         <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>{{translate.sales_views.country}}</mat-label>
@@ -32,12 +32,12 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>description</mat-icon>
-                        <mat-label>Code</mat-label>
+                        <mat-label>{{translate.sales_views.code}}</mat-label>
                         <input matInput placeholder="Code" required formControlName="code">
                         <mat-error
                             *ngIf="form.controls['code'].hasError('required') && (form.controls['code'].dirty || form.controls['code'].touched)">

@@ -14,18 +14,19 @@ import * as LANGUAGE from 'src/assets/i18n/translate.json';
 })
 export class DevicesDialogComponent implements OnInit {
   form!: FormGroup;
-  element:any;
-  edit:boolean = false;
-  dataControllerVersions!:ControllerVersion[];
-  dataFirmwareVersions!:FirmwareVersion[];
-  dataModels!:any[];
+  element: any;
+  edit: boolean = false;
+  dataControllerVersions!: ControllerVersion[];
+  dataFirmwareVersions!: FirmwareVersion[];
+  dataModels!: any[];
   translate: any = LANGUAGE
+  rol = localStorage.getItem('rol');
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  private dialog: MatDialog,
-  private _snack: MatSnackBar,
-  private deviceServices: DevicesService,
-  private fb: FormBuilder) {
+    private dialog: MatDialog,
+    private _snack: MatSnackBar,
+    private deviceServices: DevicesService,
+    private fb: FormBuilder) {
     this.getData()
     this.createForm()
   }
@@ -33,28 +34,31 @@ export class DevicesDialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data)
     this.edit = this.data.edit
-    if(this.data.edit){
+    if (this.data.edit) {
+      if(this.rol === '3'){
+        this.disabledControls()
+      }
       this.element = this.data.element
       this.setData();
     }
   }
 
   createForm() {
-      this.form = this.fb.group({
-        active: new FormControl('',),
-        password: new FormControl('', [Validators.required]),
-        restarts: new FormControl('', [Validators.required]),
-        serial: new FormControl('', [Validators.required]),
-        comments: new FormControl('',),
-        ip: new FormControl('',),
-        lan: new FormControl('',),
-        firmware_version_id: new FormControl('', [Validators.required]),
-        controller_version_id: new FormControl('', [Validators.required]),
-        model_id: new FormControl('', [Validators.required]),
-      });
+    this.form = this.fb.group({
+      active: new FormControl('',),
+      password: new FormControl('', [Validators.required]),
+      restarts: new FormControl('', [Validators.required]),
+      serial: new FormControl('', [Validators.required]),
+      comments: new FormControl('',),
+      ip: new FormControl('',),
+      lan: new FormControl('',),
+      firmware_version_id: new FormControl('', [Validators.required]),
+      controller_version_id: new FormControl('', [Validators.required]),
+      model_id: new FormControl('', [Validators.required]),
+    });
   }
 
-  setData(){
+  setData() {
     this.form.controls['password'].setValue(this.element.password)
     this.form.controls['restarts'].setValue(this.element.restarts)
     this.form.controls['serial'].setValue(this.element.serial)
@@ -70,37 +74,37 @@ export class DevicesDialogComponent implements OnInit {
 
   getData(): void {
     this.deviceServices.getControllerVersions().subscribe({
-      next:(v) => {
+      next: (v) => {
         console.log(v)
         this.dataControllerVersions = v.controller_versions
       },
-      error:(e) => {
+      error: (e) => {
         console.log(e)
       }
     });
     this.deviceServices.getFirmwareVersions().subscribe({
-      next:(v) => {
+      next: (v) => {
         console.log(v)
         this.dataFirmwareVersions = v.firmware_versions
       },
-      error:(e) => {
+      error: (e) => {
         console.log(e)
       }
     });
     this.deviceServices.getModels().subscribe({
-      next:(v) => {
+      next: (v) => {
         console.log(v)
         this.dataModels = v.models
       },
-      error:(e) => {
+      error: (e) => {
         console.log(e)
       }
     });
   }
 
-  sendData(){
+  sendData() {
     let data
-    if(this.edit){
+    if (this.edit) {
       let hardware_v = this.dataModels[this.dataModels.findIndex(obj => obj.id === this.form.controls['model_id'].value)].hardware_version.version;
       let firmware_v = this.dataFirmwareVersions[this.dataFirmwareVersions.findIndex(obj => obj.id === this.form.controls['firmware_version_id'].value)].version;
       let controller_v = this.dataControllerVersions[this.dataControllerVersions.findIndex(obj => obj.id === this.form.controls['controller_version_id'].value)].version;;
@@ -117,7 +121,7 @@ export class DevicesDialogComponent implements OnInit {
         hardware_version: hardware_v,
       }
     }
-    else{
+    else {
       data = {
         active: this.form.controls['active'].value,
         password: this.form.controls['password'].value,
@@ -133,10 +137,10 @@ export class DevicesDialogComponent implements OnInit {
     }
     console.log(data)
     this.deviceServices.syncDevice(data).subscribe({
-      next:(v) => {
+      next: (v) => {
         console.log(v)
       },
-      error:(e) => {
+      error: (e) => {
         console.log(e)
         this.openSnack(e)
       },
@@ -144,6 +148,19 @@ export class DevicesDialogComponent implements OnInit {
         this.dialog.closeAll()
       }
     })
+  }
+
+  disabledControls(){
+    this.form.controls['active'].disable()
+    this.form.controls['password'].disable()
+    this.form.controls['restarts'].disable()
+    this.form.controls['serial'].disable()
+    this.form.controls['comments'].disable()
+    this.form.controls['ip'].disable()
+    this.form.controls['lan'].disable()
+    this.form.controls['firmware_version_id'].disable()
+    this.form.controls['controller_version_id'].disable()
+    this.form.controls['model_id'].disable()
   }
 
   openSnack(message: string) {

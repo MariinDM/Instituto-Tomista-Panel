@@ -18,6 +18,7 @@ export class DevicesComponent implements OnInit {
   dataTable: any[] = []
   dataDevices!: any[]
   loader = false
+  rol = localStorage.getItem('rol');
   translate: any = LANGUAGE
 
   displayedColumns: string[] = ['point', 'id', 'controller_version', 'firmware_version', 'model', 'device_type', 'device_version', 'hardware_version', 'active', 'restarts', 'serial', 'actions'];

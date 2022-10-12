@@ -10,6 +10,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { UserUpdateDialogComponent } from './user-update-dialog/user-update-dialog.component';
 import { environment } from 'src/environments/environment';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
+import { SalesService } from 'src/app/services/sales.service';
 
 @Component({
   selector: 'app-users',
@@ -23,6 +24,7 @@ export class UsersComponent implements OnInit {
   user!: any
   loader = true
   code = localStorage.getItem('code')
+  rol = localStorage.getItem('rol')
   filter: string = ''
   apiURL = environment.apiUrl
   translate: any = LANGUAGE
@@ -35,6 +37,7 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private userService: UsersService,
+    private salesSvc: SalesService,
     private _snack: MatSnackBar,
     public dialog: MatDialog,
     private aurhService: AuthService) { }
@@ -53,30 +56,60 @@ export class UsersComponent implements OnInit {
   getall(): void {
     this.loader = false
     this.dataTable = []
-    this.userService.getall(this.code).subscribe((data: any) => {
-      console.log(data)
-      this.dataUser = data.data
-      for (let i = 0; i < this.dataUser.length; i++) {
-        this.user = {
-          id: this.dataUser[i].users.id,
-          name: this.dataUser[i].users.profile[0].name,
-          last_name: this.dataUser[i].users.profile[0].last_name,
-          email: this.dataUser[i].users.email,
-          rol: this.dataUser[i].roles.name,
-          institution_picture: this.dataUser[i].users.institution_picture,
-          profile_picture: this.dataUser[i].users.profile_picture,
-          active: this.dataUser[i].users.active,
+    if (this.rol !== '3') {
+      this.userService.getall(this.code).subscribe((data: any) => {
+        console.log(data)
+        this.dataUser = data.data
+        for (let i = 0; i < this.dataUser.length; i++) {
+          this.user = {
+            id: this.dataUser[i].users.id,
+            name: this.dataUser[i].users.profile[0].name,
+            last_name: this.dataUser[i].users.profile[0].last_name,
+            email: this.dataUser[i].users.email,
+            rol: this.dataUser[i].roles.name,
+            institution_picture: this.dataUser[i].users.institution_picture,
+            profile_picture: this.dataUser[i].users.profile_picture,
+            active: this.dataUser[i].users.active,
+          }
+          if (localStorage.getItem('rol') < this.dataUser[i].role_id) {
+            this.dataTable.push(this.user)
+          }
         }
-        if (localStorage.getItem('rol') < this.dataUser[i].role_id) {
-          this.dataTable.push(this.user)
+        this.setData()
+        this.loader = true
+        this.openSnack(data.message)
+      }, (error: any) => {
+        this.openSnack(error)
+      })
+    } else {
+      this.salesSvc.getOWners().subscribe({
+        next: (v) => {
+          console.log(v)
+          this.dataUser = v.data
+          for (let i = 0; i < this.dataUser.length; i++) {
+            this.user = {
+              id: this.dataUser[i].users.id,
+              name: this.dataUser[i].users.profile[0].name,
+              last_name: this.dataUser[i].users.profile[0].last_name,
+              email: this.dataUser[i].users.email,
+              rol: this.dataUser[i].roles.name,
+              institution_picture: this.dataUser[i].users.institution_picture,
+              profile_picture: this.dataUser[i].users.profile_picture,
+              active: this.dataUser[i].users.active,
+            }
+            if (localStorage.getItem('rol') < this.dataUser[i].role_id) {
+              this.dataTable.push(this.user)
+            }
+          }
+          this.setData()
+          this.loader = true
+          this.openSnack(v.message)
+        },
+        error: (e) => {
+          console.log(e)
         }
-      }
-      this.setData()
-      this.loader = true
-      this.openSnack(data.message)
-    }, (error: any) => {
-      this.openSnack(error)
-    })
+      })
+    }
     this.filter = ''
   }
 

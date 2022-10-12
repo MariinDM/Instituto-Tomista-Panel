@@ -1,7 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Directive, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject, Observable, scan } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { UsersService } from 'src/app/services/users.service';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
@@ -11,57 +14,136 @@ import * as LANGUAGE from 'src/assets/i18n/translate.json';
   templateUrl: './user-dialog.component.html',
   styleUrls: ['../../../app.component.scss']
 })
-export class UserDialogComponent implements OnInit {
+export class UserDialogComponent implements OnInit, AfterViewInit {
 
   form!: FormGroup
   obj!: any
   dataRoles: any[] = []
   dataCities: any[] = []
-  dataCountries!: any[]
-  dataLanguages!: any[]
+  dataCountries: any[] = []
+  dataLanguages: any[] = []
+  dataSelect: any[] = []
   image: any = null
   code = localStorage.getItem('code')
   rol = localStorage.getItem('rol')
   select!: any
+  dealer!: any;
+  userInfo!: any;
   translate: any = LANGUAGE
+
+  allDoctors = Array.from(new Array(40000).keys()).map(i => 'Doctor ' + i);
+  viewDoctors = this.allDoctors.slice(0, 10);
+  viewIndex = 0;
+  windowSize = 10;
+
+  private readonly PIXEL_TOLERANCE = 3.0;
+  @ViewChild('data') selectElem: MatSelect;
 
   constructor(
     private dialog: MatDialog,
     private _snack: MatSnackBar,
     private userService: UsersService,
     private roleService: RolesService,
+    private authService: AuthService,
     private fb: FormBuilder) { this.createForm() }
 
   ngOnInit(): void {
     this.getData()
-    this.selectRol()
+    this.changeSelect()
+    if (this.rol === '3' || this.rol === '4' || this.rol === '5') {
+      this.getInfo()
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // this.selectElem.openedChange.subscribe(() =>
+    //   this.registerPanelScrollEvent()
+    // );
+  }
+
+  registerPanelScrollEvent() {
+    const panel = this.selectElem.panel.nativeElement;
+    panel.addEventListener('scroll', event => this.loadNextOnScroll(event));
+  }
+
+  loadNextOnScroll(event) {
+    if (this.hasScrolledToBottom(event.target)) {
+      console.log('Scrolled to bottom');
+      this.viewIndex += this.windowSize;
+      this.viewDoctors = this.allDoctors.slice(0, this.viewIndex);
+    }
+  }
+
+  private hasScrolledToBottom(target): boolean {
+    return Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) < this.PIXEL_TOLERANCE;
+  }
+
+  reset() {
+    this.viewDoctors = this.allDoctors.slice(0, 10);
   }
 
   getData() {
-    this.getRoles()
-    this.getLanguages()
-    this.getCountries()
-  }
-
-  getRoles() {
     this.roleService.getall(this.code).subscribe({
       next: (v) => {
-        for (let i = 0; i < v.roles.length; i++) {
-          if (v.roles[i].name != 'GUEST' && v.roles[i].id > this.rol) {
-            this.dataRoles.push(v.roles[i])
-          }
+        console.log(v)
+        switch (this.rol) {
+          // DEVELOPER
+          case '1':
+            for (let i of v.roles) {
+              if (i.id === 2 || i.id === 3 || i.id === 4) {
+                this.dataRoles.push(i)
+              }
+            }
+            break;
+          // ADMIN
+          case '2':
+            for (let i of v.roles) {
+              if (i.id === 3 || i.id === 4) {
+                this.dataRoles.push(i)
+              }
+            }
+            break;
+          // DEALER
+          case '3':
+            for (let i of v.roles) {
+              if (i.id === 4) {
+                this.dataRoles.push(i)
+              }
+            }
+            break;
+          // OWNER
+          case '4':
+            for (let i of v.roles) {
+              if (i.id === 5 || i.id === 6) {
+                this.dataRoles.push(i)
+              }
+            }
+            break;
+          // INSTRUCTOR
+          case '5':
+            for (let i of v.roles) {
+              if (i.id === 6) {
+                this.dataRoles.push(i)
+              }
+            }
+            break;
         }
       },
       error: (e) => {
         this.openSnack(e)
       }
     })
-  }
-
-  getCountries() {
     this.userService.getcountries(this.code).subscribe({
       next: (v) => {
         this.dataCountries = v.countries
+      },
+      error: (e) => {
+        this.openSnack(e)
+      }
+    })
+    this.userService.getlanguages(this.code).subscribe({
+      next: (v) => {
+        this.dataLanguages = v.languages
       },
       error: (e) => {
         this.openSnack(e)
@@ -80,37 +162,57 @@ export class UserDialogComponent implements OnInit {
     })
   }
 
-  getLanguages() {
-    this.userService.getlanguages(this.code).subscribe({
-      next: (v) => {
-        this.dataLanguages = v.languages
-      },
-      error: (e) => {
-        this.openSnack(e)
-      }
-    })
-  }
-
   sendData() {
     if (this.form.invalid) { return }
-    var data = this.setData()
-    this.userService.insert(this.code, data).subscribe({
+    this.enableInputs()
+    this.setData()
+    if (this.obj.role_id === 6 && this.obj.age === 0) {
+      this.openSnack('Age is required')
+      this.disabledInputs()
+      return
+    }
+    this.userService.insert(this.code, this.obj).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e) },
+      error: (e) => { this.openSnack(e), this.disabledInputs() },
       complete: () => { this.dialog.closeAll() }
     })
   }
 
-  selectRol() {
+  changeSelect() {
     this.form.controls['role_id'].valueChanges.subscribe((v) => {
       this.select = v
-      console.log(this.select)
+      if (this.select === 4) {
+        this.userService.getDealers().subscribe({
+          next: (v) => {
+            this.dataSelect = v.data
+          },
+          error: (e) => {
+            this.openSnack(e)
+          }
+        })
+      } else if (this.select === 6) {
+        this.userService.getInstructors().subscribe({
+          next: (v) => {
+            for (let item of v.data) {
+              if (item.users.profile[0].institution === this.form.controls['institution'].value) {
+                this.dataSelect.push(item)
+              }
+            }
+          },
+          error: (e) => {
+            this.openSnack(e)
+          }
+        })
+      }
+    })
+    this.form.controls['dealer'].valueChanges.subscribe((v) => {
+      this.disabledInputs(v.users)
     })
   }
 
   createForm() {
     this.form = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       role_id: new FormControl('', [Validators.required]),
       country_id: new FormControl('', [Validators.required]),
       city_id: new FormControl('', [Validators.required]),
@@ -118,36 +220,66 @@ export class UserDialogComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern(/^[1-9]\d{6,10}$/)]),
-      age: new FormControl('', [Validators.required]),
+      age: new FormControl(0, []),
       grade: new FormControl('', []),
       group: new FormControl('', []),
       institution: new FormControl('', []),
-      premium: new FormControl(false),
+      premium: new FormControl(false, []),
+      password: new FormControl('1n3rC1@', []),
+      dealer: new FormControl(0, []),
+      instructor: new FormControl(0, [])
     });
   }
 
   setData() {
+    this.obj = this.form.value
+    console.log(this.obj)
+  }
 
-    var formData = new FormData()
+  disabledInputs(data?: any) {
+    console.log(data)
+    if (data) {
+      this.form.controls['country_id'].setValue(data.profile[0].country_id)
+      this.form.controls['language_id'].setValue(data.profile[0].language_id)
+      this.getCities(data.profile[0].country_id)
+      this.form.controls['city_id'].setValue(data.profile[0].city_id)
 
-    formData.set('email', this.form.controls['email'].value)
-    formData.set('password', '1n3rC1@')
-    formData.set('role_id', this.form.controls['role_id'].value)
-    formData.set('country_id', this.form.controls['country_id'].value)
-    formData.set('city_id', this.form.controls['city_id'].value)
-    formData.set('language_id', this.form.controls['language_id'].value)
-    formData.set('name', this.form.controls['name'].value)
-    formData.set('last_name', this.form.controls['last_name'].value)
-    formData.set('phone', this.form.controls['phone'].value)
-    formData.set('age', this.form.controls['age'].value)
-    formData.set('grade', this.form.controls['grade'].value)
-    formData.set('group', this.form.controls['group'].value)
-    formData.set('age', this.form.controls['age'].value)
-    formData.set('institution', this.form.controls['institution'].value)
-    formData.set('premium', this.form.controls['premium'].value)
-    // formData.set('image', this.image)
+      // this.form.controls['country_id'].disable()
+      // this.form.controls['language_id'].disable()
+      // this.form.controls['city_id'].disable()
 
-    return formData
+      if (this.rol === '4' || this.rol === '5') {
+        this.form.controls['institution'].setValue(data.profile[0].institution)
+        this.form.controls['institution'].disable()
+      }
+    } else {
+    //   this.form.controls['country_id'].disable()
+    //   this.form.controls['language_id'].disable()
+    //   this.form.controls['city_id'].disable()
+      this.form.controls['institution'].disable()
+    }
+  }
+
+  getInfo() {
+    this.authService.getInfo().subscribe({
+      next: (v) => {
+        this.userInfo = v
+        this.disabledInputs(v)
+      },
+      error: (e) => {
+        console.log(e)
+      }
+    })
+  }
+
+  enableInputs() {
+    this.form.controls['country_id'].enable()
+    this.form.controls['language_id'].enable()
+    this.form.controls['city_id'].enable()
+
+    if (this.rol === '4' || this.rol === '5') {
+      this.form.controls['institution'].enable()
+    }
   }
 
   openSnack(message: string) {

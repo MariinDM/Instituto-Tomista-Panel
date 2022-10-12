@@ -4,8 +4,8 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ edit ? translate.tickets_views.ticket_category_edit:
-                        translate.tickets_views.ticket_category_add }} </div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ edit ? translate.tickets_views.ticket_edit:
+                        translate.tickets_views.ticket_add }} </div>
                 </div>
             </div>
         </div>
@@ -22,13 +22,13 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                     <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
                         <div class="row">
-                            <h3>Info Ticket</h3>
+                            <h3>{{translate.tickets_views.info_ticket}}</h3>
                         </div>
                         <div style="width:auto;height: 41vh;" [perfectScrollbar]>
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                                        <mat-label>Category</mat-label>
+                                        <mat-label>{{translate.tickets_views.category}}</mat-label>
                                         <mat-select formControlName="ticket_category_id">
                                             <mat-option *ngFor="let item of dataTickets" [value]="item.id">
                                                 {{item.name}}
@@ -43,7 +43,7 @@
                             <div class="row" *ngIf="rol != '1' && rol != '2'">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                                        <mat-label>Device</mat-label>
+                                        <mat-label>{{ translate.tickets_views.device }}</mat-label>
                                         <mat-select formControlName="user_device_id">
                                             <mat-option *ngFor="let item of dataDevices" [value]="item.id">
                                                 {{item.device.serial}}
@@ -59,7 +59,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                                         <mat-icon matSuffix>description</mat-icon>
-                                        <mat-label>Title</mat-label>
+                                        <mat-label>{{ translate.tickets_views.title }}</mat-label>
                                         <input matInput placeholder="Code" required formControlName="title">
                                         <mat-error
                                             *ngIf="form.controls['title'].hasError('required') || (form.controls['title'].dirty || form.controls['title'].touched)">
@@ -72,7 +72,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                                         <mat-icon matSuffix>description</mat-icon>
-                                        <mat-label>Text</mat-label>
+                                        <mat-label>{{ translate.tickets_views.description }}</mat-label>
                                         <input matInput placeholder="Name" required formControlName="text">
                                         <mat-error
                                             *ngIf="form.controls['text'].hasError('required') || (form.controls['text'].dirty || form.controls['text'].touched)">
@@ -84,7 +84,7 @@
                             <div class="row" [hidden]="rol !== '1' && rol !== '2'">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                                        <mat-label>Status</mat-label>
+                                        <mat-label>{{translate.shared.status}}</mat-label>
                                         <mat-select formControlName="status">
                                             <mat-option *ngFor="let item of dataStatus" [value]="item.code">
                                                 {{item.text}}
@@ -119,9 +119,10 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <button style="margin-left:2.5vw;" type="button" mat-icon-button color="warn" (click)="deleteFile(elem)">
+                                                            <button style="margin-left:2.5vw;" type="button"
+                                                                mat-icon-button color="warn" (click)="deleteFile(elem)">
                                                                 <!-- <span class="mat-button-wrapper log-white"> -->
-                                                                    <mat-icon>delete</mat-icon>
+                                                                <mat-icon>delete</mat-icon>
                                                                 <!-- </span> -->
                                                             </button>
                                                         </div>
@@ -163,7 +164,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                     <form [formGroup]="formComments" (ngSubmit)="sendComment()" class="register-form m-4">
                         <div class="row">
-                            <h3>Commments</h3>
+                            <h3>{{translate.evaluations.comments}}</h3>
                         </div>
                         <div class="container-comments" [perfectScrollbar]>
                             <div *ngFor="let item of dataComments">
@@ -197,7 +198,7 @@
                                         <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                                             <mat-icon matSuffix (click)="openDialogImageComment(false)" color="primary">
                                                 file_upload</mat-icon>
-                                            <mat-label>Comment</mat-label>
+                                            <mat-label>{{translate.evaluations.comments}}</mat-label>
                                             <input matInput placeholder="Text" formControlName="comment">
                                         </mat-form-field>
                                     </div>

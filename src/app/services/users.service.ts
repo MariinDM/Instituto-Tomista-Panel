@@ -39,6 +39,10 @@ export class UsersService {
     let code = localStorage.getItem('code')
     return this.http.get(`${environment.apiUrl}v1/${code}/users/get?dealers=true`);
   }
+  getInstructors(): Observable<any> {
+    let code = localStorage.getItem('code')
+    return this.http.get(`${environment.apiUrl}v1/${code}/users/get?instructors=true`);
+  }
   upProfile(code: string, id: number, image: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/User/Profile/${id}`, image)
   }

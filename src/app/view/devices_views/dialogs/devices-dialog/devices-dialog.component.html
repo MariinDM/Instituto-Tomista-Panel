@@ -1,84 +1,87 @@
 <div class="addContainer">
   <div class="modalHeader">
-      <div class="editRowModal">
-          <div class="modalHeader clearfix">
-              <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
-              <div class="modal-about">
-                  <div class="font-weight-bold p-t-5 font-17">{{translate.devices.title}}</div>
-              </div>
-          </div>
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">{{translate.devices.title}}</div>
+        </div>
       </div>
-      <button mat-icon-button [mat-dialog-close]="true" aria-label="Close dialog"
-          class="mat-focus-indicator mat-icon-button mat-button-base">
-          <span class="mat-button-wrapper">
-              <mat-icon>close </mat-icon>
-          </span>
-      </button>
+    </div>
+    <button mat-icon-button [mat-dialog-close]="true" aria-label="Close dialog"
+      class="mat-focus-indicator mat-icon-button mat-button-base">
+      <span class="mat-button-wrapper">
+        <mat-icon>close </mat-icon>
+      </span>
+    </button>
   </div>
   <div class="mat-dialog-content">
-      <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
-        <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>{{translate.devices.password}}</mat-label>
-                  <input matInput placeholder="Password" required formControlName="password">
-                  <mat-error *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].dirty || form.controls['password'].touched)">
-                    {{translate.validations.required}}
-                  </mat-error>
-              </mat-form-field>
-          </div>
+    <form [formGroup]="form" (ngSubmit)="sendData()" class="register-form m-4">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-label>{{translate.devices.password}}</mat-label>
+            <input matInput placeholder="Password" required formControlName="password">
+            <mat-error
+              *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].dirty || form.controls['password'].touched)">
+              {{translate.validations.required}}
+            </mat-error>
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>{{translate.devices.restarts}}</mat-label>
-                  <input matInput placeholder="Restarts" required formControlName="restarts">
-                  <mat-error *ngIf="form.controls['restarts'].hasError('required') && (form.controls['restarts'].dirty || form.controls['restarts'].touched)">
-                    {{translate.validations.required}}
-                  </mat-error>
-              </mat-form-field>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-label>{{translate.devices.restarts}}</mat-label>
+            <input matInput placeholder="Restarts" required formControlName="restarts">
+            <mat-error
+              *ngIf="form.controls['restarts'].hasError('required') && (form.controls['restarts'].dirty || form.controls['restarts'].touched)">
+              {{translate.validations.required}}
+            </mat-error>
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>{{translate.devices.serial}}</mat-label>
-                  <input matInput placeholder="Serial" required formControlName="serial">
-                  <mat-error *ngIf="form.controls['serial'].hasError('required') && (form.controls['serial'].dirty || form.controls['serial'].touched)">
-                    {{translate.validations.required}}
-                  </mat-error>
-              </mat-form-field>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-label>{{translate.devices.serial}}</mat-label>
+            <input matInput placeholder="Serial" required formControlName="serial">
+            <mat-error
+              *ngIf="form.controls['serial'].hasError('required') && (form.controls['serial'].dirty || form.controls['serial'].touched)">
+              {{translate.validations.required}}
+            </mat-error>
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>{{translate.devices.comments}}</mat-label>
-                  <input matInput placeholder="Comments" formControlName="comments">
-              </mat-form-field>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-label>{{translate.devices.comments}}</mat-label>
+            <input matInput placeholder="Comments" formControlName="comments">
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>description</mat-icon>
-                  <mat-label>{{translate.devices.ip}}</mat-label>
-                  <input matInput placeholder="IP" formControlName="ip">
-              </mat-form-field>
-          </div>
-          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-            <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                <mat-icon matSuffix>description</mat-icon>
-                <mat-label>{{translate.devices.lan}}</mat-label>
-                <input matInput placeholder="LAN" formControlName="lan">
-            </mat-form-field>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-label>{{translate.devices.ip}}</mat-label>
+            <input matInput placeholder="IP" formControlName="ip">
+          </mat-form-field>
         </div>
-        <!-- <div class="row" *ngIf="edit == true">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-label>{{translate.devices.lan}}</mat-label>
+            <input matInput placeholder="LAN" formControlName="lan">
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- <div class="row" *ngIf="edit == true">
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
               <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                   <mat-icon matSuffix>description</mat-icon>
@@ -94,73 +97,74 @@
             </mat-form-field>
           </div>
         </div> -->
-        <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>undo</mat-icon>
-                  <mat-label>{{translate.devices.f_version}}</mat-label>
-                  <mat-select formControlName="firmware_version_id">
-                    <mat-option *ngFor="let item of dataFirmwareVersions" [value]="item.id">
-                        {{item.version}}
-                    </mat-option>
-                </mat-select>
-              </mat-form-field>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>undo</mat-icon>
+            <mat-label>{{translate.devices.f_version}}</mat-label>
+            <mat-select formControlName="firmware_version_id">
+              <mat-option *ngFor="let item of dataFirmwareVersions" [value]="item.id">
+                {{item.version}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>undo</mat-icon>
+            <mat-label>{{translate.devices.c_version}}</mat-label>
+            <mat-select formControlName="controller_version_id">
+              <mat-option *ngFor="let item of dataControllerVersions" [value]="item.id">
+                {{item.description}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+            <mat-icon matSuffix>undo</mat-icon>
+            <mat-label>{{translate.devices.model}}</mat-label>
+            <mat-select formControlName="model_id">
+              <mat-option *ngFor="let item of dataModels" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+          <p class="ms-1">
+            <mat-checkbox color="primary" formControlName="active"> {{translate.shared.active}}</mat-checkbox>
+          </p>
+        </div>
+      </div>
+      <div class="row" *ngIf="edit">
+        <div class="qrcodeImage center">
+          <qrcode [qrdata]="element.token" [allowEmptyString]="true" [elementType]="'canvas'" [scale]="1" [width]="512"
+            [errorCorrectionLevel]="'H'"></qrcode>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row" mat-dialog-actions align="end">
+            <button type="submit" mat-raised-button class="baby-green" [disabled]="rol === '3'">
+              <span class="mat-button-wrapper log-white">
+                <mat-icon>save</mat-icon>
+              </span>
+            </button>
+            <button mat-dialog-close mat-raised-button color="warn">
+              <span class="mat-button-wrapper log-white">
+                <mat-icon>close</mat-icon>
+              </span>
+            </button>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>undo</mat-icon>
-                  <mat-label>{{translate.devices.c_version}}</mat-label>
-                  <mat-select formControlName="controller_version_id">
-                    <mat-option *ngFor="let item of dataControllerVersions" [value]="item.id">
-                        {{item.description}}
-                    </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                  <mat-icon matSuffix>undo</mat-icon>
-                  <mat-label>{{translate.devices.model}}</mat-label>
-                  <mat-select formControlName="model_id">
-                    <mat-option *ngFor="let item of dataModels" [value]="item.id">
-                        {{item.name}}
-                    </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-              <p class="ms-1">
-                  <mat-checkbox color="primary" formControlName="active"> {{translate.shared.active}}</mat-checkbox>
-              </p>
-          </div>
-        </div>
-        <div class="row" *ngIf="edit">
-          <div class="qrcodeImage center">
-            <qrcode [qrdata]="element.token" [allowEmptyString]="true" [elementType]="'canvas'" [scale]="1" [width]="512" [errorCorrectionLevel]="'H'"></qrcode>
-          </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                <div class="example-button-row" mat-dialog-actions align="end">
-                    <button type="submit" mat-raised-button class="baby-green">
-                        <span class="mat-button-wrapper log-white">
-                            <mat-icon>save</mat-icon>
-                        </span>
-                    </button>
-                    <button mat-dialog-close mat-raised-button color="warn">
-                        <span class="mat-button-wrapper log-white">
-                            <mat-icon>close</mat-icon>
-                        </span>
-                    </button>
-                </div>
-            </div>
-          </div>
-      </form>
+      </div>
+    </form>
   </div>
 </div>

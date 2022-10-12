@@ -30,7 +30,7 @@ export class RegionDialogComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data)
-    this.getCountries()
+    // this.getCountries()
     this.edit = this.data.edit
     if (this.data.edit) {
       this.element = this.data.element
@@ -52,7 +52,7 @@ export class RegionDialogComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      country_id: new FormControl('', [Validators.required]),
+      // country_id: new FormControl('', [Validators.required]),
       code: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
@@ -62,7 +62,7 @@ export class RegionDialogComponent implements OnInit {
 
   setData() {
     console.log(this.element)
-    this.form.controls['country_id'].setValue(this.element.country_id)
+    // this.form.controls['country_id'].setValue(this.element.country_id)
     this.form.controls['code'].setValue(this.element.code)
     this.form.controls['description'].setValue(this.element.description)
     this.form.controls['name'].setValue(this.element.name)
@@ -71,7 +71,7 @@ export class RegionDialogComponent implements OnInit {
 
   sendData() {
     let data = {
-      country_id: this.form.controls['country_id'].value,
+      // country_id: this.form.controls['country_id'].value,
       code: this.form.controls['code'].value,
       description: this.form.controls['description'].value,
       name: this.form.controls['name'].value,
