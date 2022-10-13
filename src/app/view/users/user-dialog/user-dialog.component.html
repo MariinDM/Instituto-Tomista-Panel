@@ -40,7 +40,7 @@
                         <mat-label>{{translate.sales_views.dealer}}</mat-label>
                         <mat-select formControlName="dealer">
                             <mat-option *ngFor="let item of dataSelect" [value]="item">
-                                {{item.users.profile[0].name + ' ' + item.users.profile[0].last_name }}
+                                {{item.users.profile[0].name + ' ' + item.users.profile[0].last_name + ' - ' + item.users.email }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -53,7 +53,7 @@
                         <mat-label>{{translate.evaluations.instructor}}</mat-label>
                         <mat-select formControlName="instructor">
                             <mat-option *ngFor="let item of dataSelect" [value]="item">
-                                {{item.users.profile[0].name + ' ' + item.users.profile[0].last_name }}
+                                {{item.users.profile[0].name + ' ' + item.users.profile[0].last_name + ' - ' + item.users.email }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

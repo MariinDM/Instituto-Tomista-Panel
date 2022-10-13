@@ -70,7 +70,7 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
   }
   createForm(): void {
     this.loginForm = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
