@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Inject, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { RolesService } from 'src/app/services/roles.service';
@@ -12,23 +13,30 @@ import * as LANGUAGE from 'src/assets/i18n/translate.json';
   templateUrl: './user-update-dialog.component.html',
   styleUrls: ['../../../app.component.scss']
 })
-export class UserUpdateDialogComponent implements OnInit {
+export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
 
   form!: FormGroup
   obj!: any
   dataRoles: any[] = []
   dataCities: any[] = []
+  viewCities: any[] = []
   dataCountries: any[] = []
   dataLanguages: any[] = []
   dataSelect: any[] = []
   image: any = null
   code = localStorage.getItem('code')
   rol = localStorage.getItem('rol')
-  select!: any
+  select: any = 0
   dealer!: any;
   userInfo!: any;
   element!: any;
   translate: any = LANGUAGE
+
+  viewIndex = 0;
+  windowSize = 150;
+
+  private readonly PIXEL_TOLERANCE = 3.0;
+  @ViewChild('data', { static: false }) selectElem: MatSelect;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -46,6 +54,35 @@ export class UserUpdateDialogComponent implements OnInit {
     this.changeSelect()
     this.setForm()
     this.disabledInputs()
+  }
+
+  ngAfterViewInit(): void {
+    this.selectElem.openedChange.subscribe((v) => {
+      if (v) {
+        this.registerPanelScrollEvent()
+      }
+    });
+  }
+
+  registerPanelScrollEvent() {
+    const panel = this.selectElem.panel.nativeElement;
+    console.log(panel)
+    panel.addEventListener('scroll', event => this.loadNextOnScroll(event));
+  }
+
+  loadNextOnScroll(event) {
+    if (this.hasScrolledToBottom(event.target)) {
+      this.viewIndex += this.windowSize;
+      this.viewCities = this.dataCities.slice(0, this.viewIndex);
+    }
+  }
+
+  private hasScrolledToBottom(target): boolean {
+    return Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) < this.PIXEL_TOLERANCE;
+  }
+
+  reset() {
+    this.viewCities = this.dataCities.slice(0, 150);
   }
 
   getData() {
@@ -80,6 +117,11 @@ export class UserUpdateDialogComponent implements OnInit {
     this.userService.getcities(this.code, event).subscribe({
       next: (v) => {
         this.dataCities = v.cities
+        this.viewCities = this.dataCities.slice(0, 150);
+        let city_id = this.element.users.profile[0].cities.id;
+        let city = this.dataCities.find(aaaa => aaaa.id === city_id);
+        this.dataCities.splice(city_id, city_id + 1);
+        this.viewCities.unshift(city)
       },
       error: (e) => {
         this.openSnack(e)

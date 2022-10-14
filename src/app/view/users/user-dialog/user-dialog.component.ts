@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, Directive, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Directive, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSelect } from '@angular/material/select';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject, Observable, scan } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -20,24 +19,23 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   obj!: any
   dataRoles: any[] = []
   dataCities: any[] = []
+  viewCities: any[] = []
   dataCountries: any[] = []
   dataLanguages: any[] = []
   dataSelect: any[] = []
   image: any = null
   code = localStorage.getItem('code')
   rol = localStorage.getItem('rol')
-  select!: any
+  select: any = 0
   dealer!: any;
   userInfo!: any;
   translate: any = LANGUAGE
 
-  allDoctors = Array.from(new Array(40000).keys()).map(i => 'Doctor ' + i);
-  viewDoctors = this.allDoctors.slice(0, 10);
   viewIndex = 0;
-  windowSize = 10;
+  windowSize = 150;
 
   private readonly PIXEL_TOLERANCE = 3.0;
-  @ViewChild('data') selectElem: MatSelect;
+  @ViewChild('data', { static: false }) selectElem: MatSelect;
 
   constructor(
     private dialog: MatDialog,
@@ -56,13 +54,16 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.selectElem.openedChange.subscribe(() =>
-    //   this.registerPanelScrollEvent()
-    // );
+    this.selectElem.openedChange.subscribe((v) => {
+      if(v){
+        this.registerPanelScrollEvent()
+      }
+    });
   }
 
   registerPanelScrollEvent() {
     const panel = this.selectElem.panel.nativeElement;
+    console.log(panel)
     panel.addEventListener('scroll', event => this.loadNextOnScroll(event));
   }
 
@@ -70,7 +71,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     if (this.hasScrolledToBottom(event.target)) {
       console.log('Scrolled to bottom');
       this.viewIndex += this.windowSize;
-      this.viewDoctors = this.allDoctors.slice(0, this.viewIndex);
+      this.viewCities = this.dataCities.slice(0, this.viewIndex);
     }
   }
 
@@ -79,7 +80,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   }
 
   reset() {
-    this.viewDoctors = this.allDoctors.slice(0, 10);
+    this.viewCities = this.dataCities.slice(0, 150);
   }
 
   getData() {
@@ -155,6 +156,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     this.userService.getcities(this.code, event).subscribe({
       next: (v) => {
         this.dataCities = v.cities
+        this.viewCities = this.dataCities.slice(0, 150);
       },
       error: (e) => {
         this.openSnack(e)
@@ -181,6 +183,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   changeSelect() {
     this.form.controls['role_id'].valueChanges.subscribe((v) => {
       this.select = v
+      console.log(v)
       if (this.select === 4) {
         this.userService.getDealers().subscribe({
           next: (v) => {
@@ -253,9 +256,9 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
         this.form.controls['institution'].disable()
       }
     } else {
-    //   this.form.controls['country_id'].disable()
-    //   this.form.controls['language_id'].disable()
-    //   this.form.controls['city_id'].disable()
+      //   this.form.controls['country_id'].disable()
+      //   this.form.controls['language_id'].disable()
+      //   this.form.controls['city_id'].disable()
       this.form.controls['institution'].disable()
     }
   }

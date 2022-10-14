@@ -102,21 +102,17 @@
                     </mat-form-field>
                 </div>
             </div>
-            <!-- LANGUAGE AND CELLPHONE -->
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <!-- AGE AND CELLPHONE -->
+            <div class="row" >
+                <div [ngClass]="select !== 6 ? 'col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2' : 'col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2'" [hidden]="select !== 6">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>{{translate.users.age}}</mat-label>
-                        <input matInput #age placeholder="Ex. 19" maxlength="2" type="text" required
+                        <input matInput #age placeholder="Ex. 19" maxlength="2" type="text"
                             formControlName="age"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                        <mat-error
-                            *ngIf="form.controls['age'].hasError('required') || (form.controls['age'].dirty || form.controls['age'].touched)">
-                            {{translate.validations.required}}
-                        </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <div [ngClass]="select !== 6 ? 'col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2' : 'col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2'">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>phone</mat-icon>
                         <mat-label>{{translate.users.cellphone}}</mat-label>
@@ -172,8 +168,8 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>{{translate.users.city}}</mat-label>
                         <!-- #data (onClose)="reset()" -->
-                        <mat-select formControlName="city_id">
-                            <mat-option *ngFor="let item of dataCities" [value]="item.id">
+                        <mat-select formControlName="city_id" #data>
+                            <mat-option *ngFor="let item of viewCities" [value]="item.id">
                                 {{item.name}}
                             </mat-option>
                         </mat-select>
