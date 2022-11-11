@@ -99,7 +99,7 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
               for (let i = 0; i < v.sale[0].sale_devices.length; i++) {
                 this.dataDevices.push(v.sale[0].sale_devices[i])
               }
-              console.log(this.dataDevices)
+              // console.log(this.dataDevices)
             },
             error: (e) => {
               console.log(e)
@@ -125,20 +125,20 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
       devices: this.assignedDevices,
       active: this.form.controls['active'].value
     }
-    console.log(data)
+    // console.log(data)
     if (this.assignedDevices.length == 0) {
-      console.log("jeje error")
+      // console.log("jeje error")
       return false
     }
 
     if (this.edit) {
       this.salesServices.updateSale(this.element.id, data).subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           this.openSnack(v.message)
         },
         error: (e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {
@@ -149,11 +149,11 @@ export class SalesDialogComponent implements OnInit, AfterViewInit {
     else {
       this.salesServices.sendSale(data).subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           this.openSnack(v.message)
         },
         error: (e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {

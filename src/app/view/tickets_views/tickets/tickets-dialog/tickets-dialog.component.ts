@@ -113,7 +113,7 @@ export class TicketsDialogComponent implements OnInit {
 
         this.ticketsSvc.uploadImageTicket(fd).subscribe({
           next: (v) => {
-            console.log(v)
+            // console.log(v)
             this.multimedias.push(v.ticket_multimedia_id)
           },
           error: (e) => {
@@ -140,11 +140,11 @@ export class TicketsDialogComponent implements OnInit {
           }
           this.ticketsSvc.insertTickets(data).subscribe({
             next: (v) => {
-              console.log(v)
+              // console.log(v)
               this.openSnack(v.message)
             },
             error: (e) => {
-              console.log(e)
+              // console.log(e)
               this.openSnack(e)
             },
             complete: () => {
@@ -169,11 +169,11 @@ export class TicketsDialogComponent implements OnInit {
       }
       this.ticketsSvc.updateTickets(this.element.id, data).subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           this.openSnack(v.message)
         },
         error: (e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {
@@ -198,7 +198,7 @@ export class TicketsDialogComponent implements OnInit {
 
       this.ticketsSvc.uploadImageTicket(fd).subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           data.multimedias.push(v.ticket_multimedia_id)
           this.ticketsSvc.insertTicketsComments(data).subscribe({
             next: (v) => {
@@ -230,7 +230,7 @@ export class TicketsDialogComponent implements OnInit {
   refreshData() {
     this.ticketsSvc.getoneTickets(this.element.id).subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         let a = v.ticket.ticket_comments.length
         this.dataComments.push(v.ticket.ticket_comments[a - 1])
       },
@@ -300,7 +300,7 @@ export class TicketsDialogComponent implements OnInit {
         format: this.format
       }
       this.srcArray.push(this.src)
-      console.log(this.srcArray)
+      // console.log(this.srcArray)
     }
   }
 

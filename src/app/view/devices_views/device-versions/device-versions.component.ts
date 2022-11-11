@@ -42,14 +42,14 @@ export class DeviceVersionsComponent implements OnInit {
     this.deviceServices.getDeviceVersions().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataDeviceVersion = v.device_versions
         this.setData()
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

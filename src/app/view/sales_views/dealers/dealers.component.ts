@@ -42,14 +42,14 @@ export class DealersComponent implements OnInit {
     this.salesServices.getDealers().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataDealers = v.dealers
         this.setData()
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

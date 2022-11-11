@@ -25,7 +25,7 @@ export class DeviceCodeDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.element = this.data.element
     this.getData()
   }
@@ -36,12 +36,12 @@ export class DeviceCodeDialogComponent implements OnInit {
     }
     this.deviceServices.getDeviceCode(body).subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.device_code = v.code
         this.expiration = v.expires
       },
       error:(e) => {
-        console.log(e)
+        // console.log(e)
         this.openSnack("Error al Obtener el Codigo")
       }
     });

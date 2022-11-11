@@ -28,7 +28,7 @@ export class HardwareVersionDialogComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if(this.data.edit){
       this.element = this.data.element
@@ -55,7 +55,7 @@ export class HardwareVersionDialogComponent implements OnInit {
   getData(): void {
     this.deviceServices.getHardwareVersions().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataHardwareVersions = v.hardware_versions
       },
       error:(e) => {
@@ -78,8 +78,8 @@ export class HardwareVersionDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
@@ -92,8 +92,8 @@ export class HardwareVersionDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()

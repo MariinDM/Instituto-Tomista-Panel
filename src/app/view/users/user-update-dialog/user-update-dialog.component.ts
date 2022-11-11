@@ -66,7 +66,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
 
   registerPanelScrollEvent() {
     const panel = this.selectElem.panel.nativeElement;
-    console.log(panel)
+    // console.log(panel)
     panel.addEventListener('scroll', event => this.loadNextOnScroll(event));
   }
 
@@ -200,11 +200,11 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
 
   setData() {
     this.obj = this.form.value
-    console.log(this.obj)
+    // console.log(this.obj)
   }
 
   disabledInputs(data?: any) {
-    console.log(data)
+    // console.log(data)
     // if (data) {
     // this.form.controls['country_id'].setValue(data.profile[0].country_id)
     // this.form.controls['language_id'].setValue(data.profile[0].language_id)

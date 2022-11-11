@@ -25,7 +25,7 @@ export class ModelNecessitiesComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.element = this.data.element
     this.fillArray()
   }
@@ -33,7 +33,7 @@ export class ModelNecessitiesComponent implements OnInit {
   getNecessities(){
     this.deviceServices.getNecessities().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataNecessities = v.necessities
       },
       error:(e) => {
@@ -55,7 +55,7 @@ export class ModelNecessitiesComponent implements OnInit {
   }
 
   onChange(event: any) {
-    console.log(event)
+    // console.log(event)
     if (event.checked) {
       this.assignedNecessities.push(event.source.value.id);
     } else {
@@ -84,7 +84,7 @@ export class ModelNecessitiesComponent implements OnInit {
         console.log(v)
       },
       error:(e) => {
-        console.log(e)
+        // console.log(e)
         this.openSnack(e)
       },
       complete: () => {

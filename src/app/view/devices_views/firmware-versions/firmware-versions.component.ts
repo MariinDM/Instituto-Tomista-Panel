@@ -43,7 +43,7 @@ export class FirmwareVersionsComponent implements OnInit {
     this.deviceServices.getFirmwareVersions().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataFirmwares = v.firmware_versions
         this.dataTable = []
         for (const obj of this.dataFirmwares) {
@@ -53,8 +53,8 @@ export class FirmwareVersionsComponent implements OnInit {
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

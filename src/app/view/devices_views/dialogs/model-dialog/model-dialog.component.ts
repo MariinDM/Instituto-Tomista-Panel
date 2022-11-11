@@ -31,7 +31,7 @@ export class ModelDialogComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if(this.data.edit){
       this.element = this.data.element
@@ -57,7 +57,7 @@ export class ModelDialogComponent implements OnInit {
   }
 
   setData(){
-    console.log(this.element)
+    // console.log(this.element)
     this.form.controls['device_version_id'].setValue(this.element.device_version_id)
     this.form.controls['device_type_id'].setValue(this.element.device_type_id)
     this.form.controls['hardware_version_id'].setValue(this.element.hardware_version_id)
@@ -68,7 +68,7 @@ export class ModelDialogComponent implements OnInit {
   getData(): void {
     this.deviceServices.getDeviceVersions().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataDeviceVersion = v.device_versions
       },
       error:(e) => {
@@ -77,7 +77,7 @@ export class ModelDialogComponent implements OnInit {
     });
     this.deviceServices.getDeviceTypes().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataDeviceType = v.device_types
       },
       error:(e) => {
@@ -86,7 +86,7 @@ export class ModelDialogComponent implements OnInit {
     });
     this.deviceServices.getHardwareVersions().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataHardwareVersion = v.hardware_versions
       },
       error:(e) => {
@@ -111,7 +111,7 @@ export class ModelDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {
@@ -125,7 +125,7 @@ export class ModelDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {

@@ -221,7 +221,7 @@ export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnIn
   logout() {
     this.spinner.show()
     this.authService.logout().subscribe((res: any) => {
-      console.log(res)
+      // console.log(res)
       localStorage.clear()
     })
     timer(1000).subscribe(()=>{

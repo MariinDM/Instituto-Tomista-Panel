@@ -32,7 +32,7 @@ export class DealerDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if (this.data.edit) {
       this.element = this.data.element
@@ -51,7 +51,7 @@ export class DealerDialogComponent implements OnInit {
   }
 
   setData() {
-    console.log(this.element)
+    // console.log(this.element)
     this.form.controls['user_id'].setValue(this.element.dealer_user[0].id)
     this.form.controls['region_id'].setValue(this.element.region_id)
     this.form.controls['legal_id'].setValue(this.element.legal_id)
@@ -62,7 +62,7 @@ export class DealerDialogComponent implements OnInit {
   getData(): void {
     this.salesServices.getRegions().subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         this.dataRegions = v.regions
       },
       error: (e) => {
@@ -71,7 +71,7 @@ export class DealerDialogComponent implements OnInit {
     });
     this.userSvc.getDealers().subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         this.dataUsers = v.data
       },
       error: (e) => {
@@ -95,8 +95,8 @@ export class DealerDialogComponent implements OnInit {
           console.log(v)
         },
         error: (e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
@@ -109,7 +109,7 @@ export class DealerDialogComponent implements OnInit {
           console.log(v)
         },
         error: (e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {

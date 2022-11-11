@@ -32,7 +32,7 @@ export class DevicesDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if (this.data.edit) {
       if(this.rol === '3'){
@@ -75,7 +75,7 @@ export class DevicesDialogComponent implements OnInit {
   getData(): void {
     this.deviceServices.getControllerVersions().subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         this.dataControllerVersions = v.controller_versions
       },
       error: (e) => {
@@ -84,7 +84,7 @@ export class DevicesDialogComponent implements OnInit {
     });
     this.deviceServices.getFirmwareVersions().subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         this.dataFirmwareVersions = v.firmware_versions
       },
       error: (e) => {
@@ -93,7 +93,7 @@ export class DevicesDialogComponent implements OnInit {
     });
     this.deviceServices.getModels().subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         this.dataModels = v.models
       },
       error: (e) => {
@@ -141,7 +141,7 @@ export class DevicesDialogComponent implements OnInit {
         console.log(v)
       },
       error: (e) => {
-        console.log(e)
+        // console.log(e)
         this.openSnack(e)
       },
       complete: () => {

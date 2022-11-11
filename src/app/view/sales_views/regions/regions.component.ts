@@ -42,14 +42,14 @@ export class RegionsComponent implements OnInit {
     this.salesServices.getRegions().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataRegions = v.regions
         this.setData()
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

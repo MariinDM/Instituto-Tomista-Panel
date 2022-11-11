@@ -42,14 +42,14 @@ export class ClientsComponent implements OnInit {
     this.salesServices.getClients().subscribe({
       next: (v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataClients = v.clients
         this.setData()
         this.openSnack(v.message)
       },
       error: (e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

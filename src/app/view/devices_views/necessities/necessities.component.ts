@@ -42,14 +42,14 @@ export class NecessitiesComponent implements OnInit {
     this.deviceServices.getNecessities().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataNecessities = v.necessities
         this.setData()
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

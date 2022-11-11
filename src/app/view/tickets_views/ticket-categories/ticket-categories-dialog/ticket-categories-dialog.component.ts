@@ -26,7 +26,7 @@ export class TicketCategoriesDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if (this.data.edit) {
       this.element = this.data.element
@@ -51,12 +51,12 @@ export class TicketCategoriesDialogComponent implements OnInit {
     if (this.edit) {
       this.ticketsSvc.updateTicketsCategories(this.element.id, data).subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           this.openSnack(v.message)
         },
         error: (e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
@@ -66,11 +66,11 @@ export class TicketCategoriesDialogComponent implements OnInit {
     else {
       this.ticketsSvc.insertTicketsCategories(data).subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           this.openSnack(v.message)
         },
         error: (e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {

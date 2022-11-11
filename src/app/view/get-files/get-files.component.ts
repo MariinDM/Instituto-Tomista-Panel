@@ -69,7 +69,7 @@ export class GetFilesComponent implements OnInit {
 
     pro1
       .then(() => {
-        console.log(this.newImg)
+        // console.log(this.newImg)
         this.dialogRef.close({
           image: this.newImg
         })

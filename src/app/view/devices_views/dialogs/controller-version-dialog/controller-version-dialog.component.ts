@@ -28,7 +28,7 @@ export class ControllerVersionDialogComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if(this.data.edit){
       this.element = this.data.element
@@ -55,7 +55,7 @@ export class ControllerVersionDialogComponent implements OnInit {
   getData(): void {
     this.deviceServices.getControllerVersions().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataControlVersions = v.controller_versions
       },
       error:(e) => {
@@ -78,7 +78,7 @@ export class ControllerVersionDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {
@@ -92,7 +92,7 @@ export class ControllerVersionDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {

@@ -91,7 +91,7 @@ export class CalculatorDialogComponent implements OnInit {
       this.language = this.form.controls['language'].value
       this.calculatorService.getone(this.language, this.data.element.id).subscribe({
         next: (v) => {
-          console.log(this.language)
+          // console.log(this.language)
           this.obj = v.calculator_field
           if (this.language == 'en') {
             this.form.patchValue(this.obj)

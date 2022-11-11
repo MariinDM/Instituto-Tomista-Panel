@@ -31,7 +31,7 @@ export class ClientDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if (this.data.edit) {
       this.element = this.data.element
@@ -50,7 +50,7 @@ export class ClientDialogComponent implements OnInit {
   }
 
   setData() {
-    console.log(this.element)
+    // console.log(this.element)
     this.form.controls['dealer_id'].setValue(this.element.dealer_id)
     this.form.controls['user_id'].setValue(this.element.user_id)
     this.form.controls['legal_id'].setValue(this.element.legal_id)
@@ -61,7 +61,7 @@ export class ClientDialogComponent implements OnInit {
   getData(): void {
     this.salesServices.getOWners().subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         this.dataUser = v.data
       },
       error: (e) => {
@@ -70,7 +70,7 @@ export class ClientDialogComponent implements OnInit {
     });
     this.salesServices.getAuthDealers().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataDealer = v.dealers_user
       },
       error:(e) => {
@@ -94,8 +94,8 @@ export class ClientDialogComponent implements OnInit {
           console.log(v)
         },
         error: (e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
@@ -108,7 +108,7 @@ export class ClientDialogComponent implements OnInit {
           console.log(v)
         },
         error: (e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {

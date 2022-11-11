@@ -29,7 +29,7 @@ export class FirmawareVersionDialogComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     this.edit = this.data.edit
     if(this.data.edit){
       this.element = this.data.element
@@ -56,7 +56,7 @@ export class FirmawareVersionDialogComponent implements OnInit {
   getData(): void {
     this.deviceServices.getFirmwareVersions().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataFirmwareVersions = v.firmware_versions
       },
       error:(e) => {
@@ -65,7 +65,7 @@ export class FirmawareVersionDialogComponent implements OnInit {
     });
     this.deviceServices.getModels().subscribe({
       next:(v) => {
-        console.log(v)
+        // console.log(v)
         this.dataModels = v.models
       },
       error:(e) => {
@@ -88,8 +88,8 @@ export class FirmawareVersionDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
@@ -102,8 +102,8 @@ export class FirmawareVersionDialogComponent implements OnInit {
           console.log(v)
         },
         error:(e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()

@@ -29,7 +29,7 @@ export class RegionDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    // console.log(this.data)
     // this.getCountries()
     this.edit = this.data.edit
     if (this.data.edit) {
@@ -61,7 +61,7 @@ export class RegionDialogComponent implements OnInit {
   }
 
   setData() {
-    console.log(this.element)
+    // console.log(this.element)
     // this.form.controls['country_id'].setValue(this.element.country_id)
     this.form.controls['code'].setValue(this.element.code)
     this.form.controls['description'].setValue(this.element.description)
@@ -81,12 +81,12 @@ export class RegionDialogComponent implements OnInit {
     if (this.edit) {
       this.salesServices.updateRegion(this.element.id, data).subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           this.openSnack(v.message)
         },
         error: (e) => {
-          console.log(e)
-          this.openSnack(e.error.message)
+          // console.log(e)
+          this.openSnack(e)
         },
         complete: () => {
           this.dialog.closeAll()
@@ -99,7 +99,7 @@ export class RegionDialogComponent implements OnInit {
           console.log(v)
         },
         error: (e) => {
-          console.log(e)
+          // console.log(e)
           this.openSnack(e)
         },
         complete: () => {

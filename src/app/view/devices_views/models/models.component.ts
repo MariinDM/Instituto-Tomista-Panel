@@ -44,7 +44,7 @@ export class ModelsComponent implements OnInit {
     this.deviceServices.getModels().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataModels = v.models
         this.dataTable = []
         for (const model of this.dataModels) {
@@ -54,8 +54,8 @@ export class ModelsComponent implements OnInit {
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

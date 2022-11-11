@@ -63,13 +63,13 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
 
   registerPanelScrollEvent() {
     const panel = this.selectElem.panel.nativeElement;
-    console.log(panel)
+    // console.log(panel)
     panel.addEventListener('scroll', event => this.loadNextOnScroll(event));
   }
 
   loadNextOnScroll(event) {
     if (this.hasScrolledToBottom(event.target)) {
-      console.log('Scrolled to bottom');
+      // console.log('Scrolled to bottom');
       this.viewIndex += this.windowSize;
       this.viewCities = this.dataCities.slice(0, this.viewIndex);
     }
@@ -86,7 +86,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   getData() {
     this.roleService.getall(this.code).subscribe({
       next: (v) => {
-        console.log(v)
+        // console.log(v)
         switch (this.rol) {
           // DEVELOPER
           case '1':
@@ -183,7 +183,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   changeSelect() {
     this.form.controls['role_id'].valueChanges.subscribe((v) => {
       this.select = v
-      console.log(v)
+      // console.log(v)
       if (this.select === 4) {
         this.userService.getDealers().subscribe({
           next: (v) => {
@@ -236,11 +236,11 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
 
   setData() {
     this.obj = this.form.value
-    console.log(this.obj)
+    // console.log(this.obj)
   }
 
   disabledInputs(data?: any) {
-    console.log(data)
+    // console.log(data)
     if (data) {
       this.form.controls['country_id'].setValue(data.profile[0].country_id)
       this.form.controls['language_id'].setValue(data.profile[0].language_id)

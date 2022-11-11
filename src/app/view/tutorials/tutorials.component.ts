@@ -56,6 +56,7 @@ export class TutorialsComponent implements OnInit {
     this.loader = false
     this.tutorialService.getall(this.code).subscribe((data: any) => {
       this.dataTutorials = data.tutorials
+      console.log(this.dataTutorials)
       this.setData()
       this.loader = true
       this.openSnack(data.message)

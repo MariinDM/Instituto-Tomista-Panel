@@ -58,7 +58,7 @@ export class UsersComponent implements OnInit {
     this.dataTable = []
     if (this.rol !== '3') {
       this.userService.getall(this.code).subscribe((data: any) => {
-        console.log(data)
+        // console.log(data)
         this.dataUser = data.data
         for (let i = 0; i < this.dataUser.length; i++) {
           this.user = {
@@ -84,7 +84,7 @@ export class UsersComponent implements OnInit {
     } else {
       this.salesSvc.getOWners().subscribe({
         next: (v) => {
-          console.log(v)
+          // console.log(v)
           this.dataUser = v.data
           for (let i = 0; i < this.dataUser.length; i++) {
             this.user = {
@@ -161,6 +161,6 @@ export class UsersComponent implements OnInit {
     }).afterClosed().subscribe(() => {
       this.getall()
     })
-    console.log(element)
+    // console.log(element)
   }
 }

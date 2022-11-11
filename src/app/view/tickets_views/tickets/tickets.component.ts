@@ -63,8 +63,8 @@ export class TicketsComponent implements OnInit {
         this.openSnack(v.message)
       },
       error: (e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
     this.filter = ''

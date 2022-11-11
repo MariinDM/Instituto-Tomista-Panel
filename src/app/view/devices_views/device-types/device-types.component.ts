@@ -42,14 +42,14 @@ export class DeviceTypesComponent implements OnInit {
     this.deviceServices.getDeviceTypes().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataDeviceTypes = v.device_types
         this.setData()
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }

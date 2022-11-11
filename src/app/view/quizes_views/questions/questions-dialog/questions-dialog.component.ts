@@ -93,7 +93,7 @@ export class QuestionsDialogComponent implements OnInit {
         next: (v) => {
           // this.data.element = v.question, this.setForm(this.obj)
           this.obj = v.question
-          console.log(v)
+          // console.log(v)
           if (this.language == 'en') {
             // this.form.patchValue(this.obj)
             this.setForm(this.obj)
@@ -182,7 +182,7 @@ export class QuestionsDialogComponent implements OnInit {
   }
 
   setForm(data: any) {
-    console.log(data)
+    // console.log(data)
     this.form.controls['title'].setValue(data.title)
     this.answers.controls['answer1'].setValue(data.answers[0].text)
     this.answers.controls['answer2'].setValue(data.answers[1].text)

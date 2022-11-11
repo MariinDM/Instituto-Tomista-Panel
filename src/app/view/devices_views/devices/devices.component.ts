@@ -45,19 +45,19 @@ export class DevicesComponent implements OnInit {
     this.deviceServices.getDevices().subscribe({
       next:(v) => {
         this.loader = true;
-        console.log(v)
+        // console.log(v)
         this.dataDevices = v.device
         this.dataTable = []
         for (const obj of this.dataDevices) {
-          console.log(obj)
+          // console.log(obj)
           this.dataTable.push({id:obj.id, controller_version:obj.controller_version.version, firmware_version:obj.firmware_version.version, model:obj.model.name, device_type:obj.model.device_type.name, device_version:obj.model.device_version.name, hardware_version:obj.model.hardware_version.version, active:obj.active, restarts:obj.restarts, serial:obj.serial })
         }
         this.setData()
         this.openSnack(v.message)
       },
       error:(e) => {
-        console.log(e)
-        this.openSnack(e.error.message)
+        // console.log(e)
+        this.openSnack(e)
       }
     });
   }
