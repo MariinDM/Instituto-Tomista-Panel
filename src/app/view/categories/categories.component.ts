@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { environment } from 'src/environments/environment';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -31,6 +32,7 @@ export class CategoriesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    private router: Router,
     private categoryService: CategoryService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) {
@@ -75,6 +77,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.delete(this.code, id).subscribe({
       next: (v) => {
         this.openSnack(v.message)
+        this.refreshMenu()
       },
       error: (e) => {
         this.openSnack(e)
@@ -109,4 +112,9 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
+  refreshMenu() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload'
+    this.router.navigate(['admin/categories'])
+  }
 }

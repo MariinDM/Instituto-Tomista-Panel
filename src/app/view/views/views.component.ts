@@ -9,6 +9,7 @@ import { View } from 'src/app/interfaces/view'
 import { ViewDialogComponent } from './view-dialog/view-dialog.component'
 import { environment } from 'src/environments/environment'
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-views',
@@ -31,6 +32,7 @@ export class ViewsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort
 
   constructor(
+    private router: Router,
     private viewService: ViewService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) { }
@@ -66,7 +68,7 @@ export class ViewsComponent implements OnInit {
 
   delete(id: number): void {
     this.viewService.delete(this.code, id).subscribe({
-      next: (v) => { this.openSnack(v.message) },
+      next: (v) => { this.openSnack(v.message), this.refreshMenu() },
       error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }
     })
@@ -91,6 +93,12 @@ export class ViewsComponent implements OnInit {
     }).afterClosed().subscribe(() => {
       this.getall()
     })
+  }
+
+  refreshMenu() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload'
+    this.router.navigate(['admin/views'])
   }
 
 }

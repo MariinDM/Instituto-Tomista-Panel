@@ -29,9 +29,9 @@ export class SidebarComponent
   routerObj = null;
 
   user: any = {
-    name:'',
-    rol:'',
-    image:''
+    name: '',
+    rol: '',
+    image: ''
   }
   picture: string = ''
   image: string = null
@@ -67,48 +67,52 @@ export class SidebarComponent
       if (localStorage.getItem('token')) {
         //CATEGORIES
         for (let j = 0; j < this.dataVR.length; j++) {
-          let route: RouteInfo = null
-          route = {
-            path: '',
-            title: this.dataVR[j].categories.name,
-            moduleName: this.dataVR[j].categories.name,
-            icon: 'monitor',
-            class: 'menu-toggle',
-            groupTitle: false,
-            submenu: []
-          }
-          let image = this.dataVR[j].categories.image
-          if (image != null) {
-            if (image.indexOf('.') == -1) {
-              route.icon = image
+          if (this.dataVR[j].categories.active === true) {
+            let route: RouteInfo = null
+            route = {
+              path: '',
+              title: this.dataVR[j].categories.name,
+              moduleName: this.dataVR[j].categories.name,
+              icon: 'monitor',
+              class: 'menu-toggle',
+              groupTitle: false,
+              submenu: []
             }
-          }
-          let name = this.dataVR[j].categories.name
-          if (this.menu.length == 0) {
-            this.menu.push(route)
-          }
-          else {
-            let index = this.menu.findIndex(item => item.moduleName == name)
-            if (index == -1) {
+            let image = this.dataVR[j].categories.image
+            if (image != null) {
+              if (image.indexOf('.') == -1) {
+                route.icon = image
+              }
+            }
+            let name = this.dataVR[j].categories.name
+            if (this.menu.length == 0) {
               this.menu.push(route)
+            }
+            else {
+              let index = this.menu.findIndex(item => item.moduleName == name)
+              if (index == -1) {
+                this.menu.push(route)
+              }
             }
           }
         }
         //VIEWS
         for (let j = 0; j < this.menu.length; j++) {
           for (let i = 0; i < this.dataVR.length; i++) {
-            let submenu: RouteInfo = null
-            submenu = {
-              path: this.dataVR[i].url,
-              title: this.dataVR[i].name,
-              moduleName: this.dataVR[i].name,
-              icon: '',
-              class: 'ml-menu',
-              groupTitle: false,
-              submenu: []
-            }
-            if (this.menu[j].moduleName == this.dataVR[i].categories.name) {
-              this.menu[j].submenu.push(submenu)
+            if (this.dataVR[i].active === true) {
+              let submenu: RouteInfo = null
+              submenu = {
+                path: this.dataVR[i].url,
+                title: this.dataVR[i].name,
+                moduleName: this.dataVR[i].name,
+                icon: '',
+                class: 'ml-menu',
+                groupTitle: false,
+                submenu: []
+              }
+              if (this.menu[j].moduleName == this.dataVR[i].categories.name) {
+                this.menu[j].submenu.push(submenu)
+              }
             }
           }
         }
