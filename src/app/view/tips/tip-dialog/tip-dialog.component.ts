@@ -97,12 +97,13 @@ export class TipDialogComponent implements OnInit {
       }
 
       if (this.image) {
-        fd.set('image', this.image)
         this.tipService.insert(this.language, fd).subscribe({
           next: (v) => { message = v.message, id = v.tip_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.tipService.uploadImg(this.language, id, fd).subscribe({
+            let fd_image = new FormData();
+            fd_image.append('image', this.image)
+            this.tipService.uploadImg(this.language, id, fd_image).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
@@ -119,12 +120,13 @@ export class TipDialogComponent implements OnInit {
       }
     } else {
       if (this.image) {
-        fd.set('image', this.image)
         this.tipService.update(this.language, this.data.element.id, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.tipService.uploadImg(this.language, this.data.element.id, fd).subscribe({
+            let fd_image = new FormData();
+            fd_image.append('image', this.image)
+            this.tipService.uploadImg(this.language, this.data.element.id, fd_image).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }

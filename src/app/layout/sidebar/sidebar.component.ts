@@ -64,34 +64,37 @@ export class SidebarComponent
   getall(): void {
     this.vrService.getone(this.code, this.rol).subscribe((data: any) => {
       this.dataVR = data.role.views
+      // console.log(this.dataVR)
       if (localStorage.getItem('token')) {
         //CATEGORIES
         for (let j = 0; j < this.dataVR.length; j++) {
-          if (this.dataVR[j].categories.active === true) {
-            let route: RouteInfo = null
-            route = {
-              path: '',
-              title: this.dataVR[j].categories.name,
-              moduleName: this.dataVR[j].categories.name,
-              icon: 'monitor',
-              class: 'menu-toggle',
-              groupTitle: false,
-              submenu: []
-            }
-            let image = this.dataVR[j].categories.image
-            if (image != null) {
-              if (image.indexOf('.') == -1) {
-                route.icon = image
+          if (this.dataVR[j].categories !== null) {
+            if (this.dataVR[j].categories.active === true) {
+              let route: RouteInfo = null
+              route = {
+                path: '',
+                title: this.dataVR[j].categories.name,
+                moduleName: this.dataVR[j].categories.name,
+                icon: 'monitor',
+                class: 'menu-toggle',
+                groupTitle: false,
+                submenu: []
               }
-            }
-            let name = this.dataVR[j].categories.name
-            if (this.menu.length == 0) {
-              this.menu.push(route)
-            }
-            else {
-              let index = this.menu.findIndex(item => item.moduleName == name)
-              if (index == -1) {
+              let image = this.dataVR[j].categories.image
+              if (image != null) {
+                if (image.indexOf('.') == -1) {
+                  route.icon = image
+                }
+              }
+              let name = this.dataVR[j].categories.name
+              if (this.menu.length == 0) {
                 this.menu.push(route)
+              }
+              else {
+                let index = this.menu.findIndex(item => item.moduleName == name)
+                if (index == -1) {
+                  this.menu.push(route)
+                }
               }
             }
           }
@@ -110,8 +113,10 @@ export class SidebarComponent
                 groupTitle: false,
                 submenu: []
               }
-              if (this.menu[j].moduleName == this.dataVR[i].categories.name) {
-                this.menu[j].submenu.push(submenu)
+              if (this.dataVR[i].categories !== null) {
+                if (this.menu[j].moduleName == this.dataVR[i].categories.name) {
+                  this.menu[j].submenu.push(submenu)
+                }
               }
             }
           }

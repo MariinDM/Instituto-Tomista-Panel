@@ -20,7 +20,9 @@ export class GetFilesComponent implements OnInit {
     zoomable: false,
     aspectRatio: 1 / 1
   }
-  newImg!: any
+  disabled = true
+  icon = true
+  newImg: any = null
   load: boolean = false
 
   constructor(
@@ -46,6 +48,8 @@ export class GetFilesComponent implements OnInit {
 
   onImageChangeFromFile() {
     this.form.controls['image'].valueChanges.subscribe((files: any) => {
+      // console.log(files)
+      this.disabled = false
       let reader = new FileReader();
       reader.readAsDataURL(files);
       reader.onload = (_event) => {
@@ -56,12 +60,15 @@ export class GetFilesComponent implements OnInit {
   getImgCropper() {
 
     this.angularCropper.cropper.getCroppedCanvas().toBlob(blob => {
-      let type = blob.type
-      let img = new File([blob], 'Image', { type });
+      let type = 'image/jpeg'
+      // console.log(type)
+      let img = new File([blob], 'Image', {type});
       this.newImg = img
-    })
+    }, 'image/jpeg', 0.65)
 
     const pro1 = new Promise((resolve, rejects) => {
+      this.disabled = true
+      this.icon = false
       setTimeout(() => {
         resolve(this.newImg)
       }, 1500)
@@ -69,7 +76,6 @@ export class GetFilesComponent implements OnInit {
 
     pro1
       .then(() => {
-        // console.log(this.newImg)
         this.dialogRef.close({
           image: this.newImg
         })

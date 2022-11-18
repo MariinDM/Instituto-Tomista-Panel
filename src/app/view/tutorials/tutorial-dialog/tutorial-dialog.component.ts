@@ -98,12 +98,14 @@ export class TutorialDialogComponent implements OnInit {
       }
 
       if (this.image) {
-        fd.set('image', this.image)
+        // fd.set('image', this.image)
         this.tutorialService.insert(this.language, fd).subscribe({
           next: (v) => { message = v.message, id = v.tutorial_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.tutorialService.uploadImg(this.language, id, fd).subscribe({
+            let fd_image = new FormData();
+            fd_image.append('image', this.image)
+            this.tutorialService.uploadImg(this.language, id, fd_image).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
@@ -120,12 +122,14 @@ export class TutorialDialogComponent implements OnInit {
       }
     } else {
       if (this.image) {
-        fd.set('image', this.image)
+        // fd.set('image', this.image)
         this.tutorialService.update(this.language, this.data.element.id, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.tutorialService.uploadImg(this.language, this.data.element.id, fd).subscribe({
+            let fd_image = new FormData();
+            fd_image.append('image', this.image)
+            this.tutorialService.uploadImg(this.language, this.data.element.id, fd_image).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }

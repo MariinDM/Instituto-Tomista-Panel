@@ -65,12 +65,14 @@ export class ViewDialogComponent implements OnInit {
 
     if (!this.data.edit) {
       if (this.image) {
-        fd.set('image', this.image)
+        // fd.set('image', this.image)
         this.viewService.insert(this.code, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.viewService.uploadImg(this.code, id, fd).subscribe({
+            let fd_image = new FormData();
+            fd_image.append('image', this.image)
+            this.viewService.uploadImg(this.code, id, fd_image).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
@@ -79,7 +81,7 @@ export class ViewDialogComponent implements OnInit {
         })
       }
       else {
-        fd.set('image', this.form.controls['image'].value)
+        // fd.set('image', this.form.controls['image'].value)
         this.viewService.insert(this.code, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
@@ -88,12 +90,14 @@ export class ViewDialogComponent implements OnInit {
       }
     } else {
       if (this.image) {
-        fd.set('image', this.image)
+        // fd.set('image', this.image)
         this.viewService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { message = v.message, id = v.view_id },
           error: (e) => { this.openSnack(e) },
           complete: () => {
-            this.viewService.uploadImg(this.code, this.data.element.id, fd).subscribe({
+            let fd_image = new FormData();
+            fd_image.append('image', this.image)
+            this.viewService.uploadImg(this.code, this.data.element.id, fd_image).subscribe({
               next: (v) => { this.openSnack(message) },
               error: (e) => { this.openSnack(e) },
               complete: () => { this.dialog.closeAll() }
@@ -102,7 +106,7 @@ export class ViewDialogComponent implements OnInit {
         })
       }
       else {
-        fd.set('image', this.form.controls['image'].value)
+        // fd.set('image', this.form.controls['image'].value)
         this.viewService.update(this.code, this.data.element.id, fd).subscribe({
           next: (v) => { this.openSnack(v.message) },
           error: (e) => { this.openSnack(e) },
