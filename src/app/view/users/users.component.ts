@@ -151,8 +151,9 @@ export class UsersComponent implements OnInit {
 
   openDialogUpdate(element: any) {
     for (let i = 0; i < this.dataUser.length; i++) {
-      if (this.dataUser[i].users.id == element.id) {
+      if (this.dataUser[i].user_id === element.id) {
         element = this.dataUser[i]
+        break
       }
     }
     this.dialog.open(UserUpdateDialogComponent, {

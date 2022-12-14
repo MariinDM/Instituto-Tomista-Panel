@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ViewRoutingModule } from './view-routing.module';
 import { CategoriesComponent } from './categories/categories.component';
-import { CommunityComponent } from './community/community.component';
+// import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DevicesComponent } from './devices_views/devices/devices.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -78,6 +78,8 @@ import { TicketsDialogComponent } from './tickets_views/tickets/tickets-dialog/t
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TicketDialogFileComponent } from './tickets_views/tickets/ticket-dialog-file/ticket-dialog-file.component';
 import { GetFileComponent } from './shared/get-file/get-file.component';
+import { ResourcesComponent } from './resources/resources.component';
+import { ResourcesDialogComponent } from './resources/resources-dialog/resources-dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -87,7 +89,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     CategoriesComponent,
-    CommunityComponent,
+    // CommunityComponent,
     DashboardComponent,
     DevicesComponent,
     ProfileComponent,
@@ -156,6 +158,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TicketsDialogComponent,
     TicketDialogFileComponent,
     GetFileComponent,
+    ResourcesComponent,
+    ResourcesDialogComponent,
   ],
   imports: [
     CommonModule,

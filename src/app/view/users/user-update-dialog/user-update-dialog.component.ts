@@ -53,7 +53,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     this.getData()
     this.changeSelect()
     this.setForm()
-    this.disabledInputs()
+    this.disabledInputs(this.element)
   }
 
   ngAfterViewInit(): void {
@@ -215,8 +215,9 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     // this.form.controls['city_id'].disable()
 
     if (this.rol === '4' || this.rol === '5') {
-      this.form.controls['institution'].setValue(data.profile[0].institution)
-      this.form.controls['institution'].disable()
+      console.log(data)
+      this.form.controls['institution'].setValue(data.users.profile[0].institution)
+      this.form.controls['institution'].disable() 
     }
     // } else {
     //   this.form.controls['country_id'].disable()
@@ -235,12 +236,6 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
 
     if (this.rol === '4' || this.rol === '5') {
       this.form.controls['institution'].enable()
-    }
-  }
-
-  inputInstitution() {
-    if (this.select === '4') {
-
     }
   }
 

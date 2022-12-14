@@ -6,7 +6,7 @@ import { DeveloperGuard } from '../guards/developer.guard';
 import { InstructorRolGuard } from '../guards/instructor-rol.guard';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { CommunityComponent } from './community/community.component';
+// import { CommunityComponent } from './community/community.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ControllerVersionsComponent } from './devices_views/controller-versions/controller-versions.component';
 import { DeviceCalibrationComponent } from './devices_views/device-calibration/device-calibration.component';
@@ -22,6 +22,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EvaluationsComponent } from './quizes_views/evaluations/evaluations.component';
 import { QuestionsComponent } from './quizes_views/questions/questions.component';
 import { UserCalculatorsComponent } from './quizes_views/user-calculators/user-calculators.component';
+import { ResourcesComponent } from './resources/resources.component';
 import { RolesComponent } from './roles/roles.component';
 import { ClientsComponent } from './sales_views/clients/clients.component';
 import { DealersComponent } from './sales_views/dealers/dealers.component';
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'admin/viewsroles', component: ViewsrolesComponent, canActivate: [DeveloperGuard] },
 
   // { path: 'admin/community', component: CommunityComponent, canActivate: [] },
+  { path: 'admin/resources', component: ResourcesComponent, canActivate: [] },
   { path: 'admin/tutorials', component: TutorialsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/tips', component: TipsComponent, canActivate: [AdminRolGuard] },
   { path: 'admin/faqs', component: FaqsComponent, canActivate: [AdminRolGuard] },
