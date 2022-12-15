@@ -4,7 +4,7 @@
             <div class="modalHeader clearfix">
                 <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? translate.tips.dialog_edit : translate.tips.dialog_add }}</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{ data.edit ? 'Edit Resource' : 'Add Resource' }}</div>
                 </div>
             </div>
         </div>
@@ -29,6 +29,7 @@
                     </mat-form-field>
                 </div>
             </div>
+            <!-- Title -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
@@ -41,6 +42,7 @@
                     </mat-form-field>
                 </div>
             </div>
+            <!-- Description -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
@@ -53,46 +55,60 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="row">
+            <!-- Choose Option (Link or File) -->
+            <div class="row" *ngIf="!data.edit">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width" (click)="picker.open()">
-                        <mat-label>{{translate.tutorials.choose_se}}</mat-label>
-                        <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate formControlName="start_date" placeholder="Start Date" disabled>
-                            <input matEndDate formControlName="end_date" placeholder="End Date" disabled>
-                        </mat-date-range-input>
-                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+                    <h5>{{translate.shared.choose_option}}</h5>
+                    <div class="row">
+                        <mat-radio-group (change)="radioChange($event)">
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-radio-button value="1">Link</mat-radio-button>
+                                </div>
+                                <div class="col-6">
+                                    <mat-radio-button value="2">File</mat-radio-button>
+                                </div>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <!-- Link -->
+            <div class="row" *ngIf="select == 1 || url == true">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-icon matSuffix></mat-icon>
+                        <mat-label>Link</mat-label>
+                        <input matInput placeholder="Ex. Estar atento todo el tiempo" formControlName="link">
+                        <mat-error
+                            *ngIf="form.controls['link'].hasError('required') || (form.controls['link'].dirty || form.controls['link'].touched)">
+                            {{translate.validations.required}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
-            <div class="row">
+            <!-- File -->
+            <div class="row" *ngIf="select == 2 || url == false ">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                     <div class="mat-form-field example-full-width">
-                        <button type="button" mat-raised-button (click)="getFile()">{{translate.shared.select_image}}</button>
+                        <button type="button" mat-raised-button (click)="getFile()" [disabled]="ext == false">Select File</button>
                     </div>
                 </div>
-                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 mb-2" *ngIf="image">
+                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 mb-2" *ngIf="file || ext == false || data.edit == true">
                     <div class="mat-form-field example-full-width">
                         <div class="demo-icon-container" style="padding: 0.4rem;">
                             <div class="demo-google-material-icon">
-                                <i class="material-icons">image</i>
-                                <span class="icon-name">{{translate.shared.captured_image}}</span>
+                                <i class="material-icons">file_copy</i>
+                                <span class="icon-name">Captured File </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-checkbox color="primary" formControlName="active"> {{translate.shared.active}} </mat-checkbox>
-                </div>
-            </div>
+            <!-- Buttons -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <div class="example-button-row" mat-dialog-actions align="end">
-                        <button type="submit" mat-raised-button color="primary" class="baby-green">
+                        <button type="submit" mat-raised-button color="primary" class="baby-green" [disabled]="!(rol == '1' || rol == '2')">
                             <span class="mat-button-wrapper log-white">
                                 <mat-icon>save</mat-icon>
                             </span>

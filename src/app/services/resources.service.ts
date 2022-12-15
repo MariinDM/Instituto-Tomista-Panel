@@ -25,7 +25,7 @@ export class ResourcesService {
   deleteData(code: string, id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}v1/${code}/resources/delete/${id}`)
   }
-  uploadFile(code: string, id: number, image: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Resources/${id}`, image)
+  uploadFile(code: string, file: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Files`, file)
   }
 }

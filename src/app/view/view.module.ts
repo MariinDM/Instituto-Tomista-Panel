@@ -80,6 +80,7 @@ import { TicketDialogFileComponent } from './tickets_views/tickets/ticket-dialog
 import { GetFileComponent } from './shared/get-file/get-file.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { ResourcesDialogComponent } from './resources/resources-dialog/resources-dialog.component';
+import { GetFileResourcesComponent } from './get-file-resources/get-file-resources.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -160,6 +161,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GetFileComponent,
     ResourcesComponent,
     ResourcesDialogComponent,
+    GetFileResourcesComponent,
   ],
   imports: [
     CommonModule,

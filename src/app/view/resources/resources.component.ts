@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -25,14 +25,15 @@ import { ResourcesDialogComponent } from './resources-dialog/resources-dialog.co
 })
 export class ResourcesComponent implements OnInit {
 
-  dataTutorials!: any[]
+  data!: any[]
   loader = false
   code = localStorage.getItem('code')
+  rol = localStorage.getItem('rol')
   filter: string = ''
   apiURL = environment.apiUrl
   translate: any = LANGUAGE
 
-  displayedColumns: string[] = ['point', 'title', 'description', 'image', 'start_date', 'end_date', 'active', 'actions']
+  displayedColumns: string[] = ['point', 'title', 'description', 'link', 'actions']
   columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   dataSource: MatTableDataSource<any>
 
@@ -55,20 +56,24 @@ export class ResourcesComponent implements OnInit {
 
   getData(): void {
     this.loader = false
-    // this.rscSvc.getData(this.code).subscribe((data: any) => {
-    //   this.dataTutorials = data.tips
-    //   this.setData()
+    this.rscSvc.getData(this.code).subscribe((data: any) => {
+      this.data = data.resources
+      this.setData()
       this.loader = true
-    //   this.openSnack(data.message)
-    // }, (error: any) => {
-    //   this.openSnack(error)
-    // })
+      this.openSnack(data.message)
+      for (let i = 0; i < this.data.length; i++) {
+        // console.log('si')
+        this.data[i].link = this.getStringURL(this.data[i].link)
+      }
+    }, (error: any) => {
+      this.openSnack(error)
+    })
     this.filter = ''
   }
 
   setData(): void {
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.dataTutorials;
+    this.dataSource.data = this.data;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -93,12 +98,20 @@ export class ResourcesComponent implements OnInit {
       this.getData()
     })
   }
+
   openDialogUpdate(element: any, edit: boolean) {
-    // this.dialog.open(TipDialogComponent, {
-    //   data: { element, edit },
-    //   panelClass: ['dialog-responsive']
-    // }).afterClosed().subscribe(() => {
-    //   this.getData()
-    // })
+    this.dialog.open(ResourcesDialogComponent, {
+      data: { element, edit },
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe(() => {
+      this.getData()
+    })
+  }
+  getStringURL(url: string) {
+    let cad = url.substring(0, 7);
+    if (cad == 'uploads') {
+      return this.apiURL + 'v1/en/resources/' + url
+    }
+    return url
   }
 }
