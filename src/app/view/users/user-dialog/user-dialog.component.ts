@@ -3,10 +3,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { UsersService } from 'src/app/services/users.service';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
+import { debounce, debounceTime, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-dialog',
@@ -33,9 +35,11 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
 
   viewIndex = 0;
   windowSize = 150;
+  filteredOptions: Observable<any[]>;
 
   private readonly PIXEL_TOLERANCE = 3.0;
   @ViewChild('data', { static: false }) selectElem: MatSelect;
+  @ViewChild('clave', { static: false }) inputCity: ElementRef;
 
   constructor(
     private dialog: MatDialog,
@@ -46,7 +50,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder) { this.createForm() }
 
   ngOnInit(): void {
-    this.getData()
+    this.getData();
     this.changeSelect()
     if (this.rol === '3' || this.rol === '4' || this.rol === '5') {
       this.getInfo()
@@ -54,11 +58,11 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.selectElem.openedChange.subscribe((v) => {
-      if(v){
-        this.registerPanelScrollEvent()
-      }
-    });
+    // this.selectElem.openedChange.subscribe((v) => {
+    //   if(v){
+    //     this.registerPanelScrollEvent()
+    //   }
+    // });
   }
 
   registerPanelScrollEvent() {
@@ -115,7 +119,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
           // OWNER
           case '4':
             for (let i of v.roles) {
-              if (i.id === 5 || i.id === 6) {
+              if (i.id === 5) {
                 this.dataRoles.push(i)
               }
             }
@@ -129,6 +133,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
             }
             break;
         }
+        this.setRol();
       },
       error: (e) => {
         this.openSnack(e)
@@ -156,7 +161,10 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     this.userService.getcities(this.code, event).subscribe({
       next: (v) => {
         this.dataCities = v.cities
-        this.viewCities = this.dataCities.slice(0, 150);
+        // console.log(this.dataCities)
+        // console.log(v.cities)
+        // this.viewCities = this.dataCities.slice(0, 150);
+        this.autoComplete();
       },
       error: (e) => {
         this.openSnack(e)
@@ -237,6 +245,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   setData() {
     this.obj = this.form.value
     // console.log(this.obj)
+    this.obj.city_id = this.searchCity();
   }
 
   disabledInputs(data?: any) {
@@ -245,7 +254,9 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
       this.form.controls['country_id'].setValue(data.profile[0].country_id)
       this.form.controls['language_id'].setValue(data.profile[0].language_id)
       this.getCities(data.profile[0].country_id)
-      this.form.controls['city_id'].setValue(data.profile[0].city_id)
+      let city = data.profile[0].cities.name + ', ' + data.profile[0].cities.code;
+      this.form.controls['city_id'].setValue(city)
+      // this.searchCity();
 
       // this.form.controls['country_id'].disable()
       // this.form.controls['language_id'].disable()
@@ -274,6 +285,12 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
       }
     })
   }
+  searchCity() {
+    // console.log(this.userInfo)
+    let city_name = this.form.controls['city_id'].value;
+    let city = this.dataCities.find(aaaa => aaaa.name === city_name);
+    return city.id
+  }
 
   enableInputs() {
     this.form.controls['country_id'].enable()
@@ -289,4 +306,36 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     this._snack.open(message, '', { duration: 1000, })
   }
 
+  setRol() {
+    if (this.rol === '3' || this.rol === '4' || this.rol === '5') {
+      this.form.controls['role_id'].setValue(this.dataRoles[0].id);
+    }
+  }
+
+  displayFn(name: any): string {
+    return name ? name : '';
+  }
+  autoComplete() {
+    setTimeout(() => {
+      this.filteredOptions = this.form.controls['city_id'].valueChanges.pipe(
+        startWith(''),
+        map(value => {
+          const name = typeof value === 'string' ? value : value?.name;
+          // console.log(name ? this._filter(name as string) : this.claveProdServ.slice());
+          // console.log(name.length)
+          if (name.length > 2) {
+            return name ? this._filter(name as string) : this.dataCities.slice();
+          }
+          // }
+        }),
+      );
+    }, 0);
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.dataCities.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
+  removeFocus(){
+    this.inputCity.nativeElement.blur();
+  }
 }

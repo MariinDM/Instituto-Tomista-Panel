@@ -167,15 +167,22 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>{{translate.users.city}}</mat-label>
+                        <input type="text" matInput formControlName="city_id" #clave
+                            (change)="autoComplete()" [matAutocomplete]=" auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+                                {{option.name}}
+                            </mat-option>
+                        </mat-autocomplete>
                         <!-- #data (onClose)="reset()" -->
-                        <mat-select formControlName="city_id" #data>
+                        <!-- <mat-select formControlName="city_id" #data>
                             <mat-option *ngFor="let item of viewCities" [value]="item.id">
                                 {{item.name}}
                             </mat-option>
                         </mat-select>
                         <mat-error
                             *ngIf="form.controls['city_id'].hasError('required') || (form.controls['city_id'].dirty || form.controls['city_id'].touched)">
-                            {{translate.validations.required}}</mat-error>
+                            {{translate.validations.required}}</mat-error> -->
                     </mat-form-field>
                 </div>
             </div>

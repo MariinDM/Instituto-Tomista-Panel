@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { UsersService } from 'src/app/services/users.service';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
+import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-update-dialog',
@@ -34,6 +36,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
 
   viewIndex = 0;
   windowSize = 150;
+  filteredOptions: Observable<any[]>;
 
   private readonly PIXEL_TOLERANCE = 3.0;
   @ViewChild('data', { static: false }) selectElem: MatSelect;
@@ -52,16 +55,15 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     this.select = this.element.roles.id
     this.getData()
     this.changeSelect()
-    this.setForm()
     this.disabledInputs(this.element)
   }
 
   ngAfterViewInit(): void {
-    this.selectElem.openedChange.subscribe((v) => {
-      if (v) {
-        this.registerPanelScrollEvent()
-      }
-    });
+    // this.selectElem.openedChange.subscribe((v) => {
+    //   if (v) {
+    //     this.registerPanelScrollEvent()
+    //   }
+    // });
   }
 
   registerPanelScrollEvent() {
@@ -122,6 +124,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
         let city = this.dataCities.find(aaaa => aaaa.id === city_id);
         this.dataCities.splice(city_id, city_id + 1);
         this.viewCities.unshift(city)
+        this.setForm()
       },
       error: (e) => {
         this.openSnack(e)
@@ -199,8 +202,11 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
   }
 
   setData() {
-    this.obj = this.form.value
-    // console.log(this.obj)
+    this.obj = this.form.value;
+    let city_name = this.obj.city_id;
+    let city = this.dataCities.find(aaaa => aaaa.name === city_name);
+    this.obj.city_id = city.id;
+
   }
 
   disabledInputs(data?: any) {
@@ -217,7 +223,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     if (this.rol === '4' || this.rol === '5') {
       console.log(data)
       this.form.controls['institution'].setValue(data.users.profile[0].institution)
-      this.form.controls['institution'].disable() 
+      this.form.controls['institution'].disable()
     }
     // } else {
     //   this.form.controls['country_id'].disable()
@@ -243,7 +249,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     this.form.controls['email'].setValue(this.element.users.email)
     this.form.controls['role_id'].setValue(this.element.roles.id)
     this.form.controls['country_id'].setValue(this.element.users.profile[0].country_id)
-    this.form.controls['city_id'].setValue(this.element.users.profile[0].city_id)
+    // this.form.controls['city_id'].setValue(this.element.users.profile[0].city_id)
     this.form.controls['language_id'].setValue(this.element.users.profile[0].language_id)
     this.form.controls['name'].setValue(this.element.users.profile[0].name)
     this.form.controls['last_name'].setValue(this.element.users.profile[0].last_name)
@@ -253,10 +259,40 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     this.form.controls['group'].setValue(this.element.users.profile[0].group)
     this.form.controls['institution'].setValue(this.element.users.profile[0].institution)
     this.form.controls['premium'].setValue(this.element.premium)
+    this.searchCity();
   }
 
   openSnack(message: string) {
     this._snack.open(message, '', { duration: 1000, })
+  }
+  displayFn(name: any): string {
+    return name ? name : '';
+  }
+  autoComplete() {
+    this.filteredOptions = this.form.controls['city_id'].valueChanges.pipe(
+      startWith(''),
+      map(value => {
+        const name = typeof value === 'string' ? value : value?.name;
+        // console.log(name ? this._filter(name as string) : this.claveProdServ.slice());
+        // console.log(name.length)
+        if (name.length > 2) {
+          return name ? this._filter(name as string) : this.dataCities.slice();
+        }
+        // }
+      }),
+    );
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.dataCities.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
+  searchCity() {
+    let city_id = this.element.users.profile[0].cities.id;
+    let city = this.dataCities.find(aaaa => aaaa.id === city_id);
+    this.setCity(city.name)
+  }
+  setCity(city) {
+    this.form.controls['city_id'].setValue(city);
   }
 
 }
