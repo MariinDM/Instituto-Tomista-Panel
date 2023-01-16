@@ -335,7 +335,4 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     const filterValue = name.toLowerCase();
     return this.dataCities.filter(option => option.name.toLowerCase().includes(filterValue));
   }
-  removeFocus(){
-    this.inputCity.nativeElement.blur();
-  }
 }

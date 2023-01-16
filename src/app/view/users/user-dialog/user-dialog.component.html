@@ -171,7 +171,7 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>{{translate.users.city}}</mat-label>
                         <input type="text" matInput formControlName="city_id" #clave
-                            (change)="autoComplete()" [matAutocomplete]="auto" (keyup.enter)="removeFocus()">
+                            (change)="autoComplete()" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
                                 {{option.name}}
