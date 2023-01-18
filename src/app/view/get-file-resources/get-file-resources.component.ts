@@ -25,8 +25,8 @@ export class GetFileResourcesComponent implements OnInit {
   ngOnInit(): void {
   }
   sendFile() {
-    if (this.form.invalid) { return }
-
+    let file = this.sizeFile();
+    if (this.form.invalid || file) { return }
     this.dialogRef.close({
       file: this.form.controls['file'].value
     });
@@ -35,6 +35,13 @@ export class GetFileResourcesComponent implements OnInit {
     this.form = this.fb.group({
       file: new FormControl('', [Validators.required]),
     });
+  }
+  sizeFile(){
+    let file = this.form.controls['file'].value;
+    if(file.size > 5000000){
+      this.openSnack('The file is larger than 5 MB.');
+      return true
+    }
   }
   openSnack(message: string) {
     this._snack.open(message, '', {

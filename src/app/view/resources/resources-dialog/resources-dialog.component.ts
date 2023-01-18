@@ -166,7 +166,8 @@ export class ResourcesDialogComponent implements OnInit {
       this.form = this.fb.group({
         title: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
-        link: new FormControl('', [])
+        link: new FormControl('', []),
+        active: new FormControl(true, [])
       });
     } else {
       this.form = this.fb.group({
@@ -174,6 +175,7 @@ export class ResourcesDialogComponent implements OnInit {
         description: new FormControl('', [Validators.required]),
         link: new FormControl('', []),
         language: new FormControl(''),
+        active: new FormControl(true, [])
       });
     }
   }

@@ -22,7 +22,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                         <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                             <mat-label>Enter File</mat-label>
-                            <ngx-mat-file-input formControlName="file" [multiple]="false" [accept]="'.bin, .pdf'">
+                            <ngx-mat-file-input formControlName="file" [multiple]="false" [accept]="'*'">
                                 <mat-error
                                     *ngIf="form.controls['file'].hasError('required') || (form.controls['file'].dirty || form.controls['file'].touched)">
                                     {{translate.validations.required}}</mat-error>

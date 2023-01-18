@@ -28,4 +28,7 @@ export class ResourcesService {
   uploadFile(code: string, file: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}v1/${code}/resources/uploads/Files`, file)
   }
+  downloadFile(code: string, file: any): Observable<any> {
+    return this.http.get(`${environment.apiUrl}v1/${code}/resources/uploads/Files/${file}?download=true`,)
+  }
 }

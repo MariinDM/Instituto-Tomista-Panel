@@ -33,7 +33,7 @@ export class ResourcesComponent implements OnInit {
   apiURL = environment.apiUrl
   translate: any = LANGUAGE
 
-  displayedColumns: string[] = ['point', 'title', 'description', 'actions'] //'link',
+  displayedColumns: string[] = ['point', 'title', 'description', 'active', 'actions'] //'link',
   columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   dataSource: MatTableDataSource<any>
 
@@ -116,7 +116,11 @@ export class ResourcesComponent implements OnInit {
   }
 
   openFile(row: any) {
-    // console.log(row);
-    window.open(row.link, '_blank');
+    if (row.link.substring(0, 26) === environment.apiUrl) {
+      let url = row.link + '?download=true';
+      window.open(url, '_blank');
+    } else {
+      window.open(row.link, '_blank');
+    }
   }
 }
