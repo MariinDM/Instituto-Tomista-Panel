@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { UsersService } from 'src/app/services/users.service';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
-import { debounce, debounceTime, map, startWith } from 'rxjs/operators';
+import { debounce, debounceTime, endWith, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-dialog',
@@ -31,11 +31,13 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   select: any = 0
   dealer!: any;
   userInfo!: any;
-  translate: any = LANGUAGE
+  translate: any = LANGUAGE;
+  cityOption: any;
 
   viewIndex = 0;
   windowSize = 150;
   filteredOptions: Observable<any[]>;
+  length: boolean = false;
 
   private readonly PIXEL_TOLERANCE = 3.0;
   @ViewChild('data', { static: false }) selectElem: MatSelect;
@@ -176,6 +178,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     if (this.form.invalid) { return }
     this.enableInputs()
     this.setData()
+    // return
     if (this.obj.role_id === 6 && this.obj.age === 0) {
       this.openSnack('Age is required')
       this.disabledInputs()
@@ -227,6 +230,7 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
       role_id: new FormControl('', [Validators.required]),
       country_id: new FormControl('', [Validators.required]),
       city_id: new FormControl('', [Validators.required]),
+      cityOption: new FormControl('', [Validators.required]),
       language_id: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
@@ -238,14 +242,17 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
       premium: new FormControl(false, []),
       password: new FormControl('1n3rC1@', []),
       dealer: new FormControl(0, []),
-      instructor: new FormControl(0, [])
+      instructor: new FormControl(0, []),
     });
   }
 
   setData() {
+    let city_id = this.form.controls['cityOption'].value
     this.obj = this.form.value
+    delete this.obj.cityOption
+    this.obj.city_id = city_id
     // console.log(this.obj)
-    this.obj.city_id = this.searchCity();
+
   }
 
   disabledInputs(data?: any) {
@@ -255,7 +262,10 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
       this.form.controls['language_id'].setValue(data.profile[0].language_id)
       this.getCities(data.profile[0].country_id)
       let city = data.profile[0].cities.name + ', ' + data.profile[0].cities.code;
-      this.form.controls['city_id'].setValue(city)
+      this.form.get('cityOption').setValue(data.profile[0].city_id)
+      this.form.get('city_id').setValue(data.profile[0].cities.name + ', ' + data.profile[0].cities.code)
+      // console.log(this.form.controls['cityOption'].value)
+      // console.log(data.profile[0].city_id);
       // this.searchCity();
 
       // this.form.controls['country_id'].disable()
@@ -285,12 +295,6 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
       }
     })
   }
-  searchCity() {
-    // console.log(this.userInfo)
-    let city_name = this.form.controls['city_id'].value;
-    let city = this.dataCities.find(aaaa => aaaa.name === city_name);
-    return city.id
-  }
 
   enableInputs() {
     this.form.controls['country_id'].enable()
@@ -316,20 +320,22 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
     return name ? name : '';
   }
   autoComplete() {
-    setTimeout(() => {
-      this.filteredOptions = this.form.controls['city_id'].valueChanges.pipe(
-        startWith(''),
-        map(value => {
+    this.filteredOptions = this.form.controls['city_id'].valueChanges.pipe(
+      startWith('A'),
+      map(value => {
+        if (value.length > 2) {
           const name = typeof value === 'string' ? value : value?.name;
-          // console.log(name ? this._filter(name as string) : this.claveProdServ.slice());
-          // console.log(name.length)
-          if (name.length > 2) {
-            return name ? this._filter(name as string) : this.dataCities.slice();
+          return name ? this._filter(name as string) : this.dataCities.slice();
+        }
+        else {
+          if (this.userInfo) {
+            let position = this.dataCities.find(aaaa => aaaa.id === this.userInfo.profile[0].city_id);
+            return [position];
           }
-          // }
-        }),
-      );
-    }, 0);
+          return [];
+        }
+      }),
+    );
   }
   private _filter(name: string): any[] {
     const filterValue = name.toLowerCase();

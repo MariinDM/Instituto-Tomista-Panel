@@ -125,6 +125,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
         this.dataCities.splice(city_id, city_id + 1);
         this.viewCities.unshift(city)
         this.setForm()
+        this.autoComplete()
       },
       error: (e) => {
         this.openSnack(e)
@@ -133,6 +134,8 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
   }
 
   sendData() {
+    // console.log(this.obj)
+    // return
     if (this.form.invalid) { return }
     this.enableInputs()
     this.setData()
@@ -186,6 +189,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
       role_id: new FormControl('', [Validators.required]),
       country_id: new FormControl('', [Validators.required]),
       city_id: new FormControl('', [Validators.required]),
+      cityOption: new FormControl('', [Validators.required]),
       language_id: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
@@ -196,17 +200,16 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
       institution: new FormControl('', []),
       premium: new FormControl(false, []),
       password: new FormControl('1n3rC1@', []),
-      // dealer: new FormControl(0, []),
-      instructor: new FormControl(0, [])
+      dealer: new FormControl(0, []),
+      instructor: new FormControl(0, []),
     });
   }
 
   setData() {
-    this.obj = this.form.value;
-    let city_name = this.obj.city_id;
-    let city = this.dataCities.find(aaaa => aaaa.name === city_name);
-    this.obj.city_id = city.id;
-
+    let city_id = this.form.controls['cityOption'].value
+    this.obj = this.form.value
+    delete this.obj.cityOption
+    this.obj.city_id = city_id
   }
 
   disabledInputs(data?: any) {
@@ -246,10 +249,13 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
   }
 
   setForm() {
+    // console.log(this.element);
+    // return
     this.form.controls['email'].setValue(this.element.users.email)
     this.form.controls['role_id'].setValue(this.element.roles.id)
     this.form.controls['country_id'].setValue(this.element.users.profile[0].country_id)
-    // this.form.controls['city_id'].setValue(this.element.users.profile[0].city_id)
+    this.form.controls['cityOption'].setValue(this.element.users.profile[0].city_id)
+    this.form.controls['city_id'].setValue(this.element.users.profile[0].cities.name + ', ' + this.element.users.profile[0].cities.code)
     this.form.controls['language_id'].setValue(this.element.users.profile[0].language_id)
     this.form.controls['name'].setValue(this.element.users.profile[0].name)
     this.form.controls['last_name'].setValue(this.element.users.profile[0].last_name)
@@ -259,7 +265,7 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
     this.form.controls['group'].setValue(this.element.users.profile[0].group)
     this.form.controls['institution'].setValue(this.element.users.profile[0].institution)
     this.form.controls['premium'].setValue(this.element.premium)
-    this.searchCity();
+    // this.searchCity();
   }
 
   openSnack(message: string) {
@@ -270,29 +276,25 @@ export class UserUpdateDialogComponent implements OnInit, AfterViewInit {
   }
   autoComplete() {
     this.filteredOptions = this.form.controls['city_id'].valueChanges.pipe(
-      startWith(''),
+      startWith('A'),
       map(value => {
-        const name = typeof value === 'string' ? value : value?.name;
-        // console.log(name ? this._filter(name as string) : this.claveProdServ.slice());
-        // console.log(name.length)
-        if (name.length > 2) {
+        if (value.length > 2) {
+          const name = typeof value === 'string' ? value : value?.name;
           return name ? this._filter(name as string) : this.dataCities.slice();
         }
-        // }
+        else {
+          if (this.element) {
+            let position = this.dataCities.find(aaaa => aaaa.id === this.element.users.profile[0].city_id);
+            return [position];
+          }
+          return [];
+        }
       }),
     );
   }
   private _filter(name: string): any[] {
     const filterValue = name.toLowerCase();
     return this.dataCities.filter(option => option.name.toLowerCase().includes(filterValue));
-  }
-  searchCity() {
-    let city_id = this.element.users.profile[0].cities.id;
-    let city = this.dataCities.find(aaaa => aaaa.id === city_id);
-    this.setCity(city.name)
-  }
-  setCity(city) {
-    this.form.controls['city_id'].setValue(city);
   }
 
 }

@@ -32,8 +32,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 const materialModules = [
+  NgxMatSelectSearchModule,
   MatButtonModule,
   MatInputModule,
   MatListModule,
