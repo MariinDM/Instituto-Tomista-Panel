@@ -116,7 +116,7 @@ export class ResourcesComponent implements OnInit {
   }
 
   openFile(row: any) {
-    if (row.link.substring(0, 26) === environment.apiUrl) {
+    if (row.link.substring(0, 30).includes(environment.apiUrl)) {
       let url = row.link + '?download=true';
       window.open(url, '_blank');
     } else {
