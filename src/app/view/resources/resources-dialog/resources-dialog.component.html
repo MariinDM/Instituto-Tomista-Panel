@@ -108,9 +108,10 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <div class="example-button-row" mat-dialog-actions align="end">
-                        <button type="submit" mat-raised-button color="primary" class="baby-green" [disabled]="!(rol == '1' || rol == '2')">
+                        <button type="submit" mat-raised-button color="primary" class="baby-green" [disabled]="!(rol == '1' || rol == '2') || disabled">
                             <span class="mat-button-wrapper log-white">
-                                <mat-icon>save</mat-icon>
+                                <mat-icon [hidden]="disabled">save</mat-icon>
+                                <mat-icon [hidden]="!disabled">hourglass_empty</mat-icon>
                             </span>
                         </button>
                         <button mat-dialog-close mat-raised-button color="warn">

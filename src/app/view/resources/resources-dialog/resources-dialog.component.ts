@@ -34,6 +34,7 @@ export class ResourcesDialogComponent implements OnInit {
   translate: any = LANGUAGE
   url: boolean = null
   ext!: boolean
+  disabled: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -80,20 +81,24 @@ export class ResourcesDialogComponent implements OnInit {
           error: (e) => { this.openSnack(e), this.dialog.closeAll() }
         })
       } else {
+        this.disabled = true;
         var fd = new FormData();
         fd.append('file', this.file)
-        this.rscService.uploadFile('en', fd).subscribe({
-          next: (v) => {
-            this.obj.link = v.fullpath
-            this.rscService.sendData('en', this.obj).subscribe({
-              next: (v) => { this.openSnack(v.message), this.dialog.closeAll() },
-              error: (e) => { this.openSnack(e), this.dialog.closeAll() }
-            })
-          },
-          error: (e) => {
-            this.openSnack(e)
-          }
-        });
+        // setTimeout(()=>{
+          this.rscService.uploadFile('en', fd).subscribe({
+            next: (v) => {
+              this.obj.link = v.fullpath
+              this.rscService.sendData('en', this.obj).subscribe({
+                next: (v) => { this.openSnack(v.message), this.dialog.closeAll() },
+                error: (e) => { this.openSnack(e), this.disabled = false; }
+              })
+            },
+            error: (e) => {
+              this.openSnack(e)
+              this.disabled = false;
+            }
+          });
+        // },10000)
       }
     } else {
       // Update Data
@@ -104,6 +109,7 @@ export class ResourcesDialogComponent implements OnInit {
         })
       } else {
         if (this.file) {
+          this.disabled = true;
           var fd = new FormData();
           fd.append('file', this.file)
           this.rscService.uploadFile('en', fd).subscribe({
@@ -111,11 +117,12 @@ export class ResourcesDialogComponent implements OnInit {
               this.obj.link = v.fullpath
               this.rscService.updateData(this.language, this.data.element.id, this.obj).subscribe({
                 next: (v) => { this.openSnack(v.message), this.dialog.closeAll() },
-                error: (e) => { this.openSnack(e), this.dialog.closeAll() }
+                error: (e) => { this.openSnack(e), this.disabled = false; }
               })
             },
             error: (e) => {
               this.openSnack(e)
+              this.disabled = false;
             }
           });
         } else {
