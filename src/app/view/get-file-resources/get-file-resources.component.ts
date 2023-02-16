@@ -38,8 +38,8 @@ export class GetFileResourcesComponent implements OnInit {
   }
   sizeFile(){
     let file = this.form.controls['file'].value;
-    if(file.size > 5000000){
-      this.openSnack('The file is larger than 5 MB.');
+    if(file.size > 20000000){
+      this.openSnack('The file is larger than 20 MB.');
       return true
     }
   }
