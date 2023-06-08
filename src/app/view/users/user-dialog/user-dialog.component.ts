@@ -36,14 +36,15 @@ export class UserDialogComponent implements OnInit {
 
   getData() {
     this.apiService.getRoles().subscribe({
-      next: (v) => { this.roles = v.roles },
+      next: (v) => {
+        this.roles = v.roles.filter(item => item.active);
+      },
       error: (e) => { this.openSnack(e) },
-      // complete: () => { this.dialog.closeAll() }
     })
   }
 
   setData() {
-    if(!this.edit){
+    if (!this.edit) {
       this.obj = this.form.value
       this.obj.password = this.generatePassword()
     } else {

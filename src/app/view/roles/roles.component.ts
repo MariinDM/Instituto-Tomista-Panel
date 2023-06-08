@@ -50,7 +50,7 @@ export class RolesComponent implements OnInit {
         this.data = v.roles
         this.setData()
         this.loader = true
-        this.openSnack(v.message)
+        // this.openSnack(v.message)
       },
       error: (e) => {
         this.openSnack(e)

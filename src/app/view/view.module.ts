@@ -16,6 +16,10 @@ import { LimitToPipe } from 'src/app/shared/pipes/limit-to.pipe'
 import { NewLinePipe } from '../shared/pipes/new-line.pipe';
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { EducationLevelsComponent } from './education-levels/education-levels.component';
+import { GradesComponent } from './grades/grades.component';
+import { SectionsComponent } from './sections/sections.component';
+import { GroupsComponent } from './groups/groups.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -31,6 +35,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserDialogComponent,
     LimitToPipe,
     NewLinePipe,
+    EducationLevelsComponent,
+    GradesComponent,
+    SectionsComponent,
+    GroupsComponent,
   ],
   imports: [
     CommonModule,
