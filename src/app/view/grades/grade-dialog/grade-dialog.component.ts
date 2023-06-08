@@ -5,11 +5,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 
 @Component({
-  selector: 'app-role-dialog',
-  templateUrl: './role-dialog.component.html',
+  selector: 'app-grade-dialog',
+  templateUrl: './grade-dialog.component.html',
   styleUrls: ['../../../app.component.scss']
 })
-export class RoleDialogComponent implements OnInit {
+export class GradeDialogComponent implements OnInit {
 
   form!: FormGroup
   obj!: any
@@ -20,7 +20,7 @@ export class RoleDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,
     private _snack: MatSnackBar,
-    private apiService:ApiServiceService,
+    private apiService: ApiServiceService,
     private fb: FormBuilder) { this.createForm() }
 
   ngOnInit(): void {
@@ -35,13 +35,13 @@ export class RoleDialogComponent implements OnInit {
     if (this.form.invalid) { return }
     this.setData()
     if (!this.data.edit) {
-      this.apiService.addRole(this.obj).subscribe({
+      this.apiService.addGrade(this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
       })
     } else {
-      this.apiService.updateRole(this.obj).subscribe({
+      this.apiService.updateGrade(this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
@@ -52,7 +52,7 @@ export class RoleDialogComponent implements OnInit {
   createForm(): void {
     this.form = this.fb.group({
       name: new FormControl('', [Validators.required]),
-      description: new FormControl('', []),
+      // description: new FormControl('', []),
     });
   }
 

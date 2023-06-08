@@ -36,5 +36,41 @@ export let ROUTES: RouteInfo[] = [
     class: '',
     groupTitle: false,
     submenu: []
+  },
+  {
+    path: '/grades',
+    title: 'Grados',
+    moduleName: 'grades',
+    icon: 'monitor',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
+    path: '/sections',
+    title: 'Secciones',
+    moduleName: 'sections',
+    icon: 'monitor',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
+    path: '/groups',
+    title: 'Grupos',
+    moduleName: 'groups',
+    icon: 'monitor',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
+    path: '/education-levels',
+    title: 'Niveles Educativos',
+    moduleName: 'education-levels',
+    icon: 'monitor',
+    class: '',
+    groupTitle: false,
+    submenu: []
   }
 ];

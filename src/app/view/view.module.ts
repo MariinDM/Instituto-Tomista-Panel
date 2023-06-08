@@ -20,6 +20,7 @@ import { EducationLevelsComponent } from './education-levels/education-levels.co
 import { GradesComponent } from './grades/grades.component';
 import { SectionsComponent } from './sections/sections.component';
 import { GroupsComponent } from './groups/groups.component';
+import { GradeDialogComponent } from './grades/grade-dialog/grade-dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -39,6 +40,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GradesComponent,
     SectionsComponent,
     GroupsComponent,
+    GradeDialogComponent,
   ],
   imports: [
     CommonModule,
