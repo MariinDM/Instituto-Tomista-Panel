@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiServiceService } from 'src/app/services/api-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['../../app.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
   loginForm: FormGroup;
@@ -12,8 +14,10 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private apiService: ApiServiceService,
+    private _snack: MatSnackBar,
+  ) { }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: [
@@ -31,7 +35,20 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     } else {
-      this.router.navigate(['/dashboard/main']);
+      this.apiService.sendMailRoute(this.loginForm.value).subscribe({
+        next: (v) => {
+          this.openSnack(v.message)
+          this.router.navigate(['/dashboard']);
+        },
+        error: (e) => {
+          this.openSnack(e.message)
+        }
+      })
     }
+  }
+  openSnack(message: string) {
+    this._snack.open(message, '', {
+      duration: 1000
+    })
   }
 }

@@ -10,6 +10,11 @@ export class ApiServiceService {
 
   constructor(private http: HttpClient) { }
 
+
+  sendMailRoute(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}send/route/signed`, data, {})
+  }
+
   getUsers(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}users`, {})
   }
