@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { environment } from 'src/environments/environment';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
+import { ApiServiceService } from 'src/app/services/api-service.service';
 
 @Component({
   selector: 'app-users',
@@ -32,6 +33,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
+    private apiService: ApiServiceService,
     private _snack: MatSnackBar,
     public dialog: MatDialog,
     private aurhService: AuthService) { }
@@ -48,8 +50,21 @@ export class UsersComponent implements OnInit {
   }
 
   getall(): void {
-    // this.loader = false
+    this.loader = false
     this.dataTable = []
+
+    this.apiService.getUsers().subscribe({
+      next: (v) => {
+        this.dataTable = v.users
+        this.setData()
+        this.loader = true
+      },
+      error: (e) => {
+        console.log(e)
+        this.loader = true
+      }
+    })
+
     // if (this.rol !== '3') {
     //   this.userService.getall(this.code).subscribe((data: any) => {
     //     // console.log(data)
@@ -114,18 +129,11 @@ export class UsersComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  delete(id: number): void {
-    // this.userService.delete(this.code, id).subscribe({
-    //   next: (v) => { this.openSnack(v.message) },
-    //   error: (e) => { this.openSnack(e) },
-    //   complete: () => { this.getall() }
-    // })
-  }
-
-  passwordDefault(obj: any): void {
-    this.aurhService.passwordDefault(this.code, obj).subscribe({
+  delete(data: any): void {
+    this.apiService.deleteUser(data).subscribe({
       next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e) }
+      error: (e) => { this.openSnack(e) },
+      complete: () => { this.getall() }
     })
   }
 
@@ -135,27 +143,12 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  openDialog() {
+  openDialog(edit: boolean, element?: any) {
     this.dialog.open(UserDialogComponent, {
+      data: { edit, element },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
       this.getall()
     })
-  }
-
-  openDialogUpdate(element: any) {
-    for (let i = 0; i < this.dataUser.length; i++) {
-      if (this.dataUser[i].user_id === element.id) {
-        element = this.dataUser[i]
-        break
-      }
-    }
-    // this.dialog.open(UserUpdateDialogComponent, {
-    //   data: { element },
-    //   panelClass: ['dialog-responsive']
-    // }).afterClosed().subscribe(() => {
-    //   this.getall()
-    // })
-    // console.log(element)
   }
 }

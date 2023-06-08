@@ -44,26 +44,15 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
       this.setData()
       this.subs.sink = this.authService.login(this.auth).subscribe({
         next: (v) => {
+          // localStorage.setItem('code', this.code)
+          // localStorage.setItem('rol', this.rol)
+          this.spinner.hide()
+          this.router.navigate(['/dashboard'])
         },
         error: (e) => {
           this.error = e;
           this.submitted = false;
           this.spinner.hide()
-        },
-        complete: () => {
-          let id = ''
-          this.authService.getInfo().subscribe({
-            next: (v) => { this.code = v.profile[0].languages.code, this.rol = v.rol[0].id, id = v.id },
-            error: (e) => { console.log(e) },
-            complete: () => {
-              localStorage.setItem('code', this.code)
-              localStorage.setItem('rol', this.rol)
-              localStorage.setItem('id', id)
-              this.submitted = true
-              this.router.navigate(['/dashboard'])
-              this.spinner.hide()
-            }
-          })
         }
       })
     }

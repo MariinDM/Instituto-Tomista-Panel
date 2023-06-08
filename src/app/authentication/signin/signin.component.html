@@ -8,10 +8,10 @@
               <div>
                 <div class="text-center">
                   <div>
-                    <a routerLink="" class="logo-full"><img class="img-auth" src="assets/images/inercia/logo-inercia.png"></a>
+                    <a routerLink="" class="logo-full"><img class="img-auth" src="assets/images/banner/auth-bg.jpg"></a>
                   </div>
 
-                  <h4 class="font-20 fs-4 mt-4 baby-letter-pink">BIENVENIDO !</h4>
+                  <h4 class="font-20 fs-4 mt-4 text-color">BIENVENIDO !</h4>
                   <!-- <p class="text-muted">Sign in to continue to Lorax.</p> -->
                 </div>
 
@@ -21,23 +21,23 @@
                     <div class="form-group auth-form-group mb-4">
                       <mat-icon matSuffix class="auth-page-icon">email</mat-icon>
                       <input type="email" formControlName="email" class="form-control auth-control" id="email"
-                        placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                        placeholder="Correo" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                       <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        <div *ngIf="f.email.errors.required"> Es requerido</div>
+                        <div *ngIf="f.email.errors.email">Formato Invalido</div>
                       </div>
                     </div>
 
                     <div class="form-group auth-form-group mb-4">
                       <mat-icon matSuffix class="auth-page-icon">vpn_key</mat-icon>
                       <input type="password" formControlName="password" class="form-control auth-control" id="password"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password" />
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Contraseña" />
                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.required">Es requerido</div>
                       </div>
                     </div>
 
-                    <div class="flex-sb-m w-full p-t-15 p-b-20">
+                    <!-- <div class="flex-sb-m w-full p-t-15 p-b-20">
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox" value=""> Remember me
@@ -47,13 +47,13 @@
                         </label>
                       </div>
                       <div>
-                        <!-- <a class="txt1" routerLink="/authentication/forgot-password">Forgot Password?</a> -->
+                         <a class="txt1" routerLink="/authentication/forgot-password">Forgot Password?</a>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="container-login100-form-btn">
-                      <button mat-flat-button class="login100-form-btn baby-purpura" type="submit">
-                        Login
+                      <button mat-flat-button class="login100-form-btn buttons-color" type="submit">
+                        Iniciar Sesión
                       </button>
                     </div>
 

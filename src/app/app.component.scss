@@ -14,20 +14,30 @@ $subtitles: #585858;
 $principal-text: #000000;
 $secondary-text: #585858;
 
-.container-comments{
-    width:auto;
+$navbar-color: $babycare-orange;
+$buttons-color: #ff8400;
+
+.buttons-color{
+    background-color: $buttons-color !important;
+}
+.text-color{
+    color: #FF8C00 !important;
+}
+
+.container-comments {
+    width: auto;
     height: 40vh;
     padding: 1.5rem;
 }
 
-.container-message-left{
-    margin:1.5rem 0rem;
+.container-message-left {
+    margin: 1.5rem 0rem;
     margin-right: 1.5em;
     background-color: $babycare-pink;
 }
 
-.container-message-right{
-    margin:1.5rem 0rem;
+.container-message-right {
+    margin: 1.5rem 0rem;
     margin-left: 1.5rem;
     background-color: $babycare-purpura;
 }
@@ -126,7 +136,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 .navbar,
 .color-baby,
 .navbar-header {
-    background-color: $babycare-pink  !important;
+    background-color: $navbar-color !important;
 }
 
 .spinner-white circle {
@@ -151,7 +161,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .baby-purpura {
-    background-color: $babycare-purpura  !important;
+    background-color: $babycare-purpura !important;
 }
 
 .baby-green {

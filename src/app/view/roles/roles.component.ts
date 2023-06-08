@@ -8,6 +8,7 @@ import { Rol } from 'src/app/interfaces/rol';
 // import { RolesService } from 'src/app/services/roles.service';
 import { RoleDialogComponent } from './role-dialog/role-dialog.component';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
+import { ApiServiceService } from 'src/app/services/api-service.service';
 
 @Component({
   selector: 'app-roles',
@@ -16,20 +17,19 @@ import * as LANGUAGE from 'src/assets/i18n/translate.json';
 })
 export class RolesComponent implements OnInit {
 
-  dataRol!: any[]
+  data!: any[]
   loader = false
-  code = localStorage.getItem('code')
   filter: string = ''
   translate: any = LANGUAGE
 
-  displayedColumns: string[] = ['point', 'name', 'description', 'active', 'actions'];
+  displayedColumns: string[] = ['name', 'description', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    // private rolService: RolesService,
+    private apiService: ApiServiceService,
     private _snack: MatSnackBar,
     public dialog: MatDialog) {
   }
@@ -45,48 +45,40 @@ export class RolesComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    // this.rolService.getall(this.code).subscribe({
-    //   next: (v) => {
-    //     this.dataRol = v.roles
-    //     this.setData()
-    //     this.loader = true
-    //     this.openSnack(v.message)
-    //   },
-    //   error: (e) => {
-    //     this.openSnack(e)
-    //   }
-    // })
+    this.apiService.getRoles().subscribe({
+      next: (v) => {
+        this.data = v.roles
+        this.setData()
+        this.loader = true
+        this.openSnack(v.message)
+      },
+      error: (e) => {
+        this.openSnack(e)
+      }
+    })
     this.filter = ''
   }
 
   setData(): void {
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.dataRol;
+    this.dataSource.data = this.data;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  delete(id: number): void {
-    // this.rolService.delete(this.code, id).subscribe({
-    //   next: (v) => { this.openSnack(v.message) },
-    //   error: (e) => { this.openSnack(e) },
-    //   complete: () => { this.getall() }
-    // })
+  delete(data: any): void {
+    this.apiService.deleteRole(data).subscribe({
+      next: (v) => { this.openSnack(v.message) },
+      error: (e) => { this.openSnack(e) },
+      complete: () => { this.getall() }
+    })
   }
 
   openSnack(message: string) {
     this._snack.open(message, '', { duration: 1000, })
   }
 
-  openDialog(edit: boolean) {
-    this.dialog.open(RoleDialogComponent, {
-      data: { edit },
-      panelClass: ['dialog-responsive']
-    }).afterClosed().subscribe(() => {
-      this.getall()
-    })
-  }
-  openDialogUpdate(element: Rol, edit: boolean) {
+  openDialog(edit: boolean, element?: any) {
     this.dialog.open(RoleDialogComponent, {
       data: { element, edit },
       panelClass: ['dialog-responsive']

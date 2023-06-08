@@ -2,9 +2,9 @@
     <div class="modalHeader">
         <div class="editRowModal">
             <div class="modalHeader clearfix">
-                <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt="">
+                <!-- <img src="assets/images/inercia/logo-inercia.png" class="rounded-circle" width="32" height="32" alt=""> -->
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-5 font-17"> {{translate.users.dialog_add}}</div>
+                    <div class="font-weight-bold p-t-5 font-17"> {{edit ? 'Editar Usuario' : 'Agregar Usuario'}}</div>
                 </div>
             </div>
         </div>
@@ -21,43 +21,15 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>{{translate.users.rol}}</mat-label>
+                        <mat-label>Rol</mat-label>
                         <mat-select formControlName="role_id">
-                            <mat-option *ngFor="let item of dataRoles" [value]="item.id">
+                            <mat-option *ngFor="let item of roles" [value]="item.id">
                                 {{item.name}}
                             </mat-option>
                         </mat-select>
                         <mat-error
                             *ngIf="form.controls['role_id'].hasError('required') || (form.controls['role_id'].dirty || form.controls['role_id'].touched)">
-                            {{translate.validations.required}}</mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-            <!-- DEALER -->
-            <div class="row" *ngIf="select === 4 && rol !== '3'">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>{{translate.sales_views.dealer}}</mat-label>
-                        <mat-select formControlName="dealer">
-                            <mat-option *ngFor="let item of dataSelect" [value]="item">
-                                {{item.users.profile[0].name + ' ' + item.users.profile[0].last_name + ' - ' +
-                                item.users.email }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
-            <!-- INSTRUCTOR -->
-            <div class="row" *ngIf="select === 6 && rol === '4'">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>{{translate.evaluations.instructor}}</mat-label>
-                        <mat-select formControlName="instructor">
-                            <mat-option *ngFor="let item of dataSelect" [value]="item">
-                                {{item.users.profile[0].name + ' ' + item.users.profile[0].last_name + ' - ' +
-                                item.users.email }}
-                            </mat-option>
-                        </mat-select>
+                            Es requerido</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -66,22 +38,22 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>face</mat-icon>
-                        <mat-label>{{translate.users.name}}</mat-label>
+                        <mat-label>Nombre</mat-label>
                         <input matInput placeholder="Ex. Juan" required formControlName="name">
                         <mat-error
                             *ngIf="form.controls['name'].hasError('required') || (form.controls['name'].dirty || form.controls['name'].touched)">
-                            {{translate.validations.required}}
+                            Es requerido
                         </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>face</mat-icon>
-                        <mat-label>{{translate.users.last_name}}</mat-label>
+                        <mat-label>Apellidos</mat-label>
                         <input matInput placeholder="Ex. Torres" required formControlName="last_name">
                         <mat-error
                             *ngIf="form.controls['last_name'].hasError('required') || (form.controls['last_name'].dirty || form.controls['last_name'].touched)">
-                            {{translate.validations.required}}
+                            Es requerido
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -91,165 +63,84 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>email</mat-icon>
-                        <mat-label>{{translate.users.email}}</mat-label>
-                        <input matInput placeholder="Ex. example@gmail.com" required formControlName="email">
+                        <mat-label>Correo</mat-label>
+                        <input matInput placeholder="Ex. example@gmail.com" required formControlName="email" [disabled]="edit">
                         <mat-error
                             *ngIf="form.controls['email'].hasError('required') || (form.controls['email'].dirty || form.controls['email'].touched)">
-                            {{translate.validations.required}}
+                            Es requerido
                         </mat-error>
                         <mat-error
                             *ngIf="form.controls['email'].hasError('email') || (form.controls['email'].dirty || form.controls['email'].touched)">
-                            {{translate.validations.email}}
+                            Formato no correcto
                         </mat-error>
                     </mat-form-field>
                 </div>
             </div>
-            <!-- AGE AND CELLPHONE -->
-            <div class="row" *ngIf="select === 6">
-                <div class='col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2'>
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>{{translate.users.age}}</mat-label>
-                        <input matInput #age placeholder="Ex. 19" maxlength="2" type="text" formControlName="age"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>phone</mat-icon>
-                        <mat-label>{{translate.users.cellphone}}</mat-label>
-                        <input matInput #phone placeholder="Ex. 8745213654" maxlength='10' required
-                            formControlName="phone"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                        <mat-hint align="end">{{phone.value.length}} / 10</mat-hint>
-                        <mat-error
-                            *ngIf="form.controls['phone'].hasError('required') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            {{translate.validations.required}}
-                        </mat-error>
-                        <mat-error
-                            *ngIf="form.controls['phone'].hasError('minlength') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            {{translate.validations.phone}}
-                        </mat-error>
-                        <!-- <mat-error
-                            *ngIf="form.controls['phone'].hasError('pattern') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            Only Numbers
-                        </mat-error> -->
-                    </mat-form-field>
-                </div>
-            </div>
-            <!-- LANGUAGE AND CELLPHONE -->
-            <div class="row" *ngIf="select !== 6">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>{{translate.users.language}}</mat-label>
-                        <mat-select formControlName="language_id">
-                            <mat-option *ngFor="let item of dataLanguages" [value]="item.id">
-                                {{item.name}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error
-                            *ngIf="form.controls['language_id'].hasError('required') || (form.controls['language_id'].dirty || form.controls['language_id'].touched)">
-                            {{translate.validations.required}}
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>phone</mat-icon>
-                        <mat-label>{{translate.users.cellphone}}</mat-label>
-                        <input matInput #phone placeholder="Ex. 8745213654" maxlength='10' required
-                            formControlName="phone"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                        <mat-hint align="end">{{phone.value.length}} / 10</mat-hint>
-                        <mat-error
-                            *ngIf="form.controls['phone'].hasError('required') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            {{translate.validations.required}}
-                        </mat-error>
-                        <mat-error
-                            *ngIf="form.controls['phone'].hasError('minlength') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            {{translate.validations.phone}}
-                        </mat-error>
-                        <!-- <mat-error
-                            *ngIf="form.controls['phone'].hasError('pattern') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
-                            Only Numbers
-                        </mat-error> -->
-                    </mat-form-field>
-                </div>
-            </div>
-            <!-- COUNTRY AND CITY-->
+            <!-- Street, Number, Zip Code -->
             <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-label>{{translate.users.country}}</mat-label>
-                        <mat-select formControlName="country_id" (selectionChange)="getCities($event.value)">
-                            <mat-option *ngFor="let item of dataCountries" [value]="item.id">
-                                {{item.name}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error
-                            *ngIf="form.controls['country_id'].hasError('required') || (form.controls['country_id'].dirty || form.controls['country_id'].touched)">
-                            {{translate.validations.required}}</mat-error>
+                        <mat-label>Calle/Avenida</mat-label>
+                        <input matInput placeholder="Ex. Venenzuela" type="text" formControlName="street">
                     </mat-form-field>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-select placeholder="City" formControlName="cityOption">
-                            <mat-option>
-                                <ngx-mat-select-search [clearSearchInput]="false" formControlName="city_id"
-                                    placeholderLabel="Find City..."
-                                    noEntriesFoundLabel="'No matching city found'"></ngx-mat-select-search>
-                            </mat-option>
-                            <mat-option *ngFor="let item of filteredOptions | async" [value]="item.id">
-                                {{item.name}}
-                            </mat-option>
-                        </mat-select>
+                        <mat-label>Numero</mat-label>
+                        <input matInput placeholder="Ex. 1000" type="text" formControlName="number">
+                    </mat-form-field>
+                </div>
+                <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-label>Codigo Postal</mat-label>
+                        <input matInput placeholder="Ex. 25555" type="text" formControlName="zip_code">
                     </mat-form-field>
                 </div>
             </div>
-            <!-- GRADE AND SECTION -->
-            <div class="row" *ngIf="select == '6'">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <!-- Suburb, City, State -->
+            <div class="row">
+                <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>grade</mat-icon>
-                        <mat-label>{{translate.users.grade}}</mat-label>
-                        <input matInput placeholder="Ex. 5" type="number" formControlName="grade"
+                        <mat-label>Colonia</mat-label>
+                        <input matInput placeholder="Ex. Ciudad Nazas" type="text" formControlName="suburb">
+                    </mat-form-field>
+                </div>
+                <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-label>Ciudad</mat-label>
+                        <input matInput placeholder="Ex. 1000" type="text" formControlName="city">
+                    </mat-form-field>
+                </div>
+                <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-label>Estado</mat-label>
+                        <input matInput placeholder="Ex. 25555" type="text" formControlName="state">
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Phone -->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <mat-label>Telefono</mat-label>
+                        <input matInput #phone placeholder="Ex. 8745213654" maxlength='10' required
+                            formControlName="phone"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        <mat-hint align="end">{{phone.value.length}} / 10</mat-hint>
                         <mat-error
-                            *ngIf="form.controls['grade'].hasError('required') || (form.controls['grade'].dirty || form.controls['grade'].touched)">
-                            {{translate.validations.required}}</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>group_work</mat-icon>
-                        <mat-label>{{translate.users.group}}</mat-label>
-                        <input matInput placeholder="Ex. A" formControlName="group">
+                            *ngIf="form.controls['phone'].hasError('required') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
+                            Es requerido
+                        </mat-error>
                         <mat-error
-                            *ngIf="form.controls['group'].hasError('required') || (form.controls['group'].dirty || form.controls['group'].touched)">
-                            {{translate.validations.required}}</mat-error>
+                            *ngIf="form.controls['phone'].hasError('minlength') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
+                            Es requerido
+                        </mat-error>
+                        <!-- <mat-error
+                            *ngIf="form.controls['phone'].hasError('pattern') || (form.controls['phone'].dirty || form.controls['phone'].touched)">
+                            Only Numbers
+                        </mat-error> -->
                     </mat-form-field>
-                </div>
-            </div>
-            <!-- INSTITUTION -->
-            <div class="row" *ngIf="select == '4' || rol === '4' || rol === '5'">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field appearance="outline" class="mat-form-field example-full-width">
-                        <mat-icon matSuffix>school</mat-icon>
-                        <mat-label>{{translate.users.institution}}</mat-label>
-                        <input matInput placeholder="Ex. Universidad Tecnologica de Torreon"
-                            formControlName="institution">
-                        <mat-error
-                            *ngIf="form.controls['institution'].hasError('required') || (form.controls['institution'].dirty || form.controls['institution'].touched)">
-                            {{translate.validations.required}}</mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-            <!-- PREMIUM -->
-            <div class="row" *ngIf="rol === '1' || rol === '2'">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <p class="ms-1">
-                        <mat-checkbox color="primary" formControlName="premium"> {{translate.shared.premium}}
-                        </mat-checkbox>
-                    </p>
                 </div>
             </div>
             <!-- BUTTONS -->

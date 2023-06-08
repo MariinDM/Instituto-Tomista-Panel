@@ -5,8 +5,8 @@
         (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
       <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
       <a class="navbar-brand" routerLink="dashboard">
-        <img src="assets/images/inercia/inercia-l2.png" alt="" width="32" height="32" />
-        <span class="logo-name">{{ texts.title_header }}</span>
+        <!-- <img src="assets/images/inercia/inercia-l2.png" alt="" width="32" height="32" /> -->
+        <!-- <span class="logo-name">Instituto Tomista</span> -->
       </a>
     </div>
     <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
@@ -40,22 +40,12 @@
                   <ul class="user_dw_menu">
                     <li>
                       <a href="#" routerLink="user/profile" onClick="return false;">
-                        <app-feather-icons [icon]="'users'" [class]="'user-menu-icons'"></app-feather-icons>Account
+                        <app-feather-icons [icon]="'users'" [class]="'user-menu-icons'"></app-feather-icons>Perfil
                       </a>
                     </li>
-                    <!-- <li>
-                      <a href="#" onClick="return false;">
-                        <app-feather-icons [icon]="'mail'" [class]="'user-menu-icons'"></app-feather-icons>Inbox
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" onClick="return false;">
-                        <app-feather-icons [icon]="'settings'" [class]="'user-menu-icons'"></app-feather-icons>Settings
-                      </a>
-                    </li> -->
                     <li>
                       <a href="javascript:void(0);" (click)="logout()">
-                        <app-feather-icons [icon]="'log-out'" [class]="'user-menu-icons'"></app-feather-icons>Logout
+                        <app-feather-icons [icon]="'log-out'" [class]="'user-menu-icons'"></app-feather-icons>Cerrar Sessión
                       </a>
                     </li>
                   </ul>
