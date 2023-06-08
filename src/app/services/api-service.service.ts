@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,6 +13,13 @@ export class ApiServiceService {
 
   sendMailRoute(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}send/route/signed`, data, {})
+  }
+
+  resetPassword(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${data.token}`
+    });
+    return this.http.post<any>(`${environment.apiUrl}reset-password`, data, { headers })
   }
 
   getUsers(): Observable<any> {

@@ -6,15 +6,17 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LockedComponent } from './locked/locked.component';
 import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
-  // { path: 'signup', component: SignupComponent },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  // { path: 'locked', component: LockedComponent },
   { path: 'page404', component: Page404Component },
   { path: 'page500', component: Page500Component }
+  // { path: 'signup', component: SignupComponent },
+  // { path: 'locked', component: LockedComponent },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
