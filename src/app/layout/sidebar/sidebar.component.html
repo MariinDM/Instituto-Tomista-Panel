@@ -7,7 +7,8 @@
         <li class="sidebar-user-panel">
           <div class="user-panel">
             <div class=" image">
-              <img src="{{picture ? user.image : 'assets/images/image-gallery/user.jpg'}}" class="img-circle user-img-circle" alt=""/>
+              <img src="{{picture ? user.image : 'assets/images/image-gallery/user.jpg'}}"
+                class="img-circle user-img-circle" alt="" />
             </div>
           </div>
           <div class="profile-usertitle">
@@ -21,10 +22,10 @@
           <a [routerLink]="sidebarItem.class === '' ? [sidebarItem.path] : null" *ngIf="!sidebarItem.groupTitle;"
             [ngClass]="[sidebarItem.class]" (click)="callLevel1Toggle($event, sidebarItem.moduleName)" class="menu-top">
             <div class="aling-icons-menu">
-              <mat-icon color="primary" aria-hidden="false" aria-label="Example home icon" class="sidebarIcon">{{sidebarItem.icon}}</mat-icon>
-            <!-- <mat-icon>{{sidebarItem.icon}}</mat-icon> -->
-            <span class="hide-menu letters">{{sidebarItem.title | translate}}
-            </span>
+              <mat-icon color="primary" aria-hidden="false" aria-label="Example home icon"
+                class="sidebarIcon">{{sidebarItem.icon}}</mat-icon>
+              <!-- <mat-icon>{{sidebarItem.icon}}</mat-icon> -->
+              <span class="hide-menu letters">{{sidebarItem.title | translate}}</span>
             </div>
           </a>
           <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">

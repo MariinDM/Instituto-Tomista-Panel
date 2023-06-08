@@ -5,8 +5,8 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { RolesService } from 'src/app/services/roles.service';
-import { UsersService } from 'src/app/services/users.service';
+// import { RolesService } from 'src/app/services/roles.service';
+// import { UsersService } from 'src/app/services/users.service';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
 import { debounce, debounceTime, endWith, map, startWith } from 'rxjs/operators';
 
@@ -46,8 +46,8 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   constructor(
     private dialog: MatDialog,
     private _snack: MatSnackBar,
-    private userService: UsersService,
-    private roleService: RolesService,
+    // private userService: UsersService,
+    // private roleService: RolesService,
     private authService: AuthService,
     private fb: FormBuilder) { this.createForm() }
 
@@ -90,88 +90,88 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
   }
 
   getData() {
-    this.roleService.getall(this.code).subscribe({
-      next: (v) => {
-        // console.log(v)
-        switch (this.rol) {
-          // DEVELOPER
-          case '1':
-            for (let i of v.roles) {
-              if (i.id === 2 || i.id === 3 || i.id === 4) {
-                this.dataRoles.push(i)
-              }
-            }
-            break;
-          // ADMIN
-          case '2':
-            for (let i of v.roles) {
-              if (i.id === 3 || i.id === 4) {
-                this.dataRoles.push(i)
-              }
-            }
-            break;
-          // DEALER
-          case '3':
-            for (let i of v.roles) {
-              if (i.id === 4) {
-                this.dataRoles.push(i)
-              }
-            }
-            break;
-          // OWNER
-          case '4':
-            for (let i of v.roles) {
-              if (i.id === 5) {
-                this.dataRoles.push(i)
-              }
-            }
-            break;
-          // INSTRUCTOR
-          case '5':
-            for (let i of v.roles) {
-              if (i.id === 6) {
-                this.dataRoles.push(i)
-              }
-            }
-            break;
-        }
-        this.setRol();
-      },
-      error: (e) => {
-        this.openSnack(e)
-      }
-    })
-    this.userService.getcountries(this.code).subscribe({
-      next: (v) => {
-        this.dataCountries = v.countries
-      },
-      error: (e) => {
-        this.openSnack(e)
-      }
-    })
-    this.userService.getlanguages(this.code).subscribe({
-      next: (v) => {
-        this.dataLanguages = v.languages
-      },
-      error: (e) => {
-        this.openSnack(e)
-      }
-    })
+    // this.roleService.getall(this.code).subscribe({
+    //   next: (v) => {
+    //     // console.log(v)
+    //     switch (this.rol) {
+    //       // DEVELOPER
+    //       case '1':
+    //         for (let i of v.roles) {
+    //           if (i.id === 2 || i.id === 3 || i.id === 4) {
+    //             this.dataRoles.push(i)
+    //           }
+    //         }
+    //         break;
+    //       // ADMIN
+    //       case '2':
+    //         for (let i of v.roles) {
+    //           if (i.id === 3 || i.id === 4) {
+    //             this.dataRoles.push(i)
+    //           }
+    //         }
+    //         break;
+    //       // DEALER
+    //       case '3':
+    //         for (let i of v.roles) {
+    //           if (i.id === 4) {
+    //             this.dataRoles.push(i)
+    //           }
+    //         }
+    //         break;
+    //       // OWNER
+    //       case '4':
+    //         for (let i of v.roles) {
+    //           if (i.id === 5) {
+    //             this.dataRoles.push(i)
+    //           }
+    //         }
+    //         break;
+    //       // INSTRUCTOR
+    //       case '5':
+    //         for (let i of v.roles) {
+    //           if (i.id === 6) {
+    //             this.dataRoles.push(i)
+    //           }
+    //         }
+    //         break;
+    //     }
+    //     this.setRol();
+    //   },
+    //   error: (e) => {
+    //     this.openSnack(e)
+    //   }
+    // })
+    // this.userService.getcountries(this.code).subscribe({
+    //   next: (v) => {
+    //     this.dataCountries = v.countries
+    //   },
+    //   error: (e) => {
+    //     this.openSnack(e)
+    //   }
+    // })
+    // this.userService.getlanguages(this.code).subscribe({
+    //   next: (v) => {
+    //     this.dataLanguages = v.languages
+    //   },
+    //   error: (e) => {
+    //     this.openSnack(e)
+    //   }
+    // })
   }
 
   getCities(event: any) {
-    this.userService.getcities(this.code, event).subscribe({
-      next: (v) => {
-        this.dataCities = v.cities
-        // console.log(this.dataCities)
-        // console.log(v.cities)
-        // this.viewCities = this.dataCities.slice(0, 150);
-        this.autoComplete();
-      },
-      error: (e) => {
-        this.openSnack(e)
-      }
-    })
+    // this.userService.getcities(this.code, event).subscribe({
+    //   next: (v) => {
+    //     this.dataCities = v.cities
+    //     // console.log(this.dataCities)
+    //     // console.log(v.cities)
+    //     // this.viewCities = this.dataCities.slice(0, 150);
+    //     this.autoComplete();
+    //   },
+    //   error: (e) => {
+    //     this.openSnack(e)
+    //   }
+    // })
   }
 
   sendData() {
@@ -184,40 +184,40 @@ export class UserDialogComponent implements OnInit, AfterViewInit {
       this.disabledInputs()
       return
     }
-    this.userService.insert(this.code, this.obj).subscribe({
-      next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e), this.disabledInputs() },
-      complete: () => { this.dialog.closeAll() }
-    })
+    // this.userService.insert(this.code, this.obj).subscribe({
+    //   next: (v) => { this.openSnack(v.message) },
+    //   error: (e) => { this.openSnack(e), this.disabledInputs() },
+    //   complete: () => { this.dialog.closeAll() }
+    // })
   }
 
   changeSelect() {
     this.form.controls['role_id'].valueChanges.subscribe((v) => {
       this.select = v
       // console.log(v)
-      if (this.select === 4) {
-        this.userService.getDealers().subscribe({
-          next: (v) => {
-            this.dataSelect = v.data
-          },
-          error: (e) => {
-            this.openSnack(e)
-          }
-        })
-      } else if (this.select === 6) {
-        this.userService.getInstructors().subscribe({
-          next: (v) => {
-            for (let item of v.data) {
-              if (item.users.profile[0].institution === this.form.controls['institution'].value) {
-                this.dataSelect.push(item)
-              }
-            }
-          },
-          error: (e) => {
-            this.openSnack(e)
-          }
-        })
-      }
+      // if (this.select === 4) {
+      //   this.userService.getDealers().subscribe({
+      //     next: (v) => {
+      //       this.dataSelect = v.data
+      //     },
+      //     error: (e) => {
+      //       this.openSnack(e)
+      //     }
+      //   })
+      // } else if (this.select === 6) {
+      //   this.userService.getInstructors().subscribe({
+      //     next: (v) => {
+      //       for (let item of v.data) {
+      //         if (item.users.profile[0].institution === this.form.controls['institution'].value) {
+      //           this.dataSelect.push(item)
+      //         }
+      //       }
+      //     },
+      //     error: (e) => {
+      //       this.openSnack(e)
+      //     }
+      //   })
+      // }
     })
     this.form.controls['dealer'].valueChanges.subscribe((v) => {
       this.disabledInputs(v.users)

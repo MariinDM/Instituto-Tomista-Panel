@@ -11,105 +11,30 @@ export let ROUTES: RouteInfo[] = [
   //   submenu: []
   // },
   {
-    path: '/',
-    title: 'Inicio',
+    path: '/dashboard',
+    title: 'Dashboard',
     moduleName: 'dashboard',
     icon: 'monitor',
-    class: 'menu-toggle',
+    class: '',
     groupTitle: false,
-    submenu: [
-      {
-        path: '/dashboard',
-        title: 'Estadisticas',
-        moduleName: 'dashboard',
-        icon: 'monitor',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      }
-    ]
+    submenu: []
   },
   {
-    path: '',
-    title: 'Gestion',
-    moduleName: 'gestion',
-    icon: 'user-check',
-    class: 'menu-toggle',
+    path: '/users',
+    title: 'Usuarios',
+    moduleName: 'users',
+    icon: 'monitor',
+    class: '',
     groupTitle: false,
-    submenu: [
-      {
-        path: '/gestion/categorias',
-        title: 'Categorias',
-        moduleName: 'categories',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/gestion/vistas',
-        title: 'Vistas',
-        moduleName: 'views',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/gestion/roles',
-        title: 'Roles',
-        moduleName: 'roles',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/gestion/vistaroles',
-        title: 'Vistas roles',
-        moduleName: 'viewsroles',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/gestion/comunidad',
-        title: 'Comunidad',
-        moduleName: 'community',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      }
-    ]
+    submenu: []
   },
   {
-    path: '',
-    title: 'Usuario',
-    moduleName: 'user',
-    icon: 'anchor',
-    class: 'menu-toggle',
+    path: '/roles',
+    title: 'Roles',
+    moduleName: 'roles',
+    icon: 'monitor',
+    class: '',
     groupTitle: false,
-    submenu: [
-      {
-        path: '/user/usuarios',
-        title: 'Usuarios',
-        moduleName: 'users',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      },
-      {
-        path: '/user/dispositivos',
-        title: 'Dispositivos',
-        moduleName: 'devices',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: []
-      }
-    ]
-  },
+    submenu: []
+  }
 ];

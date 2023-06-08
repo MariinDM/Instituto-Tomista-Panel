@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rol } from 'src/app/interfaces/rol';
-import { RolesService } from 'src/app/services/roles.service';
+// import { RolesService } from 'src/app/services/roles.service';
 import { RoleDialogComponent } from './role-dialog/role-dialog.component';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
@@ -28,7 +28,10 @@ export class RolesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private rolService: RolesService, private _snack: MatSnackBar, public dialog: MatDialog) {
+  constructor(
+    // private rolService: RolesService,
+    private _snack: MatSnackBar,
+    public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -42,18 +45,18 @@ export class RolesComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    this.rolService.getall(this.code).subscribe({
-      next: (v) => {
-        this.dataRol = v.roles
-        this.setData()
-        this.loader = true
-        this.openSnack(v.message)
-      },
-      error: (e)=>{
-        this.openSnack(e)
-      }
-    })
-    this.filter= ''
+    // this.rolService.getall(this.code).subscribe({
+    //   next: (v) => {
+    //     this.dataRol = v.roles
+    //     this.setData()
+    //     this.loader = true
+    //     this.openSnack(v.message)
+    //   },
+    //   error: (e) => {
+    //     this.openSnack(e)
+    //   }
+    // })
+    this.filter = ''
   }
 
   setData(): void {
@@ -64,11 +67,11 @@ export class RolesComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.rolService.delete(this.code,id).subscribe({
-      next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e) },
-      complete: () => { this.getall() }
-    })
+    // this.rolService.delete(this.code, id).subscribe({
+    //   next: (v) => { this.openSnack(v.message) },
+    //   error: (e) => { this.openSnack(e) },
+    //   complete: () => { this.getall() }
+    // })
   }
 
   openSnack(message: string) {

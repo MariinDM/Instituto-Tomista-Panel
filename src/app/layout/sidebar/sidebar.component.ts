@@ -7,7 +7,7 @@ import { RouteInfo } from './sidebar.metadata';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { ViewsrolesService } from 'src/app/services/viewsroles.service';
+// import { ViewsrolesService } from 'src/app/services/viewsroles.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -46,7 +46,7 @@ export class SidebarComponent
     private renderer: Renderer2,
     public elementRef: ElementRef,
     private router: Router,
-    private vrService: ViewsrolesService,
+    // private vrService: ViewsrolesService,
     private cd: ChangeDetectorRef,
     private authService: AuthService,
     private _snack: MatSnackBar
@@ -62,85 +62,85 @@ export class SidebarComponent
     });
   }
   getall(): void {
-    this.vrService.getone(this.code, this.rol).subscribe((data: any) => {
-      this.dataVR = data.role.views
-      // console.log(this.dataVR)
-      if (localStorage.getItem('token')) {
-        //CATEGORIES
-        for (let j = 0; j < this.dataVR.length; j++) {
-          if (this.dataVR[j].categories !== null) {
-            if (this.dataVR[j].categories.active === true) {
-              let route: RouteInfo = null
-              route = {
-                path: '',
-                title: this.dataVR[j].categories.name,
-                moduleName: this.dataVR[j].categories.name,
-                icon: 'monitor',
-                class: 'menu-toggle',
-                groupTitle: false,
-                submenu: []
-              }
-              let image = this.dataVR[j].categories.image
-              if (image != null) {
-                if (image.indexOf('.') == -1) {
-                  route.icon = image
-                }
-              }
-              let name = this.dataVR[j].categories.name
-              if (this.menu.length == 0) {
-                this.menu.push(route)
-              }
-              else {
-                let index = this.menu.findIndex(item => item.moduleName == name)
-                if (index == -1) {
-                  this.menu.push(route)
-                }
-              }
-            }
-          }
-        }
-        //VIEWS
-        for (let j = 0; j < this.menu.length; j++) {
-          for (let i = 0; i < this.dataVR.length; i++) {
-            if (this.dataVR[i].active === true) {
-              let submenu: RouteInfo = null
-              submenu = {
-                path: this.dataVR[i].url,
-                title: this.dataVR[i].name,
-                moduleName: this.dataVR[i].name,
-                icon: '',
-                class: 'ml-menu',
-                groupTitle: false,
-                submenu: []
-              }
-              if (this.dataVR[i].categories !== null) {
-                if (this.menu[j].moduleName == this.dataVR[i].categories.name) {
-                  this.menu[j].submenu.push(submenu)
-                }
-              }
-            }
-          }
-        }
-        for (let h = 0; h < this.menu.length; h++) {
-          this.menu[h].moduleName = this.tolowercase(this.menu[h].moduleName)
-        }
-        this.sidebarItems = this.menu
-      }
-      this.initLeftSidebar();
-      this.bodyTag = this.document.body;
-    })
+    // this.vrService.getone(this.code, this.rol).subscribe((data: any) => {
+    //   this.dataVR = data.role.views
+    //   // console.log(this.dataVR)
+    //   if (localStorage.getItem('token')) {
+    //     //CATEGORIES
+    //     for (let j = 0; j < this.dataVR.length; j++) {
+    //       if (this.dataVR[j].categories !== null) {
+    //         if (this.dataVR[j].categories.active === true) {
+    //           let route: RouteInfo = null
+    //           route = {
+    //             path: '',
+    //             title: this.dataVR[j].categories.name,
+    //             moduleName: this.dataVR[j].categories.name,
+    //             icon: 'monitor',
+    //             class: 'menu-toggle',
+    //             groupTitle: false,
+    //             submenu: []
+    //           }
+    //           let image = this.dataVR[j].categories.image
+    //           if (image != null) {
+    //             if (image.indexOf('.') == -1) {
+    //               route.icon = image
+    //             }
+    //           }
+    //           let name = this.dataVR[j].categories.name
+    //           if (this.menu.length == 0) {
+    //             this.menu.push(route)
+    //           }
+    //           else {
+    //             let index = this.menu.findIndex(item => item.moduleName == name)
+    //             if (index == -1) {
+    //               this.menu.push(route)
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //     //VIEWS
+    //     for (let j = 0; j < this.menu.length; j++) {
+    //       for (let i = 0; i < this.dataVR.length; i++) {
+    //         if (this.dataVR[i].active === true) {
+    //           let submenu: RouteInfo = null
+    //           submenu = {
+    //             path: this.dataVR[i].url,
+    //             title: this.dataVR[i].name,
+    //             moduleName: this.dataVR[i].name,
+    //             icon: '',
+    //             class: 'ml-menu',
+    //             groupTitle: false,
+    //             submenu: []
+    //           }
+    //           if (this.dataVR[i].categories !== null) {
+    //             if (this.menu[j].moduleName == this.dataVR[i].categories.name) {
+    //               this.menu[j].submenu.push(submenu)
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //     for (let h = 0; h < this.menu.length; h++) {
+    //       this.menu[h].moduleName = this.tolowercase(this.menu[h].moduleName)
+    //     }
+        this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
+    //   }
+    //   this.initLeftSidebar();
+    //   this.bodyTag = this.document.body;
+    // })
   }
   getInfo(): void {
-    this.authService.getInfo().subscribe((data: any) => {
-      this.user.name = data.profile[0].name + ' ' + data.profile[0].last_name
-      this.user.rol = data.rol[0].name
-      this.picture = data.profile_picture
-      this.user.image = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
-      // this.institution = environment.apiUrl + 'v1/en/resources/' + data.institution_picture
-      // this.profile = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
-    }, (error: any) => {
-      this.openSnack(error)
-    })
+    // this.authService.getInfo().subscribe((data: any) => {
+    //   this.user.name = data.profile[0].name + ' ' + data.profile[0].last_name
+    //   this.user.rol = data.rol[0].name
+    //   this.picture = data.profile_picture
+    //   this.user.image = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
+    //   // this.institution = environment.apiUrl + 'v1/en/resources/' + data.institution_picture
+    //   // this.profile = environment.apiUrl + 'v1/en/resources/' + data.profile_picture
+    // }, (error: any) => {
+    //   this.openSnack(error)
+    // })
   }
   openSnack(message: string) {
     this._snack.open(message, '', {
