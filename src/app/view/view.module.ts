@@ -21,6 +21,8 @@ import { GradesComponent } from './grades/grades.component';
 import { SectionsComponent } from './sections/sections.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GradeDialogComponent } from './grades/grade-dialog/grade-dialog.component';
+import { SectionDialogComponent } from './sections/section-dialog/section-dialog.component';
+import { GroupDialogComponent } from './groups/group-dialog/group-dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -41,6 +43,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SectionsComponent,
     GroupsComponent,
     GradeDialogComponent,
+    SectionDialogComponent,
+    GroupDialogComponent,
   ],
   imports: [
     CommonModule,
