@@ -43,7 +43,7 @@ export class AuthService {
 
   logout(): Observable<any> {
     const token: any = localStorage.getItem('token')
-    return this.http.post(`${environment.apiUrl}auth/en/logout`, token)
+    return this.http.post(`${environment.apiUrl}logout`, token)
   }
 
   getInfo(): Observable<any> {
