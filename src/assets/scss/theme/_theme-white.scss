@@ -10,7 +10,7 @@
     background-color: transparent;
   }
   .navbar.active {
-    background-color: $theme-white !important;
+    background-color: black !important;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     .nav {
       > li {
@@ -83,7 +83,7 @@
 
       .copyright {
         a {
-          color: $theme-white !important;
+          color: black !important;
         }
       }
     }

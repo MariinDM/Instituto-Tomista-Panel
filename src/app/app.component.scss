@@ -6,7 +6,7 @@ $babycare-magenta: #f677b3;
 $babycare-aquamarine: #2fdadc;
 $babycare-salmon: #f69577;
 $babycare-blue: #879bf2;
-$babycare-orange: #f7b167;
+$babycare-orange: black;
 $babycare-purpure: #b167f7;
 $babycare-gray: #b3b3b4;
 $titles: #000000;
@@ -18,7 +18,7 @@ $navbar-color: $babycare-orange;
 $buttons-color: #ff8400;
 
 .buttons-color{
-    background-color: $buttons-color !important;
+    background-color: #11a8ab !important;
 }
 .text-color{
     color: #FF8C00 !important;
@@ -61,8 +61,8 @@ $buttons-color: #ff8400;
 }
 
 .img-auth {
-    max-width: 70% !important;
-    padding: 1rem;
+    max-width: 100% !important;
+    // padding: 1rem;
 }
 
 .mr-5 {
@@ -136,7 +136,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 .navbar,
 .color-baby,
 .navbar-header {
-    background-color: $navbar-color !important;
+    background-color: #394264 !important;
 }
 
 .spinner-white circle {

@@ -7,7 +7,7 @@ import { GradesComponent } from './grades/grades.component';
 import { SectionsComponent } from './sections/sections.component';
 import { GroupsComponent } from './groups/groups.component';
 import { EducationLevelsComponent } from './education-levels/education-levels.component';
-
+import { ProfileComponent } from './profile/profile/profile.component';
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [] },
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'grades', component: GradesComponent, canActivate: [] },
   { path: 'sections', component: SectionsComponent, canActivate: [] },
   { path: 'groups', component: GroupsComponent, canActivate: [] },
+  { path: 'profile', component: ProfileComponent, canActivate: [] },
   { path: 'education-levels', component: EducationLevelsComponent, canActivate: [] },
 ];
 

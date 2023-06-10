@@ -4,7 +4,7 @@
  *  Description: This scss file for left side bar style classes
  */
 
-@import '../theme/theme-color-variables';
+@import "../theme/theme-color-variables";
 
 .overlay {
   position: fixed;
@@ -27,7 +27,7 @@
 .sidebar {
   @include transition(all 0.5s);
   font-family: $sidebar-font-family;
-  background: #ffffff;
+  background: #394264;
   width: 260px;
   overflow: hidden;
   display: inline-block;
@@ -123,7 +123,9 @@
       li {
         &.active {
           .menu-top {
-            background-color: #f0f3fb;
+            background: #50597b;
+            border-bottom: 4px solid #11a8ab;
+            text-decoration: none;
           }
           > :first-child {
             span {
@@ -186,12 +188,12 @@
         }
 
         &:before {
-          content: '+';
+          content: "+";
           @include transform(scale(1));
         }
 
         &:after {
-          content: '\2013';
+          content: "\2013";
           @include transform(scale(0));
         }
       }
@@ -218,12 +220,12 @@
         }
 
         &:before {
-          content: '+';
+          content: "+";
           @include transform(scale(1));
         }
 
         &:after {
-          content: '\2013';
+          content: "\2013";
           @include transform(scale(0));
         }
       }
@@ -264,7 +266,7 @@
 
         span {
           margin: 7px 0 7px 3px;
-          color: #333;
+          color: #ffffff;
           // font-weight: bold;
           font-size: 14px;
           overflow: hidden;
@@ -294,7 +296,7 @@
           &.active {
             a.toggled:not(.menu-toggle) {
               &:before {
-                content: '';
+                content: "";
                 display: block;
                 width: 7px;
                 height: 7px;
@@ -317,8 +319,8 @@
 
             a {
               &:before {
-                content: '\f105';
-                font-family: 'Font Awesome 5 Free';
+                content: "\f105";
+                font-family: "Font Awesome 5 Free";
                 font-size: 13px;
                 display: block;
                 width: 7px;
@@ -493,7 +495,7 @@
           width: 0;
           height: 0;
           margin-left: -16px;
-          content: ' ';
+          content: " ";
           pointer-events: none;
           border: solid transparent;
           border-width: 9px;
@@ -508,7 +510,7 @@
           width: 0;
           height: 0;
           margin-left: -16px;
-          content: ' ';
+          content: " ";
           pointer-events: none;
           border: solid transparent;
           border-width: 9px;
@@ -542,7 +544,7 @@
         position: relative;
 
         &:after {
-          content: '\2023';
+          content: "\2023";
           position: absolute;
           right: 0;
           font-size: 25px;
@@ -719,8 +721,8 @@
     }
   }
   .menu .list .ml-menu .active a::before {
-    content: '\f105';
-    font-family: 'Font Awesome 5 Free';
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
     font-size: 13px;
     display: block;
     width: 7px;
@@ -742,8 +744,8 @@
   padding: 25px 10px 10px 0;
 
   .image {
-    width: 35%;
-    max-width: 75px;
+    width: auto;
+    max-width: 150px;
     margin: 0 auto;
 
     img {
@@ -760,6 +762,7 @@
 
 .img-circle {
   border-radius: 50%;
+  background-color: white;
 }
 
 .profile-usertitle {

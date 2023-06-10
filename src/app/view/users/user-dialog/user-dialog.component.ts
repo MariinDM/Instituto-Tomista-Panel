@@ -60,7 +60,9 @@ export class UserDialogComponent implements OnInit {
     this.setData()
     if (!this.edit) {
       this.apiService.addUser(this.obj).subscribe({
-        next: (v) => { this.openSnack(v.message) },
+        next: (v) => { 
+          console.log(v)
+          this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
       })

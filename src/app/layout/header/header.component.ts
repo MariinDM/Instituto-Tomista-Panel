@@ -220,13 +220,15 @@ export class HeaderComponent extends UnsubscribeOnDestroyAdapter implements OnIn
 
   logout() {
     this.spinner.show()
-    this.authService.logout().subscribe((res: any) => {
-      // console.log(res)
-      localStorage.clear()
-    })
-    timer(1000).subscribe(()=>{
-      this.router.navigate(['/authentication/signin']);
-      this.spinner.hide()
-    })
+    localStorage.removeItem("token");
+    this.router.navigate(['/authentication/signin']);
+    this.spinner.hide()
+    // this.authService.logout().subscribe((res: any) => {
+    //   // console.log(res)
+    //   localStorage.clear()
+    // })
+    // timer(1000).subscribe(()=>{
+     
+    // })
   }
 }

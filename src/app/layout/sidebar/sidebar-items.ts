@@ -14,7 +14,7 @@ export let ROUTES: RouteInfo[] = [
     path: '/dashboard',
     title: 'Dashboard',
     moduleName: 'dashboard',
-    icon: 'monitor',
+    icon: 'category',
     class: '',
     groupTitle: false,
     submenu: []
@@ -23,7 +23,7 @@ export let ROUTES: RouteInfo[] = [
     path: '/users',
     title: 'Usuarios',
     moduleName: 'users',
-    icon: 'monitor',
+    icon: 'person',
     class: '',
     groupTitle: false,
     submenu: []
@@ -32,7 +32,7 @@ export let ROUTES: RouteInfo[] = [
     path: '/roles',
     title: 'Roles',
     moduleName: 'roles',
-    icon: 'monitor',
+    icon: 'badge',
     class: '',
     groupTitle: false,
     submenu: []
@@ -41,7 +41,7 @@ export let ROUTES: RouteInfo[] = [
     path: '/grades',
     title: 'Grados',
     moduleName: 'grades',
-    icon: 'monitor',
+    icon: 'grade',
     class: '',
     groupTitle: false,
     submenu: []
@@ -50,7 +50,7 @@ export let ROUTES: RouteInfo[] = [
     path: '/sections',
     title: 'Secciones',
     moduleName: 'sections',
-    icon: 'monitor',
+    icon: 'filter_list',
     class: '',
     groupTitle: false,
     submenu: []
@@ -59,7 +59,7 @@ export let ROUTES: RouteInfo[] = [
     path: '/groups',
     title: 'Grupos',
     moduleName: 'groups',
-    icon: 'monitor',
+    icon: 'group',
     class: '',
     groupTitle: false,
     submenu: []
@@ -68,7 +68,7 @@ export let ROUTES: RouteInfo[] = [
     path: '/education-levels',
     title: 'Niveles Educativos',
     moduleName: 'education-levels',
-    icon: 'monitor',
+    icon: 'school',
     class: '',
     groupTitle: false,
     submenu: []

@@ -46,6 +46,7 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
         next: (v) => {
           // localStorage.setItem('code', this.code)
           // localStorage.setItem('rol', this.rol)
+          console.log("DATOS",v)
           this.spinner.hide()
           this.router.navigate(['/dashboard'])
         },

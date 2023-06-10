@@ -26,6 +26,14 @@ export class ApiServiceService {
     return this.http.get<any>(`${environment.apiUrl}users`, {})
   }
 
+  // getUser(): Observable<any> {
+  //   return this.http.get<any>(`${environment.apiUrl}/user-profile`, {})
+  // }
+  getUser(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}user-profile/${id}`);
+  }
+  
+
   addUser(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}users`, data, {})
   }
@@ -116,6 +124,22 @@ export class ApiServiceService {
 
   deleteEducationLevel(data: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}education/levels/${data.id}`, {})
+  }
+
+  getLevel(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}level`, {})
+  }
+
+  addLevel(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}level`, data, {})
+  }
+
+  updateLevel(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}level/${data.id}`, data, {})
+  }
+
+  deleteLevel(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}level/${data.id}`, {})
   }
 
 

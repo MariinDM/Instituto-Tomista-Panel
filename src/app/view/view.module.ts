@@ -23,7 +23,8 @@ import { GroupsComponent } from './groups/groups.component';
 import { GradeDialogComponent } from './grades/grade-dialog/grade-dialog.component';
 import { SectionDialogComponent } from './sections/section-dialog/section-dialog.component';
 import { GroupDialogComponent } from './groups/group-dialog/group-dialog.component';
-
+import { ProfileComponent } from './profile/profile/profile.component';
+import { LevelDialogComponent } from './education-levels/level-dialog/level-dialog.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false
@@ -32,7 +33,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     DashboardComponent,
+    LevelDialogComponent,
     RolesComponent,
+    ProfileComponent,
     UsersComponent,
     RoleDialogComponent,
     UserDialogComponent,

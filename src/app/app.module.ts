@@ -25,6 +25,8 @@ import { WINDOW_PROVIDERS } from './core/service/window.service';
 import { InterceptorService } from './services/interceptor.service';
 import { QRCodeModule } from 'angularx-qrcode';
 
+
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false
@@ -43,6 +45,7 @@ export function createTranslateLoader(http: HttpClient): any {
     RightSidebarComponent,
     AuthLayoutComponent,
     MainLayoutComponent,
+   
   ],
   imports: [
     BrowserModule,
