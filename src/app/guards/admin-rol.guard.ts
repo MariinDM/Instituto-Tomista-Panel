@@ -13,7 +13,7 @@ export class AdminRolGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
     const rol = localStorage.getItem('rol')
-    if (rol == '1' || rol == '2') {
+    if (rol == '1') {
       return true
     }
     this.spinner.hide()

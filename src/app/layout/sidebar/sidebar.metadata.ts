@@ -6,5 +6,6 @@ export interface RouteInfo {
   icon: string;
   class: string;
   groupTitle: boolean;
+  rol: number;
   submenu: RouteInfo[];
 }

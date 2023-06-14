@@ -19,13 +19,13 @@ export class DashboardComponent implements OnInit {
   loader = true
   filter: string = ''
   //DATOS
-  nombre:string ="";
-  email:string = "";
+  nombre: string = "";
+  email: string = "";
 
   //FECHA
-  dia:any;
-  mes:string = "";
-  
+  dia: any;
+  mes: string = "";
+
   displayedColumns: string[] = ['name', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
 
@@ -37,101 +37,86 @@ export class DashboardComponent implements OnInit {
     private _snack: MatSnackBar,
     public dialog: MatDialog) { }
   ngOnInit(): void {
-    
-    const userId = JSON.parse(localStorage.getItem('userId'));
-    this.fecha();
-this.apiService.getUser(userId).subscribe(
-  (response) => {
-    // Maneja la respuesta del servidor
-    console.log(response);
 
-    const user = {
-      id: response.id,
-      role: response.role_id,
-      email: response.email,
-      name: response.name,
-      last_name: response.last_name,
-      street: response.street,
-      number: response.number,
-      suburb: response.suburb,
-      city: response.city,
-      state: response.state,
-      zip_code: response.zip_code,
-      phone: response.phone
-    };
-    
-    // Convertir el objeto a una cadena de texto JSON
-    const userJson = JSON.stringify(user);
-    
-    // Guardar la cadena de texto en el localStorage
-    localStorage.setItem('UserData', userJson);
+    // const userId = JSON.parse(localStorage.getItem('userId'));
+    // this.fecha();
+    // this.apiService.getUser(userId).subscribe(
+    //   (response) => {
+    //     // Maneja la respuesta del servidor
+    //     console.log(response);
 
-    const userDataJson = localStorage.getItem('UserData');
-    const userData = JSON.parse(userDataJson);
-    this.nombre = userData.name + " " + user.last_name
-    // let { name, last_name } = userData;
-    this.email = userData.email;
+    //     const user = {
+    //       id: response.id,
+    //       role: response.role_id,
+    //       email: response.email,
+    //       name: response.name,
+    //       last_name: response.last_name,
+    //       street: response.street,
+    //       number: response.number,
+    //       suburb: response.suburb,
+    //       city: response.city,
+    //       state: response.state,
+    //       zip_code: response.zip_code,
+    //       phone: response.phone
+    //     };
 
-    
-  },
-  (error) => {
-    // Maneja los errores de la solicitud
-    console.error(error);
+    //     // Convertir el objeto a una cadena de texto JSON
+    //     const userJson = JSON.stringify(user);
+
+    //     // Guardar la cadena de texto en el localStorage
+    //     localStorage.setItem('UserData', userJson);
+
+    //     const userDataJson = localStorage.getItem('UserData');
+    //     const userData = JSON.parse(userDataJson);
+    //     this.nombre = userData.name + " " + user.last_name
+    //     // let { name, last_name } = userData;
+    //     this.email = userData.email;
+
+
+    //   },
+    //   (error) => {
+    //     // Maneja los errores de la solicitud
+    //     console.error(error);
+    //   }
+    // );
+
   }
-);
-
-  }
-
-
-  // changepass(): void {
-  //   return Swal.fire({
-  //     position: 'center',
-  //     icon: 'warning',
-  //     text: "olaaaa",
-  //     showCancelButton: true,
-  //     cancelButtonText: false,
-  //     cancelButtonColor: '#ce2b16',
-  //     showConfirmButton: true,
-  //     confirmButtonText: confirm,
-  //     confirmButtonColor: '#65c005',
-  //   });
-  // }
 
   fecha(): void {
     // Obtener la fecha actual
-const fechaActual = new Date();
+    const fechaActual = new Date();
 
-// Obtener el número del día
-const numeroDia = fechaActual.getDate();
+    // Obtener el número del día
+    const numeroDia = fechaActual.getDate();
 
-// Obtener el nombre del mes en español
-const nombreMes = obtenerNombreMesEnEspanol(fechaActual.getMonth());
+    // Obtener el nombre del mes en español
+    const nombreMes = obtenerNombreMesEnEspanol(fechaActual.getMonth());
 
-// Función para obtener el nombre del mes en español
-function obtenerNombreMesEnEspanol(mes) {
-  const mesesEnEspanol = [
-    'enero',
-    'febrero',
-    'marzo',
-    'abril',
-    'mayo',
-    'junio',
-    'julio',
-    'agosto',
-    'septiembre',
-    'octubre',
-    'noviembre',
-    'diciembre'
-  ];
+    // Función para obtener el nombre del mes en español
+    function obtenerNombreMesEnEspanol(mes) {
+      const mesesEnEspanol = [
+        'enero',
+        'febrero',
+        'marzo',
+        'abril',
+        'mayo',
+        'junio',
+        'julio',
+        'agosto',
+        'septiembre',
+        'octubre',
+        'noviembre',
+        'diciembre'
+      ];
 
-  return mesesEnEspanol[mes];
-}
-
-// Mostrar el número del día y el nombre del mes en español
-console.log(`${numeroDia} ${nombreMes}`);
-this.dia = numeroDia;
-this.mes = nombreMes;
-
+      return mesesEnEspanol[mes];
     }
-  
+
+    // Mostrar el número del día y el nombre del mes en español
+    console.log(`${numeroDia} ${nombreMes}`);
+    this.dia = numeroDia;
+    this.mes = nombreMes;
+
+  }
+
 }

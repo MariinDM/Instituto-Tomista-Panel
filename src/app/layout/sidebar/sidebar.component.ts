@@ -124,7 +124,7 @@ export class SidebarComponent
     //     for (let h = 0; h < this.menu.length; h++) {
     //       this.menu[h].moduleName = this.tolowercase(this.menu[h].moduleName)
     //     }
-        this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
+    this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
     //   }
     //   this.initLeftSidebar();
     //   this.bodyTag = this.document.body;

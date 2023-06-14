@@ -17,10 +17,11 @@ $secondary-text: #585858;
 $navbar-color: $babycare-orange;
 $buttons-color: #ff8400;
 
-.buttons-color{
+.buttons-color {
     background-color: #11a8ab !important;
 }
-.text-color{
+
+.text-color {
     color: #FF8C00 !important;
 }
 
@@ -224,4 +225,13 @@ th {
     text-align: center;
     font-weight: 600;
     font-size: 5rem;
+}
+
+
+::ng-deep.mat-icon.mat-primary {
+    color: white;
+}
+
+::ng-deep.theme-white .navbar.active .nav-notification-icons .mat-icon{
+    color: white;
 }

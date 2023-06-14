@@ -9,20 +9,20 @@ import { Auth } from "../interfaces/user";
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(user: Auth): Observable<any> {
     return this.http.post(`${environment.apiUrl}login`, user).pipe(
       map((res: any) => {
         //console.log("res",res)
-        this.saveToken(res.token.token);
+        this.saveToken(res.token);
         // Supongamos que tienes el ID en una variable llamada "id"
-console.log(res.token.userid)
+        // console.log(res.token)
         // Guardar el ID en el localStorage
-        localStorage.setItem("userId", res.userId);
+        // localStorage.setItem("userId", res.userId);
 
         // Obtener el ID del localStorage
-        const storedId = localStorage.getItem("userId");
+        // const storedId = localStorage.getItem("userId");
 
         // Comprobar si el ID está almacenado y convertirlo a un número entero
         // if (storedId) {
@@ -60,7 +60,7 @@ console.log(res.token.userid)
   }
 
   getInfo(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}auth/en/me`);
+    return this.http.get(`${environment.apiUrl}me`, {});
   }
 
   changePassword(code: string, obj: any): Observable<any> {

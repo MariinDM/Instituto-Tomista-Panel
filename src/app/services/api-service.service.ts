@@ -26,9 +26,6 @@ export class ApiServiceService {
     return this.http.get<any>(`${environment.apiUrl}users`, {})
   }
 
-  // getUser(): Observable<any> {
-  //   return this.http.get<any>(`${environment.apiUrl}/user-profile`, {})
-  // }
   getUser(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}user-profile/${id}`);
   }
