@@ -25,6 +25,10 @@ import { SectionDialogComponent } from './sections/section-dialog/section-dialog
 import { GroupDialogComponent } from './groups/group-dialog/group-dialog.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { LevelDialogComponent } from './education-levels/level-dialog/level-dialog.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { DialogQuestionsComponent } from './questions/dialog-questions/dialog-questions.component';
+import { LessonsComponent } from './lessons/lessons.component';
+import { DialogLessonComponent } from './lessons/dialog-lesson/dialog-lesson.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false
@@ -48,6 +52,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GradeDialogComponent,
     SectionDialogComponent,
     GroupDialogComponent,
+    QuestionsComponent,
+    DialogQuestionsComponent,
+    LessonsComponent,
+    DialogLessonComponent,
   ],
   imports: [
     CommonModule,

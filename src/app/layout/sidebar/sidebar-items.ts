@@ -17,7 +17,6 @@ export let ROUTES: RouteInfo[] = [
     icon: 'category',
     class: '',
     groupTitle: false,
-    rol: 0,
     submenu: []
   },
   {
@@ -27,7 +26,6 @@ export let ROUTES: RouteInfo[] = [
     icon: 'person',
     class: '',
     groupTitle: false,
-    rol: 1,
     submenu: []
   },
   {
@@ -37,7 +35,6 @@ export let ROUTES: RouteInfo[] = [
     icon: 'badge',
     class: '',
     groupTitle: false,
-    rol: 1,
     submenu: []
   },
   {
@@ -47,7 +44,6 @@ export let ROUTES: RouteInfo[] = [
     icon: 'grade',
     class: '',
     groupTitle: false,
-    rol: 1,
     submenu: []
   },
   {
@@ -57,7 +53,6 @@ export let ROUTES: RouteInfo[] = [
     icon: 'filter_list',
     class: '',
     groupTitle: false,
-    rol: 1,
     submenu: []
   },
   {
@@ -67,7 +62,6 @@ export let ROUTES: RouteInfo[] = [
     icon: 'group',
     class: '',
     groupTitle: false,
-    rol: 1,
     submenu: []
   },
   // {

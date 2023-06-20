@@ -12,7 +12,7 @@ export class AdminRolGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
-    const rol = localStorage.getItem('rol')
+    const rol = localStorage.getItem('role')
     if (rol == '1') {
       return true
     }

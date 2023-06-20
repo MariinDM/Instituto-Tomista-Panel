@@ -26,10 +26,9 @@ export class ApiServiceService {
     return this.http.get<any>(`${environment.apiUrl}users`, {})
   }
 
-  getUser(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}user-profile/${id}`);
+  profile(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}me`,{});
   }
-  
 
   addUser(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}users`, data, {})
@@ -57,6 +56,34 @@ export class ApiServiceService {
 
   deleteRole(data: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}roles/${data.id}`, {})
+  }
+
+  getViews(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}views`, {})
+  }
+
+  addView(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}views`, data, {})
+  }
+
+  updateView(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}views/${data.id}`, data, {})
+  }
+
+  deleteView(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}views/${data.id}`, {})
+  }
+
+  getRoleViews(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}roleViews`, {})
+  }
+
+  getRoleViewUser(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}roleViews/1`, {})
+  }
+
+  addRoleView(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}roleViews`, data, {})
   }
 
   getGrades(): Observable<any> {
@@ -124,20 +151,19 @@ export class ApiServiceService {
   }
 
   getLevel(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}level`, {})
+    return this.http.get<any>(`${environment.apiUrl}education/levels`, {})
   }
 
   addLevel(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}level`, data, {})
+    return this.http.post<any>(`${environment.apiUrl}education/levels`, data, {})
   }
 
   updateLevel(data: any): Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}level/${data.id}`, data, {})
+    return this.http.put<any>(`${environment.apiUrl}education/levels/${data.id}`, data, {})
   }
 
   deleteLevel(data: any): Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}level/${data.id}`, {})
+    return this.http.delete<any>(`${environment.apiUrl}education/levels/${data.id}`, {})
   }
-
 
 }

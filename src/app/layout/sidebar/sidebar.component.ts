@@ -7,6 +7,7 @@ import { RouteInfo } from './sidebar.metadata';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import { ApiServiceService } from 'src/app/services/api-service.service';
 // import { ViewsrolesService } from 'src/app/services/viewsroles.service';
 
 @Component({
@@ -28,11 +29,7 @@ export class SidebarComponent
   headerHeight = 60;
   routerObj = null;
 
-  user: any = {
-    name: '',
-    rol: '',
-    image: ''
-  }
+  user: any = {}
   picture: string = ''
   image: string = null
   code = localStorage.getItem('code')
@@ -46,7 +43,7 @@ export class SidebarComponent
     private renderer: Renderer2,
     public elementRef: ElementRef,
     private router: Router,
-    // private vrService: ViewsrolesService,
+    private apiService: ApiServiceService,
     private cd: ChangeDetectorRef,
     private authService: AuthService,
     private _snack: MatSnackBar
@@ -62,6 +59,28 @@ export class SidebarComponent
     });
   }
   getall(): void {
+    this.sidebarItems = []
+    this.apiService.getRoleViewUser().subscribe({
+      next: (v) => {
+        for (let i = 0; i < v.roleViews.length; i++) {
+          let route: RouteInfo = null
+          route = {
+            path: v.roleViews[i].views.route,
+            title: v.roleViews[i].views.name,
+            moduleName: v.roleViews[i].views.name,
+            icon: v.roleViews[i].views.icon,
+            class: '',
+            groupTitle: false,
+            submenu: []
+          }
+
+          this.sidebarItems.push(route)
+        }
+      },
+      error: (e) => {
+
+      }
+    })
     // this.vrService.getone(this.code, this.rol).subscribe((data: any) => {
     //   this.dataVR = data.role.views
     //   // console.log(this.dataVR)
@@ -124,13 +143,27 @@ export class SidebarComponent
     //     for (let h = 0; h < this.menu.length; h++) {
     //       this.menu[h].moduleName = this.tolowercase(this.menu[h].moduleName)
     //     }
-    this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
+    // this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
     //   }
     //   this.initLeftSidebar();
     //   this.bodyTag = this.document.body;
     // })
   }
   getInfo(): void {
+    this.apiService.profile().subscribe({
+      next: (v) => {
+        localStorage.setItem('role', v.me.role_id)
+        // console.log(v)
+        this.user = v.me
+
+        this.user.full_name = `${this.user.profile.name} ${this.user.profile.last_name}`
+        this.user.role_name = this.user.role.name
+      },
+      error: (e) => {
+        console.log(e)
+      }
+    })
+
     // this.authService.getInfo().subscribe((data: any) => {
     //   this.user.name = data.profile[0].name + ' ' + data.profile[0].last_name
     //   this.user.rol = data.rol[0].name

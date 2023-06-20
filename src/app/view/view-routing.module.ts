@@ -9,6 +9,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { EducationLevelsComponent } from './education-levels/education-levels.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { AdminRolGuard } from '../guards/admin-rol.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [] },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'grades', component: GradesComponent, canActivate: [AdminRolGuard] },
   { path: 'sections', component: SectionsComponent, canActivate: [AdminRolGuard] },
   { path: 'groups', component: GroupsComponent, canActivate: [AdminRolGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AdminRolGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [] },
   { path: 'education-levels', component: EducationLevelsComponent, canActivate: [AdminRolGuard] },
 ];
 
