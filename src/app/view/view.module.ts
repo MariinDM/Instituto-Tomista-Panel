@@ -23,12 +23,13 @@ import { GroupsComponent } from './groups/groups.component';
 import { GradeDialogComponent } from './grades/grade-dialog/grade-dialog.component';
 import { SectionDialogComponent } from './sections/section-dialog/section-dialog.component';
 import { GroupDialogComponent } from './groups/group-dialog/group-dialog.component';
-import { ProfileComponent } from './profile/profile/profile.component';
 import { LevelDialogComponent } from './education-levels/level-dialog/level-dialog.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { DialogQuestionsComponent } from './questions/dialog-questions/dialog-questions.component';
 import { LessonsComponent } from './lessons/lessons.component';
 import { DialogLessonComponent } from './lessons/dialog-lesson/dialog-lesson.component';
+import { ProfileComponentDash } from '../profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false
@@ -56,6 +57,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DialogQuestionsComponent,
     LessonsComponent,
     DialogLessonComponent,
+    ProfileComponentDash
   ],
   imports: [
     CommonModule,

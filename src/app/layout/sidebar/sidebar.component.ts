@@ -1,14 +1,12 @@
-import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, ElementRef, OnInit, AfterViewInit, Renderer2, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ROUTES } from './sidebar-items';
+import { Component, Inject, ElementRef, OnInit, Renderer2, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { RouteInfo } from './sidebar.metadata';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { ApiServiceService } from 'src/app/services/api-service.service';
-// import { ViewsrolesService } from 'src/app/services/viewsroles.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -158,6 +156,7 @@ export class SidebarComponent
 
         this.user.full_name = `${this.user.profile.name} ${this.user.profile.last_name}`
         this.user.role_name = this.user.role.name
+        this.user.img = `${environment.apiUrl}get/profile/picture/${this.user.profile.image}`
       },
       error: (e) => {
         console.log(e)

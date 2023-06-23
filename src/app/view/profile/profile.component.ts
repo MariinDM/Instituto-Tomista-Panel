@@ -63,26 +63,26 @@ export class ProfileComponent implements OnInit {
   getall(): void {
     this.loader = false
     this.data = []
-    this.apiService.getGroups().subscribe({
-      next: (v) => {
-        this.dataRes = v.group
-        v.group.forEach(element => {
-          let obj = {
-            id: element.id,
-            grade: element.grade.name,
-            section: element.section.name,
-            active: element.active,
-          }
-          this.data.push(obj)
-        });
-        this.setData()
-        this.loader = true
-      },
-      error: (e) => {
-        console.log(e)
-        this.loader = true
-      }
-    })
+    // this.apiService.getGroups().subscribe({
+    //   next: (v) => {
+    //     this.dataRes = v.group
+    //     v.group.forEach(element => {
+    //       let obj = {
+    //         id: element.id,
+    //         grade: element.grade.name,
+    //         section: element.section.name,
+    //         active: element.active,
+    //       }
+    //       this.data.push(obj)
+    //     });
+    //     this.setData()
+    //     this.loader = true
+    //   },
+    //   error: (e) => {
+    //     console.log(e)
+    //     this.loader = true
+    //   }
+    // })
     this.filter = ''
   }
 
@@ -94,11 +94,11 @@ export class ProfileComponent implements OnInit {
   }
 
   delete(data: any): void {
-    this.apiService.deleteGroup(data).subscribe({
-      next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e) },
-      complete: () => { this.getall() }
-    })
+    // this.apiService.deleteGroup(data).subscribe({
+    //   next: (v) => { this.openSnack(v.message) },
+    //   error: (e) => { this.openSnack(e) },
+    //   complete: () => { this.getall() }
+    // })
   }
 
   openSnack(message: string) {
