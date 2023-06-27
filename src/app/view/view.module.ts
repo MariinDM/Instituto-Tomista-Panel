@@ -30,6 +30,8 @@ import { LessonsComponent } from './lessons/lessons.component';
 import { DialogLessonComponent } from './lessons/dialog-lesson/dialog-lesson.component';
 import { ProfileComponentDash } from '../profile/profile.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TestsComponent } from './tests/tests.component';
+import { DialogTestComponent } from './tests/dialog-test/dialog-test.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false
@@ -57,7 +59,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DialogQuestionsComponent,
     LessonsComponent,
     DialogLessonComponent,
-    ProfileComponentDash
+    ProfileComponentDash,
+    TestsComponent,
+    DialogTestComponent
   ],
   imports: [
     CommonModule,

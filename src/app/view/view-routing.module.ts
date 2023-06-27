@@ -9,7 +9,8 @@ import { GroupsComponent } from './groups/groups.component';
 import { EducationLevelsComponent } from './education-levels/education-levels.component';
 import { AdminRolGuard } from '../guards/admin-rol.guard';
 import { ProfileComponentDash } from '../profile/profile.component';
-import { ProfileComponent } from './profile/profile.component';
+import { LessonsComponent } from './lessons/lessons.component';
+import { QuestionsComponent } from './questions/questions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,9 +20,11 @@ const routes: Routes = [
   { path: 'grades', component: GradesComponent, canActivate: [AdminRolGuard] },
   { path: 'sections', component: SectionsComponent, canActivate: [AdminRolGuard] },
   { path: 'groups', component: GroupsComponent, canActivate: [AdminRolGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [] },
+  { path: 'profile', component: ProfileComponentDash, canActivate: [] },
   { path: 'education-levels', component: EducationLevelsComponent, canActivate: [AdminRolGuard] },
-  { path: 'example', component: ProfileComponentDash, canActivate: [] },
+  { path: 'lessons', component: LessonsComponent, canActivate: [AdminRolGuard] },
+  { path: 'questions', component: QuestionsComponent, canActivate: [AdminRolGuard] },
+  // { path: 'profile', component: ProfileComponent, canActivate: [] },
   
 ];
 

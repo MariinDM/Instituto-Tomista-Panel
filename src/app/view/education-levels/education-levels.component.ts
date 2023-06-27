@@ -6,16 +6,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 import { LevelDialogComponent } from './level-dialog/level-dialog.component';
-// import { GradeDialogComponent } from './grade-dialog/grade-dialog.component';
 import * as LANGUAGE from 'src/assets/i18n/translate.json';
 
 @Component({
   selector: 'app-education-levels',
   templateUrl: './education-levels.component.html',
-  styleUrls: ['./education-levels.component.scss']
+  styleUrls: ['../../app.component.scss']
 })
 export class EducationLevelsComponent implements OnInit {
-  
+
   data!: any[]
   loader = false
   filter: string = ''
@@ -44,9 +43,9 @@ export class EducationLevelsComponent implements OnInit {
 
   getall(): void {
     this.loader = false
-    this.apiService.getLevel().subscribe({
+    this.apiService.getEducationLevels().subscribe({
       next: (v) => {
-        this.data = v.level
+        this.data = v.educa
         this.setData()
         this.loader = true
         // this.openSnack(v.message)
@@ -66,7 +65,7 @@ export class EducationLevelsComponent implements OnInit {
   }
 
   delete(data: any): void {
-    this.apiService.deleteRole(data).subscribe({
+    this.apiService.deleteEducationLevel(data).subscribe({
       next: (v) => { this.openSnack(v.message) },
       error: (e) => { this.openSnack(e) },
       complete: () => { this.getall() }

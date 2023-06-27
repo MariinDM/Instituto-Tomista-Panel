@@ -35,13 +35,13 @@ export class LevelDialogComponent implements OnInit {
     if (this.form.invalid) { return }
     this.setData()
     if (!this.data.edit) {
-      this.apiService.addLevel(this.obj).subscribe({
+      this.apiService.addEducationLevel(this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }
       })
     } else {
-      this.apiService.updateLevel(this.obj).subscribe({
+      this.apiService.updateEducationLevel(this.obj).subscribe({
         next: (v) => { this.openSnack(v.message) },
         error: (e) => { this.openSnack(e) },
         complete: () => { this.dialog.closeAll() }

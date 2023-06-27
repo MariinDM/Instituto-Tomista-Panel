@@ -150,20 +150,36 @@ export class ApiServiceService {
     return this.http.delete<any>(`${environment.apiUrl}education/levels/${data.id}`, {})
   }
 
-  getLevel(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}education/levels`, {})
+  getLessons(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}lessons`, {})
   }
 
-  addLevel(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}education/levels`, data, {})
+  addLesson(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}lessons`, data, {})
   }
 
-  updateLevel(data: any): Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}education/levels/${data.id}`, data, {})
+  updateLesson(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}lessons/${data.id}`, data, {})
   }
 
-  deleteLevel(data: any): Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}education/levels/${data.id}`, {})
+  deleteLesson(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}lessons/${data.id}`, {})
+  }
+
+  getQuetions(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}questions`, {})
+  }
+
+  addQuetion(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}questions`, data, {})
+  }
+
+  updateQuetion(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}questions/${data.id}`, data, {})
+  }
+
+  deleteQuetion(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}questions/${data.id}`, {})
   }
 
 }
