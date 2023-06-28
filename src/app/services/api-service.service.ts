@@ -182,4 +182,36 @@ export class ApiServiceService {
     return this.http.delete<any>(`${environment.apiUrl}questions/${data.id}`, {})
   }
 
+  getTests(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}tests`, {})
+  }
+
+  addTest(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}tests`, data, {})
+  }
+
+  updateTest(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}tests/${data.id}`, data, {})
+  }
+
+  deleteTest(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}tests/${data.id}`, {})
+  }
+
+  getTestsQuestions(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}testQuestions`, {})
+  }
+
+  addTestQuestions(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}testQuestions`, data, {})
+  }
+
+  updateTestQuestions(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}testQuestions/${data.id}`, data, {})
+  }
+
+  deleteTestQuestions(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}testQuestions/${data.id}`, {})
+  }
+
 }

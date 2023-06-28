@@ -5,20 +5,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiServiceService } from 'src/app/services/api-service.service';
-import { DialogTestComponent } from './dialog-test/dialog-test.component';
+import { DialogTestQuestionsComponent } from './dialog-test-questions/dialog-test-questions.component';
 
 @Component({
-  selector: 'app-tests',
-  templateUrl: './tests.component.html',
+  selector: 'app-tests-questions',
+  templateUrl: './tests-questions.component.html',
   styleUrls: ['../../app.component.scss']
 })
-export class TestsComponent implements OnInit {
+export class TestsQuestionsComponent implements OnInit {
 
-  data!: any[]
+  data: any[] = []
+  dataOriginal: any[] = []
   loader = false
   filter: string = ''
 
-  displayedColumns: string[] = ['name', 'description', 'active', 'actions'];
+  displayedColumns: string[] = ['name', 'description', 'quantity', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,10 +41,21 @@ export class TestsComponent implements OnInit {
   }
 
   getall(): void {
+    this.data = []
     this.loader = false
-    this.apiService.getTests().subscribe({
+    this.apiService.getTestsQuestions().subscribe({
       next: (v) => {
-        this.data = v.test
+        this.dataOriginal = v.testquestion
+        this.dataOriginal.forEach(element => {
+          let obj = {
+            id: element.id,
+            name: element.name,
+            description: element.description,
+            quantity: element.test_questions.length
+          }
+          this.data.push(obj)
+        });
+        // console.log(this.data)
         this.setData()
         this.loader = true
         // this.openSnack(v.message)
@@ -62,20 +74,25 @@ export class TestsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  delete(data: any): void {
-    this.apiService.deleteTest(data).subscribe({
-      next: (v) => { this.openSnack(v.message) },
-      error: (e) => { this.openSnack(e) },
-      complete: () => { this.getall() }
-    })
-  }
+  // delete(data: any): void {
+  //   this.apiService.deleteRole(data).subscribe({
+  //     next: (v) => { this.openSnack(v.message) },
+  //     error: (e) => { this.openSnack(e) },
+  //     complete: () => { this.getall() }
+  //   })
+  // }
 
   openSnack(message: string) {
     this._snack.open(message, '', { duration: 1000, })
   }
 
   openDialog(edit: boolean, element?: any) {
-    this.dialog.open(DialogTestComponent, {
+    
+    if (edit) {
+      element = this.dataOriginal.find(item => element.id === item.id)
+    }
+
+    this.dialog.open(DialogTestQuestionsComponent, {
       data: { element, edit },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {

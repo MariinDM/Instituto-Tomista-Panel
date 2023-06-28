@@ -1,14 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Rol } from 'src/app/interfaces/rol';
-// import { RolesService } from 'src/app/services/roles.service';
-import { RoleDialogComponent } from './role-dialog/role-dialog.component';
-import * as LANGUAGE from 'src/assets/i18n/translate.json';
 import { ApiServiceService } from 'src/app/services/api-service.service';
+import { RoleDialogComponent } from './role-dialog/role-dialog.component';
 
 @Component({
   selector: 'app-roles',
@@ -20,7 +17,6 @@ export class RolesComponent implements OnInit {
   data!: any[]
   loader = false
   filter: string = ''
-  translate: any = LANGUAGE
 
   displayedColumns: string[] = ['name', 'description', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;

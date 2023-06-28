@@ -11,6 +11,8 @@ import { AdminRolGuard } from '../guards/admin-rol.guard';
 import { ProfileComponentDash } from '../profile/profile.component';
 import { LessonsComponent } from './lessons/lessons.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { TestsComponent } from './tests/tests.component';
+import { TestsQuestionsComponent } from './tests-questions/tests-questions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -24,8 +26,10 @@ const routes: Routes = [
   { path: 'education-levels', component: EducationLevelsComponent, canActivate: [AdminRolGuard] },
   { path: 'lessons', component: LessonsComponent, canActivate: [AdminRolGuard] },
   { path: 'questions', component: QuestionsComponent, canActivate: [AdminRolGuard] },
+  { path: 'tests', component: TestsComponent, canActivate: [AdminRolGuard] },
+  { path: 'tests-questions', component: TestsQuestionsComponent, canActivate: [AdminRolGuard] },
   // { path: 'profile', component: ProfileComponent, canActivate: [] },
-  
+
 ];
 
 @NgModule({

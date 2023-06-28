@@ -19,20 +19,20 @@
                       <div class="col-8">
                         <ul class="header-buttons-left ml-0">
                           <li class="dropdown">
-                            <h2>Encuestas</h2>
+                            <h2>Encuestas y Preguntas</h2>
                           </li>
                           <li class="dropdown m-l-20">
                             <label for="search-input"><i class="material-icons search-icon">search</i></label>
                             <input placeholder="Buscar" type="text" [(ngModel)]="filter" (keyup)="applyFilter($event)"
                               class="browser-default search-field" aria-label="Search box">
                           </li>
-                          <li>
+                          <!-- <li>
                             <div class="export-button m-l-10" matTooltip="Agregar">
                               <button mat-mini-fab class="buttons-color" (click)="openDialog(false)">
                                 <mat-icon class="col-white">add</mat-icon>
                               </button>
                             </div>
-                          </li>
+                          </li> -->
                           <li>
                             <div class="export-button m-l-10" matTooltip="Recargar">
                               <button mat-mini-fab class="buttons-color" (click)="getall()">
@@ -71,15 +71,11 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
                         <td mat-cell *matCellDef="let row"> {{row.description}} </td>
                       </ng-container>
-  
-                      <!-- Active Column -->
-                      <ng-container matColumnDef="active">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-                        <td mat-cell *matCellDef="let row">
-                          <span [ngClass]="row.active === true ? 'col-green' : 'col-red'">
-                            <mat-icon>{{row.active === true ? 'done' : 'clear'}} </mat-icon>
-                          </span>
-                        </td>
+
+                      <!-- Cantidad Preguntas Column -->
+                      <ng-container matColumnDef="quantity">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Preguntas </th>
+                        <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
                       </ng-container>
   
                       <!-- Actions -->
@@ -94,10 +90,10 @@
                               <mat-icon>mode_edit</mat-icon>
                               <span>Editar</span>
                             </button>
-                            <button mat-menu-item (click)="delete(row)">
+                            <!-- <button mat-menu-item (click)="delete(row)">
                               <mat-icon>sync_alt</mat-icon>
                               <span>Cambiar Estado</span>
-                            </button>
+                            </button> -->
                           </mat-menu>
                         </td>
                       </ng-container>
