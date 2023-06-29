@@ -27,7 +27,7 @@ export class ApiServiceService {
   }
 
   profile(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}me`,{});
+    return this.http.get<any>(`${environment.apiUrl}me`, {});
   }
 
   addUser(data: any): Observable<any> {
@@ -212,6 +212,11 @@ export class ApiServiceService {
 
   deleteTestQuestions(data: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}testQuestions/${data.id}`, {})
+  }
+
+
+  uploadFile(data: any, img: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}upload/${data.id}`, img, {})
   }
 
 }

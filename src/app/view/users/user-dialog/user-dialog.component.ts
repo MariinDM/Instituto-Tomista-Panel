@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, Directive, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiServiceService } from 'src/app/services/api-service.service';
+import { GetFilesComponent } from '../../get-files/get-files.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-dialog',
@@ -17,13 +19,23 @@ export class UserDialogComponent implements OnInit {
   roles!: any[]
   element!: any;
   edit!: any;
+  minDate: Date;
+  maxDate: Date;
+  image: any;
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dataRow: any,
     private dialog: MatDialog,
     private _snack: MatSnackBar,
     private apiService: ApiServiceService,
-    private fb: FormBuilder) { this.createForm() }
+    private datePipe: DatePipe,
+    private fb: FormBuilder) {
+    this.createForm()
+    const currentYear = new Date().getFullYear();
+    this.minDate = new Date(currentYear - 80, 0, 1);
+    this.maxDate = new Date(currentYear - 6, 11, 31);
+  }
 
   ngOnInit(): void {
     this.element = this.dataRow.element
@@ -52,6 +64,7 @@ export class UserDialogComponent implements OnInit {
         id: this.element.id,
         ...this.form.value
       }
+      this.obj.birthday = this.datePipe.transform(this.obj.birthday, 'MM/dd/yyyy');
     }
   }
 
@@ -59,19 +72,53 @@ export class UserDialogComponent implements OnInit {
     if (this.form.invalid) { return }
     this.setData()
     if (!this.edit) {
+      if (!this.image) { this.openSnack('Favor de seleccionar una imagen') }
+      let message = '';
       this.apiService.addUser(this.obj).subscribe({
-        next: (v) => { 
-          console.log(v)
-          this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e) },
-        complete: () => { this.dialog.closeAll() }
+        next: (v) => {
+          message = v.message
+          let fd_image = new FormData();
+          fd_image.append('context', 'Profile')
+          fd_image.append('profile_pic', this.image)
+          this.apiService.uploadFile({ id: v.user_id }, fd_image).subscribe({
+            next: (v) => {
+              this.openSnack(message)
+              this.dialog.closeAll()
+            },
+            error: (e) => {
+              console.log(e)
+            }
+          })
+        },
+        error: (e) => { this.openSnack(e) }
       })
     } else {
-      this.apiService.updateUser(this.obj).subscribe({
-        next: (v) => { this.openSnack(v.message) },
-        error: (e) => { this.openSnack(e) },
-        complete: () => { this.dialog.closeAll() }
-      })
+      if (this.image) {
+        let message = '';
+        this.apiService.updateUser(this.obj).subscribe({
+          next: (v) => {
+            message = v.message
+            let fd_image = new FormData();
+            fd_image.append('context', 'Profile')
+            fd_image.append('profile_pic', this.image)
+            this.apiService.uploadFile({ context: 'Profile', id: v.user_id }, fd_image).subscribe({
+              next: (v) => {
+                this.openSnack(message)
+                this.dialog.closeAll()
+              },
+              error: (e) => {
+                console.log(e)
+              }
+            })
+          },
+          error: (e) => { this.openSnack(e) },
+        })
+      } else {
+        this.apiService.updateUser(this.obj).subscribe({
+          next: (v) => { this.openSnack(v.message), this.dialog.closeAll() },
+          error: (e) => { this.openSnack(e) },
+        })
+      }
     }
   }
 
@@ -88,6 +135,7 @@ export class UserDialogComponent implements OnInit {
       state: new FormControl('', [Validators.required]),
       zip_code: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern(/^[1-9]\d{6,10}$/)]),
+      birthday: new FormControl('', [Validators.required]),
     });
   }
 
@@ -104,7 +152,8 @@ export class UserDialogComponent implements OnInit {
       city: this.element.profile.city,
       state: this.element.profile.state,
       zip_code: this.element.profile.zip_code,
-      phone: this.element.profile.phone
+      phone: this.element.profile.phone,
+      birthday: this.element.profile.birthday
     }
 
     this.form.patchValue(formObj)
@@ -127,6 +176,14 @@ export class UserDialogComponent implements OnInit {
     }
 
     return password;
+  }
+
+  getFile() {
+    this.dialog.open(GetFilesComponent, {
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe((result) => {
+      this.image = result.image
+    })
   }
 
 

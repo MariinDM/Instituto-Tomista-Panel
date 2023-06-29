@@ -64,7 +64,8 @@
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>email</mat-icon>
                         <mat-label>Correo</mat-label>
-                        <input matInput placeholder="Ex. example@gmail.com" required formControlName="email" [disabled]="edit">
+                        <input matInput placeholder="Ex. example@gmail.com" required formControlName="email"
+                            [disabled]="edit">
                         <mat-error
                             *ngIf="form.controls['email'].hasError('required') || (form.controls['email'].dirty || form.controls['email'].touched)">
                             Es requerido
@@ -118,9 +119,9 @@
                     </mat-form-field>
                 </div>
             </div>
-            <!-- Phone -->
+            <!-- Phone, Birthday -->
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>phone</mat-icon>
                         <mat-label>Telefono</mat-label>
@@ -141,6 +142,23 @@
                             Only Numbers
                         </mat-error> -->
                     </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="mat-form-field example-full-width"
+                        (click)="picker.open()">
+                        <mat-label>Fecha de Nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate"
+                            formControlName="birthday">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <button type="button" mat-raised-button (click)="getFile()">Seleccionar Imagen</button>
                 </div>
             </div>
             <!-- BUTTONS -->

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { ViewRoutingModule } from './view-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -34,6 +34,7 @@ import { TestsComponent } from './tests/tests.component';
 import { DialogTestComponent } from './tests/dialog-test/dialog-test.component';
 import { TestsQuestionsComponent } from './tests-questions/tests-questions.component';
 import { DialogTestQuestionsComponent } from './tests-questions/dialog-test-questions/dialog-test-questions.component';
+import { GetFilesComponent } from './get-files/get-files.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -66,7 +67,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TestsComponent,
     DialogTestComponent,
     TestsQuestionsComponent,
-    DialogTestQuestionsComponent
+    DialogTestQuestionsComponent,
+    GetFilesComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +82,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    DatePipe
   ]
 })
 export class ViewModule { }
