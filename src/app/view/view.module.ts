@@ -35,6 +35,8 @@ import { DialogTestComponent } from './tests/dialog-test/dialog-test.component';
 import { TestsQuestionsComponent } from './tests-questions/tests-questions.component';
 import { DialogTestQuestionsComponent } from './tests-questions/dialog-test-questions/dialog-test-questions.component';
 import { GetFilesComponent } from './get-files/get-files.component';
+import { UserGroupLessonsComponent } from './user-group-lessons/user-group-lessons.component';
+import { DialogUserGroupLessonsComponent } from './user-group-lessons/dialog-user-group-lessons/dialog-user-group-lessons.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -68,7 +70,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DialogTestComponent,
     TestsQuestionsComponent,
     DialogTestQuestionsComponent,
-    GetFilesComponent
+    GetFilesComponent,
+    UserGroupLessonsComponent,
+    DialogUserGroupLessonsComponent
   ],
   imports: [
     CommonModule,
