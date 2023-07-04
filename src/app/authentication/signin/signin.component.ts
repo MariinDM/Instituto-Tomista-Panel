@@ -48,7 +48,7 @@ export class SigninComponent extends UnsubscribeOnDestroyAdapter implements OnIn
           this.router.navigate(['/dashboard'])
         },
         error: (e) => {
-          this.error = e;
+          this.error = 'Correo o contraseña incorrecta';
           this.submitted = false;
           this.spinner.hide()
         }
