@@ -150,6 +150,10 @@ export class ApiServiceService {
     return this.http.delete<any>(`${environment.apiUrl}education/levels/${data.id}`, {})
   }
 
+  filterLessonsEducationLevel(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}filter/lessons`, data, {})
+  }
+
   getLessons(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}lessons`, {})
   }
@@ -209,7 +213,7 @@ export class ApiServiceService {
   updateTestQuestions(data: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}testQuestions/${data.id}`, data, {})
   }
-
+  
   deleteTestQuestions(data: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}testQuestions/${data.id}`, {})
   }
@@ -218,5 +222,15 @@ export class ApiServiceService {
   uploadFile(data: any, img: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}upload/${data.id}`, img, {})
   }
+  
+  getGroupUserLessons(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}groupUserLessons`, {})
+  }
 
+  addGroupUserLessons(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}groupUserLessons`, data, {})
+  }
+  deleteGroupUserLessons(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}groupUserLessons/${data.id}`, {})
+  }
 }

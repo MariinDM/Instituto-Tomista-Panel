@@ -26,7 +26,6 @@ export class DialogLessonComponent implements OnInit {
   ngOnInit(): void {
     this.edit = this.data.edit;
     this.element = this.data.element;
-    this.getData()
     if (this.data.edit) {
       this.form.patchValue(this.element);
     }
@@ -54,7 +53,6 @@ export class DialogLessonComponent implements OnInit {
     this.form = this.fb.group({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', []),
-      educa_level: new FormControl('', [Validators.required]),
     });
   }
 
@@ -67,17 +65,6 @@ export class DialogLessonComponent implements OnInit {
 
   openSnack(message: string) {
     this._snack.open(message, '', { duration: 1000, })
-  }
-
-  getData() {
-    this.apiService.getEducationLevels().subscribe({
-      next: (v) => {
-        this.educationLevels = v.educa.filter(item => item.active)
-      },
-      error: (e) => {
-        console.log(e)
-      }
-    })
   }
 
 }

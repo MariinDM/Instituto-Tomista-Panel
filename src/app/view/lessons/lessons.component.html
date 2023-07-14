@@ -71,12 +71,6 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
                         <td mat-cell *matCellDef="let row"> {{row.description}} </td>
                       </ng-container>
-
-                      <!-- Education Level Column -->
-                      <ng-container matColumnDef="educa_level">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nivel Educativo </th>
-                        <td mat-cell *matCellDef="let row"> {{row.educa.name}} </td>
-                      </ng-container>
   
                       <!-- Active Column -->
                       <ng-container matColumnDef="active">

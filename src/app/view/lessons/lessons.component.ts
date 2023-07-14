@@ -18,7 +18,7 @@ export class LessonsComponent implements OnInit {
   loader = false
   filter: string = ''
 
-  displayedColumns: string[] = ['name', 'description', 'educa_level', 'active', 'actions'];
+  displayedColumns: string[] = ['name', 'description', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

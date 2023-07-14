@@ -138,16 +138,20 @@
                 <hr>
               </div>
             </mat-tab>
-            <mat-tab label="Skills">
+            <mat-tab label="Materias">
               <ul class="list-unstyled p-4">
                 <li>
-                  <div>Photoshop</div>
-                  <div class="progress skill-progress m-b-20">
-                    <div class="progress-bar l-bg-green width-per-45" role="progressbar" aria-valuenow="45"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
+                  <div><strong>Nivel Educativo:</strong> {{user.level}}</div>
                 </li>
                 <li>
+                  <div><strong>Materias: </strong></div>
+                  <div *ngFor="let item of user.lessons"> {{item}}</div>
+                  <!-- <div class="progress skill-progress m-b-20">
+                    <div class="progress-bar l-bg-green width-per-45" role="progressbar" aria-valuenow="45"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div> -->
+                </li>
+                <!-- <li>
                   <div>Wordpress</div>
                   <div class="progress skill-progress m-b-20">
                     <div class="progress-bar l-bg-orange width-per-38" role="progressbar" aria-valuenow="38"
@@ -167,7 +171,7 @@
                     <div class="progress-bar l-bg-purple width-per-70" role="progressbar" aria-valuenow="70"
                       aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                </li>
+                </li> -->
               </ul>
             </mat-tab>
           </mat-tab-group>
@@ -176,7 +180,7 @@
       <div class="col-lg-12 col-md-12">
         <div class="card">
           <mat-tab-group>
-            <mat-tab>
+            <!-- <mat-tab>
               <ng-template mat-tab-label>
                 <mat-icon class="example-tab-icon msr-2">face</mat-icon>
                 About Me
@@ -232,12 +236,12 @@
                   </div>
                 </div>
               </div>
-            </mat-tab>
+            </mat-tab> -->
 
             <mat-tab>
               <ng-template mat-tab-label>
                 <mat-icon class="example-tab-icon msr-2">settings</mat-icon>
-                Settings
+                Contraseñas
               </ng-template>
               <div class="header">
                 <h2>
@@ -245,21 +249,23 @@
                 </h2>
               </div>
               <div class="body">
-                <div class="example-container">
-                  <!-- <mat-form-field class="example-full-width" appearance="fill">
+                <form (ngSubmit)="changePassword()" [formGroup]="form">
+                  <div class="example-container">
+                    <!-- <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Username</mat-label>
                     <input matInput>
                   </mat-form-field> -->
-                  <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Current Password</mat-label>
-                    <input matInput type="password">
-                  </mat-form-field>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>New Password</mat-label>
-                    <input matInput type="password">
-                  </mat-form-field>
-                </div>
-                <button mat-raised-button color="primary">Save</button>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Nueva Contraseña</mat-label>
+                      <input matInput type="password" formControlName="password">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Confirmar Contraseña</mat-label>
+                      <input matInput type="password" formControlName="confirmPassword">
+                    </mat-form-field>
+                  </div>
+                  <button mat-raised-button color="primary" type="submit">Guardar</button>
+                </form>
               </div>
               <div class="header">
                 <h2>
