@@ -48,7 +48,7 @@ export class ProfileComponentDash implements OnInit {
         console.log(e)
       }
     })
-    console.log(this.user)
+    // console.log(this.user)
   }
 
   buildForm(): void {

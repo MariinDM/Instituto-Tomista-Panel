@@ -247,7 +247,8 @@ export class ApiServiceService {
   }
 
   deleteEvaluations(data: any): Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}evaluations/${data.id}`, {})
+    return this.http.delete<any>(`${environment.apiUrl}evaluations/${data.id}`, { body: data })
+    // return this.http.delete<any>(`${environment.apiUrl}evaluations/${data.id}?type=${data.type}`);
   }
 
 }

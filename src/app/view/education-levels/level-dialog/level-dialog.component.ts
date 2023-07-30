@@ -7,7 +7,7 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
 @Component({
   selector: 'app-level-dialog',
   templateUrl: './level-dialog.component.html',
-  styleUrls: ['./level-dialog.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class LevelDialogComponent implements OnInit {
 

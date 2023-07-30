@@ -10,7 +10,7 @@ import { DialogEvaluationsComponent } from './dialog-evaluations/dialog-evaluati
 @Component({
   selector: 'app-evaluations',
   templateUrl: './evaluations.component.html',
-  styleUrls: ['./evaluations.component.scss']
+  styleUrls: ['../../app.component.scss']
 })
 export class EvaluationsComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class EvaluationsComponent implements OnInit {
   loader = true
   filter: string = ''
 
-  displayedColumns: string[] = ['test', 'email','group', 'actions'];
+  displayedColumns: string[] = ['test', 'email', 'group', 'public', 'active', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -57,13 +57,18 @@ export class EvaluationsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  // delete(data: any): void {
-  //   this.apiService.deleteGrade(data).subscribe({
-  //     next: (v) => { this.openSnack(v.message) },
-  //     error: (e) => { this.openSnack(e) },
-  //     complete: () => { this.getall() }
-  //   })
-  // }
+  delete(data: any, type: boolean): void {
+    let obj = {
+      id: data.id,
+      type: type
+    }
+    console.log(obj)
+    this.apiService.deleteEvaluations(obj).subscribe({
+      next: (v) => { this.openSnack(v.message) },
+      error: (e) => { this.openSnack(e) },
+      complete: () => { this.getall() }
+    })
+  }
 
   openSnack(message: string) {
     this._snack.open(message, '', {
@@ -76,7 +81,7 @@ export class EvaluationsComponent implements OnInit {
       data: { edit, element },
       panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(() => {
-
+      this.getall()
     })
   }
 

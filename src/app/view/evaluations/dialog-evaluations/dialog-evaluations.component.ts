@@ -7,7 +7,7 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
 @Component({
   selector: 'app-dialog-evaluations',
   templateUrl: './dialog-evaluations.component.html',
-  styleUrls: ['./dialog-evaluations.component.scss']
+  styleUrls: ['../../../app.component.scss']
 })
 export class DialogEvaluationsComponent implements OnInit {
 
@@ -28,7 +28,7 @@ export class DialogEvaluationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.edit = this.data.edit;
-    this.element = this.data.obj;
+    this.element = this.data.element;
     this.getData()
     if (this.data.edit) {
       this.setForm()
@@ -46,7 +46,7 @@ export class DialogEvaluationsComponent implements OnInit {
     })
     this.apiService.getGroups().subscribe({
       next: (v) => {
-        this.groups = v.group
+        this.groups = v.group.filter(item => item.active)
       },
       error: (e) => {
         console.log(e)
@@ -55,7 +55,7 @@ export class DialogEvaluationsComponent implements OnInit {
 
     this.apiService.getTests().subscribe({
       next: (v) => {
-        this.surveys = v.test
+        this.surveys = v.test.filter(item => item.active)
       },
       error: (e) => {
         console.log(e)
@@ -82,13 +82,13 @@ export class DialogEvaluationsComponent implements OnInit {
   }
 
   setData(): void {
-    console.log(this.element)
+    // console.log(this.element)
     this.obj = {
       ...this.form.value,
-      user_id: this.element ? this.element.user_id : null,
-      group_id: this.element ? this.element.group_id : null,
-      test_id: this.element ? this.element.test_id : null,
-      date: this.element ? this.element.date : null,
+      id: this.element ? this.element.id : null,
+      // group_id: this.element ? this.element.group_id : null,
+      // test_id: this.element ? this.element.test_id : null,
+      // date: this.element ? this.element.date : null,
     }
   }
 
@@ -100,8 +100,8 @@ export class DialogEvaluationsComponent implements OnInit {
       date: new FormControl('', [Validators.required]),
     });
   }
-  
-  setForm(){
+
+  setForm() {
     console.log(this.element)
     this.form.controls['user_id'].setValue(this.element.user_id)
     this.form.controls['group_id'].setValue(this.element.group_id)
