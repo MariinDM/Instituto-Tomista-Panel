@@ -233,4 +233,21 @@ export class ApiServiceService {
   deleteGroupUserLessons(data: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}groupUserLessons/${data.id}`, {})
   }
+
+  getEvaluations(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}evaluations`, {})
+  }
+
+  addEvaluations(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}evaluations`, data, {})
+  }
+
+  updateEvaluations(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}evaluations/${data.id}`, data, {})
+  }
+
+  deleteEvaluations(data: any): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}evaluations/${data.id}`, {})
+  }
+
 }

@@ -24,6 +24,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { WINDOW_PROVIDERS } from './core/service/window.service';
 import { InterceptorService } from './services/interceptor.service';
 import { QRCodeModule } from 'angularx-qrcode';
+// import { DialogEvaluationsComponent } from './dialog-evaluations/dialog-evaluations.component';
 
 
 
@@ -45,6 +46,8 @@ export function createTranslateLoader(http: HttpClient): any {
     RightSidebarComponent,
     AuthLayoutComponent,
     MainLayoutComponent,
+    
+   
    
   ],
   imports: [
