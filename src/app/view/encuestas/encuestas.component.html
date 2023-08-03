@@ -1,0 +1,91 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <!-- <div class="card" [hidden]="!loader"> -->
+            <div class="body">
+              <div class="tableBody">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="row line-colors">
+                    <!-- <div class="col-3 baby-pink height"></div>
+                    <div class="col-3 baby-purpura height"></div>
+                    <div class="col-3 baby-green height"></div>
+                    <div class="col-3 baby-yellow height"></div> -->
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <div class="materialTableHeader">
+                    <div class="row">
+                      <div class="col-8">
+                        <ul class="header-buttons-left ml-0">
+                          <li class="dropdown">
+                            <h2>Encuesta 1</h2>
+                          </li>
+                          <!-- <li class="dropdown m-l-20">
+                            <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                            <input placeholder="Buscar" type="text" [(ngModel)]="filter" (keyup)="applyFilter($event)"
+                              class="browser-default search-field" aria-label="Search box">
+                          </li> -->
+                          <!-- <li>
+
+                            <div class="export-button m-l-10" matTooltip="Agregar">
+                              <button mat-mini-fab class="buttons-color" (click)="openDialog(false)">
+                                <mat-icon class="mat-icon notranslate col-white material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">add</mat-icon>
+                              </button>
+                            </div>
+                          </li> -->
+                          <!-- <li>
+                            <div class="export-button m-l-10" matTooltip="Recargar">
+                              <button mat-mini-fab class="buttons-color" (click)="getall()">
+                                <mat-icon class="col-white">refresh</mat-icon>
+                              </button>
+                            </div>
+                          </li> -->
+                        </ul>
+                      </div>
+                      <div class="col-4">
+                        <ul class="header-buttons">
+                          <!-- <li>
+                            <div class="export-button m-l-10" matTooltip="XLSX">
+                              <img src="" alt="Hola"
+                                (click)="exporter.exportTable('xlsx', {fileName:'Users Data', sheet: 'sheet1'})" />
+                            </div>
+                          </li> -->
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="mat-elevation-z8">
+                    <mat-card>
+                        <mat-card-content>Contesta la siguiente encuesta de tal manera de que 5 es lo mejor y 1 lo peor.</mat-card-content>
+                        </mat-card>
+                    <mat-card>
+                        <mat-card-content>1-¿Porque eres tan solitario?</mat-card-content>
+
+                        <mat-radio-group aria-label="Select an option">
+                            <mat-radio-button [value]="1">1</mat-radio-button>
+                            <mat-radio-button [value]="2">2</mat-radio-button>
+                            <mat-radio-button [value]="3">3</mat-radio-button>
+                            <mat-radio-button [value]="4">4</mat-radio-button>
+                            <mat-radio-button [value]="5">5</mat-radio-button>
+                          </mat-radio-group>
+                      </mat-card>
+                      <mat-card>
+                        <mat-card-content>
+                            <button mat-stroked-button color="primary">Anterior</button>
+                            <button mat-stroked-button color="primary">Siguiente</button>
+
+                        </mat-card-content>
+                        </mat-card>
+                      <button mat-stroked-button color="primary">Enviar encuesta</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <mat-spinner [hidden]="loader" color="accent" style="top: 150%; margin-right: auto; margin-left: auto;" diameter="150"></mat-spinner> -->
+        </div>
+      <!-- </div> -->
+    </div>
+  </section>

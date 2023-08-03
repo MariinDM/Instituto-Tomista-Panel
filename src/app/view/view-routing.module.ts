@@ -15,6 +15,7 @@ import { TestsComponent } from './tests/tests.component';
 import { TestsQuestionsComponent } from './tests-questions/tests-questions.component';
 import { UserGroupLessonsComponent } from './user-group-lessons/user-group-lessons.component';
 import { EvaluationsComponent } from './evaluations/evaluations.component';
+import { EncuestasComponent } from './encuestas/encuestas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -32,6 +33,8 @@ const routes: Routes = [
   { path: 'tests-questions', component: TestsQuestionsComponent, canActivate: [AdminRolGuard] },
   { path: 'user-lessons', component: UserGroupLessonsComponent, canActivate: [AdminRolGuard] },
   { path: 'evaluations', component: EvaluationsComponent, canActivate: [] },
+  { path: 'encuestas', component: EncuestasComponent, canActivate: [] },
+
   // { path: 'profile', component: ProfileComponent, canActivate: [] },
 
 ];

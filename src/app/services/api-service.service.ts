@@ -251,4 +251,8 @@ export class ApiServiceService {
     // return this.http.delete<any>(`${environment.apiUrl}evaluations/${data.id}?type=${data.type}`);
   }
 
+  showEvaluations(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}show/evaluations`, data, {})
+  }
+
 }
