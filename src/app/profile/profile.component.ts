@@ -20,6 +20,7 @@ export class ProfileComponentDash implements OnInit {
 
   user: any = {};
   form: FormGroup;
+  role: number = 0;
 
   constructor(
     private apiService: ApiServiceService,
@@ -34,15 +35,36 @@ export class ProfileComponentDash implements OnInit {
   getData() {
     this.apiService.profile().subscribe({
       next: (v) => {
-        this.user.full_name = `${v.me.profile.name} ${v.me.profile.last_name}`
-        this.user.role = v.me.role.name
-        this.user.img = `${environment.apiUrl}get/profile/picture/${v.me.profile.image}`
-        this.user.address = `${v.me.profile.number}, ${v.me.profile.street}, ${v.me.profile.suburb}`
-        this.user.location = `${v.me.profile.zip_code}, ${v.me.profile.city}`
-        this.user.phone = v.me.profile.phone
-        this.user.group = `${v.me.student.group.grade.name} ${v.me.student.group.section.name}`
-        this.user.lessons = v.me.student.group?.groupUserLessons?.map((item) => item.lesson.name) || [];
-        this.user.level = v.me.student.group?.groupUserLessons[0]?.education_level.name
+        this.role = v.me.role.id
+        if (v.me.role.id === 3) {
+
+          this.user.full_name = `${v.me.profile.name} ${v.me.profile.last_name}`
+          this.user.role = v.me.role.name
+          this.user.img = `${environment.apiUrl}get/profile/picture/${v.me.profile.image}`
+          this.user.address = `${v.me.profile.number}, ${v.me.profile.street}, ${v.me.profile.suburb}`
+          this.user.location = `${v.me.profile.zip_code}, ${v.me.profile.city}`
+          this.user.phone = v.me.profile.phone
+          this.user.group = `${v.me.student.group.grade.name} ${v.me.student.group.section.name}`
+          this.user.lessons = v.me.student.group?.groupUserLessons?.map((item) => item.lesson.name) || [];
+          this.user.level = v.me.student.group?.groupUserLessons[0]?.education_level.name
+
+        } else if (v.me.role.id === 2) {
+
+          this.user.full_name = `${v.me.profile.name} ${v.me.profile.last_name}`
+          this.user.role = v.me.role.name
+          this.user.img = `${environment.apiUrl}get/profile/picture/${v.me.profile.image}`
+          this.user.address = `${v.me.profile.number}, ${v.me.profile.street}, ${v.me.profile.suburb}`
+          this.user.location = `${v.me.profile.zip_code}, ${v.me.profile.city}`
+          this.user.phone = v.me.profile.phone
+          this.user.groups = v.me.groupUserLessons.map(item => ({
+            education_level: item.education_level.name,
+            group: `${item.group.grade.name} ${item.group.section.name}`,
+            lesson: item.lesson.name
+          }));
+
+          console.log(this.user)
+
+        }
       },
       error: (e) => {
         console.log(e)

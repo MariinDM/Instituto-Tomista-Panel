@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'tests-questions', component: TestsQuestionsComponent, canActivate: [AdminRolGuard] },
   { path: 'user-lessons', component: UserGroupLessonsComponent, canActivate: [AdminRolGuard] },
   { path: 'evaluations', component: EvaluationsComponent, canActivate: [] },
-  { path: 'encuestas', component: EncuestasComponent, canActivate: [] },
+  { path: 'answers', component: EncuestasComponent, canActivate: [] },
 
   // { path: 'profile', component: ProfileComponent, canActivate: [] },
 

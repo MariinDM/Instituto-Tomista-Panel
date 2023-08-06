@@ -213,7 +213,7 @@ export class ApiServiceService {
   updateTestQuestions(data: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}testQuestions/${data.id}`, data, {})
   }
-  
+
   deleteTestQuestions(data: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}testQuestions/${data.id}`, {})
   }
@@ -222,7 +222,7 @@ export class ApiServiceService {
   uploadFile(data: any, img: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}upload/${data.id}`, img, {})
   }
-  
+
   getGroupUserLessons(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}groupUserLessons`, {})
   }
@@ -251,8 +251,20 @@ export class ApiServiceService {
     // return this.http.delete<any>(`${environment.apiUrl}evaluations/${data.id}?type=${data.type}`);
   }
 
-  showEvaluations(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}show/evaluations`, data, {})
+  // showEvaluations(data: any): Observable<any> {
+  //   return this.http.post<any>(`${environment.apiUrl}show/evaluations`, data, {})
+  // }
+
+  getAuthEvaluations(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}show/evaluations`, {})
   }
+
+  getAnswers(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}answers`, {})
+  }
+  sendAnswers(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}answers`, data, {})
+  }
+
 
 }

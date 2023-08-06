@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row clearfix">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="card" [hidden]="!loader">
+				<div class="card" [hidden]="!loader" *ngIf="role === 3 || role === 1">
 					<div class="body">
 						<div class="tableBody">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -21,10 +21,10 @@
 												<small class="text-muted fs-4">Nombre: </small>
 												<p class="fs-5">{{user.full_name}}</p>
 
-												<small class="text-muted fs-4">Nivel Educativo: </small>
+												<small class="text-muted fs-4" *ngIf="user.level">Nivel Educativo: </small>
 												<p class="fs-5">{{user.level}}</p>
 
-												<small class="text-muted fs-4">Grupo: </small>
+												<small class="text-muted fs-4" *ngIf="user.group">Grupo: </small>
 												<p class="fs-5">{{user.group}}</p>
 
 												<small class="text-muted fs-4">Correo: </small>
@@ -32,22 +32,45 @@
 
 											</div>
 										</mat-tab>
-										<mat-tab label="Evaluaciones">
-											<ul class="list-unstyled p-4">
-												<li>
-													<!-- <div><strong>Nivel Educativo:</strong> {{user.level}}</div> -->
-												</li>
-												<li>
-													<div><strong>Materias: </strong></div>
+										<mat-tab label="Evaluaciones" *ngIf="role === 3">
+											<div class="col-12">
+												<div class="row m-3" *ngIf="evaluations.length === 0">
+													<span><strong>No hay evaluaciones</strong></span>
+												</div>
+												<div class="row d-flex justify-content-between m-3"
+													*ngFor="let item of evaluations">
+													<div class="col-auto">
+														<span><strong>{{item.test.name}}</strong></span>
+													</div>
+													<div class="col-auto">
+														<button mat-raised-button color="primary"
+															(click)="testQuestions(item)">
+															<span class="mat-button-wrapper log-white">
+																<mat-icon>visibility</mat-icon>
+															</span>
+														</button>
+													</div>
 
-												</li>
-											</ul>
+												</div>
+											</div>
 										</mat-tab>
 									</mat-tab-group>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+				<div *ngFor="let chartOptions of configuration">
+					<mat-card *ngIf="role === 2" class="m-3">
+
+						<div class="chart">
+							<apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+								[plotOptions]="chartOptions.plotOptions" [dataLabels]="chartOptions.dataLabels"
+								[stroke]="chartOptions.stroke" [grid]="chartOptions.grid" [xaxis]="chartOptions.xaxis"
+								[yaxis]="chartOptions.yaxis" [fill]="chartOptions.fill" [title]="chartOptions.title">
+							</apx-chart>
+						</div>
+					</mat-card>
 				</div>
 				<mat-spinner [hidden]="loader" color="accent" style="top: 150%; margin-right: auto; margin-left: auto;"
 					diameter="150"></mat-spinner>

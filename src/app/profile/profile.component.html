@@ -119,7 +119,7 @@
         </div> -->
         <div class="card">
           <mat-tab-group mat-align-tabs="start">
-            <mat-tab label="About">
+            <!-- <mat-tab label="About">
               <div class="p-4">
                 <p class="text-default">Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has
@@ -137,8 +137,8 @@
                 <p>+91 1234567890</p>
                 <hr>
               </div>
-            </mat-tab>
-            <mat-tab label="Materias">
+            </mat-tab> -->
+            <mat-tab label="Materias" *ngIf="role === 3">
               <ul class="list-unstyled p-4">
                 <li>
                   <div><strong>Nivel Educativo:</strong> {{user.level}}</div>
@@ -146,32 +146,15 @@
                 <li>
                   <div><strong>Materias: </strong></div>
                   <div *ngFor="let item of user.lessons"> {{item}}</div>
-                  <!-- <div class="progress skill-progress m-b-20">
-                    <div class="progress-bar l-bg-green width-per-45" role="progressbar" aria-valuenow="45"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div> -->
                 </li>
-                <!-- <li>
-                  <div>Wordpress</div>
-                  <div class="progress skill-progress m-b-20">
-                    <div class="progress-bar l-bg-orange width-per-38" role="progressbar" aria-valuenow="38"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </li>
+              </ul>
+            </mat-tab>
+            <mat-tab label="Grupos" *ngIf="role === 2">
+              <ul class="list-unstyled p-4">
                 <li>
-                  <div>HTML 5</div>
-                  <div class="progress skill-progress m-b-20">
-                    <div class="progress-bar l-bg-cyan width-per-39" role="progressbar" aria-valuenow="39"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
+                  <!-- <div><strong>Materias: </strong></div> -->
+                  <div *ngFor="let item of user.groups"> {{item.education_level + ' - ' + item.lesson + ' - ' + item.group }}</div>
                 </li>
-                <li>
-                  <div>Angular</div>
-                  <div class="progress skill-progress m-b-20">
-                    <div class="progress-bar l-bg-purple width-per-70" role="progressbar" aria-valuenow="70"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </li> -->
               </ul>
             </mat-tab>
           </mat-tab-group>
