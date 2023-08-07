@@ -58,6 +58,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getData() {
+    this.configuration = []
     this.apiService.profile().subscribe({
       next: (v) => {
         // console.log(v)
