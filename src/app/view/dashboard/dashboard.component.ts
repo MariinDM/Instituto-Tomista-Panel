@@ -16,6 +16,7 @@ import {
   ApexStroke,
   ApexGrid
 } from "ng-apexcharts";
+import { DialogInfoComponent } from './dialog-info/dialog-info.component';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -162,8 +163,24 @@ export class DashboardComponent implements OnInit {
             opacityTo: 0.85,
             stops: [50, 0, 100]
           }
-        }
+        },
+        questions: []
       };
+
+      item.evaluation.answers.forEach(answer => {
+        const questionId = answer.quetion.id;
+
+        const existingQuestion = chartOptions.questions.find(q => q.id === questionId);
+
+        if (!existingQuestion) {
+          chartOptions.questions.push({
+            id: questionId,
+            name: answer.quetion.name
+          });
+        }
+      });
+
+      // console.log(chartOptions.questions)
 
       let categories = item.questionAverages.map(item => item.question_id)
       let dataSerie = item.questionAverages.map(item => Number(item.average).toFixed(1))
@@ -205,6 +222,15 @@ export class DashboardComponent implements OnInit {
     }
 
     return evaluationsWithAverages;
+  }
+
+  openDialog(element: any): void {
+    this.dialog.open(DialogInfoComponent, {
+      data: { element },
+      panelClass: ['dialog-responsive']
+    }).afterClosed().subscribe(() => {
+      this.getData()
+    })
   }
 
 }

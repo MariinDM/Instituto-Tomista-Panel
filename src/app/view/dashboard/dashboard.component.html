@@ -21,7 +21,8 @@
 												<small class="text-muted fs-4">Nombre: </small>
 												<p class="fs-5">{{user.full_name}}</p>
 
-												<small class="text-muted fs-4" *ngIf="user.level">Nivel Educativo: </small>
+												<small class="text-muted fs-4" *ngIf="user.level">Nivel Educativo:
+												</small>
 												<p class="fs-5">{{user.level}}</p>
 
 												<small class="text-muted fs-4" *ngIf="user.group">Grupo: </small>
@@ -62,7 +63,11 @@
 				</div>
 				<div *ngFor="let chartOptions of configuration">
 					<mat-card *ngIf="role === 2" class="m-3">
-
+						<div class="row">
+							<button mat-icon-button class="ms-3" (click)="openDialog(chartOptions.questions)">
+								<mat-icon>info</mat-icon>
+							</button>
+						</div>
 						<div class="chart">
 							<apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
 								[plotOptions]="chartOptions.plotOptions" [dataLabels]="chartOptions.dataLabels"

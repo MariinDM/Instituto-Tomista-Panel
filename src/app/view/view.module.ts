@@ -40,6 +40,7 @@ import { DialogUserGroupLessonsComponent } from './user-group-lessons/dialog-use
 import { EvaluationsComponent } from './evaluations/evaluations.component';
 import { DialogEvaluationsComponent } from './evaluations/dialog-evaluations/dialog-evaluations.component';
 import { EncuestasComponent } from './encuestas/encuestas.component';
+import { DialogInfoComponent } from './dashboard/dialog-info/dialog-info.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -78,7 +79,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DialogUserGroupLessonsComponent,
     EvaluationsComponent,
     DialogEvaluationsComponent,
-    EncuestasComponent
+    EncuestasComponent,
+    DialogInfoComponent,
     
   ],
   imports: [
