@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row clearfix">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="card" [hidden]="!loader" *ngIf="role === 3 || role === 1">
+				<div class="card" [hidden]="!loader">
 					<div class="body">
 						<div class="tableBody">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -33,7 +33,7 @@
 
 											</div>
 										</mat-tab>
-										<mat-tab label="Evaluaciones" *ngIf="role === 3">
+										<mat-tab label="Evaluaciones" *ngIf="role === 2">
 											<div class="col-12">
 												<div class="row m-3" *ngIf="evaluations.length === 0">
 													<span><strong>No hay evaluaciones</strong></span>
