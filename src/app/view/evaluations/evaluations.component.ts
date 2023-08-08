@@ -49,6 +49,11 @@ export class EvaluationsComponent implements OnInit {
     })
     this.filter = ''
   }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   setData(): void {
     this.dataSource = new MatTableDataSource();

@@ -22,8 +22,8 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>person_outline</mat-icon>
-                        <mat-label>Nombre</mat-label>
-                        <input matInput placeholder="Ex. Ejemplo" required formControlName="name">
+                        <mat-label>Pregunta</mat-label>
+                        <input matInput required formControlName="name">
                         <mat-error
                             *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
                             Es requerido</mat-error>

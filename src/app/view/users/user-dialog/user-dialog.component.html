@@ -88,13 +88,15 @@
                 <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>Numero</mat-label>
-                        <input matInput placeholder="Ex. 1000" type="text" formControlName="number">
+                        <input matInput placeholder="Ex. 1000" type="text" formControlName="number"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     </mat-form-field>
                 </div>
                 <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>Codigo Postal</mat-label>
-                        <input matInput placeholder="Ex. 25555" type="text" formControlName="zip_code">
+                        <input matInput placeholder="Ex. 25555" type="text" formControlName="zip_code"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="5">
                     </mat-form-field>
                 </div>
             </div>
@@ -109,13 +111,13 @@
                 <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>Ciudad</mat-label>
-                        <input matInput placeholder="Ex. 1000" type="text" formControlName="city">
+                        <input matInput placeholder="Ex. Torreón" type="text" formControlName="city">
                     </mat-form-field>
                 </div>
                 <div class='col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2'>
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-label>Estado</mat-label>
-                        <input matInput placeholder="Ex. 25555" type="text" formControlName="state">
+                        <input matInput placeholder="Ex. Coahuila" type="text" formControlName="state">
                     </mat-form-field>
                 </div>
             </div>

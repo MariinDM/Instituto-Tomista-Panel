@@ -22,8 +22,8 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <mat-form-field appearance="outline" class="mat-form-field example-full-width">
                         <mat-icon matSuffix>person_outline</mat-icon>
-                        <mat-label>Nombre</mat-label>
-                        <input matInput placeholder="Ex. Ejemplo" required formControlName="name"
+                        <mat-label>Grado</mat-label>
+                        <input matInput placeholder="Ex. 3" required formControlName="name"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2">
                         <mat-error
                             *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].dirty || form.controls['name'].touched)">
