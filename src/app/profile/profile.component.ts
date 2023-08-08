@@ -62,7 +62,7 @@ export class ProfileComponentDash implements OnInit {
             lesson: item.lesson.name
           }));
 
-          console.log(this.user)
+          // console.log(this.user)
 
         }
       },

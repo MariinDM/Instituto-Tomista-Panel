@@ -46,7 +46,7 @@ export class UserGroupLessonsComponent implements OnInit {
     this.apiService.getGroupUserLessons().subscribe({
       next: (v) => {
         this.dataOriginal = v.groupUserLessons
-        console.log(this.dataOriginal)
+        // console.log(this.dataOriginal)
 
         this.dataOriginal.forEach(element => {
           let obj = {

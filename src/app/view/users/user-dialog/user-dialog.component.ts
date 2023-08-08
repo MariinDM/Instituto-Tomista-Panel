@@ -49,7 +49,8 @@ export class UserDialogComponent implements OnInit {
   getData() {
     this.apiService.getRoles().subscribe({
       next: (v) => {
-        this.roles = v.roles.filter(item => item.active);
+        this.roles = v.roles.filter(item => item.active && item.id != 1);
+        // console.log(this.roles)
       },
       error: (e) => { this.openSnack(e) },
     })

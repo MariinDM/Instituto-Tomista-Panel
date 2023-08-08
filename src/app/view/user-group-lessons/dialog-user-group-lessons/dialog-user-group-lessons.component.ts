@@ -69,7 +69,7 @@ export class DialogUserGroupLessonsComponent implements OnInit {
     this.apiService.getEducationLevels().subscribe({
       next: (v) => {
         this.education_levels = v.educa.filter(item => item.active)
-        console.log(this.education_levels)
+        // console.log(this.education_levels)
       },
       error: (e) => {
         console.log(e)

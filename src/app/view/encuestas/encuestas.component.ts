@@ -48,7 +48,7 @@ export class EncuestasComponent implements OnInit {
     this.answers.splice(this.i - 1, 1)
     this.i--
     this.getQuestion()
-    console.log(this.answers)
+    // console.log(this.answers)
   }
 
   nextQuestion(): void {

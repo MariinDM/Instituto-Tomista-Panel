@@ -86,7 +86,7 @@ export class GroupDialogComponent implements OnInit {
   }
   
   setForm(){
-    console.log(this.element)
+    // console.log(this.element)
     this.form.controls['grade_id'].setValue(this.element.grade_id)
     this.form.controls['section_id'].setValue(this.element.section_id)
   }

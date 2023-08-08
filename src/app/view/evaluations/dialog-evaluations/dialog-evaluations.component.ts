@@ -102,7 +102,7 @@ export class DialogEvaluationsComponent implements OnInit {
   }
 
   setForm() {
-    console.log(this.element)
+    // console.log(this.element)
     this.form.controls['user_id'].setValue(this.element.user_id)
     this.form.controls['group_id'].setValue(this.element.group_id)
     this.form.controls['group_id'].setValue(this.element.test_id)

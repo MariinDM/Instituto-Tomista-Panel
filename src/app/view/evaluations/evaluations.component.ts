@@ -67,7 +67,7 @@ export class EvaluationsComponent implements OnInit {
       id: data.id,
       type: type
     }
-    console.log(obj)
+    // console.log(obj)
     this.apiService.deleteEvaluations(obj).subscribe({
       next: (v) => { this.openSnack(v.message) },
       error: (e) => { this.openSnack(e) },

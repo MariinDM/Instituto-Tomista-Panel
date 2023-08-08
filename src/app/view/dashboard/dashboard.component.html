@@ -2,16 +2,10 @@
 	<div class="container-fluid">
 		<div class="row clearfix">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="card" [hidden]="!loader">
+				<div class="card" [hidden]="!loader" *ngIf="role !== 2">
 					<div class="body">
 						<div class="tableBody">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<!-- <div class="row line-colors">
-					<div class="col-3 baby-pink height"></div>
-					<div class="col-3 baby-purpura height"></div>
-					<div class="col-3 baby-green height"></div>
-					<div class="col-3 baby-yellow height"></div>
-				  </div> -->
 							</div>
 							<div class="table-responsive">
 								<div class="card">
@@ -33,7 +27,7 @@
 
 											</div>
 										</mat-tab>
-										<mat-tab label="Evaluaciones" *ngIf="role === 2">
+										<mat-tab label="Evaluaciones" *ngIf="role === 3">
 											<div class="col-12">
 												<div class="row m-3" *ngIf="evaluations.length === 0">
 													<span><strong>No hay evaluaciones</strong></span>
@@ -61,6 +55,11 @@
 						</div>
 					</div>
 				</div>
+				<mat-card *ngIf="role === 2 && configuration.length === 0" class="m-3">
+					<div class="row m-3">
+						<span><strong>No hay evaluaciones</strong></span>
+					</div>
+				</mat-card>
 				<div *ngFor="let chartOptions of configuration">
 					<mat-card *ngIf="role === 2" class="m-3">
 						<div class="row">
